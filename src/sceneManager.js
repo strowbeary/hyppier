@@ -55,6 +55,7 @@ export function SceneManager(canvas) {
 
         for (let i = 0; i < sceneSubjects.length; i++)
             sceneSubjects[i].update(elapsedTime);
+        //scene.background = new Color(parseInt(elapsedTime*100)%2 *0xffffff);
 
         renderer.render(scene, camera);
     };

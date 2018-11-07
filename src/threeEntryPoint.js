@@ -19,11 +19,9 @@ export default containerElement => {
     }
 
     function resizeCanvas() {
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
 
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         sceneManager.onWindowResize();
     }
