@@ -1,4 +1,5 @@
-import {Clock, Color, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import {Clock, Color, OrthographicCamera, Scene, WebGLRenderer} from "three";
+import OrbitControls from "three-orbitcontrols";
 import SceneSubject from "./sceneSubjects/SceneSubject";
 import {GeneralLights} from "./sceneSubjects/GeneralLights";
 
@@ -14,6 +15,8 @@ export function SceneManager(canvas) {
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
+    camera.position.set(0, 20, 55);
+    const controls = new OrbitControls(camera, renderer.domElement);
     const sceneSubjects = createSceneSubjects(scene);
 
     function buildScene() {
@@ -36,11 +39,9 @@ export function SceneManager(canvas) {
     }
 
     function buildCamera({width, height}) {
-        const aspectRatio = width / height;
-        const fieldOfView = 60;
         const nearPlane = 1;
-        const farPlane = 100;
-        return new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+        const farPlane = 10000;
+        return new OrthographicCamera(width / - 4, width / 4, height / 4, height / - 4, nearPlane, farPlane);
     }
 
     function createSceneSubjects(scene) {
@@ -52,11 +53,10 @@ export function SceneManager(canvas) {
 
     this.update = function () {
         const elapsedTime = clock.getElapsedTime();
+        controls.update();
 
         for (let i = 0; i < sceneSubjects.length; i++)
             sceneSubjects[i].update(elapsedTime);
-        //scene.background = new Color(parseInt(elapsedTime*100)%2 *0xffffff);
-
         renderer.render(scene, camera);
     };
 
