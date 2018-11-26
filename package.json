@@ -12,6 +12,7 @@
     "react-dom": "^16.6.0",
     "react-scripts": "2.1.0",
     "three": "^0.98.0",
+    "three-obj-mtl-loader": "^1.0.3",
     "three-orbitcontrols": "latest"
   },
   "scripts": {

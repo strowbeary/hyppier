@@ -1,7 +1,8 @@
 import {Clock, Color, OrthographicCamera, Scene, WebGLRenderer} from "three";
 import OrbitControls from "three-orbitcontrols";
-import SceneSubject from "./sceneSubjects/SceneSubject";
-import {GeneralLights} from "./sceneSubjects/GeneralLights";
+import Room from "./objects/room";
+import {GeneralLights} from "./GeneralLights";
+import Bed from "./objects/bed";
 
 export function SceneManager(canvas) {
 
@@ -15,7 +16,7 @@ export function SceneManager(canvas) {
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    camera.position.set(0, 20, 55);
+    camera.position.set(0, 20, 300);
     const controls = new OrbitControls(camera, renderer.domElement);
     const sceneSubjects = createSceneSubjects(scene);
 
@@ -47,7 +48,8 @@ export function SceneManager(canvas) {
     function createSceneSubjects(scene) {
         return [
             new GeneralLights(scene),
-            new SceneSubject(scene)
+            new Room(scene),
+            new Bed(scene)
         ];
     }
 

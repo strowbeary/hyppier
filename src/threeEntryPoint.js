@@ -1,4 +1,4 @@
-import {SceneManager} from "./sceneManager";
+import {SceneManager} from "./3dScene/sceneManager";
 
 export default containerElement => {
     const canvas = createCanvas(document, containerElement);
