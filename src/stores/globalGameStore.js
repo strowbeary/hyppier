@@ -1,3 +1,5 @@
 import {types} from "mobx-state-tree";
 
-export const globalStore = types.model({});
+export const globalStore = types.model({
+
+});

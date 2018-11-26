@@ -2,7 +2,7 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_threeContainer.scss";
 import {observer} from "mobx-react";
-import threeEntryPoint from "../../threeEntryPoint";
+import threeEntryPoint from "../../../threeEntryPoint";
 
 const ThreeContainer = {
     displayName: "ThreeContainer",
