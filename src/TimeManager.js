@@ -19,40 +19,62 @@ export class TimeManager extends EventTarget{
     constructor(duration = 0) {
         super();
         this.duration = duration;
-        this.pauseOffset = 0;
         this.startTime = 0;
         this.pauseTime = 0;
-        this.ended = false;
         this.running = false;
+        this.started = false;
     }
 
     pause() {
-        cancelAnimationFrame(this.req);
-        this.pauseTime = performance.now(); //startTime + elapsedTime before Pause
-        this.running = false;
+        if (this.running && this.started) {
+            if (this.req) {
+                cancelAnimationFrame(this.req);
+            }
+            this.pauseTime = performance.now(); //startTime + elapsedTime before Pause
+            this.running = false;
+        }
         return this;
     }
 
-    reset() {
-        if(this.ended) {
-            this.pauseOffset = 0;
-            this.startTime = performance.now();
-            this.pauseTime = 0;
-            this.ended = false;
-        }
-    }
-
-    start() {
-        if(!this.running) {
-            this.running = true;
-            this.startTime += performance.now() - this.pauseTime; //on rajoute à l'heure de départ, le temps écoulé pendant la pause
-        }
+    play() { //do this after pause when start is clicked
+        this.startTime += performance.now() - this.pauseTime;
+        this.running = true;
         this.update();
         return this;
     }
 
+    reset() {
+        if (this.req) {
+            cancelAnimationFrame(this.req);
+        }
+        this.startTime = performance.now();
+        this.pauseTime = 0;
+        this.running = false;
+        this.started = false;
+    }
+
+    restart() {
+        this.reset();
+        this.update();
+        return this;
+    }
+
+    start() {
+        if (!this.started) {
+            this.started = true;
+            this.running = true;
+            this.startTime = performance.now();
+            this.update();
+            return this;
+        } else if (!this.running && (this.pauseTime - this.startTime) <  this.duration) {
+            this.play();
+        } else {
+            this.restart();
+        }
+    }
+
     update() {
-        if(this.remainingTime < 0) {
+        if(this.remainingTime < 0 && this.running) {
             this.pause();
             this.reset();
             this.dispatchEvent(TimeoutEvent);
