@@ -16,6 +16,7 @@ export default function Bed(scene) {
                 console.log(object);
                 object.position.set(-50, -150, 0);
                 object.rotation.set(0, Math.PI / 4, 0);
+                object.scale.set(0.5, 0.5, 0.5);
                 scene.add(object);
 
             }
