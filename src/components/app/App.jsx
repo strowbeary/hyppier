@@ -16,16 +16,19 @@ const App = {
         timer.addEventListener("timeout", () => console.log("toto"));
         return (
             <div id="app">
-                <p>{timer.currentTimeout}</p>
+                <p>{timer.elapsedTime}</p>
                 <button onClick={() => {
                     timer.start();
-                    console.log(timer, timer.currentTimeout);
+                    console.log(timer, timer.elapsedTime);
                 }}>Start</button>
                 <button onClick={() => {
-                    console.log(timer, timer.currentTimeout);
                     timer.pause();
-                    console.log(timer, timer.currentTimeout);
+                    console.log(timer, timer.elapsedTime);
                 }}>Pause</button>
+                <button onClick={() => {
+                    timer.reset();
+                    console.log(timer, timer.elapsedTime);
+                }}>Reset</button>
             </div>
         )
     }
