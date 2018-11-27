@@ -1,98 +1,86 @@
-const instances = [];
-const TimeoutEvent = new CustomEvent("timeout");
+import {types} from "mobx-state-tree";
 
-function play() { //do this after pause when start is clicked
-    this.startTime += performance.now() - this.pauseTime;
-    this.running = true;
-    update.apply(this);
-    return this;
-}
-
-function restart() {
-    this.reset();
-    update.apply(this);
-    return this;
-}
-
-function update() {
-    if(this.remainingTime < 0 && this.running) {
-        this.pause();
-        this.reset();
-        this.dispatchEvent(TimeoutEvent);
-    } else {
-        this.req = requestAnimationFrame(update.bind(this));
-    }
-}
-
-export class TimeManager extends EventTarget{
-
-    static pauseAll() {
-        instances.forEach(tm => tm.pause());
-    }
-
-    static startAll() {
-        instances.forEach(tm => tm.start());
-    }
-
-    static create(duration) {
-        let newTimeManager = new TimeManager(duration);
-        instances.push(newTimeManager);
-        return newTimeManager
-    }
-
-    constructor(duration = 0) {
-        super();
-        this.duration = duration;
-        this.startTime = 0;
-        this.pauseTime = 0;
-        this.running = false;
-        this.started = false;
-    }
-
-    pause() {
-        if (this.running && this.started) {
-            if (this.req) {
-                cancelAnimationFrame(this.req);
+export const Countdown = types.model("Todo", {
+    duration: types.number,
+    elapsedTime: 0,
+    startTime: 0,
+    pauseTime: 0,
+    ended: false,
+    paused: true,
+    req: 0
+})
+    .views(self => {
+        return {
+            get remainingTime() {
+                return (self.startTime + self.duration) - performance.now()
             }
-            this.pauseTime = performance.now(); //startTime + elapsedTime before Pause
-            this.running = false;
         }
-        return this;
-    }
-
-    start() {
-        if (!this.started) {
-            this.started = true;
-            this.running = true;
-            this.startTime = performance.now();
-            update.apply(this);
-            return this;
-        } else if (!this.running && (this.pauseTime - this.startTime) <  this.duration) {
-            play.apply(this);
-        } else {
-            restart.apply(this);
+    })
+    .actions(self => ({
+        _loop() {
+            self.elapsedTime = performance.now() - self.startTime;
+            if (self.elapsedTime >= self.duration) {
+                self.ended = true;
+            }
+            if (!self.ended) {
+                self.req = requestAnimationFrame(() => this._loop());
+            }
+            if (self.paused) {
+                console.log("paused");
+                cancelAnimationFrame(self.req);
+            }
+        },
+        pause() {
+            if (!self.ended && !self.paused) {
+                self.pauseTime = performance.now();
+                self.paused = true;
+            }
+        },
+        start() {
+            if (self.ended) {
+                this.reset();
+            }
+            if (!self.ended && self.paused) {
+                self.startTime += performance.now() - self.pauseTime;
+            } else {
+                self.startTime = performance.now();
+            }
+            self.paused = false;
+            this._loop();
+            console.log("started");
+        },
+        reset() {
+            self.elapsedTime = 0;
+            self.startTime = 0;
+            self.pauseTime = 0;
+            self.ended = false;
+            self.paused = true;
         }
-    }
+    }));
 
-    reset() {
-        if (this.req) {
-            cancelAnimationFrame(this.req);
+
+const TimeManager = types.model("TimeManager", {
+    countdowns: types.array(Countdown)
+})
+    .actions(self => {
+        return {
+            pauseAll() {
+                self.countdowns.forEach(tm => tm.pause());
+            },
+            startAll() {
+                self.countdowns.forEach(tm => tm.start());
+            },
+            create(duration) {
+                const newTimeManager = Countdown.create({
+                    duration: duration
+                });
+                self.countdowns.push(newTimeManager);
+                return newTimeManager;
+            }
         }
-        this.startTime = performance.now();
-        this.pauseTime = 0;
-        this.running = false;
-        this.started = false;
-    }
+    })
+    .create({
+        countdowns: []
+    });
 
-
-
-    get elapsedTime() {
-        return performance.now() - this.startTime;
-    }
-
-    get remainingTime() {
-        return (this.startTime + this.duration) - performance.now()
-    }
-
-}
-
+export default TimeManager;

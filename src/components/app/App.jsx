@@ -2,32 +2,26 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
-import ThreeContainer from "./threeContainer/ThreeContainer";
-import {TimeManager} from "../../utils/TimeManager";
+import TimeManager from "../../utils/TimeManager";
 
+const timer = TimeManager.create(3000);
 const App = {
     displayName: "App",
     componentDidMount() {
         console.log("App mounted !");
     },
     render() {
-        const timer = TimeManager
-            .create(3000);
-        timer.addEventListener("timeout", () => console.log("END: ", timer, timer.elapsedTime));
         return (
             <div id="app">
-                <p>{timer.elapsedTime}</p>
+                <p>{timer.elapsedTime} / {timer.duration}</p>
                 <button onClick={() => {
                     timer.start();
-                    console.log(timer, timer.elapsedTime);
                 }}>Start</button>
                 <button onClick={() => {
                     timer.pause();
-                    console.log(timer, timer.elapsedTime);
                 }}>Pause</button>
                 <button onClick={() => {
                     timer.reset();
-                    console.log(timer, timer.elapsedTime);
                 }}>Reset</button>
             </div>
         )
