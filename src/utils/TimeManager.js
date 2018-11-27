@@ -1,5 +1,29 @@
 const instances = [];
 const TimeoutEvent = new CustomEvent("timeout");
+
+function play() { //do this after pause when start is clicked
+    this.startTime += performance.now() - this.pauseTime;
+    this.running = true;
+    update.apply(this);
+    return this;
+}
+
+function restart() {
+    this.reset();
+    update.apply(this);
+    return this;
+}
+
+function update() {
+    if(this.remainingTime < 0 && this.running) {
+        this.pause();
+        this.reset();
+        this.dispatchEvent(TimeoutEvent);
+    } else {
+        this.req = requestAnimationFrame(update.bind(this));
+    }
+}
+
 export class TimeManager extends EventTarget{
 
     static pauseAll() {
@@ -41,12 +65,12 @@ export class TimeManager extends EventTarget{
             this.started = true;
             this.running = true;
             this.startTime = performance.now();
-            this._update();
+            update.apply(this);
             return this;
         } else if (!this.running && (this.pauseTime - this.startTime) <  this.duration) {
-            this._play();
+            play.apply(this);
         } else {
-            this._restart();
+            restart.apply(this);
         }
     }
 
@@ -60,28 +84,7 @@ export class TimeManager extends EventTarget{
         this.started = false;
     }
 
-    _play() { //do this after pause when start is clicked
-        this.startTime += performance.now() - this.pauseTime;
-        this.running = true;
-        this._update();
-        return this;
-    }
 
-    _restart() {
-        this.reset();
-        this._update();
-        return this;
-    }
-
-    _update() {
-        if(this.remainingTime < 0 && this.running) {
-            this.pause();
-            this.reset();
-            this.dispatchEvent(TimeoutEvent);
-        } else {
-            this.req = requestAnimationFrame(this._update.bind(this));
-        }
-    }
 
     get elapsedTime() {
         return performance.now() - this.startTime;

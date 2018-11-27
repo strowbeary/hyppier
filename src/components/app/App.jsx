@@ -3,7 +3,7 @@ import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
 import ThreeContainer from "./threeContainer/ThreeContainer";
-import {TimeManager} from "../../TimeManager";
+import {TimeManager} from "../../utils/TimeManager";
 
 const App = {
     displayName: "App",
