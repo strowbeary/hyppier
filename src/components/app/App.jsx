@@ -16,6 +16,7 @@ const App = {
         timer.addEventListener("timeout", () => console.log("END: ", timer, timer.elapsedTime));
         return (
             <div id="app">
+                <p>{timer.elapsedTime}</p>
                 <button onClick={() => {
                     timer.start();
                     console.log(timer, timer.elapsedTime);
