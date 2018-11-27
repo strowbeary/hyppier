@@ -2,31 +2,35 @@ import {types} from "mobx-state-tree";
 
 export const Countdown = types.model("Todo", {
     duration: types.number,
-    elapsedTime: 0,
+    metaElapsedTime: 0,
     startTime: 0,
     pauseTime: 0,
     ended: false,
     paused: true,
+    running: false,
     req: 0
 })
     .views(self => {
         return {
             get remainingTime() {
-                return (self.startTime + self.duration) - performance.now()
+                return self.duration - self.metaElapsedTime;
+            },
+            get elapsedTime() {
+                return Math.min(Math.max(self.metaElapsedTime, 0), self.duration)
             }
         }
     })
     .actions(self => ({
         _loop() {
-            self.elapsedTime = performance.now() - self.startTime;
-            if (self.elapsedTime >= self.duration) {
+            self.metaElapsedTime = performance.now() - self.startTime;
+            if (self.metaElapsedTime >= self.duration) {
                 self.ended = true;
+                self.running = false;
             }
             if (!self.ended) {
                 self.req = requestAnimationFrame(() => this._loop());
             }
             if (self.paused) {
-                console.log("paused");
                 cancelAnimationFrame(self.req);
             }
         },
@@ -34,27 +38,30 @@ export const Countdown = types.model("Todo", {
             if (!self.ended && !self.paused) {
                 self.pauseTime = performance.now();
                 self.paused = true;
+                self.running = false;
             }
         },
         start() {
-            if (self.ended) {
-                this.reset();
+            if (!self.running && !self.ended) {
+                if (!self.ended && self.paused) {
+                    self.startTime += performance.now() - self.pauseTime;
+                } else if (!self.ended && !self.paused) {
+                    self.startTime = performance.now();
+                }
+                self.paused = false;
+                self.running = true;
+                this._loop();
+                console.log("started");
             }
-            if (!self.ended && self.paused) {
-                self.startTime += performance.now() - self.pauseTime;
-            } else {
-                self.startTime = performance.now();
-            }
-            self.paused = false;
-            this._loop();
-            console.log("started");
         },
-        reset() {
-            self.elapsedTime = 0;
+        stop() {
+            cancelAnimationFrame(self.req);
+            this.pause();
+            self.metaElapsedTime = 0;
             self.startTime = 0;
             self.pauseTime = 0;
+            self.running = false;
             self.ended = false;
-            self.paused = true;
         }
     }));
 

@@ -2,9 +2,7 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
-import TimeManager from "../../utils/TimeManager";
-
-const timer = TimeManager.create(3000);
+import Notification from "./notification/Notification";
 const App = {
     displayName: "App",
     componentDidMount() {
@@ -13,16 +11,7 @@ const App = {
     render() {
         return (
             <div id="app">
-                <p>{timer.elapsedTime} / {timer.duration}</p>
-                <button onClick={() => {
-                    timer.start();
-                }}>Start</button>
-                <button onClick={() => {
-                    timer.pause();
-                }}>Pause</button>
-                <button onClick={() => {
-                    timer.reset();
-                }}>Reset</button>
+                <Notification time={5000}/>
             </div>
         )
     }
