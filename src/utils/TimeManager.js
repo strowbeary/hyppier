@@ -77,6 +77,9 @@ const TimeManager = types.model("TimeManager", {
             startAll() {
                 self.countdowns.forEach(tm => tm.start());
             },
+            stopAll() {
+                self.countdowns.forEach(tm => tm.stop());
+            },
             create(duration) {
                 const newTimeManager = Countdown.create({
                     duration: duration
