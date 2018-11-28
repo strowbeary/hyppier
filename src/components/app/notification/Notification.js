@@ -10,7 +10,7 @@ const Notification = {
         this.timer = TimeManager.create(this.props.time);
     },
     render() {
-        const dashSize = 133;
+        const dashSize = 134;
         return (
             <div className="notification">
                 <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
