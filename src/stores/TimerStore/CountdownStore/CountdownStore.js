@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree";
 
-export const Countdown = types.model("Todo", {
+export default types.model("TimerStore", {
     duration: types.number,
     metaElapsedTime: 0,
     startTime: 0,
@@ -65,32 +65,3 @@ export const Countdown = types.model("Todo", {
         }
     }));
 
-
-const TimeManager = types.model("TimeManager", {
-    countdowns: types.array(Countdown)
-})
-    .actions(self => {
-        return {
-            pauseAll() {
-                self.countdowns.forEach(tm => tm.pause());
-            },
-            startAll() {
-                self.countdowns.forEach(tm => tm.start());
-            },
-            stopAll() {
-                self.countdowns.forEach(tm => tm.stop());
-            },
-            create(duration) {
-                const newTimeManager = Countdown.create({
-                    duration: duration
-                });
-                self.countdowns.push(newTimeManager);
-                return newTimeManager;
-            }
-        }
-    })
-    .create({
-        countdowns: []
-    });
-
-export default TimeManager;

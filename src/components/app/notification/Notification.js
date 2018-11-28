@@ -2,12 +2,12 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_notification.scss";
 import {observer} from "mobx-react";
-import TimeManager from "../../../utils/TimeManager";
+import CountdownStore from "../../../stores/TimerStore/TimerStore";
 
 const Notification = {
     displayName: "Notification",
     componentWillMount() {
-        this.timer = TimeManager.create(this.props.time);
+        this.timer = CountdownStore.create(this.props.time);
     },
     render() {
         const dashSize = 134;
