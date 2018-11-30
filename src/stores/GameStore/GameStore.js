@@ -9,7 +9,8 @@ export default types.model({
     hype: HypeStore,
     room: RoomStore,
     options: OptionsStore
-}).create({
+})
+    .create({
     attic: AtticStore.create({
 
     }),

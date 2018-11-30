@@ -13,7 +13,6 @@ const Notification = {
         const dashSize = 134;
         return (
             <div className="notification">
-                <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
                 <svg viewBox="0 0 22 26" width={50} height={60} xmlns="http://www.w3.org/2000/svg">
                     <g transform="matrix(1,0,0,1,-658.499,-1190.18)">
                         <g id="notification" transform="matrix(0.444838,0,0,0.440874,365.673,665.589)">
@@ -37,15 +36,15 @@ const Notification = {
                                       style={{
                                           fill: "none",
                                           stroke: "rgb(255,0,0)",
-                                          strokeWidth: "1.7px"
+                                          strokeWidth: "2px"
                                       }}
-                                      strokeDashoffset={this.timer.elapsedTime / this.timer.duration * dashSize}
+                                      strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
                                       strokeDasharray={dashSize}/>
                             </g>
                         </g>
                     </g>
                 </svg>
-
+                <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
                 <div>
                     {(()=> {
                         if(this.timer.ended) {

@@ -1,0 +1,47 @@
+{
+  "objectFamilies": [
+    {
+      "name": "Ordinateurs",
+      "generations": [
+        {
+          "ad": "Lorem ipsum",
+          "objects": [
+            {
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            },{
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            },{
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            },{
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            },{
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            },{
+              "name": "Macintosh",
+              "model3dUrl": "./mac.obj",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            }
+          ]
+        }
+      ],
+      "catalogGeneration": 0,
+      "generationTimeout": 15000
+    }
+  ]
+}
