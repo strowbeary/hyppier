@@ -4,6 +4,7 @@ import "./_app.scss";
 import {observer} from "mobx-react";
 import Notification from "./notification/Notification";
 import TimerStore from "../../stores/TimerStore/TimerStore";
+
 const App = {
     displayName: "App",
     componentDidMount() {
@@ -13,8 +14,8 @@ const App = {
         return (
             <div id="app">
                 <Notification time={5000}/>
-                <Notification time={5000}/>
-                <Notification time={5000}/>
+                <Notification time={10000}/>
+                <Notification time={15000}/>
                 <div>
                     <button onClick={() => {
                         TimerStore.startAll();
