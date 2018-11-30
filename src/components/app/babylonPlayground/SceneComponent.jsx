@@ -8,7 +8,7 @@ export default class SceneComponent extends Component {
     engine;
     canvas;
 
-    onResizeWindow = () => {
+    onResizeWindow () {
         if (this.engine) {
             this.engine.resize();
         }
@@ -47,9 +47,9 @@ export default class SceneComponent extends Component {
         if (c !== null) {
             this.canvas = c;
         }
-    }
+    };
 
-    render () {
+    render() {
         // 'rest' can contain additional properties that you can flow through to canvas:
         // (id, className, etc.)
         let { width, height, ...rest } = this.props;
@@ -60,7 +60,6 @@ export default class SceneComponent extends Component {
             opts.width = width;
             opts.height = height;
         }
-
         return (
             <canvas {...opts} ref={this.onCanvasLoaded}/>
         )

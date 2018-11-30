@@ -5,9 +5,10 @@ import 'babylonjs-loaders';
 import SceneComponent from './SceneComponent'; // import the component above linking to file we just created.
 
 export default class BabylonPlayground extends Component {
-    onSceneMount = (e) => {
+    onSceneMount(e) {
         const { canvas, scene, engine } = e;
 
+        scene.clearColor = new BABYLON.Color3(1, 1, 1);
         // This creates and positions a free camera (non-mesh)
         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
 
@@ -29,10 +30,10 @@ export default class BabylonPlayground extends Component {
         // Move the sphere upward 1/2 its height
         //sphere.position.y = 1;
 
-        var assetsManager = new BABYLON.AssetsManager(scene);
-        var objTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_mac.obj");
-        var tableTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_table.obj");
-        var litTask = assetsManager.addMeshTask("bed task", null, "/models/", "lit.obj");
+        const assetsManager = new BABYLON.AssetsManager(scene);
+        const objTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_mac.obj");
+        const tableTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_table.obj");
+        const litTask = assetsManager.addMeshTask("bed task", null, "/models/", "lit.obj");
         assetsManager.load();
 
         objTask.onSuccess = function (task) {
@@ -45,7 +46,7 @@ export default class BabylonPlayground extends Component {
                 //mesh.material.cameraColorCurves = curve;
                 //mesh.material.cameraColorCurvesEnabled = true;
             });
-        }
+        };
 
         tableTask.onSuccess = function (task) {
             task.loadedMeshes.forEach((mesh) => {
@@ -56,7 +57,7 @@ export default class BabylonPlayground extends Component {
                 //mesh.material.cameraColorCurves = curve;
                 //mesh.material.cameraColorCurvesEnabled = true;
             });
-        }
+        };
 
         litTask.onSuccess = function (task) {
             task.loadedMeshes.forEach((mesh) => {
@@ -67,14 +68,13 @@ export default class BabylonPlayground extends Component {
                 pbr.metallic = 0;
                 pbr.roughness = 1.0;
                 mesh.material = pbr;*/
-                //mesh.material.specularPower = 5;
                 console.log(mesh.material);
             });
-        }
+        };
 
         objTask.onError = function (task, message, exception) {
             console.log(message, exception);
-        }
+        };
 
         /*var test = new BABYLON.OBJFileLoader();
         console.log(test);*/
