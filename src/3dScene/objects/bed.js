@@ -1,6 +1,6 @@
 import {MTLLoader, OBJLoader} from "three-obj-mtl-loader";
-import bedgeo from "../models/bed2.obj";
-import bedmtl from "../models/bed2.mtl";
+import bedgeo from "../../../public/models/bed2.obj";
+import bedmtl from "../../../public/models/bed2.mtl";
 
 console.log(bedgeo);
 

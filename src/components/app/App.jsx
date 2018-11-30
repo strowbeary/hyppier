@@ -2,8 +2,11 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
-import Notification from "./notification/Notification";
-import TimeManager from "../../utils/TimeManager";
+//import Notification from "./notification/Notification";
+//import TimeManager from "../../utils/TimeManager";
+
+import BabylonPlayground from "./babylonPlayground/babylonPlayground"
+
 const App = {
     displayName: "App",
     componentDidMount() {
@@ -12,7 +15,8 @@ const App = {
     render() {
         return (
             <div id="app">
-                <Notification time={5000}/>
+                <BabylonPlayground/>
+                {/*<Notification time={5000}/>
                 <Notification time={5000}/>
                 <Notification time={5000}/>
                 <div>
@@ -25,7 +29,7 @@ const App = {
                 <button onClick={() => {
                     TimeManager.stopAll();
                 }}>Stop</button>
-            </div>
+            </div>*/}
             </div>
         )
     }
