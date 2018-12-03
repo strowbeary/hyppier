@@ -1,13 +1,12 @@
 {"producer":{"name":"Blender","version":"2.79 (sub 0)","exporter_version":"5.6.4","file":"untitled.babylon"},
 "autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"ambientColor":[0,0,0],"gravity":[0,-9.81,0],
-"materials":[{"name":"untitled.Clay","id":"untitled.Clay","ambient":[0.8,0.8,0.8],"diffuse":[0.8,0.8,0.8],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"untitled.Mat.4","id":"untitled.Mat.4","ambient":[0.496,0.5771,0.8],"diffuse":[0.3968,0.4617,0.64],"specular":[0.5,0.5,0.5],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"untitled.Wood","id":"untitled.Wood","ambient":[0.8,0.3541,0.096],"diffuse":[0.8,0.3541,0.096],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"untitled.Mat.001","id":"untitled.Mat.001","ambient":[1,0.7708,0.2806],"diffuse":[1,0.7708,0.2806],"specular":[1,1,1],"emissive":[1.2,0.925,0.3368],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"untitled.Mat","id":"untitled.Mat","ambient":[1,1,1],"diffuse":[1,1,1],"specular":[0.5,0.5,0.5],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
-"multiMaterials":[{"name":"untitled.Multimaterial#0","id":"untitled.Multimaterial#0","materials":["untitled.Clay","untitled.Mat.4"]},{"name":"untitled.Multimaterial#1","id":"untitled.Multimaterial#1","materials":["untitled.Mat.001","untitled.Mat"]}],
+"materials":[{"name":"untitled.WhiteClay","id":"untitled.WhiteClay","ambient":[0.8,0.8,0.8],"diffuse":[0.8,0.8,0.8],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"untitled.Screen","id":"untitled.Screen","ambient":[0.0158,0.0176,0.0228],"diffuse":[0.0126,0.0141,0.0183],"specular":[1,1,1],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"untitled.Wood","id":"untitled.Wood","ambient":[0.8,0.308,0.1268],"diffuse":[0.8,0.308,0.1268],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"untitled.Light bulb","id":"untitled.Light bulb","ambient":[1,0.7708,0.2806],"diffuse":[1,0.7708,0.2806],"specular":[1,1,1],"emissive":[1.2,0.925,0.3368],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
+"multiMaterials":[{"name":"untitled.Multimaterial#0","id":"untitled.Multimaterial#0","materials":["untitled.WhiteClay","untitled.Screen"]},{"name":"untitled.Multimaterial#1","id":"untitled.Multimaterial#1","materials":["untitled.Light bulb","untitled.WhiteClay"]}],
 "skeletons":[],
-"meshes":[{"name":"Plane","id":"Plane","materialId":"untitled.Clay","billboardMode":0,"position":[-0.2219,0.006,-0.785],"rotation":[0,0,0],"scaling":[1.6115,1.6115,1.6115],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+"meshes":[{"name":"Sol","id":"Sol","materialId":"untitled.WhiteClay","billboardMode":0,"position":[-0.2947,0.006,-0.7662],"rotation":[0,0,0],"scaling":[1.6115,1.6115,1.6115],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[1,0,-1,-1,0,1,-1,0,-1,1,0,1]
 ,"normals":[0,1,0,0,1,0,0,1,0,0,1,0]
 ,"indices":[0,1,2,0,3,1]
@@ -1474,7 +1473,7 @@
 ,1001,1000,1419,1001,1421,1422,1003,1002,1421,1003,1423,1424,1005,1004,1423,1005,1425,1426,1007,1006,1425,1007]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":1427,"indexStart":0,"indexCount":3972}]
 ,"instances":[]}
-,{"name":"tabouret","id":"tabouret","materialId":"untitled.Clay","billboardMode":0,"position":[0,0,0.3215],"rotation":[0,0,0],"scaling":[0.01,0.01,0.01],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"tabouret","id":"tabouret","materialId":"untitled.WhiteClay","billboardMode":0,"position":[0,0,0.3215],"rotation":[0,0,0],"scaling":[0.01,0.01,0.01],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-6.728,19.5501,-104.7302,-6.728,19.1384,-104.0172,-6.728,18.7268,-104.7302,6.728,19.1384,-104.0172,6.728,18.7268,-104.7302,-6.728,18.7268,-104.7302,-6.728,19.1384,-104.0172,6.728,19.1384,-104.0172,6.728,19.5501,-104.7302,6.728,18.7268,-104.7302,-6.728,19.9618,-104.0172,6.728,19.9618,-104.0172,-6.728,19.9618,-104.0172,6.728,19.9618,-104.0172,-6.728,20.3734,-104.7302,6.728,20.3734,-104.7302,-6.728,20.3734,-104.7302
 ,6.728,20.3734,-104.7302,-6.728,19.9618,-105.4432,6.728,19.9618,-105.4432,-6.728,19.9618,-105.4432,6.728,19.9618,-105.4432,-6.728,19.1384,-105.4432,6.728,19.1384,-105.4432,-6.728,19.1384,-105.4432,6.728,19.1384,-105.4432,6.728,18.7268,-104.7302,-6.728,18.7268,-104.7302,14.6021,38.0009,-101.4232,14.8275,38.0009,-103.9994,14.8375,37.9439,-103.9994,14.612,37.9439,-101.4215,14.5736,38.0511,-101.4282,14.7985,38.0511,-103.9994
 ,14.5299,38.0883,-101.4359,14.7541,38.0883,-103.9994,14.4762,38.1081,-101.4454,14.6997,38.1081,-103.9994,14.4192,38.1081,-101.4555,14.6418,38.1081,-103.9994,14.3656,38.0883,-101.4649,14.5873,38.0883,-103.9994,14.3219,38.0511,-101.4726,14.543,38.0511,-103.9994,14.2934,38.0009,-101.4776,14.514,38.0009,-103.9994,14.2835,37.9439,-101.4794,14.5039,37.9439,-103.9994,14.2934,37.8868,-101.4776,14.514,37.8868,-103.9994,14.3219,37.8367,-101.4726
@@ -1942,7 +1941,7 @@
 ,1805,1804,1802,1667,1666,1803]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":1806,"indexStart":0,"indexCount":8856}]
 ,"instances":[]}
-,{"name":"mur","id":"mur","materialId":"untitled.Clay","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[0.01,0.01,0.01],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,{"name":"mur","id":"mur","materialId":"untitled.WhiteClay","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[0.01,0.01,0.01],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[109.4051,201.3066,-238.3851,103.4112,201.3066,-238.3851,103.4112,1.3066,-238.3851,109.4051,1.3066,-238.3851,109.4051,201.3066,61.1994,109.4051,201.3066,-238.3851,109.4051,1.3066,-238.3851,109.4051,1.3066,61.1994,103.4112,201.3066,61.1994,109.4051,201.3066,61.1994,109.4051,1.3066,61.1994,103.4112,1.3066,61.1994,103.4112,201.3066,-238.3851,103.4112,201.3066,61.1994,103.4112,1.3066,61.1994,103.4112,1.3066,-238.3851,103.4112,201.3066,-238.3851
 ,109.4051,201.3066,-238.3851,109.4051,1.3066,-238.3851,103.4112,1.3066,-238.3851,-190.7646,201.3066,54.8381,-190.7646,201.3066,60.8321,-190.7646,1.3066,60.8321,-190.7646,1.3066,54.8381,108.8199,201.3066,54.8381,-190.7646,201.3066,54.8381,-190.7646,1.3066,54.8381,108.8199,1.3066,54.8381,108.8199,201.3066,60.8321,108.8199,201.3066,54.8381,108.8199,1.3066,54.8381,108.8199,1.3066,60.8321,-190.7646,201.3066,60.8321,108.8199,201.3066,60.8321
 ,108.8199,1.3066,60.8321,-190.7646,1.3066,60.8321,-190.7646,201.3066,60.8321,-190.7646,201.3066,54.8381,-190.7646,1.3066,54.8381,-190.7646,1.3066,60.8321]
@@ -4518,6 +4517,6 @@
 ],
 "morphTargetManagers":[],
 "cameras":[{"name":"Camera","id":"Camera","position":[7.4811,5.3437,-6.5076],"rotation":[0.4615,-0.8149,0],"fov":0.8576,"minZ":0.1,"maxZ":100,"speed":1,"inertia":0.9,"checkCollisions":false,"applyGravity":false,"ellipsoid":[0.2,0.9,0.2],"cameraRigMode":0,"interaxial_distance":0.0637,"type":"UniversalCamera"}],"activeCamera":"Camera",
-"lights":[{"name":"Hemi","id":"Hemi","type":3,"direction":[0.8264,0.563,0],"groundColor":[0,0,0],"intensity":0.5,"diffuse":[1,1,1],"specular":[1,1,1]},{"name":"Point","id":"Point","type":0,"position":[0.0061,1.3761,-0.9218],"intensity":0.68,"diffuse":[1,1,1],"specular":[1,1,1]}],
+"lights":[{"name":"Hemi","id":"Hemi","type":3,"direction":[0.8264,0.563,0],"groundColor":[0,0,0],"intensity":0.44,"diffuse":[1,1,1],"specular":[1,1,1]},{"name":"Point","id":"Point","type":0,"position":[0.0061,1.3761,-0.9218],"intensity":0.68,"diffuse":[1,1,1],"specular":[1,1,1]}],
 "shadowGenerators":[]
 }

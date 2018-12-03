@@ -10,8 +10,8 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		Mat Weight Precision:  2
 		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
 	Python World class constructor completed
-	processing begun of mesh:  Plane
-		processing begun of Standard material:  Clay
+	processing begun of mesh:  Sol
+		processing begun of Standard material:  WhiteClay
 		num positions      :  4
 		num normals        :  4
 		num uvs            :  0
@@ -19,8 +19,8 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  6
 	processing begun of mesh:  Macintosh.001
-		registered as also a user of material:  Clay
-		processing begun of Standard material:  Mat.4
+		registered as also a user of material:  WhiteClay
+		processing begun of Standard material:  Screen
 		processing begun of multimaterial:  untitled.Multimaterial#0
 		num positions      :  4425
 		num normals        :  4425
@@ -37,7 +37,7 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  3972
 	processing begun of mesh:  tabouret
-		registered as also a user of material:  Clay
+		registered as also a user of material:  WhiteClay
 		num positions      :  1806
 		num normals        :  1806
 		num uvs            :  3612
@@ -45,7 +45,7 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  8856
 	processing begun of mesh:  mur
-		registered as also a user of material:  Clay
+		registered as also a user of material:  WhiteClay
 		num positions      :  40
 		num normals        :  40
 		num uvs            :  80
@@ -53,8 +53,8 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  72
 	processing begun of mesh:  Ampoule
-		processing begun of Standard material:  Mat.001
-		processing begun of Standard material:  Mat
+		processing begun of Standard material:  Light bulb
+		registered as also a user of material:  WhiteClay
 		processing begun of multimaterial:  untitled.Multimaterial#1
 		num positions      :  9371
 		num normals        :  9371
@@ -68,4 +68,4 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 1.8358 secs
+elapsed time:  0 min, 1.776 secs
