@@ -31,14 +31,8 @@ export default class BabylonPlayground extends Component {
         //sphere.position.y = 1;
 
         const assetsManager = new BABYLON.AssetsManager(scene);
-        const objTask1 = assetsManager.addMeshTask("scene task", "Macintosh.001", "/models/", "untitled.babylon");
-        const objTask2 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
-        const objTask3 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
-        assetsManager.load();
-
-        objTask3.onSuccess = function (task) {
-            console.log(task.loadedMeshes[0].position = new BABYLON.Vector3(1, 1, 1));
-        }
+        const objTask1 = assetsManager.addMeshTask("scene task", null, "/models/", "Scene.babylon");
+       assetsManager.load();
 
         /*var test = new BABYLON.OBJFileLoader();
         console.log(test);*/

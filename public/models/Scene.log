@@ -18,16 +18,6 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num uvs2           :  0
 		num colors         :  0
 		num indices        :  6
-	processing begun of mesh:  Macintosh.001
-		registered as also a user of material:  WhiteClay
-		processing begun of Standard material:  Screen
-		processing begun of multimaterial:  untitled.Multimaterial#0
-		num positions      :  4425
-		num normals        :  4425
-		num uvs            :  8850
-		num uvs2           :  0
-		num colors         :  0
-		num indices        :  22428
 	processing begun of mesh:  Table
 		processing begun of Standard material:  Wood
 		num positions      :  1427
@@ -37,7 +27,7 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  3972
 	processing begun of mesh:  tabouret
-		registered as also a user of material:  WhiteClay
+		processing begun of Standard material:  Material
 		num positions      :  1806
 		num normals        :  1806
 		num uvs            :  3612
@@ -55,7 +45,7 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 	processing begun of mesh:  Ampoule
 		processing begun of Standard material:  Light bulb
 		registered as also a user of material:  WhiteClay
-		processing begun of multimaterial:  untitled.Multimaterial#1
+		processing begun of multimaterial:  Scene.Multimaterial#0
 		num positions      :  9371
 		num normals        :  9371
 		num uvs            :  18742
@@ -63,9 +53,21 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  53892
 	processing begun of camera (UniversalCamera):  Camera
+	processing begun of mesh:  Macintosh2
+		processing begun of Standard material:  Screen
+		processing begun of Standard material:  WhiteClay.001
+		processing begun of Standard material:  BlackHole
+		processing begun of multimaterial:  Scene.Multimaterial#1
+		num positions      :  83
+		num normals        :  83
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  390
+		WARNING: # of 0 area faces found:  8
 	processing begun of light (HEMI):  Hemi
 	processing begun of light (POINT):  Point
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 1.776 secs
+elapsed time:  0 min, 1.2909 secs
