@@ -6,7 +6,7 @@ import SceneComponent from './SceneComponent'; // import the component above lin
 
 export default class BabylonPlayground extends Component {
     onSceneMount(e) {
-        const { canvas, scene, engine } = e;
+        const {canvas, scene, engine} = e;
 
         scene.clearColor = new BABYLON.Color3(1, 1, 1);
         // This creates and positions a free camera (non-mesh)
@@ -24,27 +24,66 @@ export default class BabylonPlayground extends Component {
         // Default intensity is 1. Let's dim the light a small amount
         light.intensity = 1;
 
-        // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-        //var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
-
-        // Move the sphere upward 1/2 its height
-        //sphere.position.y = 1;
-
-        const assetsManager = new BABYLON.AssetsManager(scene);
-        const objTask1 = assetsManager.addMeshTask("scene task", "Macintosh.001", "/models/", "untitled.babylon");
-        const objTask2 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
-        const objTask3 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
+        /*const assetsManager = new BABYLON.AssetsManager(scene);
+        const objTask1 = assetsManager.addMeshTask("scene task", "Macintosh.001", "/models/", "untitled4.babylon");
+        //const objTask2 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
+        //const objTask3 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
         assetsManager.load();
 
-        objTask3.onSuccess = function (task) {
-            console.log(task.loadedMeshes[0].position = new BABYLON.Vector3(1, 1, 1));
-        }
+        objTask1.onSuccess= function (task) {
+            for (var i = 0; i < task.loadedMeshes[0].material.subMaterials.length; i++) {
+                console.log(task.loadedMeshes[0].material.subMaterials[i].id);
+            }
+        }*/
 
-        /*var test = new BABYLON.OBJFileLoader();
-        console.log(test);*/
+        var meshes;
+        var macintosh;
 
-        // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-        //var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
+        // LOAD FILE
+        BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, function (container) {
+            meshes = container.meshes;
+            var materials = container.materials;
+            macintosh = meshes.find(mesh => mesh.id === "Macintosh.001");
+
+            // Change materials on subMeshes with Materials in macintosh.material.subMaterials
+            //macintosh.subMeshes[1].materialIndex = 0;
+            //macintosh.subMeshes[0].materialIndex = 2;
+
+            for (var i = 0; i < materials.length; i++) {
+                console.log(materials[i].id);
+            }
+            // Adds all elements to the scene
+            container.addAllToScene();
+
+            // Adds specific mesh to scene
+            scene.meshes.push(macintosh);
+
+            // ANIMATION
+
+            // Need to clone material before animation
+            macintosh.material.subMaterials[0] = macintosh.material.subMaterials[0].clone();
+            macintosh.material.subMaterials[1] = macintosh.material.subMaterials[1].clone();
+
+            var animationBox = new BABYLON.Animation("myAnimation", "material.subMaterials.0.diffuseColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+
+            var keys = [];
+
+            keys.push({
+                frame: 0,
+                value: macintosh.material.subMaterials[0].diffuseColor
+            });
+
+            keys.push({
+                frame: 100,
+                value: new BABYLON.Color3(1, 0, 0)
+            });
+
+            animationBox.setKeys(keys);
+            macintosh.animations = [];
+            macintosh.animations.push(animationBox);
+            scene.beginAnimation(macintosh, 0, 100, true);
+        });
+
         //var postProcess = new BABYLON.BlackAndWhitePostProcess("bandw", 1, camera);
         //var kernel = 32.0;
         //var postProcess = new BABYLON.BlurPostProcess("Horizontal blur", new BABYLON.Vector2(1.0, 0), kernel, 0.25, camera);
