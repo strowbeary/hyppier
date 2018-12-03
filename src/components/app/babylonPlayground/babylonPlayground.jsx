@@ -31,50 +31,14 @@ export default class BabylonPlayground extends Component {
         //sphere.position.y = 1;
 
         const assetsManager = new BABYLON.AssetsManager(scene);
-        const objTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_mac.obj");
-        const tableTask = assetsManager.addMeshTask("bed task", null, "/models/", "test_mtl_table.obj");
-        const litTask = assetsManager.addMeshTask("bed task", null, "/models/", "lit.obj");
+        const objTask1 = assetsManager.addMeshTask("scene task", "Macintosh.001", "/models/", "untitled.babylon");
+        const objTask2 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
+        const objTask3 = assetsManager.addMeshTask("scene task", "Table", "/models/", "untitled.babylon");
         assetsManager.load();
 
-        objTask.onSuccess = function (task) {
-            task.loadedMeshes.forEach((mesh) => {
-                mesh.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-                mesh.position = new BABYLON.Vector3(0, -3, 0);
-                //mesh.material.diffuseColor = new BABYLON.Color3.White();
-                //var curve = new BABYLON.ColorCurves();
-                //curve.globalSaturation = -100;
-                //mesh.material.cameraColorCurves = curve;
-                //mesh.material.cameraColorCurvesEnabled = true;
-            });
-        };
-
-        tableTask.onSuccess = function (task) {
-            task.loadedMeshes.forEach((mesh) => {
-                mesh.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-                mesh.position = new BABYLON.Vector3(0, -3, 0);
-                //var curve = new BABYLON.ColorCurves();
-                //curve.globalSaturation = -100;
-                //mesh.material.cameraColorCurves = curve;
-                //mesh.material.cameraColorCurvesEnabled = true;
-            });
-        };
-
-        litTask.onSuccess = function (task) {
-            task.loadedMeshes.forEach((mesh) => {
-                mesh.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-                mesh.position = new BABYLON.Vector3(25, -3, 0);
-                /*var pbr = new BABYLON.PBRMetallicRoughnessMaterial("pbr", scene);
-                pbr.baseColor = new BABYLON.Color3.White();
-                pbr.metallic = 0;
-                pbr.roughness = 1.0;
-                mesh.material = pbr;*/
-                console.log(mesh.material);
-            });
-        };
-
-        objTask.onError = function (task, message, exception) {
-            console.log(message, exception);
-        };
+        objTask3.onSuccess = function (task) {
+            console.log(task.loadedMeshes[0].position = new BABYLON.Vector3(1, 1, 1));
+        }
 
         /*var test = new BABYLON.OBJFileLoader();
         console.log(test);*/

@@ -1,0 +1,84 @@
+Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		export scope        :  ALL
+		inline textures     :  false
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		texture directory   :  /Users/remicaillot/Projets/hyppier/src/components/app/babylonPlayground/
+	Python World class constructor completed
+	processing begun of mesh:  Sol
+		WARNING: No materials have been assigned: 
+		num positions      :  0
+		num normals        :  0
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  0
+	processing begun of mesh:  Table
+		processing begun of Standard material:  Mat
+		num positions      :  1427
+		num normals        :  1427
+		num uvs            :  2854
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  3972
+	processing begun of mesh:  Macintosh_
+		WARNING: No materials have been assigned: 
+		num positions      :  0
+		num normals        :  0
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  0
+	processing begun of mesh:  Accesesoir
+		processing begun of Standard material:  Mat.3
+		num positions      :  3960
+		num normals        :  3960
+		num uvs            :  7920
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  21372
+	processing begun of mesh:  computer
+		processing begun of Standard material:  Mat�riau C1
+		num positions      :  463
+		num normals        :  463
+		num uvs            :  926
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  1056
+	processing begun of mesh:  tabouret
+		registered as also a user of material:  Mat
+		num positions      :  1806
+		num normals        :  1806
+		num uvs            :  3612
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  8856
+	processing begun of mesh:  mur
+		WARNING: No materials have been assigned: 
+		num positions      :  40
+		num normals        :  40
+		num uvs            :  80
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  72
+	processing begun of mesh:  lampoule
+		registered as also a user of material:  Mat
+		num positions      :  9330
+		num normals        :  9330
+		num uvs            :  18660
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  53892
+	processing begun of camera (UniversalCamera):  Camera
+	processing begun of light (POINT):  Point
+	processing begun of light (SUN):  Sun
+	processing begun of light (POINT):  Lamp
+========= Writing of scene file started =========
+========= Writing of scene file completed =========
+========= end of processing =========
+elapsed time:  0 min, 1.7847 secs
