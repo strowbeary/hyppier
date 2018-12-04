@@ -30,7 +30,7 @@ const App = {
                     <button onClick={() => {
                         TimerStore.stopAll();
                     }}>Stop</button>
-                </div>
+                </div>*/}
             </div>
         )
     }

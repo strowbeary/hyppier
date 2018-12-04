@@ -10,8 +10,18 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		Mat Weight Precision:  2
 		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
 	Python World class constructor completed
-	processing begun of mesh:  Sol
+	processing begun of mesh:  Lumière
 		processing begun of Standard material:  WhiteClay
+		processing begun of Standard material:  LightBulb
+		processing begun of multimaterial:  Scene.Multimaterial#0
+		num positions      :  642
+		num normals        :  642
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  3456
+	processing begun of mesh:  Sol
+		processing begun of Standard material:  WhiteClay.001
 		num positions      :  4
 		num normals        :  4
 		num uvs            :  0
@@ -27,7 +37,7 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num colors         :  0
 		num indices        :  3972
 	processing begun of mesh:  tabouret
-		processing begun of Standard material:  Material
+		processing begun of Standard material:  LightBlueClay
 		num positions      :  1806
 		num normals        :  1806
 		num uvs            :  3612
@@ -42,32 +52,23 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		num uvs2           :  0
 		num colors         :  0
 		num indices        :  72
-	processing begun of mesh:  Ampoule
-		processing begun of Standard material:  Light bulb
-		registered as also a user of material:  WhiteClay
-		processing begun of multimaterial:  Scene.Multimaterial#0
-		num positions      :  9371
-		num normals        :  9371
-		num uvs            :  18742
-		num uvs2           :  0
-		num colors         :  0
-		num indices        :  53892
 	processing begun of camera (UniversalCamera):  Camera
 	processing begun of mesh:  Macintosh2
 		processing begun of Standard material:  Screen
-		processing begun of Standard material:  WhiteClay.001
 		processing begun of Standard material:  BlackHole
+		registered as also a user of material:  WhiteClay
+		processing begun of Standard material:  BlueClay
 		processing begun of multimaterial:  Scene.Multimaterial#1
-		num positions      :  83
-		num normals        :  83
+		num positions      :  77
+		num normals        :  77
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  390
-		WARNING: # of 0 area faces found:  8
-	processing begun of light (HEMI):  Hemi
+		num indices        :  342
 	processing begun of light (POINT):  Point
+	processing begun of light (HEMI):  Hemi
+	processing begun of light (SUN):  Sun
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 1.2909 secs
+elapsed time:  0 min, 0.3008 secs

@@ -10,29 +10,36 @@ export default class BabylonPlayground extends Component {
 
         scene.clearColor = new BABYLON.Color3(1, 1, 1);
         // This creates and positions a free camera (non-mesh)
-        var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
-
+        var camera = new BABYLON.ArcRotateCamera("camera1", 0, 0, 10, new BABYLON.Vector3(0, 5, -10), scene);
         // This targets the camera to scene origin
         camera.setTarget(BABYLON.Vector3.Zero());
 
         // This attaches the camera to the canvas
-        camera.attachControl(canvas, true);
+        camera.attachControl(canvas);
+        camera.inputs.attached.mousewheel.wheelDeltaPercentage = 30;
+        camera.inputs.attached.mousewheel.wheelPrecision = 100;
 
-        // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-        var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+        console.log(camera.inputs.attached);
 
-        // Default intensity is 1. Let's dim the light a small amount
-        light.intensity = 1;
+        const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(-2.00315, -0.89497, 3.50581), scene);
+        const sun = new BABYLON.PointLight("DirectionalLight", new BABYLON.Vector3(0, 0, 0), scene);
+        sun.intensity = 1;
 
-        // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-        //var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
-
-        // Move the sphere upward 1/2 its height
-        //sphere.position.y = 1;
-
+        const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, scene, [camera]);
+        defaultPipeline.samples = 4;
+        defaultPipeline.fxaaEnabled = true;
         const assetsManager = new BABYLON.AssetsManager(scene);
-        const objTask1 = assetsManager.addMeshTask("scene task", null, "/models/", "Scene.babylon");
-       assetsManager.load();
+        const objTask = assetsManager.addMeshTask("scene task", null, "/models/", "Scene.babylon");
+        objTask.onSuccess = function (task) {
+            task.loadedMeshes.forEach((mesh) => {
+                mesh.convertToFlatShadedMesh();
+                if(mesh.name === "Lumière") {
+                    sun.position = mesh.position;
+                }
+            });
+        };
+
+        assetsManager.load();
 
         /*var test = new BABYLON.OBJFileLoader();
         console.log(test);*/
