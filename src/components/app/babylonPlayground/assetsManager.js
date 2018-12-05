@@ -25,21 +25,18 @@ function locationManager(mesh, scene) {
             container => {
                 container.meshes.forEach(loadedMesh => {
                     if (loadedMesh.name.includes("Location")) {
-                        if (loadedMesh.parent) {
-                            const relativeFamilyLocation = CatalogStore.objectFamilies.find(family => {
-                                return family.generations.find(generation => {
-                                    return generation.name === loadedMesh.parent.name;
-                                });
-                            }).location;
-                            loadedMesh.position.add(relativeFamilyLocation)
-                        }
                         locationManager(loadedMesh, scene)
                     } else {
-                        loadedMesh.position = new BABYLON.Vector3(
+                        loadedMesh.convertToFlatShadedMesh();
+                        const locationPosition = new BABYLON.Vector3(
                             family.location.coordinates.x,
                             family.location.coordinates.y,
                             family.location.coordinates.z
                         );
+                        loadedMesh.position = locationPosition;
+                        loadedMesh.getChildren().forEach(mesh => {
+                            mesh.position.addInPlace(locationPosition);
+                        })
                     }
                     showAxis(1, loadedMesh.position, scene);
                 });
