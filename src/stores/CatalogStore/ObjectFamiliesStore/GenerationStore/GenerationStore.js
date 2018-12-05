@@ -1,7 +1,8 @@
 import {types} from "mobx-state-tree";
-import ObjectStore from "./ObjectStore/ObjectStore";
+import ObjectStore from "./TintStore/TintStore";
 
 export default types.model({
     ad: types.string,
-    objects: types.array(ObjectStore)
+    modelFilename: types.string,
+    tints: types.array(ObjectStore),
 })

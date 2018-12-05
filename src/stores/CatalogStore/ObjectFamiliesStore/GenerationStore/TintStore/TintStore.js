@@ -1,8 +1,7 @@
 import {types} from "mobx-state-tree";
 
-export default types.model({
+export default types.model("TintStore", {
     name: types.string,
-    model3dUrl: types.string,
     thumbnailUrl: types.string,
     parcelSize: types.number
-})
+});

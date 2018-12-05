@@ -2,15 +2,12 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
-import Notification from "./notification/Notification";
-import TimerStore from "../../stores/TimerStore/TimerStore";
-import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 
 import BabylonPlayground from "./babylonPlayground/babylonPlayground"
+
 const App = {
     displayName: "App",
     componentDidMount() {
-        console.log(CatalogStore.toJSON());
     },
     render() {
         return (

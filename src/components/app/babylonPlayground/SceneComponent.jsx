@@ -1,6 +1,6 @@
-import {Scene, Engine} from "babylonjs";
-import React from "react";
-import {Component} from "react";
+import {Engine, Scene} from "babylonjs";
+import React, {Component} from "react";
+import {assetsManager} from "./assetsManager";
 
 export default class SceneComponent extends Component {
 
@@ -24,6 +24,8 @@ export default class SceneComponent extends Component {
 
         let scene = new Scene(this.engine);
         this.scene = scene;
+
+        assetsManager(scene);
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
@@ -52,7 +54,7 @@ export default class SceneComponent extends Component {
     render() {
         // 'rest' can contain additional properties that you can flow through to canvas:
         // (id, className, etc.)
-        let { width, height, ...rest } = this.props;
+        let {width, height} = this.props;
 
         let opts = {};
 
