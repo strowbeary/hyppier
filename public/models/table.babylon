@@ -3,7 +3,7 @@
 "materials":[{"name":"table.Wood","id":"table.Wood","ambient":[0.8,0.308,0.1268],"diffuse":[0.8,0.308,0.1268],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
 "multiMaterials":[],
 "skeletons":[],
-"meshes":[{"name":"Plane","id":"Plane","materialId":"table.Wood","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[1.2287,0.9698,0.5566],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+"meshes":[{"name":"Table","id":"Table","materialId":"table.Wood","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[1.2287,0.9698,0.5566],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
 ,"positions":[-0.785,0.6737,0.7542,0.6959,0.6737,-0.7542,-0.785,0.6737,-0.7542,0.8097,0.7011,-1,-0.8987,0.7011,1,-0.8987,0.7011,-1,-0.8987,0.6737,-1,-0.8987,0.6737,1,0.8097,0.7011,1,0.8097,0.6737,1,0.8097,0.6737,-1,-0.8447,0.6737,0.88,0.7557,0.6737,-0.88,-0.8447,0.6737,-0.88,0.7557,0.6737,0.88,0.6959,0.6407,0.7542,0.6959,0.6737,0.7542
 ,0.7557,0.6407,0.88,-0.785,0.6407,0.7542,0.6959,0.6407,-0.7542,-0.785,0.6407,-0.7542,-0.8447,0.6407,0.88,-0.8447,0.6407,-0.88,0.7557,0.6407,-0.88,-0.8117,0.6751,0.8553,-0.8075,0.0022,0.8544,-0.8117,0.0022,0.8553,-0.8075,0.6751,0.8544,-0.8034,0.0022,0.8517,-0.8034,0.6751,0.8517,-0.7997,0.0022,0.8473,-0.7997,0.6751,0.8473,-0.7964,0.0022,0.8414,-0.7964,0.6751,0.8414
 ,-0.7938,0.0022,0.8342,-0.7938,0.6751,0.8342,-0.7918,0.0022,0.826,-0.7918,0.6751,0.826,-0.7905,0.0022,0.817,-0.7905,0.6751,0.817,-0.7901,0.0022,0.8078,-0.7901,0.6751,0.8078,-0.7905,0.0022,0.7985,-0.7905,0.6751,0.7985,-0.7918,0.0022,0.7896,-0.7918,0.6751,0.7896,-0.7938,0.0022,0.7813,-0.7938,0.6751,0.7813,-0.7964,0.0022,0.7741,-0.7964,0.6751,0.7741,-0.7997,0.0022,0.7682
@@ -73,7 +73,7 @@
 ,258,238,258,260,238,262,264,232,264,266,230,266,268,230,270,272,224,272,274,222]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":280,"indexStart":0,"indexCount":1620}]
 ,"instances":[]}
-,{"name":"Location(Decoration,false)","id":"Location(Decoration,false)","parentId":"Plane","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computers,true)","id":"Location(Computers,true)","parentId":"Plane","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+,{"name":"Location(Decoration,false)","id":"Location(Decoration,false)","parentId":"Table","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computers,true)","id":"Location(Computers,true)","parentId":"Table","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

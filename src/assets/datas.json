@@ -6,10 +6,10 @@
       "generations": [
         {
           "ad": "Lorem ipsum",
+          "name": "Macintosh",
           "modelFilename": "computer.babylon",
           "objects": [
             {
-              "name": "Macintosh",
               "materials": "",
               "thumbnailUrl": "./mac.png",
               "parcelSize": 1
@@ -24,11 +24,11 @@
       "type": "furniture",
       "generations": [
         {
+          "name": "Table",
           "ad": "Lorem ipsum",
           "modelFilename": "table.babylon",
           "objects": [
             {
-              "name": "Table",
               "materials": "",
               "thumbnailUrl": "table.png",
               "parcelSize": 1
@@ -43,11 +43,11 @@
       "type": "furniture",
       "generations": [
         {
+          "name": "Tabouret",
           "ad": "Lorem ipsum",
           "modelFilename": "tabouret.babylon",
           "objects": [
             {
-              "name": "Tabouret",
               "materials": "",
               "thumbnailUrl": "tabouret.png",
               "parcelSize": 1
@@ -62,11 +62,11 @@
       "type": "furniture",
       "generations": [
         {
+          "name": "Tabouret",
           "ad": "Lorem ipsum",
           "modelFilename": "tabouret.babylon",
           "objects": [
             {
-              "name": "Tabouret",
               "materials": "",
               "thumbnailUrl": "tabouret.png",
               "parcelSize": 1

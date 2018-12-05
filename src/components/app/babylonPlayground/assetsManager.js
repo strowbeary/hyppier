@@ -1,6 +1,7 @@
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import LocationStore from "../../../stores/CatalogStore/ObjectFamiliesStore/LocationStore/LocationStore";
+import {showAxis} from "../../../utils/Axis";
 
 const findFamilyIndex = (familyName) => CatalogStore.objectFamilies.toJSON().map(o => o.toJSON()).findIndex(family => family.name === familyName);
 
@@ -24,11 +25,23 @@ function locationManager(mesh, scene) {
             container => {
                 container.meshes.forEach(loadedMesh => {
                     if (loadedMesh.name.includes("Location")) {
-                        console.log(loadedMesh.parent.name);
+                        if (loadedMesh.parent) {
+                            const relativeFamilyLocation = CatalogStore.objectFamilies.find(family => {
+                                return family.generations.find(generation => {
+                                    return generation.name === loadedMesh.parent.name;
+                                });
+                            }).location;
+                            loadedMesh.position.add(relativeFamilyLocation)
+                        }
                         locationManager(loadedMesh, scene)
                     } else {
-                        loadedMesh.position = family.location.coordinates;
+                        loadedMesh.position = new BABYLON.Vector3(
+                            family.location.coordinates.x,
+                            family.location.coordinates.y,
+                            family.location.coordinates.z
+                        );
                     }
+                    showAxis(1, loadedMesh.position, scene);
                 });
                 container.addAllToScene();
             }
@@ -42,8 +55,11 @@ export function assetsManager(scene) {
     assetsManager.addMeshTask("room task", null, "/models/", "room.babylon");
     assetsManager.onProgress = (remainingCount, totalCount, task) => {
         task.loadedMeshes.forEach(loadedMesh => {
+            console.log(loadedMesh.name, loadedMesh.position);
             if (loadedMesh.name.includes("Location")) {
                 locationManager(loadedMesh, scene)
+            } else {
+                loadedMesh.convertToFlatShadedMesh();
             }
         });
     };

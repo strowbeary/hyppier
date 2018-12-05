@@ -2,7 +2,7 @@
 "autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"ambientColor":[0,0,0],"gravity":[0,-9.81,0],
 "materials":[{"name":"room.WhiteClay.003","id":"room.WhiteClay.003","ambient":[1,1,1],"diffuse":[1,1,1],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
 {"name":"room.LightBulb","id":"room.LightBulb","ambient":[1,0.5317,0.0004],"diffuse":[1,0.5317,0.0004],"specular":[0.4524,0.4524,0.4524],"emissive":[0,0,0],"specularPower":50,"alpha":0.375,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
-{"name":"room.WhiteClay.001","id":"room.WhiteClay.001","ambient":[0.1816,0.1816,0.1816],"diffuse":[0.1816,0.1816,0.1816],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
+{"name":"room.Ground","id":"room.Ground","ambient":[0.1816,0.1816,0.1816],"diffuse":[0.1816,0.1816,0.1816],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4},
 {"name":"room.WhiteClay","id":"room.WhiteClay","ambient":[0.5524,0.7331,1],"diffuse":[0.5524,0.7331,1],"specular":[0.0625,0.0625,0.0625],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
 "multiMaterials":[{"name":"room.Multimaterial#0","id":"room.Multimaterial#0","materials":["room.WhiteClay.003","room.LightBulb"]}],
 "skeletons":[],
@@ -155,9 +155,9 @@
 ,591,590,246,589,224,226]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":224,"indexStart":0,"indexCount":1152},{"materialIndex":1,"verticesStart":224,"verticesCount":418,"indexStart":1152,"indexCount":2304}]
 ,"instances":[]}
-,{"name":"Sol","id":"Sol","materialId":"room.WhiteClay.001","billboardMode":0,"position":[-0.2947,0.006,-0.7662],"rotation":[0,0,0],"scaling":[1.6115,1.6115,1.6115],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
-,"positions":[-1,0,0.98,0.8416,0,-0.8614,-1,0,-0.8614,0.8416,-0.0239,-0.8614,-1,-0.0239,0.98,-1,-0.0239,-0.8614,0.8416,-0.0239,0.98,0.8416,0,0.98]
-,"normals":[0.577,-0.577,-0.577,-0.577,-0.577,0.577,0.577,-0.577,0.577,-0.577,0.577,0.577,0.577,0.577,-0.577,0.577,0.577,0.577,-0.577,0.577,-0.577,-0.577,-0.577,-0.577]
+,{"name":"Sol","id":"Sol","materialId":"room.Ground","billboardMode":0,"position":[-0.2947,0.0538,-0.7662],"rotation":[0,0,0],"scaling":[1.6115,1.6115,1.6115],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
+,"positions":[-1,-0.0459,0.98,0.8416,-0.0459,-0.8614,-1,-0.0459,-0.8614,0.8416,-0.0239,-0.8614,-1,-0.0239,0.98,-1,-0.0239,-0.8614,0.8416,-0.0239,0.98,0.8416,-0.0459,0.98]
+,"normals":[-0.577,-0.577,0.577,0.577,-0.577,-0.577,-0.577,-0.577,-0.577,0.577,0.577,-0.577,-0.577,0.577,0.577,-0.577,0.577,-0.577,0.577,0.577,0.577,0.577,-0.577,0.577]
 ,"indices":[0,1,2,3,4,5,0,6,7,1,5,2,7,3,1,2,4,0,0,7,1,3,6,4,0,4,6,1,3,5,7,6,3,2,5,4]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":8,"indexStart":0,"indexCount":36}]
 ,"instances":[]}
