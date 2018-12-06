@@ -16,7 +16,6 @@ function locationManager(mesh, scene) {
             coordinates: JSON.parse(JSON.stringify(mesh.position))
         })
     );
-    console.log(CatalogStore.toJSON());
     if (locationOption[1] === "true") {
         BABYLON.SceneLoader.LoadAssetContainer(
             "/models/",
@@ -25,7 +24,12 @@ function locationManager(mesh, scene) {
             container => {
                 container.meshes.forEach(loadedMesh => {
                     if (loadedMesh.name.includes("Location")) {
-                        locationManager(loadedMesh, scene)
+                        locationManager(loadedMesh, scene);
+                        showAxis(scene, {
+                            position: loadedMesh.position,
+                            label: loadedMesh.name,
+                            size: 0.5
+                        });
                     } else {
                         loadedMesh.convertToFlatShadedMesh();
                         const locationPosition = new BABYLON.Vector3(
@@ -38,7 +42,6 @@ function locationManager(mesh, scene) {
                             mesh.position.addInPlace(locationPosition);
                         })
                     }
-                    showAxis(1, loadedMesh.position, scene);
                 });
                 container.addAllToScene();
             }
@@ -52,9 +55,12 @@ export function assetsManager(scene) {
     assetsManager.addMeshTask("room task", null, "/models/", "room.babylon");
     assetsManager.onProgress = (remainingCount, totalCount, task) => {
         task.loadedMeshes.forEach(loadedMesh => {
-            console.log(loadedMesh.name, loadedMesh.position);
             if (loadedMesh.name.includes("Location")) {
-                locationManager(loadedMesh, scene)
+                locationManager(loadedMesh, scene);
+                showAxis(scene, {
+                    position: loadedMesh.position,
+                    label: loadedMesh.name
+                });
             } else {
                 loadedMesh.convertToFlatShadedMesh();
             }
