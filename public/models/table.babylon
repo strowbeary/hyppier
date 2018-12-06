@@ -73,7 +73,7 @@
 ,258,238,258,260,238,262,264,232,264,266,230,266,268,230,270,272,224,272,274,222]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":280,"indexStart":0,"indexCount":1620}]
 ,"instances":[]}
-,{"name":"Location(Decoration,false)","id":"Location(Decoration,false)","parentId":"Table","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computers,true)","id":"Location(Computers,true)","parentId":"Table","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+,{"name":"Location(Decoration,false)","id":"Location(Decoration,false)","parentId":"Table","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computers,false)","id":"Location(Computers,false)","parentId":"Table","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

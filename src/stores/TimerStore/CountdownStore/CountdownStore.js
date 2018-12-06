@@ -1,15 +1,18 @@
 import {types} from "mobx-state-tree";
 
-export default types.model("TimerStore", {
-    duration: types.number,
-    metaElapsedTime: 0,
-    startTime: 0,
-    pauseTime: 0,
-    ended: false,
-    paused: true,
-    running: false,
-    req: 0
-})
+export default types
+    .model(
+    "TimerStore",
+    {
+        duration: types.number,
+        metaElapsedTime: 0,
+        startTime: 0,
+        pauseTime: 0,
+        ended: false,
+        paused: true,
+        running: false,
+        req: 0
+    })
     .views(self => {
         return {
             get remainingTime() {
