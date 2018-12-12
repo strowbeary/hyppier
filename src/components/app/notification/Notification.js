@@ -9,11 +9,19 @@ const Notification = {
     componentWillMount() {
         this.timer = TimeManager.create(this.props.time);
     },
+    buildCatalog() {
+      this.timer.start();
+    },
     render() {
         const dashSize = 133;
+        let {x, y} = this.props.position;
+        let style = {
+            'top': y - 70,
+            'left': x - 25
+        };
         return (
-            <div className="notification">
-                <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
+            <div className="notification" style={style} onClick={this.buildCatalog}>
+                {/*<p>{this.timer.elapsedTime} / {this.timer.duration}</p>*/}
                 <svg viewBox="0 0 22 26" width={50} height={60} xmlns="http://www.w3.org/2000/svg">
                     <g transform="matrix(1,0,0,1,-658.499,-1190.18)">
                         <g id="notification" transform="matrix(0.444838,0,0,0.440874,365.673,665.589)">
