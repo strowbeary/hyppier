@@ -1,13 +1,12 @@
-import {assetsManager} from "./assetsManager";
 import Notification from "../notification/Notification";
-import LambdaObject from "../lambdaObject";
-import 'babylonjs-loaders';
+import LambdaObject from "./effects/lambdaObject";
 import * as BABYLON from "babylonjs";
 import {Component} from "react";
 import * as React from "react";
 import {Scene, Engine} from "babylonjs";
-export default class SceneComponent extends Component {
+import {assetsManager} from "./utils/assetsManager";
 
+export default class SceneComponent extends Component {
     scene;
     engine;
     canvas;
@@ -35,8 +34,12 @@ export default class SceneComponent extends Component {
         let scene = new Scene(this.engine);
         this.scene = scene;
 
+        assetsManager(scene, mesh => {
+
+        });
+
         // LOAD FILE
-        BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
+        /*BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
             let meshes = container.meshes;
             let materials = container.materials;
 
@@ -48,7 +51,7 @@ export default class SceneComponent extends Component {
 
             // Adds all elements to the scene
             //container.addAllToScene();
-        });
+        });*/
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({

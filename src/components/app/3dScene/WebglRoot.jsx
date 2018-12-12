@@ -3,7 +3,7 @@ import * as BABYLON from "babylonjs";
 import 'babylonjs-loaders';
 import SceneComponent from './SceneComponent';
 
-export default class BabylonPlayground extends Component {
+export default class WebglRoot extends Component {
 
     constructor(props) {
         super(props);

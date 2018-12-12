@@ -9,12 +9,6 @@ export default class lambdaObject extends Component {
     multimaterial = this.props.mesh.material.subMaterials !== undefined;
     time = this.props.time;
 
-    constructor(props) {
-        super(props);
-        this.state = {projectedPosition: BABYLON.Vector3.Zero()};
-        this.child = React.createRef();
-    }
-
     changeMaterial() { //in order to change the version of object
         // Change materials on subMeshes with Materials in macintosh.material.subMaterials
         //this.props.subMeshes[1].materialIndex = 0;

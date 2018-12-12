@@ -1,7 +1,7 @@
 import * as BABYLON from "babylonjs";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import LocationStore from "../../../stores/CatalogStore/ObjectFamiliesStore/LocationStore/LocationStore";
-import {showAxis} from "../../../utils/Axis";
+import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
+import LocationStore from "../../../../stores/CatalogStore/ObjectFamiliesStore/LocationStore/LocationStore";
+import {showAxis} from "./Axis";
 
 const findFamilyIndex = (familyName) => CatalogStore.objectFamilies.toJSON().map(o => o.toJSON()).findIndex(family => family.name === familyName);
 
@@ -40,7 +40,7 @@ function locationManager(mesh, scene) {
                         loadedMesh.position = locationPosition;
                         loadedMesh.getChildren().forEach(mesh => {
                             mesh.position.addInPlace(locationPosition);
-                        })
+                        });
                     }
                 });
                 container.addAllToScene();

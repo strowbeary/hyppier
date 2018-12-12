@@ -3,7 +3,7 @@ import createReactClass from "create-react-class";
 import "./_app.scss";
 import {observer} from "mobx-react";
 
-import BabylonPlayground from "./babylonPlayground/babylonPlayground"
+import WebglRoot from "./3dScene/WebglRoot"
 
 const App = {
     displayName: "App",
@@ -12,7 +12,7 @@ const App = {
     render() {
         return (
             <div id="app">
-                <BabylonPlayground/>
+                <WebglRoot/>
                 {/*<Notification time={5000}/>
                 <Notification time={5000}/>
                 <Notification time={10000}/>
