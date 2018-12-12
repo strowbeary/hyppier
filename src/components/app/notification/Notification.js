@@ -2,21 +2,21 @@ import React from 'react';
 import createReactClass from "create-react-class";
 import "./_notification.scss";
 import {observer} from "mobx-react";
-import TimeManager from "../../../utils/TimeManager";
+import CountdownStore from "../../../stores/TimerStore/TimerStore";
 
 const Notification = {
     displayName: "Notification",
     componentWillMount() {
-        this.timer = TimeManager.create(this.props.time);
+        this.timer = CountdownStore.create(this.props.time);
     },
     buildCatalog() {
       this.timer.start();
     },
     render() {
-        const dashSize = 133;
+        const dashSize = 134;
         let {x, y} = this.props.position;
-        let style = {
             'top': y - 70,
+        let style = {
             'left': x - 25
         };
         return (
@@ -45,15 +45,15 @@ const Notification = {
                                       style={{
                                           fill: "none",
                                           stroke: "rgb(255,0,0)",
-                                          strokeWidth: "1.7px"
+                                          strokeWidth: "2px"
                                       }}
-                                      strokeDashoffset={this.timer.elapsedTime / this.timer.duration * dashSize}
+                                      strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
                                       strokeDasharray={dashSize}/>
                             </g>
                         </g>
                     </g>
                 </svg>
-
+                <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
                 <div>
                     {(()=> {
                         if(this.timer.ended) {

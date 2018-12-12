@@ -1,0 +1,80 @@
+{
+  "objectFamilies": [
+    {
+      "name": "Computers",
+      "type": "electric",
+      "generations": [
+        {
+          "ad": "Lorem ipsum",
+          "name": "Macintosh",
+          "modelFilename": "computer.babylon",
+          "objects": [
+            {
+              "materials": "",
+              "thumbnailUrl": "./mac.png",
+              "parcelSize": 1
+            }
+          ]
+        }
+      ],
+      "generationTimeout": 15000
+    },
+    {
+      "name": "Table",
+      "type": "furniture",
+      "generations": [
+        {
+          "name": "Table",
+          "ad": "Lorem ipsum",
+          "modelFilename": "table.babylon",
+          "objects": [
+            {
+              "materials": "",
+              "thumbnailUrl": "table.png",
+              "parcelSize": 1
+            }
+          ]
+        }
+      ],
+      "generationTimeout": 15000
+    },
+    {
+      "name": "Chair",
+      "type": "furniture",
+      "generations": [
+        {
+          "name": "Tabouret",
+          "ad": "Lorem ipsum",
+          "modelFilename": "tabouret.babylon",
+          "objects": [
+            {
+              "materials": "",
+              "thumbnailUrl": "tabouret.png",
+              "parcelSize": 1
+            }
+          ]
+        }
+      ],
+      "generationTimeout": 15000
+    },
+    {
+      "name": "Decoration",
+      "type": "furniture",
+      "generations": [
+        {
+          "name": "Tabouret",
+          "ad": "Lorem ipsum",
+          "modelFilename": "tabouret.babylon",
+          "objects": [
+            {
+              "materials": "",
+              "thumbnailUrl": "tabouret.png",
+              "parcelSize": 1
+            }
+          ]
+        }
+      ],
+      "generationTimeout": 15000
+    }
+  ]
+}

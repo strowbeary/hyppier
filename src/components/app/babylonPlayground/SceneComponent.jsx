@@ -1,10 +1,8 @@
-import {Scene, Engine} from "babylonjs";
-import React from "react";
-import {Component} from "react";
-import * as BABYLON from "babylonjs";
-import 'babylonjs-loaders';
-import LambdaObject from "../lambdaObject";
+import {assetsManager} from "./assetsManager";
 import Notification from "../notification/Notification";
+import LambdaObject from "../lambdaObject";
+import 'babylonjs-loaders';
+import * as BABYLON from "babylonjs";
 
 export default class SceneComponent extends Component {
 
@@ -114,7 +112,7 @@ export default class SceneComponent extends Component {
     render() {
         // 'rest' can contain additional properties that you can flow through to canvas:
         // (id, className, etc.)
-        let { width, height, ...rest } = this.props;
+        let {width, height} = this.props;
 
         let opts = {};
 
