@@ -3,7 +3,9 @@ import Notification from "../notification/Notification";
 import LambdaObject from "../lambdaObject";
 import 'babylonjs-loaders';
 import * as BABYLON from "babylonjs";
-
+import {Component} from "react";
+import * as React from "react";
+import {Scene, Engine} from "babylonjs";
 export default class SceneComponent extends Component {
 
     scene;
