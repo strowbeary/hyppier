@@ -1,7 +1,6 @@
 import {Engine, Scene} from "babylonjs";
 import React, {Component} from "react";
 import {assetsManager} from "./assetsManager";
-import {showAxis} from "../../../utils/Axis";
 
 export default class SceneComponent extends Component {
 
@@ -27,10 +26,10 @@ export default class SceneComponent extends Component {
         this.scene = scene;
 
         assetsManager(scene);
-        showAxis(scene, {
+        /*showAxis(scene, {
             size: 3,
             label: "Origin"
-        });
+        });*/
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
