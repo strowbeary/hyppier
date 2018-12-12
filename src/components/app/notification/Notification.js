@@ -15,8 +15,8 @@ const Notification = {
     render() {
         const dashSize = 134;
         let {x, y} = this.props.position;
-            'top': y - 70,
         let style = {
+            'top': y - 70,
             'left': x - 25
         };
         return (
