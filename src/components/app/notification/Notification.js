@@ -1,26 +1,50 @@
 import React from 'react';
-import createReactClass from "create-react-class";
+import {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import CountdownStore from "../../../stores/TimerStore/TimerStore";
+import * as BABYLON from "babylonjs";
 
-const Notification = {
-    displayName: "Notification",
-    componentWillMount() {
+const Notification = observer(class Notification extends Component {
+
+    constructor(props) {
+        super(props);
+        this.mesh = props.mesh;
+        this.position = this.mesh.position;
+        this.scene = props.scene;
         this.timer = CountdownStore.create(this.props.time);
-    },
+        this.state = {position: this.getProjectedPosition()};
+    }
+
+    setProjectedPosition() {
+        this.setState({position: this.getProjectedPosition()});
+    }
+
+    getProjectedPosition() { //does not seems to REALLY work...
+        return BABYLON.Vector3.Project(
+            this.position,
+            this.mesh.computeWorldMatrix(true), //BABYLON.Matrix.Identity()
+            this.scene.activeCamera.getViewMatrix().multiply(this.scene.activeCamera.getProjectionMatrix()), //scene.getTransformMatrix
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        )
+    }
+
     buildCatalog() {
-      this.timer.start();
-    },
+        this.timer.start();
+    }
+
     render() {
         const dashSize = 134;
-        let {x, y} = this.props.position;
+        let {x, y} = this.state.position;
         let style = {
             'top': y - 70,
             'left': x - 25
         };
         return (
-            <div className="notification" style={style} onClick={this.buildCatalog}>
+            <div className="notification" style={style} onClick={() => this.buildCatalog()}>
                 {/*<p>{this.timer.elapsedTime} / {this.timer.duration}</p>*/}
                 <svg viewBox="0 0 22 26" width={50} height={60} xmlns="http://www.w3.org/2000/svg">
                     <g transform="matrix(1,0,0,1,-658.499,-1190.18)">
@@ -66,6 +90,6 @@ const Notification = {
             </div>
         )
     }
-};
+});
 
-export default observer(createReactClass(Notification));
+export default Notification;

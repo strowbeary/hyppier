@@ -20,7 +20,7 @@ export default class WebglRoot extends Component {
 
         // This attaches the camera to the canvas
         camera.attachControl(canvas);
-        camera.inputs.attached.mousewheel.wheelDeltaPercentage = 30;
+        camera.inputs.attached.mousewheel.wheelDeltaPercentage = 1;
         camera.inputs.attached.mousewheel.wheelPrecision = 100;
 
 
