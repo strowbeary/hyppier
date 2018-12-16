@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import * as BABYLON from "babylonjs";
-import React from "react";
 
 export default class lambdaObject extends Component {
 

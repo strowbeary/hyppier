@@ -1,16 +1,17 @@
-import Notification from "../notification/Notification";
 import LambdaObject from "./effects/lambdaObject";
-import * as BABYLON from "babylonjs";
 import {Component} from "react";
 import * as React from "react";
 import {Scene, Engine} from "babylonjs";
 import {assetsManager} from "./utils/assetsManager";
+import * as BABYLON from "babylonjs";
+import NotificationFactory from "./utils/notificationFactory";
 
 export default class SceneComponent extends Component {
     scene;
     engine;
     canvas;
     pauseStatus = false;
+    notificationFactory;
 
     constructor(props) {
         super(props);
@@ -33,13 +34,14 @@ export default class SceneComponent extends Component {
 
         let scene = new Scene(this.engine);
         this.scene = scene;
+        this.notificationFactory = new NotificationFactory(scene);
 
-        assetsManager(scene, mesh => {
+        /*assetsManager(scene, mesh => {
 
-        });
+        });*/
 
         // LOAD FILE
-        /*BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
+        BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
             let meshes = container.meshes;
             let materials = container.materials;
 
@@ -47,11 +49,9 @@ export default class SceneComponent extends Component {
                 meshes: container.meshes
             });
 
-            this.updateProjectionVector(meshes);
-
             // Adds all elements to the scene
             //container.addAllToScene();
-        });*/
+        });
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
@@ -66,11 +66,9 @@ export default class SceneComponent extends Component {
         // Resize the babylon engine when the window is resized
         window.addEventListener('resize', this.onResizeWindow);
         window.addEventListener('keypress', this.pause.bind(this));
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(
-            () => {
-                this.updateProjectionVector();
-            }
-        )
+
+
+        this.notificationFactory.setCameraListener();
     }
 
     componentWillUnmount () {
@@ -90,29 +88,11 @@ export default class SceneComponent extends Component {
         }
     }
 
-    updateProjectionVector(meshes) {
-        let projectedPos = [];
-        if (meshes) {
-            projectedPos = meshes.map((mesh, i) =>
-                <Notification position={this.getProjectedPosition(mesh)} time={5000} key={i}/>
-            );
-        } else {
-            projectedPos = this.state.meshes.map((mesh, i) =>
-                <Notification position={this.getProjectedPosition(mesh)} time={5000} key={i}/>
-            );
-        }
-        this.setState({notifications: projectedPos});
-    }
-
     onCanvasLoaded = (c) => {
         if (c !== null) {
             this.canvas = c;
         }
     };
-
-    getProjectedPosition(mesh) {
-        return BABYLON.Vector3.Project(mesh.position, mesh.computeWorldMatrix(true), this.scene.getTransformMatrix(), this.scene.activeCamera.viewport.toGlobal(this.scene.activeCamera.getEngine()))
-    }
 
     render() {
         // 'rest' can contain additional properties that you can flow through to canvas:
@@ -130,7 +110,9 @@ export default class SceneComponent extends Component {
             <LambdaObject key={mesh.id} scene={this.scene} mesh={mesh} time={100}/>
         );
 
-        const notifications = this.state.notifications;
+        const notifications = this.state.meshes.map(mesh =>
+            this.notificationFactory.build(mesh)
+        );
 
         return (
             <div>
