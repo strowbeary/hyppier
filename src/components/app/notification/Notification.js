@@ -10,21 +10,21 @@ const Notification = observer(class Notification extends Component {
     constructor(props) {
         super(props);
         this.mesh = props.mesh;
-        this.position = this.mesh.position;
+        this.position = this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.05, 0));
         this.scene = props.scene;
         this.timer = CountdownStore.create(this.props.time);
-        this.state = {position: this.getProjectedPosition()};
+        this.state = {projectedPosition: this.getProjectedPosition()};
     }
 
     setProjectedPosition() {
-        this.setState({position: this.getProjectedPosition()});
+        this.setState({projectedPosition: this.getProjectedPosition()});
     }
 
     getProjectedPosition() { //does not seems to REALLY work...
         return BABYLON.Vector3.Project(
             this.position,
-            this.mesh.computeWorldMatrix(true), //BABYLON.Matrix.Identity()
-            this.scene.activeCamera.getViewMatrix().multiply(this.scene.activeCamera.getProjectionMatrix()), //scene.getTransformMatrix
+            BABYLON.Matrix.Identity(), //BABYLON.Matrix.Identity()
+            this.scene.getTransformMatrix(), //scene.getTransformMatrix
             this.scene.activeCamera.viewport.toGlobal(
                 this.scene.activeCamera.getEngine().getRenderWidth(),
                 this.scene.activeCamera.getEngine().getRenderHeight()
@@ -38,9 +38,9 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         const dashSize = 134;
-        let {x, y} = this.state.position;
+        let {x, y} = this.state.projectedPosition;
         let style = {
-            'top': y - 70,
+            'top': y - 60,
             'left': x - 25
         };
         return (
@@ -77,16 +77,6 @@ const Notification = observer(class Notification extends Component {
                         </g>
                     </g>
                 </svg>
-                <p>{this.timer.elapsedTime} / {this.timer.duration}</p>
-                <div>
-                    {(()=> {
-                        if(this.timer.ended) {
-                            return (
-                                <p>Ended</p>
-                            )
-                        }
-                    })()}
-                </div>
             </div>
         )
     }

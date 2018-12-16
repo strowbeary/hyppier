@@ -36,10 +36,12 @@ export default class SceneComponent extends Component {
         this.scene = scene;
         this.notificationFactory = new NotificationFactory(scene);
 
-        /*assetsManager(scene, mesh => {
-
-        });*/
-
+        assetsManager(scene, mesh => {
+            this.setState({
+                meshes: [...this.state.meshes, mesh]
+            });
+        });
+        /*
         // LOAD FILE
         BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
             let meshes = container.meshes;
@@ -51,7 +53,7 @@ export default class SceneComponent extends Component {
 
             // Adds all elements to the scene
             //container.addAllToScene();
-        });
+        });*/
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({

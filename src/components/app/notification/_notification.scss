@@ -1,9 +1,10 @@
 .notification {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  button {
-    margin: 5px;
+  position: fixed;
+  display: block;
+  width: 0;
+  height: 0;
+  svg {
+    width: 50px;
+    height: 60px;
   }
 }
