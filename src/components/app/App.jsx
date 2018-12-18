@@ -3,7 +3,7 @@ import "./_app.scss";
 import {observer} from "mobx-react";
 
 import WebglRoot from "./3dScene/WebglRoot"
-import FullScreenMode from "./options/FullScreenButton"
+import FullScreenButton from "./options/FullScreenButton"
 
 const App = observer(class App extends Component {
 
@@ -17,7 +17,7 @@ const App = observer(class App extends Component {
         return (
             <div id="app">
                 <WebglRoot ref={this.webGLRoot} />
-                <FullScreenMode onClick={this.resizeWebGLRoot}/>
+                <FullScreenButton onClick={this.resizeWebGLRoot}/>
             </div>
         )
     }

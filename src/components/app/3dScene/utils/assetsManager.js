@@ -63,6 +63,8 @@ export function assetsManager(scene, meshCallback) {
                 });
             } else {
                 loadedMesh.convertToFlatShadedMesh();
+                loadedMesh.freezeWorldMatrix();
+                loadedMesh.material.freeze();
             }
         });
     };
