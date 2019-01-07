@@ -16,12 +16,8 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div id="app">
-<<<<<<< HEAD
-                <WebglRoot/>
-=======
                 <WebglRoot ref={this.webGLRoot} />
                 <FullScreenButton onClick={this.resizeWebGLRoot}/>
->>>>>>> 38c6fbf3b0dc30ac0be350d920de86faf2181e06
             </div>
         )
     }
