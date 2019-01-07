@@ -7,17 +7,11 @@ import FullScreenButton from "./options/FullScreenButton"
 
 const App = observer(class App extends Component {
 
-    webGLRoot = React.createRef();
-
-    resizeWebGLRoot = ()  => {
-        this.webGLRoot.current.changeSceneLimits();
-    };
-
     render() {
         return (
             <div id="app">
-                <WebglRoot ref={this.webGLRoot} />
-                <FullScreenButton onClick={this.resizeWebGLRoot}/>
+                <WebglRoot />
+                <FullScreenButton/>
             </div>
         )
     }

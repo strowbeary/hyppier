@@ -17,12 +17,16 @@ export default class SceneComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {meshes: [], notifications: [], locations: []};
-        console.log(CatalogStore.toJSON())
+        console.log(CatalogStore.toJSON());
+        window.addEventListener('keypress', (e) => this.pause(e));
+        window.addEventListener('resize', () => this.onResize());
     }
 
-    onResizeWindow () {
+    onResize() {
         if (this.engine) {
             this.engine.resize();
+            this.scene.updateTransformMatrix(true);
+            NotificationFactory.updateProjectedPosition();
         }
     }
 
@@ -60,16 +64,7 @@ export default class SceneComponent extends Component {
             console.error('onSceneMount function not available');
         }
 
-        // Resize the babylon engine when the window is resized
-        window.addEventListener('resize', this.onResizeWindow);
-        window.addEventListener('keypress', this.pause.bind(this));
-
-
         this.notificationFactory.setCameraListener();
-    }
-
-    componentWillUnmount () {
-        window.removeEventListener('resize', this.onResizeWindow);
     }
 
     pause(e) {

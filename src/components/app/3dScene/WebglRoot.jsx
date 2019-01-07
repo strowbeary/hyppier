@@ -7,7 +7,8 @@ export default class WebglRoot extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {width: window.screen.availWidth, height: window.screen.availHeight};
+        this.state = {width: window.innerWidth, height: window.innerHeight};
+        window.addEventListener("resize", () => this.changeSceneLimits());
     }
 
     onSceneMount(e) {
@@ -40,13 +41,11 @@ export default class WebglRoot extends Component {
                 scene.render();
             }
         });
-
-        window.addEventListener("resize", this.changeSceneLimits);
     }
 
     changeSceneLimits() {
         this.setState({
-            width: window.screen.availWidth, height: window.screen.availHeight
+            width: window.innerWidth, height: window.innerHeight
         });
     }
 
