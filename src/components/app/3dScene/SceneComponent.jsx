@@ -16,7 +16,7 @@ export default class SceneComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], notifications: []}
+        this.state = {meshes: [], notifications: [], locations: []};
         console.log(CatalogStore.toJSON())
     }
 
@@ -38,10 +38,16 @@ export default class SceneComponent extends Component {
         this.scene = scene;
         this.notificationFactory = new NotificationFactory(scene);
 
-        assetsManager(scene, mesh => {
-            this.setState({
-                meshes: [...this.state.meshes, mesh]
-            });
+        assetsManager(scene, (location, isMesh) => {
+            if (isMesh) {
+                this.setState({
+                    meshes: [...this.state.meshes, location]
+                });
+            } else {
+                this.setState({
+                    locations: [...this.state.locations, location]
+                });
+            }
         });
 
         if (typeof this.props.onSceneMount === 'function') {
@@ -101,14 +107,19 @@ export default class SceneComponent extends Component {
             <LambdaObject key={mesh.id} scene={this.scene} mesh={mesh} time={100}/>
         );
 
+        const addNotifications = this.state.locations.map(mesh =>
+            this.notificationFactory.build(mesh, false)
+        );
+
         const notifications = this.state.meshes.map(mesh =>
-            this.notificationFactory.build(mesh)
+            this.notificationFactory.build(mesh, true)
         );
 
         return (
             <div>
                 {meshes}
                 {notifications}
+                {addNotifications}
                 <canvas {...opts} ref={this.onCanvasLoaded}/>
             </div>
         )

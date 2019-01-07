@@ -88,6 +88,10 @@ export default class lambdaObject extends Component {
                 value: new BABYLON.Color3.White()
             });
             animationBox.setKeys(keys);
+
+            let easingFunction = new BABYLON.ExponentialEase();
+            easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+            animationBox.setEasingFunction(easingFunction);
             this.mesh.animations.push(animationBox);
 
             /*return new BABYLON.InterpolateValueAction(

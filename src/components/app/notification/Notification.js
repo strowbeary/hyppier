@@ -10,9 +10,9 @@ const Notification = observer(class Notification extends Component {
     constructor(props) {
         super(props);
         this.mesh = props.mesh;
-        this.position = this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.05, 0));
+        this.position = this.mesh.name.includes("Location") ? this.mesh.position : this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.05, 0));
         this.scene = props.scene;
-        this.timer = CountdownStore.create(this.props.time);
+        this.timer = props.hasTimer ? CountdownStore.create(this.props.time) : null;
         this.state = {projectedPosition: this.getProjectedPosition()};
     }
 
@@ -30,10 +30,13 @@ const Notification = observer(class Notification extends Component {
                 this.scene.activeCamera.getEngine().getRenderHeight()
             )
         )
+
     }
 
     buildCatalog() {
-        this.timer.start();
+        if (this.timer) {
+            this.timer.start();
+        }
     }
 
     render() {
@@ -75,7 +78,7 @@ const Notification = observer(class Notification extends Component {
                                     }}/>
                                 </g>
                             </g>
-                            <g transform="matrix(0.980274,0,0,0.989086,17.6057,283.695)">
+                            {this.timer && <g transform="matrix(0.980274,0,0,0.989086,17.6057,283.695)">
                                 <path d="M671.811,963.702C662.127,960.833 655.054,951.862 655.054,941.252C655.054,928.331 665.544,917.84 678.466,917.84C691.387,917.84 701.877,928.331 701.877,941.252C701.877,951.862 694.804,960.833 685.12,963.702"
                                       style={{
                                           fill: "none",
@@ -85,7 +88,7 @@ const Notification = observer(class Notification extends Component {
                                       }}
                                       strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
                                       strokeDasharray={dashSize}/>
-                            </g>
+                            </g>}
                         </g>
                     </g>
                 </svg>

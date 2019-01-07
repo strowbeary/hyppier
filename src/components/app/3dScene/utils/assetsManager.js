@@ -49,7 +49,7 @@ function locationManager(mesh, scene, meshCallback) {
                             loadedMesh.getChildren().forEach(mesh => {
                                 mesh.position.addInPlace(locationPosition);
                             });
-                            meshCallback(loadedMesh);
+                            meshCallback(loadedMesh, true);
                         }
                     });
                 } catch (e) {
@@ -58,6 +58,8 @@ function locationManager(mesh, scene, meshCallback) {
 
             }
         )
+    } else {
+        meshCallback(mesh, false);
     }
 }
 
