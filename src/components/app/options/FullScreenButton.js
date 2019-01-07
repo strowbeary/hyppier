@@ -1,6 +1,5 @@
 import React from 'react';
 import {Component} from 'react';
-import "./_fullscreenbutton.scss";
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
 
@@ -41,7 +40,7 @@ const FullScreenButton = observer(class FullScreenButton extends Component {
 
     render() {
         return (
-            <button className="fullscreenbutton" onClick={this.switchFullscreen}>FULL SCREEN</button>
+            <button onClick={this.switchFullscreen}>FULL SCREEN</button>
         )
     }
 });

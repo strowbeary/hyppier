@@ -3,7 +3,7 @@ import {showAxis} from "./Axis";
 import LocationStore from "../../../../stores/CatalogStore/ObjectTypeStore/ObjectKindStore/LocationStore/LocationStore";
 import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 
-const findobjectKindsPath = (objectKindName) => {
+export const findobjectKindsPath = (objectKindName) => {
     const objectTypeIndex = CatalogStore.objectTypes
         .findIndex(objectType => objectType.objectKinds.findIndex(objectKind => objectKind.name === objectKindName) !== -1);
     const objectKindIndex = CatalogStore.objectTypes[objectTypeIndex].objectKinds.findIndex(objectKind => objectKind.name === objectKindName);
@@ -12,10 +12,8 @@ const findobjectKindsPath = (objectKindName) => {
 
 function locationManager(mesh, scene, meshCallback) {
     const locationOption = mesh.name.substring(0, mesh.name.length - 1).split("(")[1].split(",");
-    console.log(locationOption);
     const objectKindPath = findobjectKindsPath(locationOption[0]);
     const objectKind = CatalogStore.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]];
-    console.log(objectKind.name);
     objectKind.setLocation(
         LocationStore.create({
             filledAtStartup: locationOption[1] === "true",
