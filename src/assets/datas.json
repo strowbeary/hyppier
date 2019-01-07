@@ -1,80 +1,198 @@
 {
-  "objectFamilies": [
+  "objectTypes": [
     {
-      "name": "Computers",
-      "type": "electric",
-      "generations": [
-        {
-          "ad": "Lorem ipsum",
-          "name": "Macintosh",
-          "modelFilename": "computer.babylon",
-          "objects": [
-            {
-              "materials": "",
-              "thumbnailUrl": "./mac.png",
-              "parcelSize": 1
-            }
-          ]
-        }
-      ],
-      "generationTimeout": 15000
-    },
-    {
-      "name": "Table",
-      "type": "furniture",
-      "generations": [
+      "name": "furniture",
+      "clueEvent": {
+        "text": "Lorem Ipsum",
+        "illustrationUrl": "http://localhost:8080"
+      },
+      "replacementCounter": 0,
+      "objectKinds": [
         {
           "name": "Table",
-          "ad": "Lorem ipsum",
-          "modelFilename": "table.babylon",
           "objects": [
             {
-              "materials": "",
-              "thumbnailUrl": "table.png",
-              "parcelSize": 1
+              "name": "table",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "table.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
             }
-          ]
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": [
+            0,
+            0
+          ],
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
+        },
+        {
+          "name": "Chair",
+          "objects": [
+            {
+              "name": "tabouret",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "tabouret.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            }
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": [
+            0,
+            0
+          ],
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
         }
-      ],
-      "generationTimeout": 15000
+      ]
     },
     {
-      "name": "Chair",
-      "type": "furniture",
-      "generations": [
+      "name": "electric",
+      "clueEvent": {
+        "text": "Lorem Ipsum",
+        "illustrationUrl": "http://localhost:8080"
+      },
+      "replacementCounter": 0,
+      "objectKinds": [
         {
-          "name": "Tabouret",
-          "ad": "Lorem ipsum",
-          "modelFilename": "tabouret.babylon",
+          "name": "Computer",
           "objects": [
             {
-              "materials": "",
-              "thumbnailUrl": "tabouret.png",
-              "parcelSize": 1
+              "name": "Macintosh",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "computer.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
             }
-          ]
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": [
+            0,
+            0
+          ],
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
         }
-      ],
-      "generationTimeout": 15000
+      ]
     },
     {
-      "name": "Decoration",
-      "type": "furniture",
-      "generations": [
+      "name": "decoration",
+      "clueEvent": {
+        "text": "Lorem Ipsum",
+        "illustrationUrl": "http://localhost:8080"
+      },
+      "replacementCounter": 0,
+      "objectKinds": [
         {
-          "name": "Tabouret",
-          "ad": "Lorem ipsum",
-          "modelFilename": "tabouret.babylon",
+          "name": "Flower",
           "objects": [
             {
-              "materials": "",
-              "thumbnailUrl": "tabouret.png",
-              "parcelSize": 1
+              "name": "Macintosh",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "computer.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
             }
-          ]
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": [
+            0,
+            0
+          ],
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
         }
-      ],
-      "generationTimeout": 15000
+      ]
     }
   ]
 }

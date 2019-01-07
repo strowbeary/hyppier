@@ -5,6 +5,7 @@ import {Scene, Engine} from "babylonjs";
 import {assetsManager} from "./utils/assetsManager";
 import * as BABYLON from "babylonjs";
 import NotificationFactory from "./utils/notificationFactory";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export default class SceneComponent extends Component {
     scene;
@@ -16,6 +17,7 @@ export default class SceneComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {meshes: [], notifications: []}
+        console.log(CatalogStore.toJSON())
     }
 
     onResizeWindow () {
@@ -41,19 +43,6 @@ export default class SceneComponent extends Component {
                 meshes: [...this.state.meshes, mesh]
             });
         });
-        /*
-        // LOAD FILE
-        BABYLON.SceneLoader.LoadAssetContainer("/models/", "untitled4.babylon", scene, (container) => {
-            let meshes = container.meshes;
-            let materials = container.materials;
-
-            this.setState({
-                meshes: container.meshes
-            });
-
-            // Adds all elements to the scene
-            //container.addAllToScene();
-        });*/
 
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({

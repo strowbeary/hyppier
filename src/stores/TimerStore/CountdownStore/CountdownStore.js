@@ -1,4 +1,5 @@
 import {types} from "mobx-state-tree";
+import GameStore from "../../GameStore/GameStore";
 
 export default types
     .model(
@@ -25,7 +26,7 @@ export default types
     })
     .actions(self => ({
         _loop() {
-            self.metaElapsedTime = performance.now() - self.startTime;
+            self.metaElapsedTime = GameStore.hype.level * (performance.now() - self.startTime);
             if (self.metaElapsedTime >= self.duration) {
                 self.ended = true;
                 self.running = false;

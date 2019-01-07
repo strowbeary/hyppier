@@ -1,49 +1,61 @@
 import * as BABYLON from "babylonjs";
-import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
-import LocationStore from "../../../../stores/CatalogStore/ObjectFamiliesStore/LocationStore/LocationStore";
 import {showAxis} from "./Axis";
+import LocationStore from "../../../../stores/CatalogStore/ObjectTypeStore/ObjectKindStore/LocationStore/LocationStore";
+import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 
-const findFamilyIndex = (familyName) => CatalogStore.objectFamilies.toJSON().map(o => o.toJSON()).findIndex(family => family.name === familyName);
+const findobjectKindsPath = (objectKindName) => {
+    const objectTypeIndex = CatalogStore.objectTypes
+        .findIndex(objectType => objectType.objectKinds.findIndex(objectKind => objectKind.name === objectKindName) !== -1);
+    const objectKindIndex = CatalogStore.objectTypes[objectTypeIndex].objectKinds.findIndex(objectKind => objectKind.name === objectKindName);
+    return [objectTypeIndex, objectKindIndex];
+};
 
 function locationManager(mesh, scene, meshCallback) {
     const locationOption = mesh.name.substring(0, mesh.name.length - 1).split("(")[1].split(",");
-    const family = CatalogStore
-        .objectFamilies[findFamilyIndex(locationOption[0])];
-    family.setLocation(
+    console.log(locationOption);
+    const objectKindPath = findobjectKindsPath(locationOption[0]);
+    const objectKind = CatalogStore.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]];
+    console.log(objectKind.name);
+    objectKind.setLocation(
         LocationStore.create({
-            type: locationOption[0],
-            currentObject: [findFamilyIndex(locationOption[0]), 0, 0],
+            filledAtStartup: locationOption[1] === "true",
+            previewObject: [0, 0],
             coordinates: JSON.parse(JSON.stringify(mesh.position))
         })
     );
     if (locationOption[1] === "true") {
         BABYLON.SceneLoader.LoadAssetContainer(
             "/models/",
-            family.generations[0].modelFilename,
+            objectKind.objects[0].modelUrl,
             scene,
             container => {
-                container.meshes.forEach(loadedMesh => {
-                    if (loadedMesh.name.includes("Location")) {
-                        locationManager(loadedMesh, scene, meshCallback);
-                        showAxis(scene, {
-                            position: loadedMesh.position,
-                            label: loadedMesh.name,
-                            size: 0.5
-                        });
-                    } else {
-                        loadedMesh.convertToFlatShadedMesh();
-                        const locationPosition = new BABYLON.Vector3(
-                            family.location.coordinates.x,
-                            family.location.coordinates.y,
-                            family.location.coordinates.z
-                        );
-                        loadedMesh.position = locationPosition;
-                        loadedMesh.getChildren().forEach(mesh => {
-                            mesh.position.addInPlace(locationPosition);
-                        });
-                        meshCallback(loadedMesh);
-                    }
-                });
+                try {
+                    container.meshes.forEach(loadedMesh => {
+                        if (loadedMesh.name.includes("Location")) {
+                            locationManager(loadedMesh, scene, meshCallback);
+                            showAxis(scene, {
+                                position: loadedMesh.position,
+                                label: loadedMesh.name,
+                                size: 0.5
+                            });
+                        } else {
+                            loadedMesh.convertToFlatShadedMesh();
+                            const locationPosition = new BABYLON.Vector3(
+                                objectKind.location.coordinates.x,
+                                objectKind.location.coordinates.y,
+                                objectKind.location.coordinates.z
+                            );
+                            loadedMesh.position = locationPosition;
+                            loadedMesh.getChildren().forEach(mesh => {
+                                mesh.position.addInPlace(locationPosition);
+                            });
+                            meshCallback(loadedMesh);
+                        }
+                    });
+                } catch (e) {
+                    console.log(e, locationOption);
+                }
+
             }
         )
     }

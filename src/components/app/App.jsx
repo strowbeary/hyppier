@@ -13,21 +13,6 @@ const App = {
         return (
             <div id="app">
                 <WebglRoot/>
-                {/*<Notification time={5000}/>
-                <Notification time={5000}/>
-                <Notification time={10000}/>
-                <Notification time={15000}/>
-                <div>
-                    <button onClick={() => {
-                        TimerStore.startAll();
-                    }}>Start</button>
-                    <button onClick={() => {
-                        TimerStore.pauseAll();
-                    }}>Pause</button>
-                    <button onClick={() => {
-                        TimerStore.stopAll();
-                    }}>Stop</button>
-                </div>*/}
             </div>
         )
     }
