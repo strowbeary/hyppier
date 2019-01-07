@@ -14,7 +14,7 @@ const CatalogStore = types.model("CatalogStore", {
                 return [objectTypeIndex, objectKindIndex];
             },
             getObjectKind(objectKindName) {
-                const objectKindPath = this.findobjectKindsPath(objectKindName);
+                const objectKindPath = this.findobjectKindPath(objectKindName);
                 return self.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]]
             }
         })
