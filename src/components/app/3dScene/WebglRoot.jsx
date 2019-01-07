@@ -16,15 +16,18 @@ export default class WebglRoot extends Component {
 
         scene.clearColor = new BABYLON.Color3(1, 1, 1);
         // This creates and positions a free camera (non-mesh)
-        const camera = new BABYLON.ArcRotateCamera("camera1", 0, 0, 10, new BABYLON.Vector3(0, 5, -10), scene);
+        //const camera = new BABYLON.ArcRotateCamera("camera1", 0, 0, 10, new BABYLON.Vector3(0, 5, -10), scene);
         // This targets the camera to scene origin
-        camera.setTarget(BABYLON.Vector3.Zero());
+        //camera.setTarget(new BABYLON.Vector3(0, 0, 0));
+        //camera.inputs.attached.mousewheel.wheelDeltaPercentage = 1;
+        //camera.inputs.attached.mousewheel.wheelPrecision = 100;
 
+        // Parameters : name, position, scene
+        var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+        // Targets the camera to a particular position. In this case the scene origin
+        camera.setTarget(BABYLON.Vector3.Zero());
         // This attaches the camera to the canvas
         camera.attachControl(canvas);
-        camera.inputs.attached.mousewheel.wheelDeltaPercentage = 1;
-        camera.inputs.attached.mousewheel.wheelPrecision = 100;
-
 
         // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
         const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);

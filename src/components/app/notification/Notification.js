@@ -14,17 +14,19 @@ const Notification = observer(class Notification extends Component {
         this.scene = props.scene;
         this.timer = props.hasTimer ? CountdownStore.create(this.props.time) : null;
         this.state = {projectedPosition: this.getProjectedPosition()};
+        this.cameraInitVector = new BABYLON.Vector3(0, 5, -10);
+        this.cameraFocusVector = new BABYLON.Vector3(this.mesh.position.x - 2, this.mesh.position.y + 1.25, this.mesh.position.z - 2.5);
     }
 
     setProjectedPosition() {
         this.setState({projectedPosition: this.getProjectedPosition()});
     }
 
-    getProjectedPosition() { //does not seems to REALLY work...
+    getProjectedPosition() {
         return BABYLON.Vector3.Project(
             this.position,
-            BABYLON.Matrix.Identity(), //BABYLON.Matrix.Identity()
-            this.scene.getTransformMatrix(), //scene.getTransformMatrix
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
             this.scene.activeCamera.viewport.toGlobal(
                 this.scene.activeCamera.getEngine().getRenderWidth(),
                 this.scene.activeCamera.getEngine().getRenderHeight()
@@ -33,10 +35,45 @@ const Notification = observer(class Notification extends Component {
 
     }
 
-    buildCatalog() {
+    launchTimer() {
         if (this.timer) {
             this.timer.start();
         }
+    }
+
+    buildCatalog() {
+        if ((this.scene.activeCamera.position.x !== this.cameraFocusVector.x) && (this.scene.activeCamera.position.y !== this.cameraFocusVector.y) && (this.scene.activeCamera.position.z !== this.cameraFocusVector.z)) {
+            this.focusOnMeshInit();
+            this.scene.beginAnimation(this.scene.activeCamera, 0, 15, false, 1, () => {
+                this.launchTimer();
+            });
+        } else {
+            this.launchTimer();
+        }
+
+    }
+
+    initCameraAnimations() {
+        this.scene.activeCamera.animations = [];
+    }
+
+    focusOnMeshInit() {
+        this.initCameraAnimations();
+        const animationBox = new BABYLON.Animation(`${this.mesh.name}_animationFocus`, "position", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let keys = [];
+        keys.push({
+            frame: 0,
+            value: this.cameraInitVector
+        });
+        keys.push({
+            frame: 15,
+            value: this.cameraFocusVector
+        });
+        animationBox.setKeys(keys);
+        let easingFunction = new BABYLON.ExponentialEase();
+        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+        animationBox.setEasingFunction(easingFunction);
+        this.scene.activeCamera.animations.push(animationBox);
     }
 
     render() {

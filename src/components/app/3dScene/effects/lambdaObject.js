@@ -41,6 +41,10 @@ export default class lambdaObject extends Component {
             value: 1
         });
         animationBox.setKeys(keys);
+
+        let easingFunction = new BABYLON.ExponentialEase();
+        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+        animationBox.setEasingFunction(easingFunction);
         this.mesh.animations.push(animationBox);
     }
 
@@ -59,6 +63,10 @@ export default class lambdaObject extends Component {
                     value: new BABYLON.Color3.Gray()
                 });
                 animationBox.setKeys(keys);
+
+                let easingFunction = new BABYLON.ExponentialEase();
+                easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+                animationBox.setEasingFunction(easingFunction);
                 this.mesh.animations.push(animationBox);
             }
 
@@ -93,14 +101,6 @@ export default class lambdaObject extends Component {
             easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
             animationBox.setEasingFunction(easingFunction);
             this.mesh.animations.push(animationBox);
-
-            /*return new BABYLON.InterpolateValueAction(
-                BABYLON.ActionManager.OnPickTrigger,
-                this.mesh,
-                'material.diffuseColor',
-                BABYLON.Color3.White(),
-                6000, //temps en milisecondes
-            )*/
         }
     }
 
@@ -122,18 +122,34 @@ export default class lambdaObject extends Component {
         this.scene.beginAnimation(this.mesh, 45, 0, false, 1, () => {this.mesh.scalingDeterminant = 0; this.mesh.freezeWorldMatrix()});
     }
 
+    focusOnMesh() {
+        return new BABYLON.InterpolateValueAction(
+            BABYLON.ActionManager.OnPickTrigger,
+            this.scene.activeCamera,
+            'position',
+            new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + 1.25, this.mesh.position.z - 2.5),
+            500, //temps en milisecondes
+        )
+    }
+
     setClickEvent() {
         //Get Click Event on object
         this.mesh.isPickable = true;
         this.mesh.actionManager = new BABYLON.ActionManager(this.scene);
         this.mesh.actionManager.registerAction(
+            this.focusOnMesh()
+        );
+        /*this.mesh.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(
                 BABYLON.ActionManager.OnPickTrigger,
                 () => { //DO SOMETHING ON CLICK
-                    this.launchDisappearAnimation();
+                    //console.log("hello");
+                    //console.log(this.scene.activeCamera.setTarget);
+                    //this.scene.activeCamera.setTarget(this.mesh.position);
+                    //this.launchDisappearAnimation();
                 }
             )
-        );
+        );*/
     }
 
     freezeMaterials() {
