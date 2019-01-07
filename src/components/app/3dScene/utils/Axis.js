@@ -30,6 +30,9 @@ export function showAxis(scene, options) {
                 z: 0
             });
             //plane.showBoundingBox = true;
+            plane.material.freeze();
+            plane.freezeWorldMatrix();
+            plane.freezeNormals();
             return plane;
         };
         makeTextPlane(options.label, "black", Math.max(options.size, 2) / 10);
@@ -47,6 +50,8 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(options.size * 0.95, 0, -0.05 * options.size).add(options.position)
     ], scene);
     axisX.color = new BABYLON.Color3(1, 0, 0);
+    axisX.freezeWorldMatrix();
+    axisX.freezeNormals();
     var axisY = BABYLON.Mesh.CreateLines("axisY", [
         BABYLON.Vector3.Zero().add(options.position),
         new BABYLON.Vector3(0, options.size, 0).add(options.position),
@@ -59,7 +64,8 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(0, options.size * 0.95, 0.05 * options.size).add(options.position),
     ], scene);
     axisY.color = new BABYLON.Color3(0, 1, 0);
-
+    axisY.freezeWorldMatrix();
+    axisY.freezeNormals();
     var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
         BABYLON.Vector3.Zero().add(options.position),
         new BABYLON.Vector3(0, 0, options.size).add(options.position),
@@ -72,5 +78,6 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(0.05 * options.size, 0, options.size * 0.95).add(options.position),
     ], scene);
     axisZ.color = new BABYLON.Color3(0, 0, 1);
-
+    axisZ.freezeWorldMatrix();
+    axisZ.freezeNormals();
 };
