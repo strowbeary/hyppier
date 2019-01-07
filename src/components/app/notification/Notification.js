@@ -10,7 +10,7 @@ const Notification = observer(class Notification extends Component {
     constructor(props) {
         super(props);
         this.mesh = props.mesh;
-        this.position = this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.05, 0));
+        this.position = this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.03, 0));
         this.scene = props.scene;
         this.timer = CountdownStore.create(this.props.time);
         this.state = {projectedPosition: this.getProjectedPosition()};

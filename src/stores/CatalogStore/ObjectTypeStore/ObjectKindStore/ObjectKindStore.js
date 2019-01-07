@@ -10,12 +10,18 @@ export default types
         objectTimeout: types.number,
         replacementCounter: types.number,
         location: types.maybe(LocationStore),
-        activeObject: types.array(types.number),
+        activeObject: types.maybeNull(types.array(types.number)),
         achievementPromotions: AchievementStore,
         achievementSpecialTint: AchievementStore
     })
     .actions(self => ({
         setLocation(location) {
             self.location = location;
+        },
+        setActiveObject(object, tint) {
+            self.activeObject = [
+                object,
+                tint
+            ];
         }
     }));

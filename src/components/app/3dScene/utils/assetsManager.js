@@ -3,16 +3,9 @@ import {showAxis} from "./Axis";
 import LocationStore from "../../../../stores/CatalogStore/ObjectTypeStore/ObjectKindStore/LocationStore/LocationStore";
 import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 
-export const findobjectKindsPath = (objectKindName) => {
-    const objectTypeIndex = CatalogStore.objectTypes
-        .findIndex(objectType => objectType.objectKinds.findIndex(objectKind => objectKind.name === objectKindName) !== -1);
-    const objectKindIndex = CatalogStore.objectTypes[objectTypeIndex].objectKinds.findIndex(objectKind => objectKind.name === objectKindName);
-    return [objectTypeIndex, objectKindIndex];
-};
-
 function locationManager(mesh, scene, meshCallback) {
     const locationOption = mesh.name.substring(0, mesh.name.length - 1).split("(")[1].split(",");
-    const objectKindPath = findobjectKindsPath(locationOption[0]);
+    const objectKindPath = CatalogStore.findobjectKindsPath(locationOption[0]);
     const objectKind = CatalogStore.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]];
     objectKind.setLocation(
         LocationStore.create({
@@ -25,11 +18,12 @@ function locationManager(mesh, scene, meshCallback) {
         BABYLON.SceneLoader.LoadAssetContainer(
             "/models/",
             objectKind.objects[0].modelUrl,
-            scene,
+            null,
             container => {
                 try {
                     container.meshes.forEach(loadedMesh => {
                         if (loadedMesh.name.includes("Location")) {
+                            loadedMesh.scaling = new BABYLON.Vector3(0,0,0);
                             locationManager(loadedMesh, scene, meshCallback);
                             showAxis(scene, {
                                 position: loadedMesh.position,
@@ -66,6 +60,7 @@ export function assetsManager(scene, meshCallback) {
     assetsManager.onProgress = (remainingCount, totalCount, task) => {
         task.loadedMeshes.forEach(loadedMesh => {
             if (loadedMesh.name.includes("Location")) {
+                loadedMesh.scaling = new BABYLON.Vector3(0,0,0);
                 locationManager(loadedMesh, scene, meshCallback);
                 showAxis(scene, {
                     position: loadedMesh.position,

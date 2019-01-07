@@ -6,6 +6,7 @@ import {assetsManager} from "./utils/assetsManager";
 import * as BABYLON from "babylonjs";
 import NotificationFactory from "./utils/notificationFactory";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {initGame, meshShelf} from "../../../init";
 
 export default class SceneComponent extends Component {
     scene;
@@ -20,13 +21,13 @@ export default class SceneComponent extends Component {
         console.log(CatalogStore.toJSON())
     }
 
-    onResizeWindow () {
+    onResizeWindow() {
         if (this.engine) {
             this.engine.resize();
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.engine = new Engine(
             this.canvas,
             true,
@@ -37,13 +38,12 @@ export default class SceneComponent extends Component {
         let scene = new Scene(this.engine);
         this.scene = scene;
         this.notificationFactory = new NotificationFactory(scene);
-
-        assetsManager(scene, mesh => {
-            this.setState({
-                meshes: [...this.state.meshes, mesh]
-            });
+        initGame(scene).then(() => {
+            console.log("DONE");
+            /*this.setState({
+                meshes: meshShelf
+            })*/
         });
-
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
                 scene,
@@ -62,7 +62,7 @@ export default class SceneComponent extends Component {
         this.notificationFactory.setCameraListener();
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         window.removeEventListener('resize', this.onResizeWindow);
     }
 
@@ -71,8 +71,7 @@ export default class SceneComponent extends Component {
             if (!this.pauseStatus) {
                 this.pauseStatus = true;
                 this.scene.animatables.forEach(animation => animation.pause());
-            }
-            else {
+            } else {
                 this.pauseStatus = false;
                 this.scene.animatables.forEach(animation => animation.restart());
             }

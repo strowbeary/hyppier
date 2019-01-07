@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 
 import WebglRoot from "./3dScene/WebglRoot"
 import FullScreenButton from "./options/FullScreenButton"
-import {findobjectKindsPath} from "./3dScene/utils/assetsManager";
+import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 
 const App = observer(class App extends Component {
 
@@ -15,8 +15,8 @@ const App = observer(class App extends Component {
     };
 
     testChangeObject() {
-        const objectKindPath = findobjectKindsPath("Computer");
-        console.log(objectKindPath);
+        const objectKindPath = CatalogStore.getObjectKind("Sound");
+        objectKindPath.setActiveObject(1, 0);
     }
     render() {
         return (

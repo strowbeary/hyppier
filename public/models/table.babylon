@@ -1,4 +1,4 @@
-{"producer":{"name":"Blender","version":"2.79 (sub 6)","exporter_version":"5.6.4","file":"table.babylon"},
+{"producer":{"name":"Blender","version":"2.79 (sub 0)","exporter_version":"5.6.4","file":"table.babylon"},
 "autoClear":true,"clearColor":[0,0,0],"ambientColor":[0.2,0.2,0.3],"gravity":[0,-9.81,0],
 "materials":[{"name":"table.Wood","id":"table.Wood","ambient":[0.8,0.308,0.1268],"diffuse":[0.8,0.308,0.1268],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
 "multiMaterials":[],
@@ -73,7 +73,7 @@
 ,258,238,258,260,238,262,264,232,264,266,230,266,268,230,270,272,224,272,274,222]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":280,"indexStart":0,"indexCount":1620}]
 ,"instances":[]}
-,{"name":"Location(Flower,false)","id":"Location(Flower,false)","parentId":"Table","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computer,true)","id":"Location(Computer,true)","parentId":"Table","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+,{"name":"Location(Sound,false)","id":"Location(Sound,false)","parentId":"Table","position":[0.4329,0.6978,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computer,true)","id":"Location(Computer,true)","parentId":"Table","position":[-0.5271,0.7004,-0.0733],"rotation":[0,0,0],"scaling":[0.8139,1.0312,1.7967],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

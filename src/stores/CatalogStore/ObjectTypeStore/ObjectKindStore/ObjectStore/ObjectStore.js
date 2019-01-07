@@ -7,6 +7,13 @@ export default types.model("ObjectStore", {
     adUrl: types.string,
     parcelSize: types.number,
     modelUrl: types.string,
+    model: types.maybe(types.number),
     tints: types.array(TintStore),
     infos: types.array(InfoStore)
 })
+    .actions(self => ({
+        setModel(id) {
+            console.log(id);
+            self.model = id;
+        }
+    }));

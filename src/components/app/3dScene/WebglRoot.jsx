@@ -53,7 +53,7 @@ export default class WebglRoot extends Component {
     render() {
         return (
             <div>
-                <SceneComponent onSceneMount={this.onSceneMount} width={this.state.width} height={this.state.height}/>
+                <SceneComponent onSceneMount={this.onSceneMount} width={window.innerWidth} height={window.innerHeight}/>
             </div>
         )
     }
