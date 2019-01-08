@@ -25,9 +25,9 @@ export default class NotificationFactory {
             });
     }
 
-    build(mesh, isMesh) {
+    build(mesh, isMesh, callback) {
         const ref = React.createRef();
         NotificationFactory.notificationsRef.push(ref);
-        return <Notification mesh={mesh} ref={ref} scene={this.scene} time={1000} key={mesh.name} hasTimer={isMesh}/>;
+        return <Notification mesh={mesh} ref={ref} scene={this.scene} time={1000} key={mesh.name} hasTimer={isMesh} update={callback}/>;
     }
 }

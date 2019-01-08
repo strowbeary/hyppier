@@ -23,9 +23,16 @@ export default class WebglRoot extends Component {
         //camera.inputs.attached.mousewheel.wheelPrecision = 100;
 
         // Parameters : name, position, scene
-        var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+        var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(-5, 5, -5), scene);
         // Targets the camera to a particular position. In this case the scene origin
-        camera.setTarget(BABYLON.Vector3.Zero());
+        camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
+        camera.setTarget(new BABYLON.Vector3(0, 1, 0));
+        camera.speed = 0.25;
+
+        let {innerHeight, innerWidth} = window;
+        let ratio = innerHeight/innerWidth;
+        WebglRoot.updateCamera(camera, ratio, innerHeight, innerWidth, 5);
+
         // This attaches the camera to the canvas
         camera.attachControl(canvas);
 
@@ -44,6 +51,13 @@ export default class WebglRoot extends Component {
                 scene.render();
             }
         });
+    }
+
+    static updateCamera(camera, ratio, innerHeight, innerWidth, zoom) {
+        camera.orthoTop = zoom * ratio * (innerHeight/640);
+        camera.orthoBottom = -zoom * ratio * (innerHeight/640);
+        camera.orthoLeft = -zoom * ratio * (innerWidth/640);
+        camera.orthoRight = zoom * ratio * (innerWidth/640);
     }
 
     changeSceneLimits() {

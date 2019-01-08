@@ -127,7 +127,7 @@ export default class lambdaObject extends Component {
             BABYLON.ActionManager.OnPickTrigger,
             this.scene.activeCamera,
             'position',
-            new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + 1.25, this.mesh.position.z - 2.5),
+            new BABYLON.Vector3(this.mesh.position.x - 1.25, this.mesh.position.y + 0.625, this.mesh.position.z - 1.25),
             500, //temps en milisecondes
         )
     }
