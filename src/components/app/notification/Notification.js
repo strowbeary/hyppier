@@ -4,7 +4,6 @@ import "./_notification.scss";
 import {observer} from "mobx-react";
 import CountdownStore from "../../../stores/TimerStore/TimerStore";
 import * as BABYLON from "babylonjs";
-import NotificationFactory from "../3dScene/utils/notificationFactory";
 
 const Notification = observer(class Notification extends Component {
 
@@ -44,7 +43,7 @@ const Notification = observer(class Notification extends Component {
         this.timer = props.hasTimer ? CountdownStore.create(this.props.time) : null;
         this.state = {projectedPosition: this.getProjectedPosition()};
         this.cameraInitVector = new BABYLON.Vector3(-5, 5, -5);
-        this.cameraFocusVector = new BABYLON.Vector3(this.mesh.position.x - 3, this.mesh.position.y + 2, this.mesh.position.z - 2);
+        this.cameraFocusVector = new BABYLON.Vector3(this.position.x - 3, this.position.y + 2, this.position.z - 2);
     }
 
     setProjectedPosition() {
@@ -74,7 +73,7 @@ const Notification = observer(class Notification extends Component {
         this.focusOnMeshInit();
         this.scene.beginAnimation(this.scene.activeCamera, 0, 15, false, 1, () => {
             this.launchTimer();
-            this.update(1.25);
+            //this.update(1.25);
             this.updateCanvas();
         });
         this.launchTimer();
@@ -82,7 +81,7 @@ const Notification = observer(class Notification extends Component {
 
     updateCanvas() {
         this.scene.updateTransformMatrix(true);
-        NotificationFactory.updateProjectedPosition();
+        Notification.updateProjectedPosition();
     }
 
     keysVertical(orthoTop, orthoBottom, from, to, ratio) {
@@ -134,10 +133,10 @@ const Notification = observer(class Notification extends Component {
     }
 
     cameraBoundariesAnim(){
-        const orthoLeft = new BABYLON.Animation(`${this.mesh.name}_orthoLeftAnim`, "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoRight = new BABYLON.Animation(`${this.mesh.name}_orthoRightAnim`, "orthoRight", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoTop = new BABYLON.Animation(`${this.mesh.name}_orthoTopAnim`, "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoBottom = new BABYLON.Animation(`${this.mesh.name}_orthoBottomAnim`, "orthoBottom", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const orthoLeft = new BABYLON.Animation(`${this.position.x}_orthoLeftAnim`, "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const orthoRight = new BABYLON.Animation(`${this.position.x}_orthoRightAnim`, "orthoRight", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const orthoTop = new BABYLON.Animation(`${this.position.x}_orthoTopAnim`, "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const orthoBottom = new BABYLON.Animation(`${this.position.x}_orthoBottomAnim`, "orthoBottom", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
 
         let ratio = window.innerHeight / window.innerWidth;
 
@@ -151,7 +150,7 @@ const Notification = observer(class Notification extends Component {
     }
 
     cameraPositionAnim() {
-        const animationBox = new BABYLON.Animation(`${this.mesh.name}_animationFocus`, "position", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const animationBox = new BABYLON.Animation(`${this.position.x}_animationFocus`, "position", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keys = [];
         keys.push({
             frame: 0,

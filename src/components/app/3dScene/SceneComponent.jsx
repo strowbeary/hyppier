@@ -12,7 +12,6 @@ export default class SceneComponent extends Component {
     engine;
     canvas;
     pauseStatus = false;
-    notificationFactory;
     currentWidth;
     currentRatio = 1;
 
@@ -40,11 +39,11 @@ export default class SceneComponent extends Component {
 
     updateCanvas() {
         this.scene.updateTransformMatrix(true);
-        NotificationFactory.updateProjectedPosition();
+        Notification.updateProjectedPosition();
     }
 
     componentDidMount () {
-        this.engine = new Engine(
+        this.engine = new BABYLON.Engine(
             this.canvas,
             true,
             this.props.engineOptions,
@@ -128,10 +127,11 @@ export default class SceneComponent extends Component {
                     location.x,
                     location.y,
                     location.z
-                ), this.scene, (value) => this.setState({
-                    sceneRatio: value
-                }))
-)
+                ), this.scene, (value) => {
+                    this.setState({
+                        sceneRatio: value
+                    })
+                })
             )
         ];
 
@@ -139,7 +139,6 @@ export default class SceneComponent extends Component {
             <div>
                 {meshes}
                 {notifications}
-                {addNotifications}
                 <canvas {...opts} ref={this.onCanvasLoaded}/>
             </div>
         )
