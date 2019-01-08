@@ -5,10 +5,6 @@ import * as BABYLON from "babylonjs";
 
 const FullScreenButton = observer(class FullScreenButton extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         document.addEventListener("fullscreenchange", this.onFullScreenChange, false);
         document.addEventListener("mozfullscreenchange", this.onFullScreenChange, false);
@@ -35,7 +31,6 @@ const FullScreenButton = observer(class FullScreenButton extends Component {
         else {
             BABYLON.Tools.ExitFullscreen();
         }
-        this.props.onClick();
     };
 
     render() {

@@ -5,31 +5,50 @@ import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import {initGame} from "../../../init";
 import Notification from "../notification/Notification";
+import WebglRoot from "./WebglRoot";
 
 export default class SceneComponent extends Component {
     scene;
     engine;
     canvas;
     pauseStatus = false;
+    notificationFactory;
+    currentWidth;
+    currentRatio = 1;
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], emptyLocation: [], notifications: []};
-        console.log(CatalogStore.toJSON())
+        this.state = {meshes: [], emptyLocation: [], notifications: [], sceneRatio: 5};
+        console.log(CatalogStore.toJSON());
+        /*window.addEventListener('keypress', (e) => {if (e.code === "Space") {
+            console.log(this.scene.activeCamera.position)
+        }
+        });*/
+        window.addEventListener('resize', () => this.onResize());
     }
 
-    onResizeWindow() {
+    onResize() {
+        this.currentRatio = this.currentWidth !== this.canvas.width? this.canvas.height / this.canvas.width : this.currentRatio;
         if (this.engine) {
+            let {innerHeight, innerWidth} = window;
+            WebglRoot.updateCamera(this.scene.activeCamera, this.currentRatio, innerHeight, innerWidth, this.state.sceneRatio);
+            this.updateCanvas();
             this.engine.resize();
+            this.currentWidth = this.canvas.width;
         }
     }
 
-    componentDidMount() {
-        this.engine = new BABYLON.Engine(
+    updateCanvas() {
+        this.scene.updateTransformMatrix(true);
+        NotificationFactory.updateProjectedPosition();
+    }
+
+    componentDidMount () {
+        this.engine = new Engine(
             this.canvas,
             true,
             this.props.engineOptions,
-            this.props.adaptToDeviceRatio
+            false
         );
 
         let scene = new BABYLON.Scene(this.engine);
@@ -80,6 +99,7 @@ export default class SceneComponent extends Component {
     onCanvasLoaded = (c) => {
         if (c !== null) {
             this.canvas = c;
+            this.currentWidth = this.canvas.width;
         }
     };
 
@@ -108,7 +128,10 @@ export default class SceneComponent extends Component {
                     location.x,
                     location.y,
                     location.z
-                ), this.scene)
+                ), this.scene, (value) => this.setState({
+                    sceneRatio: value
+                }))
+)
             )
         ];
 
@@ -116,6 +139,7 @@ export default class SceneComponent extends Component {
             <div>
                 {meshes}
                 {notifications}
+                {addNotifications}
                 <canvas {...opts} ref={this.onCanvasLoaded}/>
             </div>
         )
