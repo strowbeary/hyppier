@@ -217,28 +217,6 @@
         {
           "name": "Flower",
           "objects": [
-            {
-              "name": "Macintosh",
-              "adUrl": "http://localhost:8080",
-              "tints": [
-                {
-                  "name": "gris",
-                  "thumbnailUrl": "http://localhost:8080",
-                  "materials": [
-                    0,
-                    1
-                  ]
-                }
-              ],
-              "parcelSize": 1,
-              "modelUrl": "computer.babylon",
-              "infos": [
-                {
-                  "slogan": "Lorem Ipsum",
-                  "url": "http://localhost:8080"
-                }
-              ]
-            }
           ],
           "objectTimeout": 5000,
           "replacementCounter": 0,

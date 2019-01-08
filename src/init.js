@@ -8,8 +8,7 @@ export const meshShelf = [];
 async function loadRoom(scene) {
     const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(
         "/models/",
-        "room.babylon",
-        scene
+        "room.babylon"
     );
     container.meshes.forEach(loadedMesh => {
         if (loadedMesh.name.includes("Location")) {
@@ -47,8 +46,7 @@ async function loadObjects(scene) {
                         return new Promise(resolve => {
                             BABYLON.SceneLoader.LoadAssetContainerAsync(
                                 "/models/",
-                                object.modelUrl,
-                                scene
+                                object.modelUrl
                             ).then(container => {
                                 resolve({
                                     container,
@@ -64,7 +62,7 @@ async function loadObjects(scene) {
     return Promise.all(firstBatch.flat());
 }
 
-export async function initGame(scene) {
+export async function initGame(scene, updateDisplayeMesh) {
     await loadRoom(scene);
     let containers = await loadObjects(scene);
     console.log("containers", containers);
@@ -91,15 +89,15 @@ export async function initGame(scene) {
                     });
                 } else {
                     container.object.setModel(meshShelf.length);
-                    meshShelf.push(loadedMesh);
                     loadedMesh.convertToFlatShadedMesh();
+                    meshShelf.push(loadedMesh);
                 }
             });
         } catch (e) {
             console.error(e);
         }
     });
-
+    const displayedMesh = [];
     return CatalogStore.objectTypes.forEach(objectType => {
         objectType.objectKinds.forEach(objectKind => {
             if (objectKind.activeObject !== null) {
@@ -114,10 +112,10 @@ export async function initGame(scene) {
                     mesh.getChildren().forEach(mesh => {
                         mesh.position.addInPlace(locationPosition);
                     });
-                    scene.addMesh(mesh);
+                    displayedMesh.push(mesh);
+                    updateDisplayeMesh(displayedMesh);
                 }
             }
         })
     });
-
 }

@@ -2,8 +2,6 @@ import LambdaObject from "./effects/lambdaObject";
 import {Component} from "react";
 import * as React from "react";
 import {Scene, Engine} from "babylonjs";
-import {assetsManager} from "./utils/assetsManager";
-import * as BABYLON from "babylonjs";
 import NotificationFactory from "./utils/notificationFactory";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import {initGame, meshShelf} from "../../../init";
@@ -17,7 +15,7 @@ export default class SceneComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], notifications: []}
+        this.state = {meshes: [], notifications: []};
         console.log(CatalogStore.toJSON())
     }
 
@@ -38,11 +36,12 @@ export default class SceneComponent extends Component {
         let scene = new Scene(this.engine);
         this.scene = scene;
         this.notificationFactory = new NotificationFactory(scene);
-        initGame(scene).then(() => {
+        initGame(scene, (meshes) => {
+            this.setState({
+                meshes
+            })
+        }).then(() => {
             console.log("DONE");
-            /*this.setState({
-                meshes: meshShelf
-            })*/
         });
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
