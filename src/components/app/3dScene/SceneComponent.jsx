@@ -1,49 +1,65 @@
 import LambdaObject from "./effects/lambdaObject";
 import {Component} from "react";
 import * as React from "react";
-import {Scene, Engine} from "babylonjs";
-import {assetsManager} from "./utils/assetsManager";
 import * as BABYLON from "babylonjs";
-import NotificationFactory from "./utils/notificationFactory";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {initGame} from "../../../init";
+import Notification from "../notification/Notification";
+import WebglRoot from "./WebglRoot";
 
 export default class SceneComponent extends Component {
     scene;
     engine;
     canvas;
     pauseStatus = false;
-    notificationFactory;
+    currentWidth;
+    currentRatio = 1;
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], notifications: []}
-        console.log(CatalogStore.toJSON())
+        this.state = {meshes: [], emptyLocation: [], notifications: [], sceneRatio: 5};
+        console.log(CatalogStore.toJSON());
+        /*window.addEventListener('keypress', (e) => {if (e.code === "Space") {
+            console.log(this.scene.activeCamera.position)
+        }
+        });*/
+        window.addEventListener('resize', () => this.onResize());
     }
 
-    onResizeWindow () {
+    onResize() {
+        this.currentRatio = this.currentWidth !== this.canvas.width? this.canvas.height / this.canvas.width : this.currentRatio;
         if (this.engine) {
+            let {innerHeight, innerWidth} = window;
+            WebglRoot.updateCamera(this.scene.activeCamera, this.currentRatio, innerHeight, innerWidth, this.state.sceneRatio);
+            this.updateCanvas();
             this.engine.resize();
+            this.currentWidth = this.canvas.width;
         }
     }
 
+    updateCanvas() {
+        this.scene.updateTransformMatrix(true);
+        Notification.updateProjectedPosition();
+    }
+
     componentDidMount () {
-        this.engine = new Engine(
+        this.engine = new BABYLON.Engine(
             this.canvas,
             true,
             this.props.engineOptions,
-            this.props.adaptToDeviceRatio
+            false
         );
 
-        let scene = new Scene(this.engine);
+        let scene = new BABYLON.Scene(this.engine);
         this.scene = scene;
-        this.notificationFactory = new NotificationFactory(scene);
-
-        assetsManager(scene, mesh => {
+        initGame(scene, (meshes) => {
             this.setState({
-                meshes: [...this.state.meshes, mesh]
-            });
+                meshes,
+                emptyLocation: CatalogStore.getEmptyLocation()
+            })
+        }).then(() => {
+            console.log("DONE");
         });
-
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
                 scene,
@@ -59,10 +75,11 @@ export default class SceneComponent extends Component {
         window.addEventListener('keypress', this.pause.bind(this));
 
 
-        this.notificationFactory.setCameraListener();
+        scene.activeCamera.onViewMatrixChangedObservable
+            .add(() => Notification.updateProjectedPosition());
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         window.removeEventListener('resize', this.onResizeWindow);
     }
 
@@ -71,8 +88,7 @@ export default class SceneComponent extends Component {
             if (!this.pauseStatus) {
                 this.pauseStatus = true;
                 this.scene.animatables.forEach(animation => animation.pause());
-            }
-            else {
+            } else {
                 this.pauseStatus = false;
                 this.scene.animatables.forEach(animation => animation.restart());
             }
@@ -82,6 +98,7 @@ export default class SceneComponent extends Component {
     onCanvasLoaded = (c) => {
         if (c !== null) {
             this.canvas = c;
+            this.currentWidth = this.canvas.width;
         }
     };
 
@@ -101,9 +118,22 @@ export default class SceneComponent extends Component {
             <LambdaObject key={mesh.id} scene={this.scene} mesh={mesh} time={100}/>
         );
 
-        const notifications = this.state.meshes.map(mesh =>
-            this.notificationFactory.build(mesh)
-        );
+        const notifications = [
+            ...this.state.meshes.map(mesh =>
+                Notification.createFromMesh(mesh, this.scene)
+            ),
+            ...this.state.emptyLocation.map(location =>
+                Notification.createFromVector3(new BABYLON.Vector3(
+                    location.x,
+                    location.y,
+                    location.z
+                ), this.scene, (value) => {
+                    this.setState({
+                        sceneRatio: value
+                    })
+                })
+            )
+        ];
 
         return (
             <div>

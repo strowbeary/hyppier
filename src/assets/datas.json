@@ -61,7 +61,7 @@
                   "thumbnailUrl": "http://localhost:8080",
                   "materials": [
                     0,
-                    1
+                    0
                   ]
                 }
               ],
@@ -140,22 +140,12 @@
             "text": "Lorem Ipsum",
             "illustrationUrl": "http://localhost:8080"
           }
-        }
-      ]
-    },
-    {
-      "name": "decoration",
-      "clueEvent": {
-        "text": "Lorem Ipsum",
-        "illustrationUrl": "http://localhost:8080"
-      },
-      "replacementCounter": 0,
-      "objectKinds": [
+        },
         {
-          "name": "Flower",
+          "name": "Sound",
           "objects": [
             {
-              "name": "Macintosh",
+              "name": "Walkman",
               "adUrl": "http://localhost:8080",
               "tints": [
                 {
@@ -168,7 +158,29 @@
                 }
               ],
               "parcelSize": 1,
-              "modelUrl": "computer.babylon",
+              "modelUrl": "walkman.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "Ipod",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "ipod.babylon",
               "infos": [
                 {
                   "slogan": "Lorem Ipsum",
@@ -179,10 +191,7 @@
           ],
           "objectTimeout": 5000,
           "replacementCounter": 0,
-          "activeObject": [
-            0,
-            0
-          ],
+          "activeObject": null,
           "achievementPromotions": {
             "text": "Lorem Ipsum",
             "illustrationUrl": "http://localhost:8080"
