@@ -1,21 +1,20 @@
 import LambdaObject from "./effects/lambdaObject";
 import {Component} from "react";
 import * as React from "react";
-import {Scene, Engine} from "babylonjs";
-import NotificationFactory from "./utils/notificationFactory";
+import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import {initGame, meshShelf} from "../../../init";
+import {initGame} from "../../../init";
+import Notification from "../notification/Notification";
 
 export default class SceneComponent extends Component {
     scene;
     engine;
     canvas;
     pauseStatus = false;
-    notificationFactory;
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], notifications: []};
+        this.state = {meshes: [], emptyLocation: [], notifications: []};
         console.log(CatalogStore.toJSON())
     }
 
@@ -26,19 +25,19 @@ export default class SceneComponent extends Component {
     }
 
     componentDidMount() {
-        this.engine = new Engine(
+        this.engine = new BABYLON.Engine(
             this.canvas,
             true,
             this.props.engineOptions,
             this.props.adaptToDeviceRatio
         );
 
-        let scene = new Scene(this.engine);
+        let scene = new BABYLON.Scene(this.engine);
         this.scene = scene;
-        this.notificationFactory = new NotificationFactory(scene);
         initGame(scene, (meshes) => {
             this.setState({
-                meshes
+                meshes,
+                emptyLocation: CatalogStore.getEmptyLocation()
             })
         }).then(() => {
             console.log("DONE");
@@ -58,7 +57,8 @@ export default class SceneComponent extends Component {
         window.addEventListener('keypress', this.pause.bind(this));
 
 
-        this.notificationFactory.setCameraListener();
+        scene.activeCamera.onViewMatrixChangedObservable
+            .add(() => Notification.updateProjectedPosition());
     }
 
     componentWillUnmount() {
@@ -99,9 +99,18 @@ export default class SceneComponent extends Component {
             <LambdaObject key={mesh.id} scene={this.scene} mesh={mesh} time={100}/>
         );
 
-        const notifications = this.state.meshes.map(mesh =>
-            this.notificationFactory.build(mesh)
-        );
+        const notifications = [
+            ...this.state.meshes.map(mesh =>
+                Notification.createFromMesh(mesh, this.scene)
+            ),
+            ...this.state.emptyLocation.map(location =>
+                Notification.createFromVector3(new BABYLON.Vector3(
+                    location.x,
+                    location.y,
+                    location.z
+                ), this.scene)
+            )
+        ];
 
         return (
             <div>

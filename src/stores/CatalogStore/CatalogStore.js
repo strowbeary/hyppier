@@ -1,4 +1,4 @@
-import {types} from "mobx-state-tree";
+import {onSnapshot, types} from "mobx-state-tree";
 import catalogDatas from "../../assets/datas";
 import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 
@@ -16,6 +16,17 @@ const CatalogStore = types.model("CatalogStore", {
             getObjectKind(objectKindName) {
                 const objectKindPath = this.findobjectKindPath(objectKindName);
                 return self.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]]
+            },
+            getEmptyLocation() {
+                return self.objectTypes.map(objectType => {
+                    return objectType.objectKinds
+                        .filter(objectKind => {
+                            return objectKind.activeObject === null
+                        })
+                        .map(objectKind => {
+                            return objectKind.location.coordinates;
+                        })
+                }).flat()
             }
         })
     )

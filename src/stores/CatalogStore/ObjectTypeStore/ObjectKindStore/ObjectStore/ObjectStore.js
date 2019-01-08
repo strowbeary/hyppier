@@ -13,7 +13,6 @@ export default types.model("ObjectStore", {
 })
     .actions(self => ({
         setModel(id) {
-            console.log(id);
             self.model = id;
         }
     }));

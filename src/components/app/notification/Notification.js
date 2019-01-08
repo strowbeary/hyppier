@@ -7,10 +7,38 @@ import * as BABYLON from "babylonjs";
 
 const Notification = observer(class Notification extends Component {
 
+    static updateProjectedPosition = function () { //update projected position for all notifications
+        if (Notification.notificationsRef.length > 0)
+            Notification.notificationsRef = Notification.notificationsRef.filter(notification => notification.current !== null);
+        Notification.notificationsRef.forEach(notification => {
+            if(notification.current !== null){
+                notification.current.setProjectedPosition();
+            }
+        });
+    };
+
+    static notificationsRef = [];
+
+    static createFromMesh = function (mesh, scene) {
+        const ref = React.createRef();
+        Notification.notificationsRef.push(ref);
+        return <Notification mesh={mesh} ref={ref} scene={scene} time={1000} key={mesh.name}/>;
+    };
+
+    static createFromVector3 = function(position, scene) {
+        const ref = React.createRef();
+        Notification.notificationsRef.push(ref);
+        return <Notification position={position} ref={ref} scene={scene} time={1000} key={position.x}/>;
+    };
+
     constructor(props) {
         super(props);
-        this.mesh = props.mesh;
-        this.position = this.mesh.position.add(new BABYLON.Vector3(0, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.03, 0));
+        if(typeof props.mesh !== "undefined") {
+            console.log(props.mesh.getBoundingInfo().boundingBox.maximumWorld.y);
+            this.position = props.mesh.position.add(new BABYLON.Vector3(0, props.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.03, 0));
+        } else {
+            this.position = props.position.add(new BABYLON.Vector3(0, 0.03, 0));
+        }
         this.scene = props.scene;
         this.timer = CountdownStore.create(this.props.time);
         this.state = {projectedPosition: this.getProjectedPosition()};
@@ -93,5 +121,6 @@ const Notification = observer(class Notification extends Component {
         )
     }
 });
+
 
 export default Notification;

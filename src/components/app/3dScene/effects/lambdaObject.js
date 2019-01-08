@@ -161,6 +161,10 @@ export default class lambdaObject extends Component {
         this.setClickEvent();
     }
 
+    componentWillUnmount() {
+        this.scene.removeMesh(this.mesh);
+    }
+
     render () {
         return null;
     }

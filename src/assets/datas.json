@@ -61,7 +61,7 @@
                   "thumbnailUrl": "http://localhost:8080",
                   "materials": [
                     0,
-                    1
+                    0
                   ]
                 }
               ],
@@ -188,35 +188,6 @@
                 }
               ]
             }
-          ],
-          "objectTimeout": 5000,
-          "replacementCounter": 0,
-          "activeObject": [
-            0,
-            0
-          ],
-          "achievementPromotions": {
-            "text": "Lorem Ipsum",
-            "illustrationUrl": "http://localhost:8080"
-          },
-          "achievementSpecialTint": {
-            "text": "Lorem Ipsum",
-            "illustrationUrl": "http://localhost:8080"
-          }
-        }
-      ]
-    },
-    {
-      "name": "decoration",
-      "clueEvent": {
-        "text": "Lorem Ipsum",
-        "illustrationUrl": "http://localhost:8080"
-      },
-      "replacementCounter": 0,
-      "objectKinds": [
-        {
-          "name": "Flower",
-          "objects": [
           ],
           "objectTimeout": 5000,
           "replacementCounter": 0,
