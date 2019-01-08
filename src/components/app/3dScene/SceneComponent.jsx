@@ -17,7 +17,11 @@ export default class SceneComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {meshes: [], emptyLocation: [], notifications: [], sceneRatio: 5};
+        this.state = {
+            meshes: [],
+            emptyLocation: [],
+            notifications: [],
+            sceneRatio: 5};
         console.log(CatalogStore.toJSON());
         /*window.addEventListener('keypress', (e) => {if (e.code === "Space") {
             console.log(this.scene.activeCamera.position)
