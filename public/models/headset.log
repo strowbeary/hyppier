@@ -1,4 +1,4 @@
-Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
+Exporter version: 5.6.4, Blender version: 2.79 (sub 6)
 ========= Conversion from Blender to Babylon.js =========
 	Scene settings used :
 		export scope        :  ALL
@@ -8,15 +8,16 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		UVs Precision       :  3
 		Vert Color Precision:  3
 		Mat Weight Precision:  2
-		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
+		texture directory   :  /home/strowbeary/Projects/hyppier/public/models/
 	Python World class constructor completed
 	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
 	processing begun of mesh:  Sound_Walkman.001
-		processing begun of Standard material:  Material.006
-		processing begun of Standard material:  Material.005
-		processing begun of multimaterial:  walkman.Multimaterial#0
-		num positions      :  218
-		num normals        :  218
+		processing begun of Standard material:  Clay
+		processing begun of Standard material:  Dark
+		processing begun of Standard material:  Glass
+		processing begun of multimaterial:  headset.Multimaterial#0
+		num positions      :  258
+		num normals        :  258
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
@@ -24,4 +25,4 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 0.0216 secs
+elapsed time:  0 min, 0.0177 secs

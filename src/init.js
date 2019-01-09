@@ -150,6 +150,8 @@ export async function initGame(scene, updateDisplayedMesh) {
                                         newObjectKind.location.coordinates.z
                                     );
                                     loadedMesh.convertToFlatShadedMesh();
+                                    loadedMesh.freezeWorldMatrix();
+                                    loadedMesh.material.freeze();
                                     meshShelf.push(loadedMesh);
                                 }
                             })

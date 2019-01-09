@@ -35,7 +35,8 @@ const Notification = observer(class Notification extends Component {
         super(props);
         if(typeof props.mesh !== "undefined") {
             console.log(props.mesh.getBoundingInfo().boundingBox.maximumWorld.y);
-            this.position = props.mesh.position.add(new BABYLON.Vector3(0, props.mesh.getBoundingInfo().boundingBox.maximumWorld.y + 0.03, 0));
+            this.position = props.mesh.position.add(
+                new BABYLON.Vector3(0, props.mesh.getBoundingInfo().boundingBox.maximum.y * props.mesh.scaling.y + 0.03, 0));
         } else {
             this.position = props.position.add(new BABYLON.Vector3(0, 0.03, 0));
         }
