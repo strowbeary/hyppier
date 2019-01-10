@@ -133,22 +133,7 @@ const Notification = observer(class Notification extends Component {
         orthoLeft.setKeys(keysLeft);
     }
 
-    cameraBoundariesAnim(){
-        const orthoLeft = new BABYLON.Animation(`${this.position.x}_orthoLeftAnim`, "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoRight = new BABYLON.Animation(`${this.position.x}_orthoRightAnim`, "orthoRight", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoTop = new BABYLON.Animation(`${this.position.x}_orthoTopAnim`, "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const orthoBottom = new BABYLON.Animation(`${this.position.x}_orthoBottomAnim`, "orthoBottom", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
 
-        let ratio = window.innerHeight / window.innerWidth;
-
-        this.keysHorizontal(orthoLeft, orthoRight, 5, 1.25, ratio);
-        this.keysVertical(orthoTop, orthoBottom, 5, 1.25, ratio);
-
-        this.scene.activeCamera.animations.push(orthoTop);
-        this.scene.activeCamera.animations.push(orthoBottom);
-        this.scene.activeCamera.animations.push(orthoLeft);
-        this.scene.activeCamera.animations.push(orthoRight);
-    }
 
     cameraPositionAnim() {
         const animationBox = new BABYLON.Animation(`${this.position.x}_animationFocus`, "position", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);

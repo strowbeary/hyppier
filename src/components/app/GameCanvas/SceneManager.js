@@ -3,9 +3,8 @@ import {GameStarter} from "../../../GameStarter";
 import {GameWatcher} from "../../../GameWatcher";
 import {LambdaMesh} from "./LambdaMesh";
 import {MeshManager} from "./MeshManager";
-import {Camera} from "./Camera";
+import {CameraManager} from "./Camera/CameraManager";
 import {Lights} from "./Lights";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import * as React from "react";
 
 export class SceneManager {
@@ -17,7 +16,8 @@ export class SceneManager {
             false
         );
         this.scene = new BABYLON.Scene(this.engine);
-        this.camera = new Camera(this.scene);
+        this.cameraManager = new CameraManager(this.scene);
+        this.camera = this.cameraManager.camera;
         this.camera.attachControl(canvas);
         const lights = new Lights();
         lights.init(this.scene);
@@ -29,7 +29,6 @@ export class SceneManager {
         defaultPipeline.grainEnabled = true;
         defaultPipeline.grain.intensity = 0.5;
 
-
         this.scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
 
         this.meshManager = new MeshManager(this.scene, lights);
@@ -37,16 +36,12 @@ export class SceneManager {
             .then(() => onReadyCB());
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
-                this.meshManager.patch(new LambdaMesh(newMesh), oldMesh ? new LambdaMesh(oldMesh) : null)
+                this.meshManager.patch(new LambdaMesh(newMesh), oldMesh ? new LambdaMesh(oldMesh) : null);
             })
             .watch();
 
         this.engine.runRenderLoop(() => {
                 this.scene.render();
         });
-    }
-
-    update() {
-        return CatalogStore.getAllActiveMeshes().map(mesh => mesh.name).join(", ");
     }
 }
