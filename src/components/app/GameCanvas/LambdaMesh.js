@@ -5,7 +5,9 @@ export class LambdaMesh {
         this.mesh.convertToFlatShadedMesh();
         //this.mesh.freezeWorldMatrix();
         //this.mesh.material.freeze();
-        this.mesh.receiveShadows = true;
+        if(mesh.name.includes("Table")) {
+            this.mesh.receiveShadows = true;
+        }
     }
 
 }

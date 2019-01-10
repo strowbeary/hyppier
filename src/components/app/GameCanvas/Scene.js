@@ -5,9 +5,11 @@ import {LambdaMesh} from "./LambdaMesh";
 import {MeshManager} from "./MeshManager";
 import {Camera} from "./Camera";
 import {Lights} from "./Lights";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import * as React from "react";
 
 export class SceneManager {
-    constructor(canvas) {
+    constructor(canvas, onReadyCB) {
         this.engine = new BABYLON.Engine(
             canvas,
             true,
@@ -31,18 +33,20 @@ export class SceneManager {
         this.scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
 
         this.meshManager = new MeshManager(this.scene, lights);
-        GameStarter.init(this.scene);
+        GameStarter.init(this.scene)
+            .then(() => onReadyCB());
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
                 this.meshManager.patch(new LambdaMesh(newMesh), oldMesh ? new LambdaMesh(oldMesh) : null)
             })
-            .watch()
-            .then(() => {
-                console.log("DONE");
-            });
+            .watch();
 
         this.engine.runRenderLoop(() => {
                 this.scene.render();
         });
+    }
+
+    update() {
+        return CatalogStore.getAllActiveMeshes().map(mesh => mesh.name).join(", ");
     }
 }

@@ -5,7 +5,7 @@ import LocationStore from "./stores/CatalogStore/ObjectTypeStore/ObjectKindStore
 export class GameWatcher {
     static updateWatchers = [];
 
-    static async watch() {
+    static watch() {
         CatalogStore.objectTypes.forEach(objectType => {
             objectType.objectKinds.forEach(objectKind => {
                 onSnapshot(objectKind, newObjectKind => {
@@ -17,7 +17,6 @@ export class GameWatcher {
                             if (oldObject) {
                                 oldMesh = oldObject.getModel();
                             }
-                            console.log(mesh.name);
                             GameWatcher.updateWatchers.forEach(watcher => watcher(mesh, oldMesh));
 
                             if (newObjectKind.location) {
@@ -40,16 +39,9 @@ export class GameWatcher {
                             }
                         }
                     }
-
-                    /*GameWatcher
-                        .changeHandler(newObjectKind, objectKind)
-                        .then(meshToDisplay => {
-                            GameWatcher.updateWatchers.forEach(watcher => watcher(meshToDisplay));
-                        })*/
                 });
             })
         });
-        return GameWatcher;
     }
 
     static onUpdate(watcher) {

@@ -119,11 +119,7 @@ export default class SceneComponent extends Component {
                     location.x,
                     location.y,
                     location.z
-                ), this.scene, (value) => {
-                    this.setState({
-                        sceneRatio: value
-                    })
-                })
+                ), this.scene)
             )
         ];
 

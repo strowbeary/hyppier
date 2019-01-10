@@ -1,19 +1,26 @@
 import * as React from "react";
 import {SceneManager} from "./Scene";
+import {observer} from "mobx-react";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
-export default class GameCanvas extends React.Component {
+export default observer(class GameCanvas extends React.Component {
     state = {
         canvas: {
             width: window.innerWidth,
             height: window.innerHeight
-        }
+        },
+        meshes: []
     };
     sceneManager = null;
-    scene= null;
+    scene = null;
 
     componentDidMount() {
         window.addEventListener('resize', () => this.onResize());
-        this.sceneManager = new SceneManager(this.canvas);
+        this.sceneManager = new SceneManager(this.canvas, () => {
+            this.setState({
+                meshes: CatalogStore.getAllActiveMeshes()
+            })
+        });
         this.scene = this.sceneManager.scene;
         this.engine = this.sceneManager.engine
     }
@@ -33,10 +40,19 @@ export default class GameCanvas extends React.Component {
             opts.width = width;
             opts.height = height;
         }
+        /*const notifications = [
+            ...CatalogStore.getAllActiveMeshes().map(mesh => Notification.createFromMesh(mesh, this.scene)),
+            ...CatalogStore.getEmptyLocation()
+                .map(location => Notification.createFromVector3(location.toVector3()), this.scene)
+        ];
+
+                {notifications}
+        */
         return (
             <div>
+                {CatalogStore.getAllActiveMeshes().map(mesh => mesh.name).join(", ")}
                 <canvas {...opts} ref={(canvas) => this.canvas = canvas}/>
             </div>
         );
     }
-}
+});

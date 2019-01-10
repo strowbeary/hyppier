@@ -31,6 +31,6 @@ export class GameStarter {
         });
     }
     static async init(scene) {
-        return await GameStarter.loadRoom(scene);
+        await GameStarter.loadRoom(scene);
     }
 }
