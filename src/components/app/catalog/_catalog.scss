@@ -1,0 +1,276 @@
+$yellow: #FFD243;
+$grey: #EEEEEE;
+$red: #FF8A8A;
+$purple: #8A8BFE;
+$green: #75E4A6;
+$orange: #E87D30;
+
+$vertical-space: 15px;
+$border-radius: 15px;
+$horizontal-space: 20px;
+$catalog-width: 400px; //350px
+
+@keyframes slide {
+  0% {transform:translateX(-25%);}
+  100% {transform:translateX(25%);}
+}
+
+.catalog {
+  position: absolute;
+  width: $catalog-width;
+  border-radius: $border-radius;
+  margin: 10vh 5vw;
+  background-color: white;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  //transition: opacity 0.5s ease-in;
+  /*opacity: 0;
+
+  &.appear {
+    opacity: 1;
+  }*/
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $yellow;
+    padding: 5px $horizontal-space;
+    border-bottom: solid 1px $yellow;
+    font-size: 1.4rem;
+    font-weight: bold;
+    flex-shrink: 0;
+
+    &__close {
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    &__scrollIndicator {
+      width: 100%;
+      background-color: $grey;
+      height: 5px;
+
+      &__progression {
+        background-color: $orange;
+        height: 5px;
+      }
+    }
+  }
+
+  &__content {
+    padding: $vertical-space $horizontal-space 0;
+    overflow-y: scroll;
+    flex-grow: 1;
+
+    h6 {
+      font-size: 2rem;
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+
+    &__main {
+      margin: $vertical-space 0;
+
+      &__productType {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+
+      &__productTitle {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        span:first-child {
+          margin-right: 0.5rem;
+        }
+      }
+
+      &__body {
+        margin-top: $vertical-space;
+        width: calc(#{$catalog-width} - 2*#{$horizontal-space});
+        height: calc(#{$catalog-width} - 2*#{$horizontal-space});
+        background-color: $grey;
+        border-radius: $border-radius;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        &.special:before {
+          content: " ";
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 50%;
+          height: 50%;
+          background-image: url("/img/catalog/bandeau.png");
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+
+        &.selected {
+          //border-color: black;
+          background-color: black;
+        }
+      }
+
+      &__img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+
+      &__palette {
+        list-style-type: none;
+        display: flex;
+        margin-top: $vertical-space;
+      }
+
+      &__color {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: $vertical-space;
+        cursor: pointer;
+        position: relative;
+        border-radius: 5px;
+
+        &.selected {
+          box-shadow: 0 0 0 2px black inset;
+        }
+
+        &.shiny:after {
+          content:'';
+          top:0;
+          transform:translateX(100%);
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index:1;
+          animation: slide 1s infinite;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%);
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__promotion {
+      margin: $vertical-space 0;
+
+      &__pub {
+        margin-top: $vertical-space;
+        width: 100%;
+        border-radius: $border-radius;
+      }
+
+      &__products {
+        margin-top: $vertical-space;
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      &__product {
+        width: calc((#{$catalog-width} - 3*#{$horizontal-space})/2);
+        margin: calc(#{$vertical-space}/2) 0;
+      }
+
+      &__productType {
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+
+      &__productTitle {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 1.6rem;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        span:first-child {
+          margin-right: 0.4rem;
+        }
+      }
+
+      &__wrapper {
+        margin: calc(#{$vertical-space}/2) 0;
+        height: calc((#{$catalog-width} - 3*#{$horizontal-space})/2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $grey;
+        border-radius: $border-radius;
+        cursor: pointer;
+        position: relative;
+
+        &:before {
+          content: " ";
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 50%;
+          height: 50%;
+          background-image: url("/img/catalog/bandeau.png");
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+
+        &.selected {
+          background-color: black;
+        }
+      }
+
+      &__img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    position: relative;
+
+    &.hasScroll{
+
+      &:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        top: -100px;
+        z-index: 2;
+        pointer-events: none;
+      }
+    }
+
+    &__validation {
+      border: none;
+      background-color: $yellow;
+      color: white;
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+  }
+}

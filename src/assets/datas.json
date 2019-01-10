@@ -12,12 +12,40 @@
           "name": "Table",
           "objects": [
             {
-              "name": "table",
+              "name": "patrick",
               "adUrl": "http://localhost:8080",
               "tints": [
                 {
-                  "name": "gris",
-                  "thumbnailUrl": "http://localhost:8080",
+                  "name": "heureux",
+                  "thumbnailUrl": "img/catalog/table/patrick.png",
+                  "color": "#8A8BFE",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "hourra",
+                  "thumbnailUrl": "img/catalog/table/patrick2.png",
+                  "color": "#FF8A8A",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "satisfait",
+                  "thumbnailUrl": "img/catalog/table/patrick3.png",
+                  "color": "#75E4A6",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "mignon",
+                  "thumbnailUrl": "img/catalog/table/patrick4.png",
+                  "color": "#FFD243",
                   "materials": [
                     0,
                     1
@@ -29,7 +57,57 @@
               "infos": [
                 {
                   "slogan": "Lorem Ipsum",
-                  "url": "http://localhost:8080"
+                  "url": "/img/catalog/table/promo.png"
+                }
+              ]
+            },
+            {
+              "name": "spongeBob",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "présentateur",
+                  "thumbnailUrl": "img/catalog/table/spongeBob.png",
+                  "color": "#8A8BFE",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "marin",
+                  "thumbnailUrl": "img/catalog/table/spongeBob2.png",
+                  "color": "#FF8A8A",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "hourra hourra",
+                  "thumbnailUrl": "img/catalog/table/spongeBob3.png",
+                  "color": "#75E4A6",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "noël",
+                  "thumbnailUrl": "img/catalog/table/spongeBob4.png",
+                  "color": "#FFD243",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "table.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "img/catalog/table/promo.png"
                 }
               ]
             }
@@ -59,6 +137,7 @@
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     0
@@ -110,6 +189,7 @@
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1
@@ -151,6 +231,7 @@
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1
@@ -173,6 +254,7 @@
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1

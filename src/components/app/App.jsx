@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import "./_app.scss";
 import {observer} from "mobx-react";
-
-import WebglRoot from "./3dScene/WebglRoot"
-import FullScreenButton from "./options/FullScreenButton"
+//import WebglRoot from "./3dScene/WebglRoot"
+//import FullScreenButton from "./options/FullScreenButton"
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
+import Catalog from "./catalog/Catalog"
 
 const App = observer(class App extends Component {
 
     webGLRoot = React.createRef();
+    state = {catalogShow: true};
 
     resizeWebGLRoot() {
         this.webGLRoot.current.changeSceneLimits();
@@ -23,10 +24,18 @@ const App = observer(class App extends Component {
         }
         console.log(objectKindPath.toJSON())
     }
+
+    onClose() {
+        this.setState({catalogShow: false});
+    }
+
     render() {
         return (
             <div id="app">
-                <WebglRoot ref={this.webGLRoot} />
+                {this.state.catalogShow &&
+                    <Catalog path={[0, 0, 1]} onClose={() => this.onClose()}/>
+                }
+                {/*<WebglRoot ref={this.webGLRoot} />
                 <div  style={{
                     position: "fixed",
                     bottom: 0,
@@ -34,7 +43,7 @@ const App = observer(class App extends Component {
                 }}>
                     <FullScreenButton onClick={() => this.resizeWebGLRoot()}/>
                     <button onClick={() => this.testChangeObject()} >Test change</button>
-                </div>
+                </div>*/}
             </div>
         )
     }

@@ -1,7 +1,50 @@
+$yellow: #FFD243;
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-regular.ttf");
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-boldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-light.ttf");
+  font-weight: 100;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Brown, sans-serif;
+}
+
 #app {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  background-color: $yellow;
+  width: 100vw;
+  height: 100vh;
 }
