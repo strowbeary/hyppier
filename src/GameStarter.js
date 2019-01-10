@@ -24,10 +24,10 @@ export class GameStarter {
             } else {
                 loadedMesh.receiveShadows = true;
                 loadedMesh.convertToFlatShadedMesh();
-                //loadedMesh.freezeWorldMatrix();
+                loadedMesh.freezeWorldMatrix();
                 //loadedMesh.material.freeze();
+                scene.addMesh(loadedMesh);
             }
-            scene.addMesh(loadedMesh);
         });
     }
 
