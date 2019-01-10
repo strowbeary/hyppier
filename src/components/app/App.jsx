@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import "./_app.scss";
 import {observer} from "mobx-react";
+import { CSSTransitionGroup } from "react-transition-group";
 //import WebglRoot from "./3dScene/WebglRoot"
 //import FullScreenButton from "./options/FullScreenButton"
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
@@ -9,7 +10,11 @@ import Catalog from "./catalog/Catalog"
 const App = observer(class App extends Component {
 
     webGLRoot = React.createRef();
-    state = {catalogShow: true};
+    state = {catalogShow: false};
+
+    componentDidMount() {
+        this.setState({catalogShow: true});
+    }
 
     resizeWebGLRoot() {
         this.webGLRoot.current.changeSceneLimits();
@@ -32,9 +37,15 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div id="app">
-                {this.state.catalogShow &&
-                    <Catalog path={[0, 0, 1]} onClose={() => this.onClose()}/>
-                }
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}
+                >
+                    {this.state.catalogShow &&
+                        <Catalog path={[0, 0, 1]} onClose={() => this.onClose()}/>
+                    }
+                </CSSTransitionGroup>
                 {/*<WebglRoot ref={this.webGLRoot} />
                 <div  style={{
                     position: "fixed",

@@ -3,15 +3,17 @@ import React, {Component} from "react";
 import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import { CSSTransitionGroup } from "react-transition-group";
 
 const Catalog = observer(class Catalog extends Component {
 
-    state = {scrollProgressionWidth: '0%', selectedNew: 0, selectedBefore: -1, fromPopUp: false};
+    state = {scrollProgressionWidth: '0%', selectedNew: 0, selectedBefore: -1, fromPopUp: false, errorShow: false};
     contentScrollHeight = 0;
     contentHeight = 0;
     contentElement = null;
     productBeforeVariants = [];
     promo = null;
+    timeOut = null;
 
     constructor(props) {
         super(props);
@@ -51,6 +53,11 @@ const Catalog = observer(class Catalog extends Component {
     componentDidUpdate() {
         this.setContentHeight();
         this.contentScrollHeight = this.contentElement.scrollHeight - this.contentHeight;
+        if (this.state.errorShow && !this.timeOut) {
+            this.timeOut = setTimeout(() => {this.setState({errorShow: false})}, 2000);
+        } else {
+            this.resetTimeOut();
+        }
     }
 
     onResize() {
@@ -59,22 +66,44 @@ const Catalog = observer(class Catalog extends Component {
         this.updateScrollProgression();
     }
 
+    resetTimeOut() {
+        if (this.timeOut) {
+            clearTimeout(this.timeOut);
+            this.timeOut = null;
+        }
+    }
+
     onThumbnailClick(index) {
+        if (!this.state.errorShow) {
+            this.setState({
+                selectedBefore: index,
+                errorShow: true
+            });
+        }
+    }
+
+    onErrorClick() {
         this.setState({
-            selectedBefore: index
-        })
+            errorShow: false
+        });
     }
 
     onTintClick(index) {
-        this.setState({
-            selectedNew: index,
-            selectedBefore: -1
-        })
+        if (!this.state.errorShow) {
+            this.setState({
+                selectedNew: index,
+                selectedBefore: -1,
+                errorShow: false
+            })
+        }
     }
 
     onMainClick() {
-        if (this.state.selectedBefore !== -1) {
-            this.setState({selectedBefore: -1});
+        if (this.state.selectedBefore !== -1 && !this.state.errorShow) {
+            this.setState({
+                selectedBefore: -1,
+                errorShow: false
+            });
         }
     }
 
@@ -83,12 +112,12 @@ const Catalog = observer(class Catalog extends Component {
         if (result) {
             this.setState({fromPopUp: true});
         } else {
-
+            this.props.onClose();
         }
     }
 
     onValidate() {
-
+        this.props.onClose();
     }
 
     render() {
@@ -101,9 +130,9 @@ const Catalog = observer(class Catalog extends Component {
         let shiny = (index) => {
             return this.productNewVariants[index].special? 'shiny':''
         };
+        let special = this.productNewVariants[this.state.selectedNew].special? 'special':'';
         let footerShadow = this.hasPreviousGeneration && this.state.fromPopUp? 'hasScroll':'';
         let hasSelectedBefore = this.state.selectedBefore === -1? 'selected':'';
-
         let tints = this.productNewVariants.map((tint, index) => <li className={`catalog__content__main__color ${selectedTint(index)} ${shiny(index)}`} style={{backgroundColor: tint.color}} key={tint.name+index} onClick={() => this.onTintClick(index)}></li>);
         let thumbnails = this.productBeforeVariants.map((variant, index) => <li className="catalog__content__promotion__product" key={variant.name}>
             <div className="catalog__content__promotion__productType">
@@ -120,6 +149,16 @@ const Catalog = observer(class Catalog extends Component {
 
         return (
             <div className={`catalog`}>
+                <CSSTransitionGroup
+                    transitionName="fadeIn"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+                    {this.state.errorShow &&
+                        <div className="error" onClick={() => this.onErrorClick()}>
+                            <p>La prévisualisation pour les articles en promotion n'est pas disponible !</p>
+                        </div>
+                    }
+                </CSSTransitionGroup>
                 <div className="catalog__header">
                     <span>Catalog</span>
                     <button className="catalog__header__close" onClick={() => this.onClose()}>
@@ -143,7 +182,7 @@ const Catalog = observer(class Catalog extends Component {
                             <span>{this.productNew.name}</span>
                             <span> > {this.productNewVariants[this.state.selectedNew].name}</span>
                         </div>
-                        <div className={`catalog__content__main__body ${hasSelectedBefore}`} onClick={() => this.onMainClick()}>
+                        <div className={`catalog__content__main__body ${hasSelectedBefore} ${special}`} onClick={() => this.onMainClick()}>
                             <img src={this.productNewVariants[this.state.selectedNew].thumbnail} alt="model" className="catalog__content__main__img"/>
                         </div>
                         <ul className="catalog__content__main__palette">

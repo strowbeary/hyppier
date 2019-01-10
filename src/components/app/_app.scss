@@ -40,6 +40,7 @@ html {
 
 body {
   font-family: Brown, sans-serif;
+  cursor: url("../../assets/img/cursor_default.png"), default;
 }
 
 #app {
@@ -47,4 +48,40 @@ body {
   background-color: $yellow;
   width: 100vw;
   height: 100vh;
+}
+
+.grow-enter {
+  transform: scale(0);
+}
+
+.grow-enter.grow-enter-active {
+  transform: scale(1);
+  transition: transform 500ms ease-in;
+}
+
+.grow-leave {
+  transform: scale(1);
+}
+
+.grow-leave.grow-leave-active {
+  transform: scale(0);
+  transition: transform 300ms ease-in;
+}
+
+.fadeIn-enter {
+  opacity: 0;
+}
+
+.fadeIn-enter.fadeIn-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fadeIn-leave {
+  opacity: 1;
+}
+
+.fadeIn-leave.fadeIn-leave-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
 }
