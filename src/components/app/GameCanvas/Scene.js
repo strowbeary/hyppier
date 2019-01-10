@@ -31,16 +31,15 @@ export class SceneManager {
         this.scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
 
         this.meshManager = new MeshManager(this.scene, lights);
-        GameStarter.init(this.scene).then(() => {
-            GameWatcher
-                .onUpdate((meshes) => {
-                    this.meshManager.patch(meshes.map(mesh => new LambdaMesh(mesh)));
-                })
-                .watch()
-                .then(() => {
-                    console.log("DONE");
-                });
-        });
+        GameStarter.init(this.scene);
+        GameWatcher
+            .onUpdate((newMesh, oldMesh) => {
+                this.meshManager.patch(new LambdaMesh(newMesh), oldMesh ? new LambdaMesh(oldMesh) : null)
+            })
+            .watch()
+            .then(() => {
+                console.log("DONE");
+            });
 
         this.engine.runRenderLoop(() => {
                 this.scene.render();

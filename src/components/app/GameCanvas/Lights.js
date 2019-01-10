@@ -20,9 +20,7 @@ export class Lights{
 
 
         this.shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
-        this.shadowGenerator.usePercentageCloserFiltering = true;
-        this.shadowGenerator.setDarkness(0.25);
-        this.shadowGenerator.bias = 0.00001
+        this.shadowGenerator.useCloseExponentialShadowMap = true;
 
     }
 }

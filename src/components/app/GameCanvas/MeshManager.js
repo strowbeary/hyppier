@@ -4,18 +4,16 @@ export class MeshManager {
         this.scene = scene;
         this.lights = lights;
     }
-    patch(lambdaMeshes) {
-        lambdaMeshes.forEach(lambdaMesh => {
-            if (typeof lambdaMesh.mesh.material.subMaterials !== "undefined") {
-                lambdaMesh.mesh.material.subMaterials.forEach(material => {
-                    material.diffuseColor = new BABYLON.Color3(1,1,1);
-                });
-            } else {
-                lambdaMesh.mesh.material.diffuseColor = new BABYLON.Color3(1,1,1);
-            }
-            lambdaMesh.mesh.receiveShadows= true;
-            this.lights.shadowGenerator.addShadowCaster(lambdaMesh.mesh, true);
-            this.scene.addMesh(lambdaMesh.mesh);
-        })
+    patch(newLambdaMesh, oldLambdaMesh) {
+        this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh, true);
+
+        if(newLambdaMesh && oldLambdaMesh) {
+            console.log(newLambdaMesh.mesh.name, "replace", oldLambdaMesh.mesh.name);
+            this.scene.removeMesh(oldLambdaMesh.mesh);
+            this.scene.addMesh(newLambdaMesh.mesh);
+        } else {
+            console.log(newLambdaMesh.mesh.name, " is new");
+            this.scene.addMesh(newLambdaMesh.mesh);
+        }
     }
 }
