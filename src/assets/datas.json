@@ -187,6 +187,72 @@
                   "url": "http://localhost:8080"
                 }
               ]
+            },
+            {
+              "name": "Headset",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "headset.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "Cat Headset",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "cat.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "Ultime Headset",
+              "adUrl": "http://localhost:8080",
+              "tints": [
+                {
+                  "name": "gris",
+                  "thumbnailUrl": "http://localhost:8080",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "ultime.babylon",
+              "infos": [
+                {
+                  "slogan": "Lorem Ipsum",
+                  "url": "http://localhost:8080"
+                }
+              ]
             }
           ],
           "objectTimeout": 5000,
