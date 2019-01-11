@@ -1,4 +1,4 @@
-$yellow: #FFD243;
+$yellow: #FFE07D;
 $grey: #EEEEEE;
 $red: #FF8A8A;
 $purple: #8A8BFE;
@@ -10,7 +10,7 @@ $border-radius: 15px;
 $horizontal-space: 20px;
 $catalog-width: 400px; //350px
 
-$pointer-url: "../../../assets/img/cursor_pointer.png";
+$pointer-url: "../../../assets/img/cursor_pointer.svg";
 
 @keyframes slide {
   0% {transform:translateX(-25%);}
@@ -122,7 +122,7 @@ $pointer-url: "../../../assets/img/cursor_pointer.png";
         }
 
         &.selected {
-          //border-color: black;
+          //box-shadow: 0 0 0 2px black inset;
           background-color: black;
         }
       }
@@ -232,6 +232,7 @@ $pointer-url: "../../../assets/img/cursor_pointer.png";
         }
 
         &.selected {
+          //box-shadow: 0 0 0 2px black inset;
           background-color: black;
         }
       }
@@ -271,7 +272,7 @@ $pointer-url: "../../../assets/img/cursor_pointer.png";
       background-color: $yellow;
       color: white;
       border-radius: 20px;
-      padding: 5px 10px;
+      padding: 10px 25px;
       font-size: 1.6rem;
       cursor: url($pointer-url), pointer;
     }
@@ -299,7 +300,7 @@ $pointer-url: "../../../assets/img/cursor_pointer.png";
 
 .fadeIn-enter.fadeIn-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in-out;
 }
 
 .fadeIn-leave {
@@ -308,5 +309,5 @@ $pointer-url: "../../../assets/img/cursor_pointer.png";
 
 .fadeIn-leave.fadeIn-leave-active {
   opacity: 0;
-  transition: opacity 300ms ease-in;
+  transition: opacity 300ms ease-in-out;
 }

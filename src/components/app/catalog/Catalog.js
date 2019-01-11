@@ -160,7 +160,7 @@ const Catalog = observer(class Catalog extends Component {
                     }
                 </CSSTransitionGroup>
                 <div className="catalog__header">
-                    <span>Catalog</span>
+                    <span>Catalogue</span>
                     <button className="catalog__header__close" onClick={() => this.onClose()}>
                         <img src={icon_close} alt="close_icon"/>
                     </button>

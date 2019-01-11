@@ -38,12 +38,12 @@ const App = observer(class App extends Component {
         return (
             <div id="app">
                 <CSSTransitionGroup
-                    transitionName="grow"
+                    transitionName="fadeIn"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}
                 >
                     {this.state.catalogShow &&
-                        <Catalog path={[0, 0, 1]} onClose={() => this.onClose()}/>
+                        <Catalog path={[0, 0, 0]} onClose={() => this.onClose()}/>
                     }
                 </CSSTransitionGroup>
                 {/*<WebglRoot ref={this.webGLRoot} />

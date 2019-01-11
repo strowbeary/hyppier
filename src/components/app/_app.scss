@@ -1,4 +1,4 @@
-$yellow: #FFD243;
+$yellow: #FFE07D;
 @font-face {
   font-family: Brown;
   src: url("../../assets/fonts/Brown/lineto-brown-regular.ttf");
@@ -32,6 +32,7 @@ $yellow: #FFD243;
 * {
   margin: 0;
   padding: 0;
+  font-family: Brown, sans-serif;
 }
 
 html {
@@ -40,7 +41,7 @@ html {
 
 body {
   font-family: Brown, sans-serif;
-  cursor: url("../../assets/img/cursor_default.png"), default;
+  cursor: url("../../assets/img/cursor_default.svg"), default;
 }
 
 #app {
