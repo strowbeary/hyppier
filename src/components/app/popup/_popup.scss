@@ -1,0 +1,86 @@
+$vertical-space: 15px;
+$border-radius: 15px;
+$horizontal-space: 20px;
+$yellow: #FFE07D;
+
+$pointer-url: "../../../assets/img/cursor_pointer.svg";
+$default-cursor-url: "../../../assets/img/cursor_default.svg";
+
+.popup {
+  position: absolute;
+  border-radius: $border-radius;
+  background-color: white;
+  padding: $vertical-space $horizontal-space;
+  max-width: 300px;
+  z-index: 1;
+
+  &.disabled {
+    z-index: 0;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      z-index: 2;
+    }
+  }
+
+  p {
+    font-size: 1.6rem;
+  }
+
+  &__image {
+    margin-top: $vertical-space;
+    width: 300px;
+  }
+
+  &__footer {
+    margin-top: $vertical-space;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__buttonClose {
+      border: none;
+      text-transform: uppercase;
+      text-decoration: underline;
+      font-size: 1.2rem;
+      cursor: url($pointer-url), pointer;
+
+      &:disabled {
+        cursor: url($default-cursor-url), default;
+      }
+    }
+
+    &__buttonCatalog {
+      border: none;
+      background-color: $yellow;
+      text-transform: uppercase;
+      font-size: 1.6rem;
+      padding: 10px 5px;
+      color: white;
+
+      cursor: url($pointer-url), pointer;
+      animation: glowing 1s infinite;
+      transition: transform 300ms ease-in-out;
+
+      &:disabled {
+        animation-duration: 0s;
+        cursor: url($default-cursor-url), default;
+
+        &:hover {
+          transform: scale(1);
+        }
+      }
+
+      &:hover {
+        transform: scale(1.2);
+        animation-duration: 0s;
+      }
+    }
+  }
+}
+
+@keyframes glowing {
+  50% { box-shadow: 0 0 $yellow; color: rgba(255, 255, 255, 0.5); background-color: $yellow;} //#c4a300
+  100% { box-shadow: 0 0 25px $yellow; color: white; background-color: ($yellow, 10%);}
+}

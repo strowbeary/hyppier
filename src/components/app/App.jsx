@@ -10,6 +10,7 @@ import Message from "./message/Message"
 import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
 import Notification from "./notification/Notification"
+import Popup from "./popup/Popup"
 
 const App = observer(class App extends Component {
 
@@ -18,6 +19,21 @@ const App = observer(class App extends Component {
 
     componentDidMount() {
         this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
+        setTimeout(
+            () => {
+                this.setState({bob: Popup.createPopup("N'attends plus tu risquerais de louper le prochain Bob l'éponge !", "Tant pis !", "Retourner au catalogue")});
+            }, 4000
+        );
+        setTimeout(
+            () => {
+                this.setState({popup: Popup.createPopup("2e POPUP", "Abandonner", "Être hype !")});
+            }, 5000
+        )
+        setTimeout(
+            () => {
+                this.setState({test: Popup.createPopup("3e POPUP", "DROP", "DOUDOU")});
+            }, 6000
+        )
     }
 
     resizeWebGLRoot() {
@@ -39,8 +55,18 @@ const App = observer(class App extends Component {
     }
 
     render() {
+
         return (
             <div id="app">
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={300}
+                >
+                    {this.state.bob}
+                    {this.state.popup}
+                    {this.state.test}
+                </CSSTransitionGroup>
                 <Spacebar/>
                 <EmptySpace/>
                 <Notification hasTimer={true} time={15000}/>
