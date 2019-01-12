@@ -9,6 +9,7 @@ import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
 import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
+import Notification from "./notification/Notification"
 
 const App = observer(class App extends Component {
 
@@ -42,6 +43,7 @@ const App = observer(class App extends Component {
             <div id="app">
                 <Spacebar/>
                 <EmptySpace/>
+                <Notification hasTimer={true} time={15000}/>
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }
