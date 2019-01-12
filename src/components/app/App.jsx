@@ -6,14 +6,17 @@ import { CSSTransitionGroup } from "react-transition-group";
 //import FullScreenButton from "./options/FullScreenButton"
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
+import Message from "./message/Message"
+import Spacebar from "./spacebar/Spacebar"
+import EmptySpace from "./emptySpace/EmptySpace"
 
 const App = observer(class App extends Component {
 
     webGLRoot = React.createRef();
-    state = {catalogShow: false};
+    state = {catalogShow: false, message: null};
 
     componentDidMount() {
-        this.setState({catalogShow: true});
+        this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
     }
 
     resizeWebGLRoot() {
@@ -37,10 +40,15 @@ const App = observer(class App extends Component {
     render() {
         return (
             <div id="app">
+                <Spacebar/>
+                <EmptySpace/>
+                {this.state.message &&
+                    <Message message={this.state.message}/>
+                }
                 <CSSTransitionGroup
-                    transitionName="fadeIn"
+                    transitionName="catalog"
                     transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
+                    transitionLeaveTimeout={500}
                 >
                     {this.state.catalogShow &&
                         <Catalog path={[0, 0, 0]} onClose={() => this.onClose()}/>

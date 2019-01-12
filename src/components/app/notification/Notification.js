@@ -175,7 +175,7 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         const dashSize = 134;
-        let {x, y} = this.state.projectedPosition;
+        let {x, y} = this.state.projectedPosition || {x: 25, y: 60};
         let style = {
             'top': y - 60,
             'left': x - 25

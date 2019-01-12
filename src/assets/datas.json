@@ -19,6 +19,7 @@
                   "name": "heureux",
                   "thumbnailUrl": "img/catalog/table/patrick.png",
                   "color": "#8A8BFE",
+                  "special": true,
                   "materials": [
                     0,
                     1
