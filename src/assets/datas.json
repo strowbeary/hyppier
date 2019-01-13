@@ -13,7 +13,9 @@
           "objects": [
             {
               "name": "patrick",
-              "adUrl": "http://localhost:8080",
+              "adUrl": "img/catalog/table/promo.png",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "heureux",
@@ -57,14 +59,16 @@
               "modelUrl": "table.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
-                  "url": "/img/catalog/table/promo.png"
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+                  "url": "http://localhost:8080"
                 }
               ]
             },
             {
               "name": "spongeBob",
-              "adUrl": "http://localhost:8080",
+              "adUrl": "img/catalog/table/promo.png",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "présentateur",
@@ -107,8 +111,8 @@
               "modelUrl": "table.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
-                  "url": "img/catalog/table/promo.png"
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Bob l'éponge !",
+                  "url": "https://fr.wikipedia.org/wiki/Bob_l%27%C3%A9ponge"
                 }
               ]
             }
@@ -134,6 +138,8 @@
             {
               "name": "tabouret",
               "adUrl": "http://localhost:8080",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "gris",
@@ -149,7 +155,7 @@
               "modelUrl": "tabouret.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain tabouret !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -186,6 +192,8 @@
             {
               "name": "Macintosh",
               "adUrl": "http://localhost:8080",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "gris",
@@ -201,7 +209,7 @@
               "modelUrl": "computer.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain ordinateur !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -228,6 +236,8 @@
             {
               "name": "Walkman",
               "adUrl": "http://localhost:8080",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "gris",
@@ -243,7 +253,7 @@
               "modelUrl": "walkman.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Walkman !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -251,6 +261,8 @@
             {
               "name": "Ipod",
               "adUrl": "http://localhost:8080",
+              "closeMessage": "Tant pis",
+              "catalogMessage": "Retourner au catalogue",
               "tints": [
                 {
                   "name": "gris",
@@ -266,7 +278,7 @@
               "modelUrl": "ipod.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Ipod !",
                   "url": "http://localhost:8080"
                 }
               ]

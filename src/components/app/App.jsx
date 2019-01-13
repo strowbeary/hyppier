@@ -21,18 +21,13 @@ const App = observer(class App extends Component {
         this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
         setTimeout(
             () => {
-                this.setState({bob: Popup.createPopup("N'attends plus tu risquerais de louper le prochain Bob l'éponge !", "Tant pis !", "Retourner au catalogue")});
+                this.setState({bob: Popup.createPopup({path: [0, 0, 0]})});
             }, 4000
         );
         setTimeout(
             () => {
-                this.setState({popup: Popup.createPopup("2e POPUP", "Abandonner", "Être hype !")});
+                this.setState({popup: Popup.createPopup({path: [0, 0, 1]})});
             }, 5000
-        )
-        setTimeout(
-            () => {
-                this.setState({test: Popup.createPopup("3e POPUP", "DROP", "DOUDOU")});
-            }, 6000
         )
     }
 

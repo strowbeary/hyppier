@@ -23,7 +23,7 @@ const Catalog = observer(class Catalog extends Component {
         this.productNewVariants = this.productNew.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl, color: tint.color, special: tint.special}});
         this.hasPreviousGeneration = path[2] !== 0;
         if (this.hasPreviousGeneration) {
-            this.promo = this.productNew.infos[0].url;
+            this.promo = this.productNew.adUrl;
             this.productBefore = this.productType.objectKinds[path[1]].objects[path[2] - 1];
             this.productBeforeVariants = this.productBefore.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl}});
         }

@@ -12,6 +12,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   background-color: white;
   padding: $vertical-space $horizontal-space;
   max-width: 300px;
+  text-align: center;
   z-index: 1;
 
   &.disabled {
@@ -26,6 +27,10 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
 
   p {
     font-size: 1.6rem;
+  }
+
+  a {
+    color: black;
   }
 
   &__image {

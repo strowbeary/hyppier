@@ -1,16 +1,20 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_popup.scss";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 const Popup = observer(class Popup extends Component {
 
     static popupRef = [];
 
-    static createPopup(question, closeButton, catalogButton) {
+    static createPopup(data) {
+        const path = data.path;
+        const object = CatalogStore.objectTypes[path[0]].objectKinds[path[1]].objects[path[2]];
+        let {infos, catalogMessage, closeMessage, adUrl} = object;
+
         const ref = React.createRef();
-        const text = {question, closeButton, catalogButton};
         Popup.popupRef.push(ref);
-        return <Popup ref={ref} text={text}/>;
+        return <Popup ref={ref} data={{infos, catalogMessage, closeMessage, adUrl}} fromCatalog={data.fromCatalog}/>;
     }
 
     startingPos = {};
@@ -18,6 +22,9 @@ const Popup = observer(class Popup extends Component {
 
     constructor(props) {
         super(props);
+        this.text = {question: props.data.infos[0].slogan, catalogButton: props.data.catalogMessage, closeButton: props.data.closeMessage };
+        this.adUrl = props.data.adUrl;
+        this.infosUrl = props.data.infos[0].url;
         this.state = {
             draggablePosition: {top: 0, left: 0},
             focus: Popup.popupRef.length < 2,
@@ -63,6 +70,14 @@ const Popup = observer(class Popup extends Component {
         document.onmousemove = null;
     }
 
+    onClose() {
+
+    }
+
+    onCatalog() {
+
+    }
+
     render() {
         let disabled = this.state.focus? '':'disabled';
         let buttonsDisabled = !this.state.focus && !this.state.hovered;
@@ -70,11 +85,12 @@ const Popup = observer(class Popup extends Component {
         return (
             <div className={`popup ${disabled}`} style={this.state.draggablePosition} onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}
                  onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
-                <p>{this.props.text.question}</p>
-                <img className="popup__image" src="img/catalog/table/promo.png" alt="promotion"/>
+                <p>{this.text.question}</p>
+                <a href={this.infosUrl} target="_blank">En savoir plus</a>
+                <img className="popup__image" src={this.adUrl} alt="promotion"/>
                 <div className="popup__footer">
-                    <button className="popup__footer__buttonClose" disabled={buttonsDisabled}>{this.props.text.closeButton}</button>
-                    <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled}>{this.props.text.catalogButton}</button>
+                    <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}>{this.text.closeButton}</button>
+                    <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled} onClick={() => this.onCatalog()}>{this.text.catalogButton}</button>
                 </div>
             </div>
         )
