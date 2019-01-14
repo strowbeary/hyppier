@@ -1,5 +1,3 @@
-import {NotificationsManager} from "../../../stores/NotificationsManager";
-import {showAxis} from "../3dScene/utils/Axis";
 
 export class MeshManager {
     constructor(scene, lights) {
@@ -7,15 +5,19 @@ export class MeshManager {
         this.lights = lights;
     }
     patch(newLambdaMesh, oldLambdaMesh) {
-
-        try {
             if(newLambdaMesh && oldLambdaMesh) {
-                this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
+                /**
+                 * Replace object
+                 */
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
+                this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 console.log(newLambdaMesh.mesh.name, "replace", oldLambdaMesh.mesh.name);
-                this.scene.removeMesh(oldLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
+                this.scene.removeMesh(oldLambdaMesh.mesh);
             } else if (
+                /**
+                 * Add new object
+                 */
                 newLambdaMesh &&
                 oldLambdaMesh === null &&
                 this.scene.getMeshByName(newLambdaMesh.mesh.name) === null
@@ -23,16 +25,13 @@ export class MeshManager {
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 console.log(newLambdaMesh.mesh.name, " is new");
                 this.scene.addMesh(newLambdaMesh.mesh);
-                NotificationsManager.createFromMesh(newLambdaMesh);
             } else {
+                /**
+                 * Update object
+                 */
                 console.log(newLambdaMesh.mesh.name, " is updated");
-                newLambdaMesh.notification.update2dPosition(this.scene);
-                newLambdaMesh.notification.setPosition(newLambdaMesh.mesh.position);
-                newLambdaMesh.notification.update2dPosition(this.scene);
             }
-        } catch (e) {
-            console.error(e)
-        }
+            console.log(newLambdaMesh.mesh.position);
 
     }
 }

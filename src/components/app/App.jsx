@@ -10,7 +10,6 @@ import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
 import Notification from "./notification/Notification"
 import Popup from "./popup/Popup"
-import {NotificationsManager} from "../../stores/NotificationsManager";
 
 const App = observer(class App extends Component {
 

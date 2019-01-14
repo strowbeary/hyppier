@@ -29,15 +29,18 @@ const CatalogStore = types.model("CatalogStore", {
                         })
                 }).flat()
             },
-            getAllActiveMeshes() {
+            getAllObjectKindWithActiveObject() {
                 return self.objectTypes.map(objectType => {
                     return objectType.objectKinds
                         .filter(objectKind => {
-                            return objectKind.activeObject !== null
+                            if(objectKind.activeObject !== null) {
+                                return typeof objectKind.objects[objectKind.activeObject[0]].model !== "undefined";
+                            } else {
+                                return false;
+                            }
                         })
-                        .filter(objectKind => typeof objectKind.objects[objectKind.activeObject[0]].model !== "undefined")
                         .map(objectKind => {
-                            return objectKind.objects[objectKind.activeObject[0]].getModel();
+                            return objectKind;
                         })
                 }).flat()
             }

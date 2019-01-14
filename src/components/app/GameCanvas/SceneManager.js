@@ -35,6 +35,7 @@ export class SceneManager {
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
                 this.meshManager.patch(newMesh, oldMesh);
+                this.camera.getProjectionMatrix(true);
             })
             .watch();
 

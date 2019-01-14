@@ -3,36 +3,52 @@ import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import {CameraManager} from "./CameraManager";
 import Notification from "../notification/Notification";
-import {NotificationsManager} from "../../../stores/NotificationsManager";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
     scene = null;
+
+    state = {
+        ready: false
+    };
 
     componentDidMount() {
         window.addEventListener('resize', () => this.onResize());
         this.sceneManager = new SceneManager(this.canvas);
         this.scene = this.sceneManager.scene;
         this.engine = this.sceneManager.engine;
+        this.setState({
+            ready: true
+        });
     }
 
     onResize() {
         this.scene.updateTransformMatrix(true);
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
-        NotificationsManager.updateNotificationsPositions(this.scene);
+        this.scene.activeCamera.getProjectionMatrix(true);
     }
 
     render() {
         return (
             <div>
-                <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Grenier"))}>Go to attic</button>
-                <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("tabouret.001"), CameraManager.CATALOG_OFFSET)}>Set target</button>
-                <button onClick={() => this.sceneManager.cameraManager.setTarget()}>reset target</button>
+                <div style={{
+                    position: "fixed",
+                    top: 10,
+                    left: 10
+                }}>
+                    <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Grenier"))}>Go to attic</button>
+                    <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("tabouret.001"), CameraManager.CATALOG_OFFSET)}>Set target</button>
+                    <button onClick={() => this.sceneManager.cameraManager.setTarget()}>reset target</button>
+                </div>
                 {(() => {
-                    return NotificationsManager.notifications.map(notificationStore => {
-                        return Notification.create(notificationStore, this.scene);
-                    })
+                    if(this.state.ready) {
+                        return CatalogStore.getAllObjectKindWithActiveObject()
+                            .map(objectKind => {
+                                return Notification.create(objectKind, this.scene);
+                            })
+                    }
                 })()}
                 <canvas
                     style={{

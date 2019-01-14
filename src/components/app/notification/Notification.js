@@ -3,39 +3,58 @@ import {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import CountdownStore from "../../../stores/TimerStore/TimerStore";
+import * as BABYLON from "babylonjs";
 
 const Notification = observer(class Notification extends Component {
 
-    static updateProjectedPosition () { //update projected position for all notifications
-        if (Notification.notificationsRef.length > 0)
-            Notification.notificationsRef = Notification.notificationsRef.filter(notification => notification.current !== null);
-        Notification.notificationsRef.forEach(notification => {
-            if(notification.current !== null){
-                notification.current.setProjectedPosition();
-            }
-        });
-    };
-
-    static notificationsRef = [];
-
-    static create(notificationState, scene) {
-        /*const ref = React.createRef();
-        Notification.notificationsRef.push(ref);*/
-        return <Notification notificationState={notificationState} scene={scene} hasTimer={true} key={notificationState.toString()}/>;
+    static create(objectKind, scene) {
+        return <Notification objectKind={objectKind} scene={scene} hasTimer={true} key={objectKind.name}/>;
     }
+
+    state = {
+        position: new BABYLON.Vector3(0, 0, 0)
+    };
 
     constructor(props) {
         super(props);
-        this.notificationState = props.notificationState;
-        this.timer = props.hasTimer ? CountdownStore.create(this.notificationState.timeout) : null;
+        this.timer = props.hasTimer ? CountdownStore.create(props.objectKind.objectTimeout) : null;
         this.scene = props.scene;
-        /*if(typeof props.mesh !== "undefined") {
-            console.log(props.mesh.getBoundingInfo().boundingBox.maximumWorld.y);
-            this.position = props.mesh.position.add(
-                new BABYLON.Vector3(0, props.mesh.getBoundingInfo().boundingBox.maximum.y * props.mesh.scaling.y + 0.03, 0));
-        } else {
-            this.position = props.position.add(new BABYLON.Vector3(0, 0.03, 0));
-        }*/
+        this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject[0]].getModel();
+
+    }
+
+    componentDidMount() {
+        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
+            this.setState({
+                position: this.get2dPosition()
+            })
+        });
+        window.addEventListener('resize', () => {
+            this.setState({
+                position: this.get2dPosition()
+            });
+        });
+        this.setState({
+            position: this.get2dPosition()
+        });
+    }
+
+    get2dPosition() {
+        return BABYLON.Vector3.Project(
+            this.lambdaMesh.mesh.position.add(
+                new BABYLON.Vector3(
+                    0,
+                    this.lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.1,
+                    0
+                )
+            ),
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        );
     }
 
     launchTimer() {
@@ -50,13 +69,13 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         const dashSize = 157;
-        let {x, y} = this.notificationState.get2dPosition(this.scene);
+        let {x, y} = this.state.position;
         let style = {
             'top': y - 25,
             'left': x - 25
         };
         let scale = (this.timer.elapsedTime / this.timer.duration * 0.5) + 0.5;
-        let styleWrapper = this.timer.running ? {animationDuration: `${(this.timer.duration/this.timer.elapsedTime) * 150}ms`} : {animationDuration: '0ms'};
+        let styleWrapper = this.timer.running ? {animationDuration: `${(this.timer.duration / this.timer.elapsedTime) * 150}ms`} : {animationDuration: '0ms'};
 
         return (
             <div className="notification" style={style} onClick={() => this.buildCatalog()}>

@@ -4,7 +4,6 @@ export class LambdaMesh {
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = true;
-        this.mesh.receiveShadow = true;
         this.objectStore = objectStore;
     }
 
