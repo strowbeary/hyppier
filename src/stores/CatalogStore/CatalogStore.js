@@ -3,8 +3,22 @@ import catalogDatas from "../../assets/datas";
 import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 
 const CatalogStore = types.model("CatalogStore", {
-    objectTypes: types.array(ObjectTypeStore)
+    objectTypes: types.array(ObjectTypeStore),
+    open: false,
+    objectKindPath: types.maybeNull(types.array(types.number))
 })
+    .actions(self =>
+        ({
+            openCatalog(objectKindPath) {
+                self.objectKindPath = objectKindPath;
+                self.open = true;
+            },
+            closeCatalog() {
+                self.objectKindPath = null;
+                self.open = false;
+            }
+        })
+    )
     .views(self =>
         ({
             findobjectKindPath(objectKindName) {
@@ -29,15 +43,18 @@ const CatalogStore = types.model("CatalogStore", {
                         })
                 }).flat()
             },
-            getAllActiveMeshes() {
+            getAllObjectKindWithActiveObject() {
                 return self.objectTypes.map(objectType => {
                     return objectType.objectKinds
                         .filter(objectKind => {
-                            return objectKind.activeObject !== null
+                            if(objectKind.activeObject !== null) {
+                                return typeof objectKind.objects[objectKind.activeObject[0]].model !== "undefined";
+                            } else {
+                                return false;
+                            }
                         })
-                        .filter(objectKind => typeof objectKind.objects[objectKind.activeObject[0]].model !== "undefined")
                         .map(objectKind => {
-                            return objectKind.objects[objectKind.activeObject[0]].getModel();
+                            return objectKind
                         })
                 }).flat()
             }

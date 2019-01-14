@@ -1,9 +1,8 @@
 import * as BABYLON from "babylonjs";
-import {NotificationsManager} from "../../../stores/NotificationsManager";
 
 export class CameraManager {
 
-    static CATALOG_OFFSET = new BABYLON.Vector3(-0.6, 0.4, 0);
+    static CATALOG_OFFSET = new BABYLON.Vector3(-0.3, 0.4, 0);
 
     initialValues = {
         width: window.innerWidth,
@@ -29,9 +28,6 @@ export class CameraManager {
         this.updateCamera();
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
-        this.camera.onViewMatrixChangedObservable.add(() => {
-            NotificationsManager.updateNotificationsPositions(this.scene)
-        })
 
     }
 
