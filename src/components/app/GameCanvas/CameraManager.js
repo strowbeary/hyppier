@@ -1,12 +1,13 @@
 import * as BABYLON from "babylonjs";
-import {cameraBoundariesAnim} from "./CameraUtils";
 
 export class CameraManager {
+
+    static CATALOG_OFFSET = new BABYLON.Vector3(-0.6, 0.4, 0);
 
     initialValues = {
         width: window.innerWidth,
         height: window.innerHeight,
-        distance: 10
+        distance: 5
     };
 
     distance = this.initialValues.distance;
@@ -43,7 +44,7 @@ export class CameraManager {
         this.camera.orthoRight = distance * ratio * (window.innerWidth / this.initialValues.height);
     }
 
-    setTarget(mesh) {
+    setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
         let toDistance = this.initialValues.distance;
         let toPosition = BABYLON.Vector3.Zero();
         if(typeof mesh !== "undefined") {
@@ -51,18 +52,16 @@ export class CameraManager {
                 mesh.getBoundingInfo().boundingBox.maximum.y * mesh.scaling.y,
                 mesh.getBoundingInfo().boundingBox.maximum.x * mesh.scaling.x,
                 mesh.getBoundingInfo().boundingBox.maximum.z * mesh.scaling.z
-            )) * 3);
+            )) * 2);
             toPosition = mesh.position.clone();
         }
 
+        toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
         console.log(this.distance, ">", toDistance);
         let fromPosition = this.camera.target;
-        if(toDistance < this.distance) {
-            toPosition.y += 0.3 * toDistance;
-            toPosition.x -= 0.5 * toDistance;
-        }
+
         const animation = () => {
             this.distance = this.distance + 0.1 * (toDistance - this.distance);
 

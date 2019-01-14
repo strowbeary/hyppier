@@ -3,7 +3,7 @@ import {GameStarter} from "../../../GameStarter";
 import {GameWatcher} from "../../../GameWatcher";
 import {LambdaMesh} from "./LambdaMesh";
 import {MeshManager} from "./MeshManager";
-import {CameraManager} from "./Camera/CameraManager";
+import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import * as React from "react";
 
@@ -29,7 +29,7 @@ export class SceneManager {
         defaultPipeline.grainEnabled = true;
         defaultPipeline.grain.intensity = 0.5;
 
-        this.scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
+        this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
         this.meshManager = new MeshManager(this.scene, lights);
         GameStarter.init(this.scene)

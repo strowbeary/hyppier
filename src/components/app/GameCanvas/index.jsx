@@ -2,6 +2,7 @@ import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {CameraManager} from "./CameraManager";
 
 export default observer(class GameCanvas extends React.Component {
     state = {
@@ -30,7 +31,6 @@ export default observer(class GameCanvas extends React.Component {
                 .map(location => Notification.createFromVector3(location.toVector3()), this.scene)
         ];
 
-        console.log(CatalogStore.getAllActiveMeshes());
     }
 
     onResize() {
@@ -43,14 +43,15 @@ export default observer(class GameCanvas extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Sound_Walkman.001"))}>Set target</button>
+                <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Grenier"))}>Go to attic</button>
+                <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("tabouret.001"), CameraManager.CATALOG_OFFSET)}>Set target</button>
                 <button onClick={() => this.sceneManager.cameraManager.setTarget()}>reset target</button>
                 <canvas
                     style={{
                         width: "100vw",
                         height: "100vh"
                     }}
-                        ref={(canvas) => this.canvas = canvas}
+                    ref={(canvas) => this.canvas = canvas}
                 />
             </div>
         );
