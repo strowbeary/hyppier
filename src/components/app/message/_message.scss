@@ -1,0 +1,46 @@
+.message {
+  position: absolute;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px 15px;
+  font-size: 2rem;
+  margin: 15vh 0 0 10vw;
+  max-width: 275px;
+
+  p {
+    margin: 0 auto;
+
+    &:after {
+      content: " ";
+      display: inline-block;
+      width: 0.25rem;
+      height: 2rem;
+      background-color: orange;
+    }
+
+    &.arrow {
+      &:after {
+        position: absolute;
+        display: block;
+        background-color: transparent;
+        bottom: 20px;
+        right: 15px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid orange;
+        animation: up-down 500ms infinite alternate;
+      }
+    }
+  }
+}
+
+@keyframes up-down {
+  from {
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(-2px);
+  }
+}

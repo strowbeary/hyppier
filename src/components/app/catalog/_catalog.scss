@@ -1,0 +1,338 @@
+$yellow: #FFE07D;
+$grey: #EEEEEE;
+$red: #FF8A8A;
+$purple: #8A8BFE;
+$green: #75E4A6;
+$orange: #E87D30;
+
+$vertical-space: 15px;
+$border-radius: 15px;
+$horizontal-space: 20px;
+$catalog-width: 400px; //350px
+
+$pointer-url: "../../../assets/img/cursor_pointer.svg";
+$default-cursor-url: "../../../assets/img/cursor_default.svg";
+
+@keyframes striped {
+  0% {
+    opacity: 0;
+    top: -110%;
+    left: -210%;
+  }
+  75% {
+    opacity: 0;
+    top: -110%;
+    left: -210%;
+  }
+  100% {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+
+  }
+}
+
+.catalog {
+  position: absolute;
+  width: $catalog-width;
+  border-radius: $border-radius;
+  margin: 10vh 5vw;
+  right: 0;
+  background-color: white;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $yellow;
+    padding: 5px $horizontal-space;
+    border-bottom: solid 1px $yellow;
+    font-size: 1.4rem;
+    font-weight: bold;
+    flex-shrink: 0;
+
+    &__close {
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    &__scrollIndicator {
+      width: 100%;
+      background-color: $grey;
+      height: 5px;
+
+      &__progression {
+        background-color: $orange;
+        height: 5px;
+      }
+    }
+  }
+
+  &__content {
+    padding: $vertical-space $horizontal-space 0;
+    overflow-y: scroll;
+    flex-grow: 1;
+
+    h6 {
+      font-size: 2rem;
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+
+    &__main {
+      margin: $vertical-space 0;
+
+      &__productType {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+
+      &__productTitle {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        span:first-child {
+          margin-right: 0.5rem;
+        }
+      }
+
+      &__body {
+        margin-top: $vertical-space;
+        width: calc(#{$catalog-width} - 2*#{$horizontal-space});
+        height: calc(#{$catalog-width} - 2*#{$horizontal-space});
+        background-color: $grey;
+        border-radius: $border-radius;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: url($pointer-url), pointer;
+        position: relative;
+
+        &.special:before {
+          content: " ";
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 50%;
+          height: 50%;
+          background-image: url("../../../assets/img/catalog/bandeau_exclu.png");
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+
+        &.selected {
+          //box-shadow: 0 0 0 2px black inset;
+          background-color: black;
+          cursor: url($default-cursor-url), default;
+        }
+      }
+
+      &__img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+
+      &__palette {
+        list-style-type: none;
+        display: flex;
+        margin-top: $vertical-space;
+      }
+
+      &__color {
+        display: block;
+        width: calc(#{$catalog-width}/10);
+        height: calc(#{$catalog-width}/10);
+        margin-right: $vertical-space;
+        cursor: url($pointer-url), pointer;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+
+        &.selected {
+          box-shadow: 0 0 0 2px black inset;
+        }
+
+        &.shiny:after {
+          content: "";
+          position: absolute;
+          width: 200%;
+          height: 200%;
+          transform: rotate(30deg);
+          background: linear-gradient(
+                          to right,
+                          rgba(255, 255, 255, 0) 0%,
+                          rgba(255, 255, 255, 0) 80%,
+                          rgba(255, 255, 255, 1) 80%,
+                          rgba(255, 255, 255, 1) 100%
+          );
+          pointer-events: none;
+          cursor: url($pointer-url), pointer;
+          animation: striped 3s ease-in infinite;
+        }
+      }
+    }
+
+    &__promotion {
+      margin: $vertical-space 0;
+
+      &__pub {
+        margin-top: $vertical-space;
+        width: 100%;
+        border-radius: $border-radius;
+      }
+
+      &__products {
+        margin-top: $vertical-space;
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      &__product {
+        width: calc((#{$catalog-width} - 3*#{$horizontal-space})/2);
+        margin: calc(#{$vertical-space}/2) 0;
+      }
+
+      &__productType {
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+
+      &__productTitle {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 1.6rem;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        span:first-child {
+          margin-right: 0.4rem;
+        }
+      }
+
+      &__wrapper {
+        margin: calc(#{$vertical-space}/2) 0;
+        height: calc((#{$catalog-width} - 3*#{$horizontal-space})/2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $grey;
+        border-radius: $border-radius;
+        cursor: url($pointer-url), pointer;
+        position: relative;
+
+        &:before {
+          content: " ";
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 50%;
+          height: 50%;
+          background-image: url("../../../assets/img/catalog/bandeau.png");
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+
+        &.selected {
+          background-color: black;
+        }
+      }
+
+      &__img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    position: relative;
+
+    &.hasScroll{
+
+      &:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        top: -100px;
+        z-index: 2;
+        pointer-events: none;
+      }
+    }
+
+    &__validation {
+      border: none;
+      background-color: $yellow;
+      color: white;
+      //border-radius: 20px;
+      padding: 10px 25px;
+      font-size: 1.6rem;
+      animation: glowing 1s infinite;
+      transition: transform 300ms ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+        animation-duration: 0s;
+      }
+    }
+  }
+}
+
+@keyframes glowing {
+  50% { box-shadow: 0 0 $yellow; color: rgba(255, 255, 255, 0.5); background-color: $yellow;} //#c4a300
+  100% { box-shadow: 0 0 25px $yellow; color: white; background-color: ($yellow, 10%);}
+}
+
+.error {
+  position: fixed;
+  top: 50vh;
+  left: 1vw;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  border-radius: $border-radius;
+  font-size: 1.5rem;
+  font-weight: bold;
+  max-width: calc(#{$catalog-width} + 8vw);
+  z-index: 3;
+  cursor: url($pointer-url), pointer;
+}
+
+.fadeIn-enter {
+  opacity: 0;
+}
+
+.fadeIn-enter.fadeIn-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fadeIn-leave {
+  opacity: 1;
+}
+
+.fadeIn-leave.fadeIn-leave-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}

@@ -12,12 +12,44 @@
           "name": "Table",
           "objects": [
             {
-              "name": "table",
-              "adUrl": "http://localhost:8080",
+              "name": "patrick",
+              "adUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
-                  "name": "gris",
-                  "thumbnailUrl": "http://localhost:8080",
+                  "name": "heureux",
+                  "thumbnailUrl": "img/catalog/table/patrick.png",
+                  "color": "#8A8BFE",
+                  "special": true,
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "hourra",
+                  "thumbnailUrl": "img/catalog/table/patrick2.png",
+                  "color": "#FF8A8A",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "satisfait",
+                  "thumbnailUrl": "img/catalog/table/patrick3.png",
+                  "color": "#75E4A6",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "mignon",
+                  "thumbnailUrl": "img/catalog/table/patrick4.png",
+                  "color": "#FFD243",
                   "materials": [
                     0,
                     1
@@ -28,8 +60,61 @@
               "modelUrl": "table.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
                   "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "spongeBob",
+              "adUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+              "tints": [
+                {
+                  "name": "présentateur",
+                  "thumbnailUrl": "img/catalog/table/spongeBob.png",
+                  "color": "#8A8BFE",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "marin",
+                  "thumbnailUrl": "img/catalog/table/spongeBob2.png",
+                  "color": "#FF8A8A",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "hourra hourra",
+                  "thumbnailUrl": "img/catalog/table/spongeBob3.png",
+                  "color": "#75E4A6",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "noël",
+                  "thumbnailUrl": "img/catalog/table/spongeBob4.png",
+                  "color": "#FFD243",
+                  "materials": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "parcelSize": 1,
+              "modelUrl": "table.babylon",
+              "infos": [
+                {
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Bob l'éponge !",
+                  "url": "https://fr.wikipedia.org/wiki/Bob_l%27%C3%A9ponge"
                 }
               ]
             }
@@ -55,10 +140,14 @@
             {
               "name": "tabouret",
               "adUrl": "http://localhost:8080",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     0
@@ -69,7 +158,7 @@
               "modelUrl": "tabouret.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain tabouret !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -106,10 +195,14 @@
             {
               "name": "Macintosh",
               "adUrl": "http://localhost:8080",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1
@@ -120,7 +213,7 @@
               "modelUrl": "computer.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain ordinateur !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -147,10 +240,14 @@
             {
               "name": "Walkman",
               "adUrl": "http://localhost:8080",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1
@@ -161,7 +258,7 @@
               "modelUrl": "walkman.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Walkman !",
                   "url": "http://localhost:8080"
                 }
               ]
@@ -169,10 +266,14 @@
             {
               "name": "Ipod",
               "adUrl": "http://localhost:8080",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
                   "thumbnailUrl": "http://localhost:8080",
+                  "color": "#8A8BFE",
                   "materials": [
                     0,
                     1
@@ -183,7 +284,7 @@
               "modelUrl": "ipod.babylon",
               "infos": [
                 {
-                  "slogan": "Lorem Ipsum",
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Ipod !",
                   "url": "http://localhost:8080"
                 }
               ]

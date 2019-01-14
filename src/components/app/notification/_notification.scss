@@ -1,10 +1,15 @@
 .notification {
   position: fixed;
   display: block;
-  width: 0;
-  height: 0;
-  svg {
-    width: 50px;
-    height: 60px;
+
+  &__wrapper {
+    animation: wiggle 0s infinite;
   }
+}
+
+
+@keyframes wiggle {
+  0% {transform: translate(2px, 0);}
+  50% {transform: translate(-2px, 0);}
+  100% {transform: translate(2px, 0);}
 }
