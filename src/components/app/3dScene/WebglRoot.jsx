@@ -42,9 +42,7 @@ export default class WebglRoot extends Component {
         // Default intensity is 1. Let's dim the light a small amount
         light.intensity = 1;
 
-        const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, scene, [camera]);
-        defaultPipeline.samples = 4;
-        defaultPipeline.fxaaEnabled = true;
+
 
         engine.runRenderLoop(() => {
             if (scene) {

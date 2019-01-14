@@ -4,5 +4,6 @@ export default types.model("TintStore", {
     name: types.string,
     thumbnailUrl: types.string,
     materials: types.array(types.number),
-    special: false
+    special: false,
+    color: types.string
 });

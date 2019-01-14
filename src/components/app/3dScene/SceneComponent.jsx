@@ -3,7 +3,7 @@ import {Component} from "react";
 import * as React from "react";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import {initGame} from "../../../init";
+import {initGame} from "../../../GameStarter";
 import Notification from "../notification/Notification";
 import WebglRoot from "./WebglRoot";
 
@@ -22,11 +22,6 @@ export default class SceneComponent extends Component {
             emptyLocation: [],
             notifications: [],
             sceneRatio: 5};
-        console.log(CatalogStore.toJSON());
-        /*window.addEventListener('keypress', (e) => {if (e.code === "Space") {
-            console.log(this.scene.activeCamera.position)
-        }
-        });*/
         window.addEventListener('resize', () => this.onResize());
     }
 
@@ -56,14 +51,7 @@ export default class SceneComponent extends Component {
 
         let scene = new BABYLON.Scene(this.engine);
         this.scene = scene;
-        initGame(scene, (meshes) => {
-            this.setState({
-                meshes,
-                emptyLocation: CatalogStore.getEmptyLocation()
-            })
-        }).then(() => {
-            console.log("DONE");
-        });
+
         if (typeof this.props.onSceneMount === 'function') {
             this.props.onSceneMount({
                 scene,
@@ -131,11 +119,7 @@ export default class SceneComponent extends Component {
                     location.x,
                     location.y,
                     location.z
-                ), this.scene, (value) => {
-                    this.setState({
-                        sceneRatio: value
-                    })
-                })
+                ), this.scene)
             )
         ];
 

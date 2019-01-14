@@ -2,9 +2,14 @@ import {types} from "mobx-state-tree";
 import TintStore from "./TintStore/TintStore";
 import InfoStore from "./InfoStore/InfoStore";
 
+const meshShelf = [];
+
 export default types.model("ObjectStore", {
     name: types.string,
     adUrl: types.string,
+    closeButtonLabel: types.string,
+    returnCatalogButtonLabel: types.string,
+    catalogSlogan: types.string,
     parcelSize: types.number,
     modelUrl: types.string,
     model: types.maybe(types.number),
@@ -12,7 +17,16 @@ export default types.model("ObjectStore", {
     infos: types.array(InfoStore)
 })
     .actions(self => ({
-        setModel(id) {
-            self.model = id;
+        setModel(mesh) {
+            self.model = meshShelf.length;
+            meshShelf.push(mesh);
+        },
+        beforeDestroy() {
+            delete meshShelf[self.model];
+        }
+    }))
+    .views(self => ({
+        getModel() {
+            return meshShelf[self.model];
         }
     }));
