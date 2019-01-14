@@ -20,8 +20,8 @@ export class GameWatcher {
                             GameWatcher.updateWatchers.forEach(watcher => watcher(mesh, oldMesh));
 
                             if (newObjectKind.location) {
-                                const mesh = objectKind.objects[objectKind.activeObject[0]].getModel();
-                                const locationPosition = objectKind.location.toVector3()
+                                const mesh = objectKind.objects[objectKind.activeObject[0]].getModel().mesh;
+                                const locationPosition = objectKind.location.toVector3();
                                 mesh.position = locationPosition;
                                 mesh.getChildren().forEach(mesh => {
                                     mesh.position.addInPlace(locationPosition);

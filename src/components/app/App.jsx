@@ -10,6 +10,7 @@ import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
 import Notification from "./notification/Notification"
 import Popup from "./popup/Popup"
+import {NotificationsManager} from "../../stores/NotificationsManager";
 
 const App = observer(class App extends Component {
 
@@ -48,7 +49,8 @@ const App = observer(class App extends Component {
         return (
             <div id="app">
                 <GameCanvas/>
-                <CSSTransitionGroup
+
+                {/*<CSSTransitionGroup
                     transitionName="grow"
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={300}
@@ -59,7 +61,6 @@ const App = observer(class App extends Component {
                 </CSSTransitionGroup>
                 <Spacebar/>
                 <EmptySpace/>
-                <Notification hasTimer={true} time={15000}/>
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }
@@ -71,7 +72,7 @@ const App = observer(class App extends Component {
                     {this.state.catalogShow &&
                         <Catalog path={[0, 0, 0]} onClose={() => this.onClose()}/>
                     }
-                </CSSTransitionGroup>
+                </CSSTransitionGroup>*/}
                 <button style={{
                     position: "fixed",
                     bottom: 10,

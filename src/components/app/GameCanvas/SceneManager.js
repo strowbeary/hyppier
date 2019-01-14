@@ -1,11 +1,9 @@
 import * as BABYLON from "babylonjs";
 import {GameStarter} from "../../../GameStarter";
 import {GameWatcher} from "../../../GameWatcher";
-import {LambdaMesh} from "./LambdaMesh";
 import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
-import * as React from "react";
 
 export class SceneManager {
     constructor(canvas, onReadyCB) {
@@ -36,7 +34,7 @@ export class SceneManager {
             .then(() => onReadyCB());
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
-                this.meshManager.patch(new LambdaMesh(newMesh), oldMesh ? new LambdaMesh(oldMesh) : null);
+                this.meshManager.patch(newMesh, oldMesh);
             })
             .watch();
 

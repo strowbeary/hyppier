@@ -17,9 +17,9 @@ export default types.model("ObjectStore", {
     infos: types.array(InfoStore)
 })
     .actions(self => ({
-        setModel(mesh) {
+        setModel(lambdaMesh) {
             self.model = meshShelf.length;
-            meshShelf.push(mesh);
+            meshShelf.push(lambdaMesh);
         },
         beforeDestroy() {
             delete meshShelf[self.model];

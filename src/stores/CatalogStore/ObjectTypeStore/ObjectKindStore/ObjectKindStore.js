@@ -4,6 +4,7 @@ import ObjectStore from "./ObjectStore/ObjectStore";
 import AchievementStore from "./AchievementStore/AchievementStore";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../CatalogStore";
+import {LambdaMesh} from "../../../../components/app/GameCanvas/LambdaMesh";
 
 export default types
     .model("ObjectKindStore", {
@@ -33,7 +34,7 @@ export default types
                                 })
                             );
                         } else {
-                            self.objects[self.activeObject[0]].setModel(loadedMesh);
+                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh));
                         }
                     });
                 });
@@ -66,7 +67,7 @@ export default types
                             if(self.location) {
                                 loadedMesh.position = self.location.toVector3();
                             }
-                            self.objects[self.activeObject[0]].setModel(loadedMesh);
+                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh));
                         }
                     });
                 });

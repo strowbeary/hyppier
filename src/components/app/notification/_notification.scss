@@ -3,7 +3,7 @@
   display: block;
 
   &__wrapper {
-    animation: wiggle 0s infinite;
+    animation: wiggle 0s infinite ease;
   }
 }
 
