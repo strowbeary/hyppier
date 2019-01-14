@@ -172,7 +172,7 @@ const Catalog = observer(class Catalog extends Component {
                     </div>
                 }
                 <div className="catalog__content" onScroll={(e) => this.updateScrollProgression(e)}>
-                    <p className="catalog__content__title">Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?</p>
+                    <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
 
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">

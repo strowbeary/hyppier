@@ -10,11 +10,11 @@ const Popup = observer(class Popup extends Component {
     static createPopup(data) {
         const path = data.path;
         const object = CatalogStore.objectTypes[path[0]].objectKinds[path[1]].objects[path[2]];
-        let {infos, catalogMessage, closeMessage, adUrl} = object;
+        let {infos, closeButtonLabel, returnCatalogButtonLabel, adUrl} = object;
 
         const ref = React.createRef();
         Popup.popupRef.push(ref);
-        return <Popup ref={ref} data={{infos, catalogMessage, closeMessage, adUrl}} fromCatalog={data.fromCatalog}/>;
+        return <Popup ref={ref} data={{infos, closeButtonLabel, returnCatalogButtonLabel, adUrl}}/>;
     }
 
     startingPos = {};
@@ -22,7 +22,7 @@ const Popup = observer(class Popup extends Component {
 
     constructor(props) {
         super(props);
-        this.text = {question: props.data.infos[0].slogan, catalogButton: props.data.catalogMessage, closeButton: props.data.closeMessage };
+        this.text = {question: props.data.infos[0].slogan, returnCatalogButtonLabel: props.data.returnCatalogButtonLabel, closeButtonLabel: props.data.closeButtonLabel };
         this.adUrl = props.data.adUrl;
         this.infosUrl = props.data.infos[0].url;
         this.state = {
@@ -89,8 +89,8 @@ const Popup = observer(class Popup extends Component {
                 <a href={this.infosUrl} target="_blank">En savoir plus</a>
                 <img className="popup__image" src={this.adUrl} alt="promotion"/>
                 <div className="popup__footer">
-                    <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}>{this.text.closeButton}</button>
-                    <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled} onClick={() => this.onCatalog()}>{this.text.catalogButton}</button>
+                    <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}>{this.text.closeButtonLabel}</button>
+                    <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled} onClick={() => this.onCatalog()}>{this.text.returnCatalogButtonLabel}</button>
                 </div>
             </div>
         )

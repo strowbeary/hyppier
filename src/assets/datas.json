@@ -14,8 +14,9 @@
             {
               "name": "patrick",
               "adUrl": "img/catalog/table/promo.png",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "heureux",
@@ -67,8 +68,9 @@
             {
               "name": "spongeBob",
               "adUrl": "img/catalog/table/promo.png",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "présentateur",
@@ -138,8 +140,9 @@
             {
               "name": "tabouret",
               "adUrl": "http://localhost:8080",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
@@ -192,8 +195,9 @@
             {
               "name": "Macintosh",
               "adUrl": "http://localhost:8080",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
@@ -236,8 +240,9 @@
             {
               "name": "Walkman",
               "adUrl": "http://localhost:8080",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",
@@ -261,8 +266,9 @@
             {
               "name": "Ipod",
               "adUrl": "http://localhost:8080",
-              "closeMessage": "Tant pis",
-              "catalogMessage": "Retourner au catalogue",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
               "tints": [
                 {
                   "name": "gris",

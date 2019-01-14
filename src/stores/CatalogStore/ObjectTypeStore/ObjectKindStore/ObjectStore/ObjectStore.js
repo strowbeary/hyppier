@@ -5,8 +5,9 @@ import InfoStore from "./InfoStore/InfoStore";
 export default types.model("ObjectStore", {
     name: types.string,
     adUrl: types.string,
-    closeMessage: types.string,
-    catalogMessage: types.string,
+    closeButtonLabel: types.string,
+    returnCatalogButtonLabel: types.string,
+    catalogSlogan: types.string,
     parcelSize: types.number,
     modelUrl: types.string,
     model: types.maybe(types.number),
