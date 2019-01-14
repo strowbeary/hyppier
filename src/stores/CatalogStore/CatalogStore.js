@@ -3,8 +3,22 @@ import catalogDatas from "../../assets/datas";
 import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 
 const CatalogStore = types.model("CatalogStore", {
-    objectTypes: types.array(ObjectTypeStore)
+    objectTypes: types.array(ObjectTypeStore),
+    open: false,
+    objectKindPath: types.maybeNull(types.array(types.number))
 })
+    .actions(self =>
+        ({
+            openCatalog(objectKindPath) {
+                self.objectKindPath = objectKindPath;
+                self.open = true;
+            },
+            closeCatalog() {
+                self.objectKindPath = null;
+                self.open = false;
+            }
+        })
+    )
     .views(self =>
         ({
             findobjectKindPath(objectKindName) {
@@ -40,7 +54,7 @@ const CatalogStore = types.model("CatalogStore", {
                             }
                         })
                         .map(objectKind => {
-                            return objectKind;
+                            return objectKind
                         })
                 }).flat()
             }

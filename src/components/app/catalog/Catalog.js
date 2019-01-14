@@ -19,12 +19,13 @@ const Catalog = observer(class Catalog extends Component {
         super(props);
         let path = props.path;
         this.productType = CatalogStore.objectTypes[path[0]];
-        this.productNew = this.productType.objectKinds[path[1]].objects[path[2]];
+        this.objectKind = this.productType.objectKinds[path[1]];
+        this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
         this.productNewVariants = this.productNew.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl, color: tint.color, special: tint.special}});
-        this.hasPreviousGeneration = path[2] !== 0;
+        this.hasPreviousGeneration = this.objectKind.activeObject[0] !== 0;
         if (this.hasPreviousGeneration) {
             this.promo = this.productNew.adUrl;
-            this.productBefore = this.productType.objectKinds[path[1]].objects[path[2] - 1];
+            this.productBefore =this.objectKind.objects[this.objectKind.activeObject[0] - 1];
             this.productBeforeVariants = this.productBefore.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl}});
         }
     }

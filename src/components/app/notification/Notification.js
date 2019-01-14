@@ -4,6 +4,7 @@ import "./_notification.scss";
 import {observer} from "mobx-react";
 import CountdownStore from "../../../stores/TimerStore/TimerStore";
 import * as BABYLON from "babylonjs";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 const Notification = observer(class Notification extends Component {
 
@@ -20,6 +21,7 @@ const Notification = observer(class Notification extends Component {
         this.timer = props.hasTimer ? CountdownStore.create(props.objectKind.objectTimeout) : null;
         this.scene = props.scene;
         this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject[0]].getModel();
+        this.objectKind = props.objectKind;
 
     }
 
@@ -65,6 +67,7 @@ const Notification = observer(class Notification extends Component {
 
     buildCatalog() {
         this.launchTimer();
+        CatalogStore.openCatalog(CatalogStore.findobjectKindPath(this.objectKind.name));
     }
 
     render() {
