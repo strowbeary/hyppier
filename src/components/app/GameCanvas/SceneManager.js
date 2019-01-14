@@ -31,7 +31,7 @@ export class SceneManager {
 
         this.meshManager = new MeshManager(this.scene, lights);
         GameStarter.init(this.scene)
-            .then(() => onReadyCB());
+            .then(/*() => onReadyCB()*/);
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
                 this.meshManager.patch(newMesh, oldMesh);

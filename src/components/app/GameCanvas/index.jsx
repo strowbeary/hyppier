@@ -2,6 +2,8 @@ import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import {CameraManager} from "./CameraManager";
+import Notification from "../notification/Notification";
+import {NotificationsManager} from "../../../stores/NotificationsManager";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -16,9 +18,9 @@ export default observer(class GameCanvas extends React.Component {
 
     onResize() {
         this.scene.updateTransformMatrix(true);
-        //Notification.updateProjectedPosition();
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
+        NotificationsManager.updateNotificationsPositions(this.scene);
     }
 
     render() {
@@ -27,11 +29,11 @@ export default observer(class GameCanvas extends React.Component {
                 <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Grenier"))}>Go to attic</button>
                 <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("tabouret.001"), CameraManager.CATALOG_OFFSET)}>Set target</button>
                 <button onClick={() => this.sceneManager.cameraManager.setTarget()}>reset target</button>
-                {/*(() => {
-                    NotificationsManager.notifications.map(notification => {
-                        return Notification.createFromMesh();
+                {(() => {
+                    return NotificationsManager.notifications.map(notificationStore => {
+                        return Notification.create(notificationStore, this.scene);
                     })
-                })()*/}
+                })()}
                 <canvas
                     style={{
                         width: "100vw",

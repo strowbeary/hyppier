@@ -17,7 +17,6 @@ export class GameWatcher {
                             if (oldObject) {
                                 oldMesh = oldObject.getModel();
                             }
-                            GameWatcher.updateWatchers.forEach(watcher => watcher(mesh, oldMesh));
 
                             if (newObjectKind.location) {
                                 const mesh = objectKind.objects[objectKind.activeObject[0]].getModel().mesh;
@@ -37,6 +36,8 @@ export class GameWatcher {
                                     );
                                 });
                             }
+
+                            GameWatcher.updateWatchers.forEach(watcher => watcher(mesh, oldMesh));
                         }
                     }
                 });

@@ -30,7 +30,7 @@ export class CameraManager {
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
         this.camera.onViewMatrixChangedObservable.add(() => {
-            NotificationsManager.updateNotificationsPositions(this.camera)
+            NotificationsManager.updateNotificationsPositions(this.scene)
         })
 
     }

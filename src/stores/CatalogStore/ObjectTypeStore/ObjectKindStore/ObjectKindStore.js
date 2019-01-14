@@ -34,7 +34,7 @@ export default types
                                 })
                             );
                         } else {
-                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh));
+                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self.toJSON()));
                         }
                     });
                 });
@@ -67,7 +67,7 @@ export default types
                             if(self.location) {
                                 loadedMesh.position = self.location.toVector3();
                             }
-                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh));
+                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self.toJSON()));
                         }
                     });
                 });

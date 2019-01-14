@@ -9,25 +9,33 @@ export const NotificationsManager =  types.model("NotificationsManager", {
     .actions(self =>
         ({
             createFromMesh(lambdaMesh) {
-                let position = lambdaMesh.mesh.position;
-                if(typeof lambdaMesh.mesh !== "undefined") {
-                    position = lambdaMesh.mesh.position.add(
-                        new BABYLON.Vector3(0, lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * lambdaMesh.mesh.scaling.y + 0.03, 0));
-                } else {
-                    position = lambdaMesh.mesh.position.add(new BABYLON.Vector3(0, 0.03, 0));
-                }
+                let position = lambdaMesh.mesh.position.add(
+                    new BABYLON.Vector3(
+                        0,
+                        lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * lambdaMesh.mesh.scaling.y + 0.03,
+                        0
+                    )
+                );
                 const notification = NotificationStore.create({
-                    location: CoordsStore.create({
+                    position: CoordsStore.create({
                         x: position.x,
                         y: position.y,
                         z: position.z
+                    }),
+                    timeout: lambdaMesh.objectStore.objectTimeout,
+                    position2D: CoordsStore.create({
+                        x: 0,
+                        y: 0,
+                        z: 0
                     })
                 });
                 lambdaMesh.bindNotification(notification);
                 self.notifications.push(notification);
-                console.log(self.toJSON());
             },
-            updateNotificationsPositions(camera) {
+            updateNotificationsPositions(scene) {
+                self.notifications.forEach(notificationStore => {
+                    notificationStore.update2dPosition(scene)
+                });
             }
         })
     )

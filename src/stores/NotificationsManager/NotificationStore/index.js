@@ -4,12 +4,21 @@ import * as BABYLON from "babylonjs";
 
 export default types.model("NotificationStore", {
     position: types.maybe(CoordsStore),
+    timeout: types.number,
+    position2D: CoordsStore
 })
-    .views(self =>
+    .actions(self =>
         ({
-            get2dPosition(scene) {
-                const position2D = BABYLON.Vector3.Project(
-                    self.position,
+            setPosition(vector) {
+                self.position = CoordsStore.create({
+                    x: vector.x,
+                    y: vector.y,
+                    z: vector.z
+                })
+            },
+            update2dPosition(scene) {
+                const position = BABYLON.Vector3.Project(
+                    self.position.toVector3(),
                     BABYLON.Matrix.Identity(),
                     scene.getTransformMatrix(),
                     scene.activeCamera.viewport.toGlobal(
@@ -17,9 +26,20 @@ export default types.model("NotificationStore", {
                         scene.activeCamera.getEngine().getRenderHeight()
                     )
                 );
+                self.position2D = CoordsStore.create({
+                    x: position.x,
+                    y: position.y,
+                    z: position.z
+                });
+            }
+        })
+    )
+    .views(self =>
+        ({
+            get2dPosition() {
                 return {
-                    x: position2D.x,
-                    y: position2D.y
+                    x: self.position2D.x,
+                    y: self.position2D.y
                 }
             }
         })
