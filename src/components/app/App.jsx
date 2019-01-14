@@ -48,7 +48,6 @@ const App = observer(class App extends Component {
         return (
             <div id="app">
                 <GameCanvas/>
-                <button style={{
                 <CSSTransitionGroup
                     transitionName="grow"
                     transitionEnterTimeout={300}
@@ -73,7 +72,7 @@ const App = observer(class App extends Component {
                         <Catalog path={[0, 0, 0]} onClose={() => this.onClose()}/>
                     }
                 </CSSTransitionGroup>
-                <div  style={{
+                <button style={{
                     position: "fixed",
                     bottom: 10,
                     right: 10
