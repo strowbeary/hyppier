@@ -287,10 +287,10 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       border: none;
       background-color: $yellow;
       color: white;
-      //border-radius: 20px;
+      border-radius: 2rem;
       padding: 10px 25px;
       font-size: 1.6rem;
-      animation: glowing 1s infinite;
+      animation: shadow-pulse 1s infinite;
       transition: transform 300ms ease-in-out;
 
       &:hover {
@@ -301,9 +301,14 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   }
 }
 
-@keyframes glowing {
-  50% { box-shadow: 0 0 $yellow; color: rgba(255, 255, 255, 0.5); background-color: $yellow;} //#c4a300
-  100% { box-shadow: 0 0 25px $yellow; color: white; background-color: ($yellow, 10%);}
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 224, 125, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 224, 125, 0);
+  }
 }
 
 .error {

@@ -116,8 +116,3 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
     box-shadow: 0 0 0 10px rgba(255, 224, 125, 0);
   }
 }
-
-@keyframes glowing {
-  50% {  color: rgba(255, 255, 255, 0.5); background-color: $yellow;} //#c4a300
-  100% { color: white; background-color: lighten($yellow, 10%);}
-}
