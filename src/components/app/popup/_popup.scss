@@ -68,6 +68,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       font-size: 1rem;
       cursor: url($pointer-url), pointer;
       letter-spacing: 0.1rem;
+      background: none;
 
       &:disabled {
         cursor: url($default-cursor-url), default;

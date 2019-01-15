@@ -5,6 +5,7 @@ import {CameraManager} from "./CameraManager";
 import Notification from "../notification/Notification";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import CameraStore from "../../../stores/CameraStore";
+import EmptySpace from "../emptySpace/EmptySpace";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -51,6 +52,14 @@ export default observer(class GameCanvas extends React.Component {
                         return CatalogStore.getAllObjectKindWithActiveObject()
                             .map(objectKind => {
                                 return Notification.create(objectKind, this.scene);
+                            })
+                    }
+                })()}
+                {(() => {
+                    if(this.state.ready) {
+                        return CatalogStore.getEmptyLocation()
+                            .map(objectKind => {
+                                return EmptySpace.create(objectKind, this.scene);
                             })
                     }
                 })()}

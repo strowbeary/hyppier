@@ -39,7 +39,7 @@ const CatalogStore = types.model("CatalogStore", {
                         })
                         .filter(objectKind =>  typeof objectKind.location !== "undefined")
                         .map(objectKind => {
-                            return objectKind.location;
+                            return objectKind;
                         })
                 }).flat()
             },

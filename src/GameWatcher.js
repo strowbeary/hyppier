@@ -8,6 +8,7 @@ export class GameWatcher {
     static watch() {
         CatalogStore.objectTypes.forEach(objectType => {
             objectType.objectKinds.forEach(objectKind => {
+                let oldPreviewObject = null;
                 onSnapshot(objectKind, newObjectKind => {
                     if (newObjectKind.activeObject !== null) {
                         if (typeof newObjectKind.objects[newObjectKind.activeObject[0]].model !== "undefined") {
@@ -39,9 +40,21 @@ export class GameWatcher {
 
                             GameWatcher.updateWatchers.forEach(watcher => watcher(mesh, oldMesh));
                         }
+
                     }
-                });
-            })
+                    if (newObjectKind.location.previewObject !== null && oldPreviewObject === null) {
+                        oldPreviewObject = newObjectKind.location.previewObject;
+                        GameWatcher.updateWatchers.forEach(watcher => {
+                            watcher(objectKind.objects[newObjectKind.location.previewObject[0]].getModel(), null)
+                        });
+                    } else if(oldPreviewObject !== null && newObjectKind.location.previewObject === null) {
+                        GameWatcher.updateWatchers.forEach(watcher => {
+                            watcher(null, objectKind.objects[oldPreviewObject[0]].getModel())
+                        });
+                        oldPreviewObject = newObjectKind.location.previewObject;
+                    }
+                })
+            });
         });
     }
 

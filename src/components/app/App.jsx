@@ -48,18 +48,7 @@ const App = observer(class App extends Component {
         return (
             <div id="app">
                 <GameCanvas/>
-
-                <CSSTransitionGroup
-                    transitionName="grow"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}
-                >
-                    {this.state.bob}
-                    {this.state.popup}
-                    {this.state.test}
-                </CSSTransitionGroup>
                 <Spacebar/>
-                <EmptySpace/>
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }

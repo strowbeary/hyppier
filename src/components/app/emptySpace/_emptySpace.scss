@@ -2,33 +2,31 @@ $pointer-url: "../../../assets/img/cursor_pointer.svg";
 
 .emptySpace {
   position: fixed;
-  left: 6rem;
-  top: 6rem;
 
   &__wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     color: grey;
-    border: solid 2px grey;
+    box-shadow: inset 0 0 0 2px grey;
     border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
+    width: 30px;
+    height: 30px;
     cursor: url($pointer-url), pointer;
 
     &:hover {
       color: orange;
-      border: solid 2px orange;
+      box-shadow: inset 0 0 0 2px orange;
     }
   }
 
   span {
     display: block;
-    width: 3rem;
-    height: 3rem;
-    font-size: 5rem;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
     font-weight: 100;
-    line-height: 2.3rem;
+    line-height: 24px;
     text-align: center;
   }
 }

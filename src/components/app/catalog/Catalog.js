@@ -4,6 +4,8 @@ import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import { CSSTransitionGroup } from "react-transition-group";
+import CameraStore from "../../../stores/CameraStore";
+import {CameraManager} from "../GameCanvas/CameraManager";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -11,7 +13,6 @@ const Catalog = observer(class Catalog extends Component {
     contentScrollHeight = 0;
     contentHeight = 0;
     contentElement = null;
-    productBeforeVariants = [];
     promo = null;
     timeOut = null;
 
@@ -20,13 +21,18 @@ const Catalog = observer(class Catalog extends Component {
         let path = props.path;
         this.productType = CatalogStore.objectTypes[path[0]];
         this.objectKind = this.productType.objectKinds[path[1]];
-        this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
-        this.productNewVariants = this.productNew.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl, color: tint.color, special: tint.special}});
-        this.hasPreviousGeneration = this.objectKind.activeObject[0] !== 0;
-        if (this.hasPreviousGeneration) {
-            this.promo = this.productNew.adUrl;
-            this.productBefore =this.objectKind.objects[this.objectKind.activeObject[0] - 1];
-            this.productBeforeVariants = this.productBefore.tints.map(tint => {return {name: tint.name, thumbnail: tint.thumbnailUrl}});
+        if(this.objectKind.activeObject !== null) {
+            this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
+
+            this.objectKind.location.setPreviewObject(this.objectKind.activeObject[0] + 1, 0);
+            this.hasPreviousGeneration = this.objectKind.activeObject[0] > 0;
+            if (this.hasPreviousGeneration) {
+                this.promo = this.productNew.adUrl;
+                this.productBefore =this.objectKind.objects[this.objectKind.activeObject[0] - 1];
+             }
+        } else {
+            this.productNew = this.objectKind.objects[0];
+            this.objectKind.location.setPreviewObject(0, 0);
         }
     }
 
@@ -49,6 +55,15 @@ const Catalog = observer(class Catalog extends Component {
         window.addEventListener('resize', () => {
             this.onResize()
         });
+        CameraStore.setTarget(
+            this.productNew.getModel().mesh.name,
+            CameraManager.CATALOG_OFFSET
+        );
+    }
+    componentWillUnmount() {
+        CameraStore.setTarget();
+
+        this.objectKind.location.removePreviewObject();
     }
 
     componentDidUpdate() {
@@ -118,6 +133,15 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     onValidate() {
+        if (this.state.selectedBefore === -1) {
+            if (this.objectKind.activeObject !== null) {
+                this.objectKind.setActiveObject(this.objectKind.activeObject[0] + 1, this.state.selectedNew);
+            } else {
+                this.objectKind.setActiveObject(0, this.state.selectedNew);
+            }
+        } else {
+            //promo IS selected
+        }
         this.props.onClose();
     }
 
@@ -129,13 +153,13 @@ const Catalog = observer(class Catalog extends Component {
             return this.state.selectedBefore === index? 'selected':''
         };
         let shiny = (index) => {
-            return this.productNewVariants[index].special? 'shiny':''
+            return this.productNew.tints[index].special? 'shiny':''
         };
-        let special = this.productNewVariants[this.state.selectedNew].special? 'special':'';
+        let special = this.productNew.tints[this.state.selectedNew].special? 'special':'';
         let footerShadow = this.hasPreviousGeneration && this.state.fromPopUp? 'hasScroll':'';
         let hasSelectedBefore = this.state.selectedBefore === -1? 'selected':'';
-        let tints = this.productNewVariants.map((tint, index) => <li className={`catalog__content__main__color ${selectedTint(index)} ${shiny(index)}`} style={{backgroundColor: tint.color}} key={tint.name+index} onClick={() => this.onTintClick(index)}></li>);
-        let thumbnails = this.productBeforeVariants.map((variant, index) => <li className="catalog__content__promotion__product" key={variant.name}>
+        let tints = this.productNew.tints.map((tint, index) => <li className={`catalog__content__main__color ${selectedTint(index)} ${shiny(index)}`} style={{backgroundColor: tint.color}} key={tint.name+index} onClick={() => this.onTintClick(index)}></li>);
+        let thumbnails = this.productBefore? this.productBefore.tints.map((variant, index) => <li className="catalog__content__promotion__product" key={variant.name}>
             <div className="catalog__content__promotion__productType">
                 <p>{this.productType.name}</p>
             </div>
@@ -144,9 +168,9 @@ const Catalog = observer(class Catalog extends Component {
                 <span> > {variant.name}</span>
             </div>
             <div className={`catalog__content__promotion__wrapper ${selectedThumbnail(index)}`} onClick={() => this.onThumbnailClick(index)}>
-                <img src={variant.thumbnail} alt="model" className="catalog__content__promotion__img"/>
+                <img src={variant.thumbnailUrl} alt="model" className="catalog__content__promotion__img"/>
             </div>
-        </li>);
+        </li>) : null;
 
         return (
             <div className={`catalog`}>
@@ -181,10 +205,10 @@ const Catalog = observer(class Catalog extends Component {
                         </div>
                         <div className="catalog__content__main__productTitle">
                             <span>{this.productNew.name}</span>
-                            <span> > {this.productNewVariants[this.state.selectedNew].name}</span>
+                            <span> > {this.productNew.tints[this.state.selectedNew].name}</span>
                         </div>
                         <div className={`catalog__content__main__body ${hasSelectedBefore} ${special}`} onClick={() => this.onMainClick()}>
-                            <img src={this.productNewVariants[this.state.selectedNew].thumbnail} alt="model" className="catalog__content__main__img"/>
+                            <img src={this.productNew.tints[this.state.selectedNew].thumbnail} alt="model" className="catalog__content__main__img"/>
                         </div>
                         <ul className="catalog__content__main__palette">
                             {tints}

@@ -55,7 +55,6 @@ export default types
                 self.paused = false;
                 self.running = true;
                 this._loop();
-                console.log("started");
             }
         },
         stop() {

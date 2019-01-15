@@ -22,7 +22,7 @@ const Notification = observer(class Notification extends Component {
         this.scene = props.scene;
         this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject[0]].getModel();
         this.objectKind = props.objectKind;
-
+        this.objectKind.preloadNextObject();
     }
 
     componentDidMount() {
@@ -73,7 +73,7 @@ const Notification = observer(class Notification extends Component {
     render() {
         let {x, y} = this.state.position;
 
-        const size = 50;
+        const size = 30;
         const dashSize = 2 * Math.PI * size;
         const rayon = (size - (3 / 2)) / 2;
 
@@ -81,6 +81,7 @@ const Notification = observer(class Notification extends Component {
             'top': y - size / 2,
             'left': x - size / 2
         };
+
         return (
             <div className="notification" style={style} onClick={() => this.buildCatalog()}>
                 <div className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>

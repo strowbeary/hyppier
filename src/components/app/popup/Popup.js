@@ -2,6 +2,7 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_popup.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import CameraStore from "../../../stores/CameraStore";
 
 const Popup = observer(class Popup extends Component {
 
@@ -71,7 +72,7 @@ const Popup = observer(class Popup extends Component {
     }
 
     onClose() {
-
+        CameraStore.setTarget();
     }
 
     onCatalog() {

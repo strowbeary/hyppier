@@ -67,7 +67,25 @@ export default types
                             if(self.location) {
                                 loadedMesh.position = self.location.toVector3();
                             }
-                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self.toJSON()));
+                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self));
+                        }
+                    });
+                });
+            }
+        },
+        preloadNextObject() {
+            const objectIndex = (self.activeObject === null) ? 0 : (self.activeObject[0] + 1);
+            if (objectIndex < self.objects.length) {
+                BABYLON.SceneLoader.LoadAssetContainerAsync(
+                    "/models/",
+                    self.objects[objectIndex].modelUrl
+                ).then((container) => {
+                    container.meshes.forEach(loadedMesh => {
+                        if (!loadedMesh.name.includes("Location")) {
+                                if (self.location) {
+                                    loadedMesh.position = self.location.toVector3();
+                                }
+                                self.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, self));
                         }
                     });
                 });
