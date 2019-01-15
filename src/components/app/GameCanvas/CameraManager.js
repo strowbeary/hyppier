@@ -47,7 +47,10 @@ export class CameraManager {
     setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
         let toDistance = this.initialValues.distance;
         let toPosition = BABYLON.Vector3.Zero();
-        if(typeof mesh !== "undefined") {
+        if(typeof mesh !== "undefined" && mesh !== "") {
+            if(typeof mesh === "string") {
+                mesh = this.scene.getMeshByName(mesh)
+            }
             toDistance = Math.ceil(Math.max(Math.max(
                 mesh.getBoundingInfo().boundingBox.maximum.y * mesh.scaling.y,
                 mesh.getBoundingInfo().boundingBox.maximum.x * mesh.scaling.x,

@@ -2,14 +2,31 @@
   position: fixed;
   display: block;
 
-  &__wrapper {
-    animation: wiggle 0s infinite ease;
+  &.animated {
+    svg {
+        animation: wave 1s ease infinite;
+    }
   }
 }
 
+@keyframes wave {
+  0% {
+    -webkit-filter: drop-shadow( 0 0 0 rgba(255, 255, 255, 255));
+    filter: drop-shadow( 0 0 0 rgba(255, 255, 255, 255));
+  }
+  100% {
+    -webkit-filter: drop-shadow( 0 0 20px rgba(255, 255, 255, 0));
+    filter: drop-shadow( 0 0 50px rgba(255, 255, 255, 0));
+  }
 
-@keyframes wiggle {
-  0% {transform: translate(2px, 0);}
-  50% {transform: translate(-2px, 0);}
-  100% {transform: translate(2px, 0);}
+}
+@keyframes bounce {
+  0% {transform: translate(0, 10px);}
+  12.5% {transform: translate(0, 0);}
+  25% {transform: translate(0, 7px);}
+  37.5% {transform: translate(0, 0);}
+  50% {transform: translate(0, 5px);}
+  62.5% {transform: translate(0, 0);}
+  75% {transform: translate(0, 3px);}
+  100% {transform: translate(0, 0);}
 }

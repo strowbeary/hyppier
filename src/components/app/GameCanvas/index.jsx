@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {CameraManager} from "./CameraManager";
 import Notification from "../notification/Notification";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import CameraStore from "../../../stores/CameraStore";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -31,6 +32,9 @@ export default observer(class GameCanvas extends React.Component {
     }
 
     render() {
+        if(this.sceneManager !== null) {
+            this.sceneManager.cameraManager.setTarget(CameraStore.meshName, CameraStore.offset.toVector3());
+        }
         return (
             <div>
                 <div style={{
@@ -38,9 +42,9 @@ export default observer(class GameCanvas extends React.Component {
                     top: 10,
                     left: 10
                 }}>
-                    <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("Grenier"))}>Go to attic</button>
-                    <button onClick={() => this.sceneManager.cameraManager.setTarget(this.scene.getMeshByName("tabouret.001"), CameraManager.CATALOG_OFFSET)}>Set target</button>
-                    <button onClick={() => this.sceneManager.cameraManager.setTarget()}>reset target</button>
+                    <button onClick={() => CameraStore.setTarget("Grenier")}>Go to attic</button>
+                    <button onClick={() => CameraStore.setTarget("tabouret.001", CameraManager.CATALOG_OFFSET)}>Set target</button>
+                    <button onClick={() => CameraStore.setTarget()}>reset target</button>
                 </div>
                 {(() => {
                     if(this.state.ready) {

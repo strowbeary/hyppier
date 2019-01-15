@@ -21,7 +21,7 @@ export class Lights{
         lightSphere.material = new BABYLON.StandardMaterial("light", scene);
         lightSphere.material.emissiveColor = new BABYLON.Color3(1, 1, 0);*/
 
-        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 13), light);
+        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 0), light);
         this.shadowGenerator.setDarkness(0.5);
         this.shadowGenerator.useExponentialShadowMap = true;
         this.shadowGenerator.setTransparencyShadow(true);

@@ -290,7 +290,7 @@
               ]
             }
           ],
-          "objectTimeout": 5000,
+          "objectTimeout": 15000,
           "replacementCounter": 0,
           "activeObject": null,
           "achievementPromotions": {
