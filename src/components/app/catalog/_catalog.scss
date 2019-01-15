@@ -4,6 +4,8 @@ $red: #FF8A8A;
 $purple: #8A8BFE;
 $green: #75E4A6;
 $orange: #E87D30;
+$false-black: #272727;
+$light-grey: #E6E6E6;
 
 $vertical-space: 15px;
 $border-radius: 15px;
@@ -42,6 +44,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   max-height: 80vh;
   display: flex;
   flex-direction: column;
+  border: solid 1px #E6E6E6;
 
   &__header {
     display: flex;
@@ -131,8 +134,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         }
 
         &.selected {
-          //box-shadow: 0 0 0 2px black inset;
-          background-color: black;
+          background-color: $false-black;
           cursor: url($default-cursor-url), default;
         }
       }
@@ -160,7 +162,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         overflow: hidden;
 
         &.selected {
-          box-shadow: 0 0 0 2px black inset;
+          box-shadow: 0 0 0 2px $false-black inset;
         }
 
         &.shiny:after {
@@ -247,7 +249,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         }
 
         &.selected {
-          background-color: black;
+          background-color: $false-black;
         }
       }
 
@@ -308,7 +310,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   position: fixed;
   top: 50vh;
   left: 1vw;
-  background-color: black;
+  background-color: $false-black;
   color: white;
   padding: 15px;
   border-radius: $border-radius;

@@ -85,13 +85,13 @@ const Popup = observer(class Popup extends Component {
         return (
             <div className={`popup ${disabled}`} style={this.state.draggablePosition} onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}
                  onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
-                <p>{this.text.question}</p>
-                <a href={this.infosUrl} target="_blank" rel="noopener noreferrer">En savoir plus</a>
-                <img className="popup__image" src={this.adUrl} alt="promotion"/>
-                <div className="popup__footer">
-                    <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}>{this.text.closeButtonLabel}</button>
-                    <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled} onClick={() => this.onCatalog()}>{this.text.returnCatalogButtonLabel}</button>
+                <div className="popup__header">
+                    <p>{this.text.question}</p>
+                    <a href={this.infosUrl} target="_blank" rel="noopener noreferrer">En savoir plus</a>
                 </div>
+                <img className="popup__image" src={this.adUrl} alt="promotion"/>
+                <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}>{this.text.closeButtonLabel}</button>
+                <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled} onClick={() => this.onCatalog()}>{this.text.returnCatalogButtonLabel}</button>
             </div>
         )
     }
