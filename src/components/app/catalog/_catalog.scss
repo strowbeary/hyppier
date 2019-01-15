@@ -4,6 +4,8 @@ $red: #FF8A8A;
 $purple: #8A8BFE;
 $green: #75E4A6;
 $orange: #E87D30;
+$false-black: #272727;
+$light-grey: #E6E6E6;
 
 $vertical-space: 15px;
 $border-radius: 15px;
@@ -42,6 +44,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   max-height: 80vh;
   display: flex;
   flex-direction: column;
+  border: solid 1px #E6E6E6;
 
   &__header {
     display: flex;
@@ -131,8 +134,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         }
 
         &.selected {
-          //box-shadow: 0 0 0 2px black inset;
-          background-color: black;
+          background-color: $false-black;
           cursor: url($default-cursor-url), default;
         }
       }
@@ -160,7 +162,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         overflow: hidden;
 
         &.selected {
-          box-shadow: 0 0 0 2px black inset;
+          box-shadow: 0 0 0 2px $false-black inset;
         }
 
         &.shiny:after {
@@ -247,7 +249,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         }
 
         &.selected {
-          background-color: black;
+          background-color: $false-black;
         }
       }
 
@@ -285,10 +287,10 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       border: none;
       background-color: $yellow;
       color: white;
-      //border-radius: 20px;
+      border-radius: 2rem;
       padding: 10px 25px;
       font-size: 1.6rem;
-      animation: glowing 1s infinite;
+      animation: shadow-pulse 1s infinite;
       transition: transform 300ms ease-in-out;
 
       &:hover {
@@ -299,16 +301,21 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   }
 }
 
-@keyframes glowing {
-  50% { box-shadow: 0 0 $yellow; color: rgba(255, 255, 255, 0.5); background-color: $yellow;} //#c4a300
-  100% { box-shadow: 0 0 25px $yellow; color: white; background-color: ($yellow, 10%);}
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 224, 125, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 224, 125, 0);
+  }
 }
 
 .error {
   position: fixed;
   top: 50vh;
   left: 1vw;
-  background-color: black;
+  background-color: $false-black;
   color: white;
   padding: 15px;
   border-radius: $border-radius;
