@@ -44,6 +44,9 @@ html {
 body {
   background: $yellow;
 }
+button, a {
+  cursor: url(../../assets/img/cursor_pointer.svg), pointer;
+}
 #app {
   position: relative;
   background-color: $yellow;

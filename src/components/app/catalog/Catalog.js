@@ -6,6 +6,8 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import { CSSTransitionGroup } from "react-transition-group";
 import CameraStore from "../../../stores/CameraStore";
 import {CameraManager} from "../GameCanvas/CameraManager";
+import Thumbnail from "./thumbnail/Thumbnail";
+import Tint from "./tint/Tint";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -14,25 +16,26 @@ const Catalog = observer(class Catalog extends Component {
     contentHeight = 0;
     contentElement = null;
     promo = null;
-    timeOut = null;
+    errorToastTimeOut = null;
 
     constructor(props) {
         super(props);
         let path = props.path;
         this.productType = CatalogStore.objectTypes[path[0]];
         this.objectKind = this.productType.objectKinds[path[1]];
-        if(this.objectKind.activeObject !== null) {
+        this.isEmpty = this.objectKind.activeObject !== null;
+        if(this.isEmpty) {
             this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
-
             this.objectKind.location.setPreviewObject(this.objectKind.activeObject[0] + 1, 0);
+            this.promo = this.productNew.adUrl;
             this.hasPreviousGeneration = this.objectKind.activeObject[0] > 0;
             if (this.hasPreviousGeneration) {
-                this.promo = this.productNew.adUrl;
-                this.productBefore =this.objectKind.objects[this.objectKind.activeObject[0] - 1];
-             }
+                this.productBefore = this.objectKind.objects[this.objectKind.activeObject[0] - 1];
+            }
         } else {
             this.productNew = this.objectKind.objects[0];
             this.objectKind.location.setPreviewObject(0, 0);
+            this.hasPreviousGeneration = false;
         }
     }
 
@@ -60,20 +63,16 @@ const Catalog = observer(class Catalog extends Component {
             CameraManager.CATALOG_OFFSET
         );
     }
+
     componentWillUnmount() {
         CameraStore.setTarget();
-
         this.objectKind.location.removePreviewObject();
     }
 
     componentDidUpdate() {
         this.setContentHeight();
         this.contentScrollHeight = this.contentElement.scrollHeight - this.contentHeight;
-        if (this.state.errorShow && !this.timeOut) {
-            this.timeOut = setTimeout(() => {this.setState({errorShow: false})}, 2000);
-        } else {
-            this.resetTimeOut();
-        }
+        this.updateErrorToastTimeOut();
     }
 
     onResize() {
@@ -82,10 +81,18 @@ const Catalog = observer(class Catalog extends Component {
         this.updateScrollProgression();
     }
 
-    resetTimeOut() {
-        if (this.timeOut) {
-            clearTimeout(this.timeOut);
-            this.timeOut = null;
+    updateErrorToastTimeOut() {
+        if (this.state.errorShow && !this.errorToastTimeOut) {
+            this.errorToastTimeOut = setTimeout(() => {this.setState({errorShow: false})}, 2000);
+        } else {
+            this.resetErrorToastTimeOut();
+        }
+    }
+
+    resetErrorToastTimeOut() {
+        if (this.errorToastTimeOut) {
+            clearTimeout(this.errorToastTimeOut);
+            this.errorToastTimeOut = null;
         }
     }
 
@@ -98,7 +105,7 @@ const Catalog = observer(class Catalog extends Component {
         }
     }
 
-    onErrorClick() {
+    onErrorToastClick() {
         this.setState({
             errorShow: false
         });
@@ -146,31 +153,16 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     render() {
-        let selectedTint = (index) => {
-            return this.state.selectedNew === index? 'selected':''
-        };
-        let selectedThumbnail = (index) => {
-            return this.state.selectedBefore === index? 'selected':''
-        };
-        let shiny = (index) => {
-            return this.productNew.tints[index].special? 'shiny':''
-        };
         let special = this.productNew.tints[this.state.selectedNew].special? 'special':'';
         let footerShadow = this.hasPreviousGeneration && this.state.fromPopUp? 'hasScroll':'';
         let hasSelectedBefore = this.state.selectedBefore === -1? 'selected':'';
-        let tints = this.productNew.tints.map((tint, index) => <li className={`catalog__content__main__color ${selectedTint(index)} ${shiny(index)}`} style={{backgroundColor: tint.color}} key={tint.name+index} onClick={() => this.onTintClick(index)}></li>);
-        let thumbnails = this.productBefore? this.productBefore.tints.map((variant, index) => <li className="catalog__content__promotion__product" key={variant.name}>
-            <div className="catalog__content__promotion__productType">
-                <p>{this.productType.name}</p>
-            </div>
-            <div className="catalog__content__promotion__productTitle">
-                <span>{this.productBefore? this.productBefore.name:''}</span>
-                <span> > {variant.name}</span>
-            </div>
-            <div className={`catalog__content__promotion__wrapper ${selectedThumbnail(index)}`} onClick={() => this.onThumbnailClick(index)}>
-                <img src={variant.thumbnailUrl} alt="model" className="catalog__content__promotion__img"/>
-            </div>
-        </li>) : null;
+        let tints = this.productNew.tints.map((tint, index) =>
+            <Tint selectedTint={this.state.selectedNew} index={index} tint={tint} onTintClick={(index) => this.onTintClick(index)} key={tint.name}/>);
+        let thumbnails = this.hasPreviousGeneration?
+            this.productBefore.tints.map((tint, index) =>
+                <Thumbnail productType={this.productType.name} productTitle={this.productBefore.name} selectedThumbnail={this.state.selectedBefore}
+                           tint={tint} index={index} key={tint.name} onThumbnailClick={(index) => this.onThumbnailClick(index)}/>
+            ) : null;
 
         return (
             <div className={`catalog`}>
@@ -179,7 +171,7 @@ const Catalog = observer(class Catalog extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}>
                     {this.state.errorShow &&
-                        <div className="error" onClick={() => this.onErrorClick()}>
+                        <div className="error" onClick={() => this.onErrorToastClick()}>
                             <p>La prévisualisation pour les articles en promotion n'est pas disponible !</p>
                         </div>
                     }
