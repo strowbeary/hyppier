@@ -1,0 +1,45 @@
+$yellow: #FFE07D;
+
+.hypeIndicator {
+  position: fixed;
+  top: 0;
+  right: 5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__label {
+    font-size: 100px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-transform: uppercase;
+    color: transparent;
+    background-image: url("./img/wave.svg");
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    background-clip: text;
+    animation: animate 1s linear infinite alternate;
+    transition: all 1s linear;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+  }
+
+}
+
+@keyframes animate {
+  0% {
+    background-position: left 0 bottom 0;
+  }
+  40% {
+    background-position: left 50% bottom 0;
+  }
+  80% {
+    background-position: left 0 bottom 0;
+  }
+  100% {
+    background-position: left 50% bottom 0;
+  }
+}

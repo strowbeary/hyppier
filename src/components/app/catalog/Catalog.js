@@ -5,6 +5,7 @@ import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import { CSSTransitionGroup } from "react-transition-group";
 import CameraStore from "../../../stores/CameraStore";
+import GameStore from "../../../stores/GameStore/GameStore";
 import {CameraManager} from "../GameCanvas/CameraManager";
 import Thumbnail from "./thumbnail/Thumbnail";
 import Tint from "./tint/Tint";
@@ -146,6 +147,7 @@ const Catalog = observer(class Catalog extends Component {
             } else {
                 this.objectKind.setActiveObject(0, this.state.selectedNew);
             }
+            GameStore.hype.setLevelByDiff(0.1);
         } else {
             //promo IS selected
         }

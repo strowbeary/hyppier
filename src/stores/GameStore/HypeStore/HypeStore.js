@@ -6,5 +6,8 @@ export default types.model("HypeStore", {
     .actions(self => ({
         setLevel(level) {
             self.level = level;
+        },
+        setLevelByDiff(diff) {
+           self.level += diff;
         }
     }))

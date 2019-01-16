@@ -9,6 +9,7 @@ import Message from "./message/Message"
 import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
 import Notification from "./notification/Notification"
+import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Popup from "./popup/Popup"
 
 const App = observer(class App extends Component {
@@ -49,6 +50,7 @@ const App = observer(class App extends Component {
             <div id="app">
                 <GameCanvas/>
                 <Spacebar/>
+                <HypeIndicator/>
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }
