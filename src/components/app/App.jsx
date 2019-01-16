@@ -59,7 +59,7 @@ const App = observer(class App extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    {CatalogStore.open &&
+                    {CatalogStore.isOpen &&
                         <Catalog path={CatalogStore.objectKindPath} onClose={() => CatalogStore.closeCatalog()}/>
                     }
                 </CSSTransitionGroup>

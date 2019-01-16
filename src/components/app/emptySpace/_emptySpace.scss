@@ -2,6 +2,8 @@ $pointer-url: "../../../assets/img/cursor_pointer.svg";
 
 .emptySpace {
   position: fixed;
+  opacity: 1;
+  transition: opacity 500ms linear;
 
   &__wrapper {
     display: flex;
@@ -28,5 +30,10 @@ $pointer-url: "../../../assets/img/cursor_pointer.svg";
     font-weight: 100;
     line-height: 24px;
     text-align: center;
+  }
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
   }
 }

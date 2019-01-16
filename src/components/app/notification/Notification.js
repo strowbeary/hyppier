@@ -12,7 +12,7 @@ const Notification = observer(class Notification extends Component {
     static create(objectKind, scene) {
         const ref = React.createRef();
         Notification.refs.push(ref);
-        return <Notification objectKind={objectKind} scene={scene} hasTimer={true} key={objectKind.name}/>;
+        return <Notification objectKind={objectKind} scene={scene} hasTimer={true} key={objectKind.name} ref={ref}/>;
     }
 
     state = {
@@ -80,13 +80,14 @@ const Notification = observer(class Notification extends Component {
         const dashSize = 2 * Math.PI * size;
         const rayon = (size - (3 / 2)) / 2;
 
+        let hide = CatalogStore.isOpen ? 'hide': '';
         let style = {
             'top': y - size / 2,
             'left': x - size / 2
         };
 
         return (
-            <div className="notification" style={style} onClick={() => this.buildCatalog()}>
+            <div className={`notification ${hide}`} style={style} onClick={() => this.buildCatalog()}>
                 <div className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>
                     <svg height={size + 2} width={size + 2}>
                             <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"

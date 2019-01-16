@@ -4,18 +4,18 @@ import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 
 const CatalogStore = types.model("CatalogStore", {
     objectTypes: types.array(ObjectTypeStore),
-    open: false,
+    isOpen: false,
     objectKindPath: types.maybeNull(types.array(types.number))
 })
     .actions(self =>
         ({
             openCatalog(objectKindPath) {
                 self.objectKindPath = objectKindPath;
-                self.open = true;
+                self.isOpen = true;
             },
             closeCatalog() {
                 self.objectKindPath = null;
-                self.open = false;
+                self.isOpen = false;
             }
         })
     )

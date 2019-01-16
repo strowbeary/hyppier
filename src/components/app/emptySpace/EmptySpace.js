@@ -7,8 +7,12 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export default observer(class EmptySpace extends Component {
 
+    static refs = [];
+
     static create(objectKind, scene) {
-        return <EmptySpace objectKind={objectKind} scene={scene} key={objectKind.name}/>;
+        const ref = React.createRef();
+        EmptySpace.refs.push(ref);
+        return <EmptySpace objectKind={objectKind} scene={scene} key={objectKind.name} ref={ref}/>;
     }
 
     state = {
@@ -64,12 +68,13 @@ export default observer(class EmptySpace extends Component {
 
         const size = 30;
 
+        let hide = CatalogStore.isOpen ? 'hide': '';
         let style = {
             'top': y - size / 2,
             'left': x - size / 2
         };
         return (
-            <div className="emptySpace" style={style} onClick={() => this.buildCatalog()}>
+            <div className={`emptySpace ${hide}`} style={style} onClick={() => this.buildCatalog()}>
                 <div className="emptySpace__wrapper">
                     <span>+</span>
                 </div>

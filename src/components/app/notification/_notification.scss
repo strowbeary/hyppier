@@ -1,11 +1,18 @@
 .notification {
   position: fixed;
   display: block;
+  opacity: 1;
+  transition: opacity 500ms linear;
 
   &.animated {
     svg {
         animation: wave 1s ease infinite;
     }
+  }
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
