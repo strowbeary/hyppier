@@ -7,8 +7,11 @@ import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 const Notification = observer(class Notification extends Component {
+    static refs = [];
 
     static create(objectKind, scene) {
+        const ref = React.createRef();
+        Notification.refs.push(ref);
         return <Notification objectKind={objectKind} scene={scene} hasTimer={true} key={objectKind.name}/>;
     }
 
