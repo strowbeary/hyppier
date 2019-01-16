@@ -5,7 +5,8 @@ import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 const CatalogStore = types.model("CatalogStore", {
     objectTypes: types.array(ObjectTypeStore),
     isOpen: false,
-    objectKindPath: types.maybeNull(types.array(types.number))
+    objectKindPath: types.maybeNull(types.array(types.number)),
+    visiblePromo: false
 })
     .actions(self =>
         ({
@@ -16,6 +17,9 @@ const CatalogStore = types.model("CatalogStore", {
             closeCatalog() {
                 self.objectKindPath = null;
                 self.isOpen = false;
+            },
+            updatePromoVisibility(value) {
+                self.visiblePromo = value;
             }
         })
     )
@@ -32,7 +36,7 @@ const CatalogStore = types.model("CatalogStore", {
                 return self.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]]
             },
             getEmptyLocation() {
-                return self.objectTypes.map(objectType => {
+                let test =  self.objectTypes.map(objectType => {
                     return objectType.objectKinds
                         .filter(objectKind => {
                             return objectKind.activeObject === null
@@ -41,7 +45,9 @@ const CatalogStore = types.model("CatalogStore", {
                         .map(objectKind => {
                             return objectKind;
                         })
-                }).flat()
+                }).flat();
+                console.log(test);
+                return test;
             },
             getAllObjectKindWithActiveObject() {
                 return self.objectTypes.map(objectType => {

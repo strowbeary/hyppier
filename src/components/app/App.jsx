@@ -10,6 +10,7 @@ import Spacebar from "./spacebar/Spacebar"
 import EmptySpace from "./emptySpace/EmptySpace"
 import Notification from "./notification/Notification"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
+import PopupStore from "../../stores/PopupStore/PopupStore"
 import Popup from "./popup/Popup"
 
 const App = observer(class App extends Component {
@@ -18,18 +19,7 @@ const App = observer(class App extends Component {
 
     componentDidMount() {
         this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
-        setTimeout(
-            () => {
-                this.setState({bob: Popup.createPopup({path: [0, 0, 0]})});
-            }, 4000
-        );
-        setTimeout(
-            () => {
-                this.setState({popup: Popup.createPopup({path: [0, 0, 1]})});
-            }, 5000
-        )
     }
-
 
     testChangeObject() {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
@@ -45,15 +35,25 @@ const App = observer(class App extends Component {
     }
 
     render() {
-
         return (
             <div id="app">
                 <GameCanvas/>
-                <Spacebar/>
                 <HypeIndicator/>
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }
+                {PopupStore.activePopup.map(path => {
+                    return Popup.createPopup(path);
+                })}
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {PopupStore.catalogPopup &&
+                        <Popup path={PopupStore.catalogPopup}/>
+                    }
+                </CSSTransitionGroup>
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}

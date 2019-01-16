@@ -11,20 +11,6 @@ $pointer-url: "../../../../assets/img/cursor_pointer.svg";
 .thumbnail {
   margin: $vertical-space 0;
 
-  &__pub {
-    margin-top: $vertical-space;
-    width: 100%;
-    border-radius: $border-radius;
-  }
-
-  &__products {
-    margin-top: $vertical-space;
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
   &__product {
     width: calc((#{$catalog-width} - 3*#{$horizontal-space})/2);
     margin: calc(#{$vertical-space}/2) 0;

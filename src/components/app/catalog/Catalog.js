@@ -9,10 +9,11 @@ import GameStore from "../../../stores/GameStore/GameStore";
 import {CameraManager} from "../GameCanvas/CameraManager";
 import Thumbnail from "./thumbnail/Thumbnail";
 import Tint from "./tint/Tint";
+import PopupStore from "../../../stores/PopupStore/PopupStore";
 
 const Catalog = observer(class Catalog extends Component {
 
-    state = {scrollProgressionWidth: '0%', selectedNew: 0, selectedBefore: -1, fromPopUp: false, errorShow: false};
+    state = {scrollProgressionWidth: '0%', selectedNew: 0, selectedBefore: -1, errorShow: false};
     contentScrollHeight = 0;
     contentHeight = 0;
     contentElement = null;
@@ -21,23 +22,21 @@ const Catalog = observer(class Catalog extends Component {
 
     constructor(props) {
         super(props);
-        let path = props.path;
-        this.productType = CatalogStore.objectTypes[path[0]];
-        this.objectKind = this.productType.objectKinds[path[1]];
-        this.isEmpty = this.objectKind.activeObject !== null;
-        if(this.isEmpty) {
+        this.path = props.path.toJSON();
+        this.productType = CatalogStore.objectTypes[this.path[0]];
+        this.objectKind = this.productType.objectKinds[this.path[1]];
+        this.hasPreviousGeneration = this.objectKind.activeObject !== null;
+        if(this.hasPreviousGeneration) {
             this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
             this.objectKind.location.setPreviewObject(this.objectKind.activeObject[0] + 1, 0);
-            this.promo = this.productNew.adUrl;
-            this.hasPreviousGeneration = this.objectKind.activeObject[0] > 0;
-            if (this.hasPreviousGeneration) {
-                this.productBefore = this.objectKind.objects[this.objectKind.activeObject[0] - 1];
-            }
+            this.productBefore = this.objectKind.objects[this.objectKind.activeObject[0]];
+            this.path.push(this.objectKind.activeObject[0]+1);
         } else {
             this.productNew = this.objectKind.objects[0];
             this.objectKind.location.setPreviewObject(0, 0);
-            this.hasPreviousGeneration = false;
+            this.path.push(0);
         }
+        this.promo = this.productNew.adUrl;
     }
 
     updateScrollProgression() {
@@ -66,7 +65,6 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     componentWillUnmount() {
-        CameraStore.setTarget();
         this.objectKind.location.removePreviewObject();
     }
 
@@ -132,12 +130,7 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     onClose() {
-        let result = window.confirm("Déjà décidé à partir? Le catalogue a d'autre surprises à te montrer, veux-tu les découvrir ?");
-        if (result) {
-            this.setState({fromPopUp: true});
-        } else {
-            this.props.onClose();
-        }
+        PopupStore.addCatalogPopup(this.path);
     }
 
     onValidate() {
@@ -148,18 +141,22 @@ const Catalog = observer(class Catalog extends Component {
                 this.objectKind.setActiveObject(0, this.state.selectedNew);
             }
             GameStore.hype.setLevelByDiff(0.1);
+            //skip generation
         } else {
             //promo IS selected
+            //this.objectKind.setActiveObject(this.objectKind.activeObject[0], this.state.selectedBefore);
         }
         this.props.onClose();
     }
 
     render() {
         let special = this.productNew.tints[this.state.selectedNew].special? 'special':'';
-        let footerShadow = this.hasPreviousGeneration && this.state.fromPopUp? 'hasScroll':'';
+        let footerShadow = (this.hasPreviousGeneration && CatalogStore.visiblePromo) && this.objectKind.achievementPromotions? 'hasScroll':'';
         let hasSelectedBefore = this.state.selectedBefore === -1? 'selected':'';
-        let tints = this.productNew.tints.map((tint, index) =>
-            <Tint selectedTint={this.state.selectedNew} index={index} tint={tint} onTintClick={(index) => this.onTintClick(index)} key={tint.name}/>);
+        let tints = this.objectKind.achievementSpecialTint? this.productNew.tints.map((tint, index) =>
+            <Tint selectedTint={this.state.selectedNew} index={index} tint={tint} onTintClick={(index) => this.onTintClick(index)} key={tint.name}/>):
+            this.productNew.tints.filter((tint) => !tint.special).map((tint, index) =>
+                    <Tint selectedTint={this.state.selectedNew} index={index} tint={tint} onTintClick={(index) => this.onTintClick(index)} key={tint.name}/>);
         let thumbnails = this.hasPreviousGeneration?
             this.productBefore.tints.map((tint, index) =>
                 <Thumbnail productType={this.productType.name} productTitle={this.productBefore.name} selectedThumbnail={this.state.selectedBefore}
@@ -184,7 +181,7 @@ const Catalog = observer(class Catalog extends Component {
                         <img src={icon_close} alt="close_icon"/>
                     </button>
                 </div>
-                {this.hasPreviousGeneration && this.state.fromPopUp &&
+                {this.hasPreviousGeneration && CatalogStore.visiblePromo &&
                     <div className="catalog__header__scrollIndicator">
                         <div className="catalog__header__scrollIndicator__progression"
                              style={{width: this.state.scrollProgressionWidth}}></div>
@@ -208,7 +205,7 @@ const Catalog = observer(class Catalog extends Component {
                             {tints}
                         </ul>
                     </div>
-                    {this.hasPreviousGeneration && this.state.fromPopUp &&
+                    {this.hasPreviousGeneration && CatalogStore.visiblePromo &&
                         <div className="catalog__content__promotion">
                             <h6>Promotions en folie !</h6>
                             <img className="catalog__content__promotion__pub" src={this.promo} alt="promotion"/>

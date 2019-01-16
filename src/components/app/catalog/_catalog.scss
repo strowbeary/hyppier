@@ -151,6 +151,24 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         margin-top: $vertical-space;
       }
     }
+
+    &__promotion {
+      margin: $vertical-space 0;
+
+      &__pub {
+        margin-top: $vertical-space;
+        width: 100%;
+        border-radius: $border-radius;
+      }
+
+      &__products {
+        margin-top: $vertical-space;
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
   }
 
   &__footer {

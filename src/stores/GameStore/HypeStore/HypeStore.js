@@ -4,10 +4,9 @@ export default types.model("HypeStore", {
     level: types.optional(types.refinement(types.number, value => (value >= 0 && value <= 1)), 0)
 })
     .actions(self => ({
-        setLevel(level) {
-            self.level = level;
-        },
         setLevelByDiff(diff) {
-           self.level += diff;
+            if (self.level + diff <= 1 && self.level + diff >= 0) {
+                self.level += diff;
+            }
         }
     }))

@@ -23,6 +23,11 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
           "header header"
           "image image"
           "buttonClose buttonCatalog";
+  transition: transform 300ms ease-in-out;
+
+  &.hide {
+    display: none;
+  }
 
   &.disabled {
     z-index: 0;

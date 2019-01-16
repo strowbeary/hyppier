@@ -119,7 +119,7 @@
               ]
             }
           ],
-          "objectTimeout": 5000,
+          "objectTimeout": 500,
           "replacementCounter": 0,
           "activeObject": [
             0,
@@ -164,7 +164,7 @@
               ]
             }
           ],
-          "objectTimeout": 5000,
+          "objectTimeout": 500,
           "replacementCounter": 0,
           "activeObject": [
             0,
@@ -219,7 +219,7 @@
               ]
             }
           ],
-          "objectTimeout": 5000,
+          "objectTimeout": 500,
           "replacementCounter": 0,
           "activeObject": [
             0,
@@ -290,7 +290,7 @@
               ]
             }
           ],
-          "objectTimeout": 15000,
+          "objectTimeout": 500,
           "replacementCounter": 0,
           "activeObject": null,
           "achievementPromotions": {

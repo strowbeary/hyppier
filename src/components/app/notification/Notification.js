@@ -5,6 +5,8 @@ import {observer} from "mobx-react";
 import TimerStore from "../../../stores/TimerStore/TimerStore";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {onPatch} from "mobx-state-tree";
+import PopupStore from "../../../stores/PopupStore/PopupStore";
 
 const Notification = observer(class Notification extends Component {
     static refs = [];
@@ -12,7 +14,7 @@ const Notification = observer(class Notification extends Component {
     static create(objectKind, scene) {
         const ref = React.createRef();
         Notification.refs.push(ref);
-        return <Notification objectKind={objectKind} scene={scene} hasTimer={true} key={objectKind.name} ref={ref}/>;
+        return <Notification objectKind={objectKind} scene={scene} key={objectKind.name} ref={ref}/>;
     }
 
     state = {
@@ -21,11 +23,20 @@ const Notification = observer(class Notification extends Component {
 
     constructor(props) {
         super(props);
-        this.timer = props.hasTimer ? TimerStore.create(props.objectKind.objectTimeout) : null;
         this.scene = props.scene;
-        this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject[0]].getModel();
         this.objectKind = props.objectKind;
+        this.lambdaMesh = this.objectKind.objects[props.objectKind.activeObject[0]].getModel();
+        this.objectKindPath = CatalogStore.findobjectKindPath(this.objectKind.name);
+        this.path = [...this.objectKindPath, props.objectKind.activeObject[0] + 1];
         this.objectKind.preloadNextObject();
+        this.timer = TimerStore.create(props.objectKind.objectTimeout);
+        this.timer.start();
+        onPatch(this.timer, patch => {
+            if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
+                let {x, y} = this.state.position;
+                PopupStore.firstPosition.setPosition({x, y});
+                PopupStore.addPopup(this.path);
+            }});
     }
 
     componentDidMount() {
@@ -62,15 +73,9 @@ const Notification = observer(class Notification extends Component {
         );
     }
 
-    launchTimer() {
-        if (this.timer) {
-            this.timer.start();
-        }
-    }
-
     buildCatalog() {
-        this.launchTimer();
-        CatalogStore.openCatalog(CatalogStore.findobjectKindPath(this.objectKind.name));
+        this.timer.stop();
+        CatalogStore.openCatalog(this.objectKindPath);
     }
 
     render() {
@@ -80,7 +85,7 @@ const Notification = observer(class Notification extends Component {
         const dashSize = 2 * Math.PI * size;
         const rayon = (size - (3 / 2)) / 2;
 
-        let hide = CatalogStore.isOpen ? 'hide': '';
+        let hide = (CatalogStore.isOpen || !this.timer.running) ? 'hide': '';
         let style = {
             'top': y - size / 2,
             'left': x - size / 2
@@ -90,10 +95,10 @@ const Notification = observer(class Notification extends Component {
             <div className={`notification ${hide}`} style={style} onClick={() => this.buildCatalog()}>
                 <div className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>
                     <svg height={size + 2} width={size + 2}>
-                            <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"
-                                    strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
-                                    strokeDasharray={dashSize}/>
-                            <circle cx={size / 2} cy={size / 2} r={rayon - 5} fill="red"/>
+                        <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"
+                                strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
+                                strokeDasharray={dashSize}/>
+                        <circle cx={size / 2} cy={size / 2} r={rayon - 5} fill="red"/>
                     </svg>
                 </div>
             </div>
