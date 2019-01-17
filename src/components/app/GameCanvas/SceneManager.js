@@ -8,6 +8,7 @@ import EmptySpace from "../emptySpace/EmptySpace";
 import Notification from "../notification/Notification";
 
 export class SceneManager {
+    static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
     constructor(canvas, onReadyCB) {
         this.engine = new BABYLON.Engine(
             canvas,
@@ -25,8 +26,8 @@ export class SceneManager {
 
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
         defaultPipeline.samples = 8;
-        defaultPipeline.fxaaEnabled = true;
-        defaultPipeline.grainEnabled = true;
+        defaultPipeline.fxaaEnabled = false;
+        defaultPipeline.grainEnabled = false;
         defaultPipeline.grain.intensity = 0.5;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);

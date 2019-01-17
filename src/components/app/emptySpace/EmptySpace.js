@@ -3,6 +3,7 @@ import "./_emptySpace.scss";
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {SceneManager} from "../GameCanvas/SceneManager";
 
 export default observer(class EmptySpace extends Component {
     static refs = [];
@@ -41,7 +42,7 @@ export default observer(class EmptySpace extends Component {
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
             this.scene.activeCamera.viewport.toGlobal(this.scene.activeCamera.getEngine())
-        );
+        )
     }
 
     buildCatalog() {
@@ -62,6 +63,9 @@ export default observer(class EmptySpace extends Component {
             x = 0;
             y = 0;
         }
+
+        x /= SceneManager.DEVICE_PIXEL_RATIO;
+        y /= SceneManager.DEVICE_PIXEL_RATIO;
 
         const size = 30;
 
