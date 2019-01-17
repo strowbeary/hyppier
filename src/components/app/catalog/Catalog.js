@@ -19,9 +19,9 @@ const Catalog = observer(class Catalog extends Component {
         this.objectKind = this.productType.objectKinds[this.path[1]];
         this.hasPreviousGeneration = this.objectKind.activeObject !== null;
         if(this.hasPreviousGeneration) {
-            this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
-            this.objectKind.location.setPreviewObject(this.objectKind.activeObject[0] + 1, 0);
-            this.path.push(this.objectKind.activeObject[0]+1);
+            this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
+            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1, 0);
+            this.path.push(this.objectKind.activeObject+1);
         } else {
             this.productNew = this.objectKind.objects[0];
             this.objectKind.location.setPreviewObject(0, 0);
@@ -47,7 +47,7 @@ const Catalog = observer(class Catalog extends Component {
 
     onValidate() {
         if (this.objectKind.activeObject !== null) {
-            this.objectKind.setActiveObject(this.objectKind.activeObject[0] + 1, 0);
+            this.objectKind.setActiveObject(this.objectKind.activeObject + 1, 0);
         } else {
             this.objectKind.setActiveObject(0, 0);
         }

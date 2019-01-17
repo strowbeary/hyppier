@@ -55,7 +55,7 @@ export default observer(class GameCanvas extends React.Component {
                 {(() => {
                     if(this.state.ready) {
                         return CatalogStore.getAllObjectKindWithActiveObject()
-                            .filter(objectKind => objectKind.activeObject[0] !== objectKind.objects.length -1)
+                            .filter(objectKind => objectKind.activeObject !== objectKind.objects.length -1)
                             .map(objectKind => {
                                 return Notification.create(objectKind, this.scene);
                             })

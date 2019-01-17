@@ -7,8 +7,6 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 export default observer(class EmptySpace extends Component {
     static refs = [];
 
-    static refs = [];
-
     static create(objectKind, scene) {
         const ref = React.createRef();
         EmptySpace.refs.push(ref);

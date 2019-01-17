@@ -24,10 +24,9 @@ const Notification = observer(class Notification extends Component {
         super(props);
         this.scene = props.scene;
         this.objectKind = props.objectKind;
-        this.lambdaMesh = this.objectKind.objects[props.objectKind.activeObject[0]].getModel();
+        this.lambdaMesh = this.objectKind.objects[props.objectKind.activeObject].getModel();
         this.objectKindPath = CatalogStore.findobjectKindPath(this.objectKind.name);
-        this.path = [...this.objectKindPath, props.objectKind.activeObject[0] + 1];
-        this.objectKind.preloadNextObject();
+        this.path = [...this.objectKindPath, props.objectKind.activeObject + 1];
         this.timer = TimerStore.create(props.objectKind.objectTimeout);
         this.timer.start();
         onPatch(this.timer, patch => {
@@ -39,27 +38,19 @@ const Notification = observer(class Notification extends Component {
     }
 
     componentDidMount() {
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
-            this.setState({});
-        });
-        window.addEventListener('resize', () => {
-            this.setState({});
+        this.setState({
+            position: this.get2dPosition()
         });
     }
 
-    launchTimer() {
-        if (this.timer) {
-            this.timer.start();
-        }
+    updatePosition() {
+        this.setState({
+            position: this.get2dPosition()
+        });
     }
 
-    buildCatalog() {
-        this.launchTimer();
-        CatalogStore.openCatalog(CatalogStore.findobjectKindPath(this.objectKind.name));
-    }
-
-    render() {
-        let {x, y} = BABYLON.Vector3.Project(
+    get2dPosition() {
+        return BABYLON.Vector3.Project(
             this.objectKind.location.toVector3().add(
                 new BABYLON.Vector3(
                     0,
@@ -74,6 +65,8 @@ const Notification = observer(class Notification extends Component {
                 this.scene.activeCamera.getEngine().getRenderHeight()
             )
         );
+    }
+
 
     buildCatalog() {
         this.timer.stop();

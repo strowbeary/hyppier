@@ -6,9 +6,6 @@ import {CSSTransitionGroup} from "react-transition-group";
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
-import Spacebar from "./spacebar/Spacebar"
-import EmptySpace from "./emptySpace/EmptySpace"
-import Notification from "./notification/Notification"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import PopupStore from "../../stores/PopupStore/PopupStore"
 import Popup from "./popup/Popup"
