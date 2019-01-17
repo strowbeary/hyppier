@@ -1,5 +1,4 @@
-import React from 'react';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import TimerStore from "../../../stores/TimerStore/TimerStore";
@@ -23,9 +22,8 @@ const Notification = observer(class Notification extends Component {
         super(props);
         this.timer = props.hasTimer ? TimerStore.create(props.objectKind.objectTimeout) : null;
         this.scene = props.scene;
-        this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject[0]].getModel();
+        this.lambdaMesh = props.objectKind.objects[props.objectKind.activeObject].getModel();
         this.objectKind = props.objectKind;
-        this.objectKind.preloadNextObject();
     }
 
     componentDidMount() {

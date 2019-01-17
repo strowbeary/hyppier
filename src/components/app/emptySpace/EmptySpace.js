@@ -1,14 +1,16 @@
-import React from 'react';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import "./_emptySpace.scss";
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export default observer(class EmptySpace extends Component {
+    static refs = [];
 
     static create(objectKind, scene) {
-        return <EmptySpace objectKind={objectKind} scene={scene} key={objectKind.name}/>;
+        const ref = React.createRef();
+        EmptySpace.refs.push(ref);
+        return <EmptySpace objectKind={objectKind} ref={ref} scene={scene} key={objectKind.name}/>;
     }
 
     state = {
@@ -22,16 +24,12 @@ export default observer(class EmptySpace extends Component {
         this.objectKind.preloadNextObject();
     }
     componentDidMount() {
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
-            this.setState({
-                position: this.get2dPosition()
-            })
+        this.setState({
+            position: this.get2dPosition()
         });
-        window.addEventListener('resize', () => {
-            this.setState({
-                position: this.get2dPosition()
-            });
-        });
+    }
+
+    updatePosition() {
         this.setState({
             position: this.get2dPosition()
         });

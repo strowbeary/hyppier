@@ -1,23 +1,40 @@
 import {types} from "mobx-state-tree";
 import CoordsStore from "./CoordsStore/CoordsStore";
-import * as BABYLON from "babylonjs";
+import CatalogStore from "../../../CatalogStore";
 
 export default types.model("LocationStore", {
-    previewObject: types.maybeNull(types.refinement(types.array(types.number), value => value.length === 2)),
-    coordinates: CoordsStore
+    previewObject: types.maybeNull(types.number),
+    coordinates: CoordsStore,
+    children: types.array(types.string)
 })
     .actions(self =>
         ({
-            setPreviewObject(object, tint) {
-                self.previewObject = [object, tint];
+            setPreviewObject(objectId) {
+                self.previewObjectId = objectId;
             },
             removePreviewObject() {
-                self.previewObject = null;
+                self.previewObjectId = null;
+            },
+            addChild(objectKindName) {
+                self.children.push(objectKindName);
+            },
+            setPosition(vector3) {
+                const oldCoordinates = self.coordinates.toVector3();
+                self.coordinates = CoordsStore.create({
+                    x: vector3.x,
+                    y: vector3.y,
+                    z: vector3.z
+                });
+                self.children
+                    .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
+                    .forEach(childLocation=> {
+                        childLocation.setPosition(vector3.subtract(oldCoordinates))
+                    })
             }
         })
     )
     .views(self => ({
         toVector3() {
-            return new BABYLON.Vector3(self.coordinates.x, self.coordinates.y, self.coordinates.z)
+            return self.coordinates.toVector3();
         }
     }))

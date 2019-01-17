@@ -9,13 +9,14 @@ const Popup = observer(class Popup extends Component {
     static popupRef = [];
 
     static createPopup(data) {
-        const path = data.path;
+        /*const path = data.path;
         const object = CatalogStore.objectTypes[path[0]].objectKinds[path[1]].objects[path[2]];
         let {infos, closeButtonLabel, returnCatalogButtonLabel, adUrl} = object;
 
         const ref = React.createRef();
-        Popup.popupRef.push(ref);
-        return <Popup ref={ref} data={{infos, closeButtonLabel, returnCatalogButtonLabel, adUrl}}/>;
+        Popup.popupRef.push(ref);*/
+        //return <Popup ref={ref} data={{infos, closeButtonLabel, returnCatalogButtonLabel, adUrl}}/>;
+        return <div/>;
     }
 
     startingPos = {};

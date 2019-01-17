@@ -3,13 +3,19 @@ import React, {Component} from "react";
 import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import { CSSTransitionGroup } from "react-transition-group";
+import {CSSTransitionGroup} from "react-transition-group";
 import CameraStore from "../../../stores/CameraStore";
 import {CameraManager} from "../GameCanvas/CameraManager";
 
 const Catalog = observer(class Catalog extends Component {
 
-    state = {scrollProgressionWidth: '0%', selectedNew: 0, selectedBefore: -1, fromPopUp: false, errorShow: false};
+    state = {
+        scrollProgressionWidth: '0%',
+        selectedNew: 0,
+        selectedBefore: -1,
+        fromPopUp: false,
+        errorShow: false
+    };
     contentScrollHeight = 0;
     contentHeight = 0;
     contentElement = null;
@@ -22,13 +28,13 @@ const Catalog = observer(class Catalog extends Component {
         this.productType = CatalogStore.objectTypes[path[0]];
         this.objectKind = this.productType.objectKinds[path[1]];
         if(this.objectKind.activeObject !== null) {
-            this.productNew = this.objectKind.objects[this.objectKind.activeObject[0] + 1];
+            this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
 
-            this.objectKind.location.setPreviewObject(this.objectKind.activeObject[0] + 1, 0);
-            this.hasPreviousGeneration = this.objectKind.activeObject[0] > 0;
+            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1, 0);
+            this.hasPreviousGeneration = this.objectKind.activeObject > 0;
             if (this.hasPreviousGeneration) {
                 this.promo = this.productNew.adUrl;
-                this.productBefore =this.objectKind.objects[this.objectKind.activeObject[0] - 1];
+                this.productBefore =this.objectKind.objects[this.objectKind.activeObject - 1];
              }
         } else {
             this.productNew = this.objectKind.objects[0];
@@ -61,9 +67,6 @@ const Catalog = observer(class Catalog extends Component {
         );
     }
     componentWillUnmount() {
-        CameraStore.setTarget();
-
-        this.objectKind.location.removePreviewObject();
     }
 
     componentDidUpdate() {
@@ -129,13 +132,15 @@ const Catalog = observer(class Catalog extends Component {
             this.setState({fromPopUp: true});
         } else {
             this.props.onClose();
+            CameraStore.setTarget();
+            this.objectKind.location.removePreviewObject();
         }
     }
 
     onValidate() {
         if (this.state.selectedBefore === -1) {
             if (this.objectKind.activeObject !== null) {
-                this.objectKind.setActiveObject(this.objectKind.activeObject[0] + 1, this.state.selectedNew);
+                this.objectKind.setActiveObject(this.objectKind.activeObject + 1, this.state.selectedNew);
             } else {
                 this.objectKind.setActiveObject(0, this.state.selectedNew);
             }
@@ -143,6 +148,8 @@ const Catalog = observer(class Catalog extends Component {
             //promo IS selected
         }
         this.props.onClose();
+        CameraStore.setTarget();
+        this.objectKind.location.removePreviewObject();
     }
 
     render() {

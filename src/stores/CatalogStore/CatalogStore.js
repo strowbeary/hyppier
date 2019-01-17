@@ -48,7 +48,7 @@ const CatalogStore = types.model("CatalogStore", {
                     return objectType.objectKinds
                         .filter(objectKind => {
                             if(objectKind.activeObject !== null) {
-                                return typeof objectKind.objects[objectKind.activeObject[0]].model !== "undefined";
+                                return typeof objectKind.objects[objectKind.activeObject].model !== "undefined";
                             } else {
                                 return false;
                             }

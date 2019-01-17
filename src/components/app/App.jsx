@@ -2,13 +2,11 @@ import React, {Component} from "react";
 import "./_app.scss";
 import {observer} from "mobx-react";
 import GameCanvas from "./GameCanvas";
-import { CSSTransitionGroup } from "react-transition-group";
+import {CSSTransitionGroup} from "react-transition-group";
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
 import Spacebar from "./spacebar/Spacebar"
-import EmptySpace from "./emptySpace/EmptySpace"
-import Notification from "./notification/Notification"
 import Popup from "./popup/Popup"
 
 const App = observer(class App extends Component {
@@ -34,8 +32,8 @@ const App = observer(class App extends Component {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
         if(objectKindPath.activeObject === null) {
             objectKindPath.setActiveObject(0, 0);
-        } else if (objectKindPath.activeObject[0] + 1 < objectKindPath.objects.length) {
-            objectKindPath.setActiveObject(objectKindPath.activeObject[0] + 1, 0);
+        } else if (objectKindPath.activeObject + 1 < objectKindPath.objects.length) {
+            objectKindPath.setActiveObject(objectKindPath.activeObject + 1, 0);
         }
     }
 

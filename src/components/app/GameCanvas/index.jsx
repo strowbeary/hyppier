@@ -1,7 +1,6 @@
 import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
-import {CameraManager} from "./CameraManager";
 import Notification from "../notification/Notification";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import CameraStore from "../../../stores/CameraStore";
@@ -23,6 +22,7 @@ export default observer(class GameCanvas extends React.Component {
         this.setState({
             ready: true
         });
+        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => this.updateTrackingPosition());
     }
 
     onResize() {
@@ -30,6 +30,12 @@ export default observer(class GameCanvas extends React.Component {
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
         this.scene.activeCamera.getProjectionMatrix(true);
+        this.updateTrackingPosition();
+    }
+
+    updateTrackingPosition() {
+        EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+        Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
     }
 
     render() {
@@ -44,7 +50,6 @@ export default observer(class GameCanvas extends React.Component {
                     left: 10
                 }}>
                     <button onClick={() => CameraStore.setTarget("Grenier")}>Go to attic</button>
-                    <button onClick={() => CameraStore.setTarget("tabouret.001", CameraManager.CATALOG_OFFSET)}>Set target</button>
                     <button onClick={() => CameraStore.setTarget()}>reset target</button>
                 </div>
                 {(() => {

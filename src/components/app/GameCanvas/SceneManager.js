@@ -4,6 +4,8 @@ import {GameWatcher} from "../../../GameWatcher";
 import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
+import EmptySpace from "../emptySpace/EmptySpace";
+import Notification from "../notification/Notification";
 
 export class SceneManager {
     constructor(canvas, onReadyCB) {
@@ -30,14 +32,18 @@ export class SceneManager {
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
         this.meshManager = new MeshManager(this.scene, lights);
-        GameStarter.init(this.scene)
-            .then(/*() => onReadyCB()*/);
+
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
                 this.meshManager.patch(newMesh, oldMesh);
-                this.camera.getProjectionMatrix(true);
+                EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+                Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
             })
-            .watch();
+            .watch(this.scene)
+            .then(() => {
+                GameStarter.init(this.scene)
+                    .then(/*() => onReadyCB()*/);
+            });
 
         this.engine.runRenderLoop(() => {
                 this.scene.render();
