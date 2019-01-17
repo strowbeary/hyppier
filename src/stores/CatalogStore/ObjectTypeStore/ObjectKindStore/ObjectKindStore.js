@@ -16,7 +16,7 @@ function loadObject(objectKind) {
                 const locationOption = loadedMesh.name
                     .substring(0, loadedMesh.name.length - 1)
                     .split("(")[1].split(",");
-                objectKind.location.setChildren(locationOption[0]);
+                objectKind.location.addChild(locationOption[0]);
                 CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position)
             } else {
                 objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh));
@@ -39,7 +39,7 @@ function preloadNextObject(objectKind) {
                     objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh));
                 }
             });
-        });
+        }).catch(e => console.log(e));
     }
 }
 

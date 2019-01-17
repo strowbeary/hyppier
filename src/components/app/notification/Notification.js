@@ -28,36 +28,11 @@ const Notification = observer(class Notification extends Component {
 
     componentDidMount() {
         this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
-            this.setState({
-                position: this.get2dPosition()
-            })
+            this.setState({});
         });
         window.addEventListener('resize', () => {
-            this.setState({
-                position: this.get2dPosition()
-            });
+            this.setState({});
         });
-        this.setState({
-            position: this.get2dPosition()
-        });
-    }
-
-    get2dPosition() {
-        return BABYLON.Vector3.Project(
-            this.lambdaMesh.mesh.position.add(
-                new BABYLON.Vector3(
-                    0,
-                    this.lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.1,
-                    0
-                )
-            ),
-            BABYLON.Matrix.Identity(),
-            this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(
-                this.scene.activeCamera.getEngine().getRenderWidth(),
-                this.scene.activeCamera.getEngine().getRenderHeight()
-            )
-        );
     }
 
     launchTimer() {
@@ -72,7 +47,21 @@ const Notification = observer(class Notification extends Component {
     }
 
     render() {
-        let {x, y} = this.state.position;
+        let {x, y} = BABYLON.Vector3.Project(
+            this.objectKind.location.toVector3().add(
+                new BABYLON.Vector3(
+                    0,
+                    this.objectKind.objects[this.objectKind.activeObject].getModel().mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.20,
+                    0
+                )
+            ),
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        );
 
         const size = 30;
         const dashSize = 2 * Math.PI * size;
@@ -85,12 +74,13 @@ const Notification = observer(class Notification extends Component {
 
         return (
             <div className="notification" style={style} onClick={() => this.buildCatalog()}>
-                <div className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>
+                <div
+                    className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>
                     <svg height={size + 2} width={size + 2}>
-                            <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"
-                                    strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
-                                    strokeDasharray={dashSize}/>
-                            <circle cx={size / 2} cy={size / 2} r={rayon - 5} fill="red"/>
+                        <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"
+                                strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
+                                strokeDasharray={dashSize}/>
+                        <circle cx={size / 2} cy={size / 2} r={rayon - 5} fill="red"/>
                     </svg>
                 </div>
             </div>

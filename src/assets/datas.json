@@ -14,6 +14,7 @@
             {
               "name": "Bureau",
               "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
               "closeButtonLabel": "Tant pis",
               "returnCatalogButtonLabel": "Retourner au catalogue",
               "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
@@ -45,6 +46,7 @@
             {
               "name": "Tabouret",
               "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
               "closeButtonLabel": "Tant pis",
               "returnCatalogButtonLabel": "Retourner au catalogue",
               "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
@@ -76,6 +78,7 @@
             {
               "name": "Lit de camp",
               "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
               "closeButtonLabel": "Tant pis",
               "returnCatalogButtonLabel": "Retourner au catalogue",
               "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
@@ -92,6 +95,114 @@
           "objectTimeout": 5000,
           "replacementCounter": 0,
           "activeObject": 0,
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
+        }
+      ],
+      "objectTimeout": 5000,
+      "activeObject": 0
+    },
+    {
+      "name": "electric",
+      "clueEvent": {
+        "text": "Lorem Ipsum",
+        "illustrationUrl": "http://localhost:8080"
+      },
+      "replacementCounter": 0,
+      "objectKinds": [
+        {
+          "name": "Computer",
+          "objects": [
+            {
+              "name": "Macintosh",
+              "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+              "parcelSize": 1,
+              "modelUrl": "computer.babylon",
+              "infos": [
+                {
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            }
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": 0,
+          "achievementPromotions": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          },
+          "achievementSpecialTint": {
+            "text": "Lorem Ipsum",
+            "illustrationUrl": "http://localhost:8080"
+          }
+        },
+        {
+          "name": "Sound",
+          "objects": [
+            {
+              "name": "Walkman",
+              "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+              "parcelSize": 1,
+              "modelUrl": "walkman.babylon",
+              "infos": [
+                {
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "Ipod",
+              "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+              "parcelSize": 1,
+              "modelUrl": "ipod.babylon",
+              "infos": [
+                {
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            },
+            {
+              "name": "Casque",
+              "adUrl": "img/catalog/table/promo.png",
+              "thumbnailUrl": "img/catalog/table/promo.png",
+              "closeButtonLabel": "Tant pis",
+              "returnCatalogButtonLabel": "Retourner au catalogue",
+              "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+              "parcelSize": 1,
+              "modelUrl": "headset.babylon",
+              "infos": [
+                {
+                  "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+                  "url": "http://localhost:8080"
+                }
+              ]
+            }
+          ],
+          "objectTimeout": 5000,
+          "replacementCounter": 0,
+          "activeObject": null,
           "achievementPromotions": {
             "text": "Lorem Ipsum",
             "illustrationUrl": "http://localhost:8080"

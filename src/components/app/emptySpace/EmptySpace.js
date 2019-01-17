@@ -21,8 +21,8 @@ export default observer(class EmptySpace extends Component {
         super(props);
         this.scene = props.scene;
         this.objectKind = props.objectKind;
-        this.objectKind.preloadNextObject();
     }
+
     componentDidMount() {
         this.setState({
             position: this.get2dPosition()
@@ -37,13 +37,7 @@ export default observer(class EmptySpace extends Component {
 
     get2dPosition() {
         return BABYLON.Vector3.Project(
-            this.objectKind.location.toVector3().add(
-                new BABYLON.Vector3(
-                    0,
-                    0.1,
-                    0
-                )
-            ),
+            this.objectKind.location.toVector3(),
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
             this.scene.activeCamera.viewport.toGlobal(
@@ -58,7 +52,19 @@ export default observer(class EmptySpace extends Component {
     }
 
     render() {
-        let {x, y} = this.state.position;
+        let {x, y} = BABYLON.Vector3.Project(
+            this.objectKind.location.toVector3(),
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        );
+        if(isNaN(x) && isNaN(y)) {
+            x = 0;
+            y = 0;
+        }
 
         const size = 30;
 

@@ -28,7 +28,7 @@ export default types.model("LocationStore", {
                 self.children
                     .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
                     .forEach(childLocation=> {
-                        childLocation.setPosition(vector3.subtract(oldCoordinates))
+                        childLocation.setPosition(childLocation.toVector3().add(vector3.subtract(oldCoordinates)))
                     })
             }
         })
