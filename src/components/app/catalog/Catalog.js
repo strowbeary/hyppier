@@ -67,7 +67,7 @@ const Catalog = observer(class Catalog extends Component {
                 >
                     {this.state.confirmVisibility &&
                     <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
-                                  onCatalog={() => this.updateConfirmVisibilty(false)}/>
+                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}/>
                     }
                 </CSSTransitionGroup>
                 <div className="catalog__header">
