@@ -1,5 +1,4 @@
-import React from 'react';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import TimerStore from "../../../stores/TimerStore/TimerStore";
@@ -41,26 +40,30 @@ const Notification = observer(class Notification extends Component {
 
     componentDidMount() {
         this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
-            this.setState({
-                position: this.get2dPosition()
-            })
+            this.setState({});
         });
         window.addEventListener('resize', () => {
-            this.setState({
-                position: this.get2dPosition()
-            });
-        });
-        this.setState({
-            position: this.get2dPosition()
+            this.setState({});
         });
     }
 
-    get2dPosition() {
-        return BABYLON.Vector3.Project(
-            this.lambdaMesh.mesh.position.add(
+    launchTimer() {
+        if (this.timer) {
+            this.timer.start();
+        }
+    }
+
+    buildCatalog() {
+        this.launchTimer();
+        CatalogStore.openCatalog(CatalogStore.findobjectKindPath(this.objectKind.name));
+    }
+
+    render() {
+        let {x, y} = BABYLON.Vector3.Project(
+            this.objectKind.location.toVector3().add(
                 new BABYLON.Vector3(
                     0,
-                    this.lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.1,
+                    this.objectKind.objects[this.objectKind.activeObject].getModel().mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.20,
                     0
                 )
             ),
@@ -71,7 +74,6 @@ const Notification = observer(class Notification extends Component {
                 this.scene.activeCamera.getEngine().getRenderHeight()
             )
         );
-    }
 
     buildCatalog() {
         this.timer.stop();

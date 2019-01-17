@@ -1,5 +1,4 @@
 import {types} from "mobx-state-tree";
-import TintStore from "./TintStore/TintStore";
 import InfoStore from "./InfoStore/InfoStore";
 
 const meshShelf = [];
@@ -13,14 +12,13 @@ export default types.model("ObjectStore", {
     parcelSize: types.number,
     modelUrl: types.string,
     model: types.maybe(types.number),
-    tints: types.array(TintStore),
     infos: types.array(InfoStore)
 })
     .actions(self =>
         ({
             setModel(lambdaMesh) {
-               self.model = meshShelf.length;
                 meshShelf.push(lambdaMesh);
+                self.model = meshShelf.length - 1;
             },
             beforeDestroy() {
                 delete meshShelf[self.model];

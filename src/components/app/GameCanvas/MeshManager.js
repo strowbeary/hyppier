@@ -5,15 +5,12 @@ export class MeshManager {
         this.lights = lights;
     }
     patch(newLambdaMesh, oldLambdaMesh) {
-        console.log(newLambdaMesh, oldLambdaMesh);
-            if(newLambdaMesh && oldLambdaMesh) {
-                /**
-                 * Replace object
-                 */
+        try {
+            if (newLambdaMesh !== null && oldLambdaMesh !== null) {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
+                oldLambdaMesh.mesh.dispose();
                 this.scene.addMesh(newLambdaMesh.mesh);
-                this.scene.removeMesh(oldLambdaMesh.mesh);
             } else if (
                 newLambdaMesh !== null &&
                 oldLambdaMesh === null &&
@@ -22,9 +19,11 @@ export class MeshManager {
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
-                this.scene.removeMesh(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
+                oldLambdaMesh.mesh.dispose();
             }
-
+        } catch (e) {
+            console.error(e);
+        }
     }
 }

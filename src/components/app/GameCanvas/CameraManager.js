@@ -62,7 +62,6 @@ export class CameraManager {
         toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
-        console.log(this.distance, ">", toDistance);
         let fromPosition = this.camera.target;
 
         const animation = () => {

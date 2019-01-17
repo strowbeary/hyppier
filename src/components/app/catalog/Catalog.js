@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {CSSTransitionGroup} from "react-transition-group";
 import CameraStore from "../../../stores/CameraStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {CameraManager} from "../GameCanvas/CameraManager";
@@ -53,6 +54,8 @@ const Catalog = observer(class Catalog extends Component {
         GameStore.hype.setLevelByDiff(0.1);
         //skip generation
         this.props.onClose();
+        CameraStore.setTarget();
+        this.objectKind.location.removePreviewObject();
     }
 
     render() {

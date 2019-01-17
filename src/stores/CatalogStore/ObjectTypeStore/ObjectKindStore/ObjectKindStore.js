@@ -1,10 +1,47 @@
 import {types} from "mobx-state-tree";
 import LocationStore from "./LocationStore/LocationStore";
 import ObjectStore from "./ObjectStore/ObjectStore";
-import AchievementStore from "./AchievementStore/AchievementStore";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../CatalogStore";
 import {LambdaMesh} from "../../../../components/app/GameCanvas/LambdaMesh";
+import CoordsStore from "./LocationStore/CoordsStore/CoordsStore";
+
+function loadObject(objectKind) {
+    BABYLON.SceneLoader.LoadAssetContainerAsync(
+        "/models/",
+        objectKind.objects[objectKind.activeObject].modelUrl
+    ).then((container) => {
+        container.meshes.forEach(loadedMesh => {
+            if (loadedMesh.name.includes("Location")) {
+                const locationOption = loadedMesh.name
+                    .substring(0, loadedMesh.name.length - 1)
+                    .split("(")[1].split(",");
+                objectKind.location.addChild(locationOption[0]);
+                CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position)
+            } else {
+                objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh));
+            }
+        });
+    });
+}
+function preloadNextObject(objectKind) {
+    const objectIndex = (objectKind.activeObject === null) ? 0 : (objectKind.activeObject + 1);
+    if (objectIndex < objectKind.objects.length) {
+        BABYLON.SceneLoader.LoadAssetContainerAsync(
+            "/models/",
+            objectKind.objects[objectIndex].modelUrl
+        ).then((container) => {
+            container.meshes.forEach(loadedMesh => {
+                if (!loadedMesh.name.includes("Location")) {
+                    if (objectKind.location) {
+                        loadedMesh.position = objectKind.location.toVector3();
+                    }
+                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh));
+                }
+            });
+        }).catch(e => console.log(e));
+    }
+}
 
 export default types
     .model("ObjectKindStore", {
@@ -13,82 +50,28 @@ export default types
         objectTimeout: types.number,
         replacementCounter: types.number,
         location: types.maybe(LocationStore),
-        activeObject: types.maybeNull(types.array(types.number)),
-        achievementPromotions: AchievementStore,
-        achievementSpecialTint: AchievementStore
+        activeObject: types.maybeNull(types.number)
     })
     .actions(self => ({
         afterCreate() {
+            self.location = LocationStore.create({
+                previewObject: null,
+                coordinates: CoordsStore.create({
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }),
+                children: []
+            });
             if (self.activeObject !== null) {
-                BABYLON.SceneLoader.LoadAssetContainerAsync(
-                    "/models/",
-                    self.objects[self.activeObject[0]].modelUrl
-                ).then((container) => {
-                    container.meshes.forEach(loadedMesh => {
-                        if (loadedMesh.name.includes("Location")) {
-                            const locationOption = loadedMesh.name.substring(0, loadedMesh.name.length - 1).split("(")[1].split(",");
-                            CatalogStore.getObjectKind(locationOption[0]).setLocation(
-                                LocationStore.create({
-                                    previewObject: null,
-                                    coordinates: JSON.parse(JSON.stringify(loadedMesh.position))
-                                })
-                            );
-                        } else {
-                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self.toJSON()));
-                        }
-                    });
-                });
+                loadObject(self);
             }
+            preloadNextObject(self);
         },
-        setLocation(location) {
-            self.location = location;
-        },
-        setActiveObject(object, tint) {
-            const newActiveObject = [
-                object,
-                tint
-            ];
-            if(self.activeObject !== newActiveObject) {
-                self.activeObject = newActiveObject;
-                BABYLON.SceneLoader.LoadAssetContainerAsync(
-                    "/models/",
-                    self.objects[self.activeObject[0]].modelUrl
-                ).then((container) => {
-                    container.meshes.forEach(loadedMesh => {
-                        if (loadedMesh.name.includes("Location")) {
-                            const locationOption = loadedMesh.name.substring(0, loadedMesh.name.length - 1).split("(")[1].split(",");
-                            CatalogStore.getObjectKind(locationOption[0]).setLocation(
-                                LocationStore.create({
-                                    previewObject: null,
-                                    coordinates: JSON.parse(JSON.stringify(loadedMesh.position))
-                                })
-                            );
-                        } else {
-                            if(self.location) {
-                                loadedMesh.position = self.location.toVector3();
-                            }
-                            self.objects[self.activeObject[0]].setModel(new LambdaMesh(loadedMesh, self));
-                        }
-                    });
-                });
-            }
-        },
-        preloadNextObject() {
-            const objectIndex = (self.activeObject === null) ? 0 : (self.activeObject[0] + 1);
-            if (objectIndex < self.objects.length) {
-                BABYLON.SceneLoader.LoadAssetContainerAsync(
-                    "/models/",
-                    self.objects[objectIndex].modelUrl
-                ).then((container) => {
-                    container.meshes.forEach(loadedMesh => {
-                        if (!loadedMesh.name.includes("Location")) {
-                                if (self.location) {
-                                    loadedMesh.position = self.location.toVector3();
-                                }
-                                self.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, self));
-                        }
-                    });
-                });
+        setActiveObject(objectId) {
+            if (self.activeObject !== objectId) {
+                self.activeObject = objectId;
+                preloadNextObject(self);
             }
         }
     }));

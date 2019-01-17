@@ -1,13 +1,7 @@
 export class LambdaMesh {
-    notification;
-    constructor(mesh, objectStore) {
+    constructor(mesh) {
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = true;
-        this.objectStore = objectStore;
-    }
-
-    bindNotification(notification) {
-        this.notification = notification;
     }
 }

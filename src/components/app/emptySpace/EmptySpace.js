@@ -1,18 +1,18 @@
-import React from 'react';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import "./_emptySpace.scss";
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export default observer(class EmptySpace extends Component {
+    static refs = [];
 
     static refs = [];
 
     static create(objectKind, scene) {
         const ref = React.createRef();
         EmptySpace.refs.push(ref);
-        return <EmptySpace objectKind={objectKind} scene={scene} key={objectKind.name} ref={ref}/>;
+        return <EmptySpace objectKind={objectKind} ref={ref} scene={scene} key={objectKind.name}/>;
     }
 
     state = {
@@ -23,19 +23,15 @@ export default observer(class EmptySpace extends Component {
         super(props);
         this.scene = props.scene;
         this.objectKind = props.objectKind;
-        this.objectKind.preloadNextObject();
     }
+
     componentDidMount() {
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => {
-            this.setState({
-                position: this.get2dPosition()
-            })
+        this.setState({
+            position: this.get2dPosition()
         });
-        window.addEventListener('resize', () => {
-            this.setState({
-                position: this.get2dPosition()
-            });
-        });
+    }
+
+    updatePosition() {
         this.setState({
             position: this.get2dPosition()
         });
@@ -43,13 +39,7 @@ export default observer(class EmptySpace extends Component {
 
     get2dPosition() {
         return BABYLON.Vector3.Project(
-            this.objectKind.location.toVector3().add(
-                new BABYLON.Vector3(
-                    0,
-                    0.1,
-                    0
-                )
-            ),
+            this.objectKind.location.toVector3(),
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
             this.scene.activeCamera.viewport.toGlobal(
@@ -64,7 +54,19 @@ export default observer(class EmptySpace extends Component {
     }
 
     render() {
-        let {x, y} = this.state.position;
+        let {x, y} = BABYLON.Vector3.Project(
+            this.objectKind.location.toVector3(),
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        );
+        if(isNaN(x) && isNaN(y)) {
+            x = 0;
+            y = 0;
+        }
 
         const size = 30;
 

@@ -1,4 +1,5 @@
 import * as BABYLON from "babylonjs";
+
 export class Lights{
     init(scene) {
         //Light direction is directly down from a position one unit up, fast decay
@@ -21,7 +22,7 @@ export class Lights{
         lightSphere.material = new BABYLON.StandardMaterial("light", scene);
         lightSphere.material.emissiveColor = new BABYLON.Color3(1, 1, 0);*/
 
-        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 0), light);
+        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 12), light);
         this.shadowGenerator.setDarkness(0.5);
         this.shadowGenerator.useExponentialShadowMap = true;
         this.shadowGenerator.setTransparencyShadow(true);
