@@ -4,7 +4,8 @@ import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
-
+import ConfirmPopup from "./confirmPopup/ConfirmPopup";
+import {CSSTransitionGroup} from "react-transition-group";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -18,10 +19,10 @@ const Catalog = observer(class Catalog extends Component {
         this.productType = CatalogStore.objectTypes[this.path[0]];
         this.objectKind = this.productType.objectKinds[this.path[1]];
         this.hasPreviousGeneration = this.objectKind.activeObject !== null;
-        if(this.hasPreviousGeneration) {
+        if (this.hasPreviousGeneration) {
             this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
             this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1);
-            this.path.push(this.objectKind.activeObject+1);
+            this.path.push(this.objectKind.activeObject + 1);
         } else {
             this.productNew = this.objectKind.objects[0];
             this.objectKind.location.setPreviewObject(0);
@@ -35,13 +36,10 @@ const Catalog = observer(class Catalog extends Component {
     onClose() {
         CatalogStore.closeCatalog();
         this.objectKind.location.removePreviewObject();
-    }
-
-    onClose() {
         this.updateConfirmVisibilty(false);
     }
 
-    updateConfirmVisibilty(value){
+    updateConfirmVisibilty(value) {
         this.setState({
             confirmVisibility: value
         })
@@ -63,10 +61,14 @@ const Catalog = observer(class Catalog extends Component {
         return (
             <div className={`catalog`}>
                 <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                 >
-                {this.state.confirmVisibility &&
-                    <ConfirmPopup product={this.productNew} onClose={() => this.onClose()} onCatalog={() => this.updateConfirmVisibilty(false)}/>
-                }
+                    {this.state.confirmVisibility &&
+                    <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
+                                  onCatalog={() => this.updateConfirmVisibilty(false)}/>
+                    }
                 </CSSTransitionGroup>
                 <div className="catalog__header">
                     <span>Catalogue</span>
@@ -85,7 +87,8 @@ const Catalog = observer(class Catalog extends Component {
                             <span>{this.productNew.name}</span>
                         </div>
                         <div className={`catalog__content__main__body`}>
-                            <img src={this.productNew.thumbnailUrl} alt="model" className="catalog__content__main__img"/>
+                            <img src={this.productNew.thumbnailUrl} alt="model"
+                                 className="catalog__content__main__img"/>
                         </div>
                     </div>
                 </div>
