@@ -1,7 +1,50 @@
 $default-cursor-url: "../../../../assets/img/cursor_default.svg";
-$green: #75E4A6;
+$yellow: #FFD832;
+$light-grey: #E6E6E6;
+$vertical-space: 15px;
+$border-radius: 15px;
+$horizontal-space: 20px;
 
 .confirmPopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  padding: $vertical-space $horizontal-space;
+  border-radius: $border-radius;
+  border: solid 1px $light-grey;
+  display: grid;
+  grid-column-gap: $horizontal-space;
+  grid-row-gap: $vertical-space;
+  grid-template-columns: min-content min-content;
+  grid-template-areas:
+          "content content"
+          "buttonClose buttonCatalog";
+
+  &__content {
+    grid-area: content;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    img {
+      margin-right: $horizontal-space;
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
+
+    a {
+      color: $yellow;
+      text-transform: uppercase;
+      position: absolute;
+      display: block;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
   &__buttonClose {
     grid-area: buttonClose;
     white-space: nowrap;
@@ -23,7 +66,7 @@ $green: #75E4A6;
     white-space: nowrap;
     border: none;
     border-radius: 2rem;
-    background-color: $green;
+    background-color: $yellow;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     font-size: 1.5rem;

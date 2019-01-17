@@ -12,6 +12,10 @@ import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 
 const Catalog = observer(class Catalog extends Component {
 
+    state = {
+        confirmVisibility: false
+    };
+
     constructor(props) {
         super(props);
         this.path = props.path.toJSON();
@@ -42,7 +46,13 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     onClose() {
+        this.updateConfirmVisibilty(false);
+    }
 
+    updateConfirmVisibilty(value){
+        this.setState({
+            confirmVisibility: value
+        })
     }
 
     onValidate() {
@@ -61,9 +71,15 @@ const Catalog = observer(class Catalog extends Component {
     render() {
         return (
             <div className={`catalog`}>
+                <CSSTransitionGroup
+                >
+                {this.state.confirmVisibility &&
+                    <ConfirmPopup product={this.productNew} onClose={() => this.onClose()} onCatalog={() => this.updateConfirmVisibilty(false)}/>
+                }
+                </CSSTransitionGroup>
                 <div className="catalog__header">
                     <span>Catalogue</span>
-                    <button className="catalog__header__close" onClick={() => this.onClose()}>
+                    <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)}>
                         <img src={icon_close} alt="close_icon"/>
                     </button>
                 </div>
