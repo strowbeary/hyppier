@@ -11,42 +11,45 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
 	Python World class constructor completed
 	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
-	processing begun of node:  Location(Table)
-	processing begun of mesh:  _ROOM_Wall.002
-		WARNING: No materials have been assigned: 
-		num positions      :  23
-		num normals        :  23
+	processing begun of mesh:  Grenier
+		processing begun of Standard material:  Clay.002
+		num positions      :  7
+		num normals        :  7
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  84
+		num indices        :  18
+	processing begun of node:  Location(Table)
+	processing begun of node:  Location(Chair)
+	processing begun of node:  Location(Bed)
+	processing begun of mesh:  Chambre
+		processing begun of Standard material:  Clay
+		num positions      :  68
+		num normals        :  68
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  312
 	processing begun of mesh:  _ROOM_Door.002
-		WARNING: No materials have been assigned: 
+		registered as also a user of material:  Clay
 		num positions      :  192
 		num normals        :  192
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
 		num indices        :  1140
-	processing begun of mesh:  WindowFrame.002
-		WARNING: No materials have been assigned: 
-		num positions      :  132
-		num normals        :  132
+	processing begun of mesh:  Plane.001
+		processing begun of Standard material:  Clay.005
+		processing begun of Standard material:  Clay.004
+		processing begun of multimaterial:  room.Multimaterial#0
+		num positions      :  47
+		num normals        :  47
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  624
-	processing begun of mesh:  Window.L.002
-		WARNING: No materials have been assigned: 
-		num positions      :  100
-		num normals        :  100
-		num uvs            :  0
-		num uvs2           :  0
-		num colors         :  0
-		num indices        :  726
-	processing begun of node:  Location(Chair)
-	processing begun of node:  Location(Bed)
+		num indices        :  234
+		WARNING: # of 0 area faces found:  14
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 0.0533 secs
+elapsed time:  0 min, 0.032 secs

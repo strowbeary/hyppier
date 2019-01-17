@@ -49,16 +49,17 @@ export class CameraManager {
         let toPosition = BABYLON.Vector3.Zero();
         if(typeof mesh !== "undefined" && mesh !== "") {
             if(typeof mesh === "string") {
-                mesh = this.scene.getMeshByName(mesh)
+                mesh = this.scene.getMeshByName(mesh);
             }
             toDistance = Math.ceil(Math.max(Math.max(
                 mesh.getBoundingInfo().boundingBox.maximum.y * mesh.scaling.y,
                 mesh.getBoundingInfo().boundingBox.maximum.x * mesh.scaling.x,
                 mesh.getBoundingInfo().boundingBox.maximum.z * mesh.scaling.z
-            )) * 2);
+            )) * 2.5);
             toPosition = mesh.position.clone();
         }
 
+        console.log("CAMERA", mesh.name, toPosition, toDistance);
         toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
@@ -72,10 +73,11 @@ export class CameraManager {
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
 
             this.updateCamera();
-
+            console.log(fromPosition, ">", toPosition);
             if (this.distance !== toDistance) {
                 animationRequest = requestAnimationFrame(animation)
             } else {
+                console.log("CANCELED");
                 cancelAnimationFrame(animationRequest);
             }
         };

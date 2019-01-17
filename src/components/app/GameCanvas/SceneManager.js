@@ -25,12 +25,12 @@ export class SceneManager {
         this.scene.shadowsEnabled = true;
 
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
-        defaultPipeline.samples = 8;
-        defaultPipeline.fxaaEnabled = false;
-        defaultPipeline.grainEnabled = false;
-        defaultPipeline.grain.intensity = 0.5;
+        defaultPipeline.samples = 4;
+        defaultPipeline.fxaaEnabled = true;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+        const ambient = 0.5;
+        this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
         this.meshManager = new MeshManager(this.scene, lights);
 

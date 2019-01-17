@@ -12,10 +12,10 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 	Python World class constructor completed
 	processing begun of camera (UniversalCamera):  Camera.002
 	processing begun of mesh:  Bureau
-		WARNING: Mixing of Cycles & Blender Render in same mesh not supported.  No materials exported.
-		num positions      :  416
-		num normals        :  416
-		num uvs            :  0
+		processing begun of Standard material:  Material.003
+		num positions      :  2147
+		num normals        :  2147
+		num uvs            :  4294
 		num uvs2           :  0
 		num colors         :  0
 		num indices        :  2436
@@ -27,4 +27,4 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 0.0382 secs
+elapsed time:  0 min, 0.0962 secs

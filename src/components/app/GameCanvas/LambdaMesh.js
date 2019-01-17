@@ -2,6 +2,6 @@ export class LambdaMesh {
     constructor(mesh) {
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
-        this.mesh.receiveShadows = true;
+        this.mesh.receiveShadows = false;
     }
 }

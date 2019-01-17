@@ -155,6 +155,12 @@ const Popup = observer(class Popup extends Component {
                 Popup.popupRef[0].current.changeFocus(true);
             }
         }
+        if (this.objectKind.activeObject !== null) {
+            this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
+        } else {
+            this.objectKind.setActiveObject(0);
+        }
+        GameStore.hype.setLevelByDiff(0.1);
         PopupStore.removePopup(this.props.path);
         //update object with "PROMO" effect
     }

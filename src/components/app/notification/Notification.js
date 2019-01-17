@@ -6,6 +6,7 @@ import * as BABYLON from "babylonjs";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import {onPatch} from "mobx-state-tree";
 import PopupStore from "../../../stores/PopupStore/PopupStore";
+import {SceneManager} from "../GameCanvas/SceneManager";
 
 const Notification = observer(class Notification extends Component {
     static refs = [];
@@ -72,6 +73,9 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         let {x, y} = this.state.position;
+
+        x /= SceneManager.DEVICE_PIXEL_RATIO;
+        y /= SceneManager.DEVICE_PIXEL_RATIO;
 
         const size = 30;
         const dashSize = 2 * Math.PI * size;
