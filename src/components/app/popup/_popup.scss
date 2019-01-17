@@ -1,7 +1,7 @@
 $vertical-space: 15px;
 $border-radius: 15px;
 $horizontal-space: 20px;
-$yellow: #FFE07D;
+$yellow: #FFD832;
 $light-grey: #E6E6E6;
 
 $pointer-url: "../../../assets/img/cursor_pointer.svg";
@@ -20,7 +20,6 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   grid-row-gap: $vertical-space;
   grid-template-columns: min-content min-content;
   grid-template-areas:
-          "header header"
           "image image"
           "buttonClose buttonCatalog";
   transition: transform 300ms ease-in-out;
@@ -39,23 +38,6 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
     }
   }
 
-  p {
-    font-size: 1.6rem;
-  }
-
-  a {
-    padding-top: 0.5rem;
-    display: inline-block;
-    color: darken($yellow, 30%);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-size: 0.8rem;
-  }
-
-  &__header {
-    grid-area: header;
-  }
-
   &__image {
     width: 100%;
     grid-area: image;
@@ -71,7 +53,6 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       text-transform: uppercase;
       text-decoration: underline;
       font-size: 1rem;
-      cursor: url($pointer-url), pointer;
       letter-spacing: 0.1rem;
       background: none;
 
@@ -92,7 +73,6 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       padding: 1rem 2rem;
       color: white;
 
-      cursor: url($pointer-url), pointer;
       animation: shadow-pulse 1s infinite;
       transition: transform 300ms ease-in-out;
 
@@ -110,15 +90,5 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         animation-duration: 0s;
       }
     }
-  }
-}
-
-@keyframes shadow-pulse
-{
-  0% {
-    box-shadow: 0 0 0 0px rgba(255, 224, 125, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 10px rgba(255, 224, 125, 0);
   }
 }

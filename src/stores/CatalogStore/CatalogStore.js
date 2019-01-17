@@ -5,8 +5,7 @@ import ObjectTypeStore from "./ObjectTypeStore/ObjectTypeStore";
 const CatalogStore = types.model("CatalogStore", {
     objectTypes: types.array(ObjectTypeStore),
     isOpen: false,
-    objectKindPath: types.maybeNull(types.array(types.number)),
-    visiblePromo: false
+    objectKindPath: types.maybeNull(types.array(types.number))
 })
     .actions(self =>
         ({
@@ -17,9 +16,6 @@ const CatalogStore = types.model("CatalogStore", {
             closeCatalog() {
                 self.objectKindPath = null;
                 self.isOpen = false;
-            },
-            updatePromoVisibility(value) {
-                self.visiblePromo = value;
             }
         })
     )

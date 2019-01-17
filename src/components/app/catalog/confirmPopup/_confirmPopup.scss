@@ -1,0 +1,50 @@
+$default-cursor-url: "../../../../assets/img/cursor_default.svg";
+$green: #75E4A6;
+
+.confirmPopup {
+  &__buttonClose {
+    grid-area: buttonClose;
+    white-space: nowrap;
+    padding: 10px 5px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    background: none;
+
+    &:disabled {
+      cursor: url($default-cursor-url), default;
+    }
+  }
+
+  &__buttonCatalog {
+    grid-area: buttonCatalog;
+    white-space: nowrap;
+    border: none;
+    border-radius: 2rem;
+    background-color: $green;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    color: white;
+
+    animation: shadow-pulse 1s infinite;
+    transition: transform 300ms ease-in-out;
+
+    &:disabled {
+      animation-duration: 0s;
+      cursor: url($default-cursor-url), default;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      animation-duration: 0s;
+    }
+  }
+}
