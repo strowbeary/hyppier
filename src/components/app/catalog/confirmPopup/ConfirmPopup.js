@@ -5,18 +5,26 @@ import errorIcon from "./img/error_icon.png";
 
 const ConfirmPopup = observer(class ConfirmPopup extends Component {
 
-    constructor(props){
-        super(props);
+    onClose() {
+       this.props.onClose();
+    }
+
+    onCatalog() {
+       this.props.closeConfirmPopup();
     }
 
     render() {
+        let {infos, closeButtonLabel, returnCatalogButtonLabel} = this.props.product;
+
         return (
             <div className="confirmPopup">
-                <img src={errorIcon} alt="error"/>
-                <p>Veux-tu vraiment passer à côté de cette paire de patins à roulettes irrésistiblement vintage qui te rendra plus rapide que l'éclair ?</p>
-                <a href="" target="_blank" rel="noopener noreferrer">En savoir plus</a>
-                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()}>Oui, vive le vintage</button>
-                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()}>Non, retourner au catalogue</button>
+                <div className="confirmPopup__content">
+                    <img src={errorIcon} alt="error"/>
+                    <p>{infos[0].slogan}</p>
+                    <a href={infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                </div>
+                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()}>{closeButtonLabel}</button>
+                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()}>{returnCatalogButtonLabel}</button>
             </div>
         )
     }
