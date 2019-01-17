@@ -3,7 +3,7 @@ import CoordsStore from "./CoordsStore/CoordsStore";
 import CatalogStore from "../../../CatalogStore";
 
 export default types.model("LocationStore", {
-    previewObject: types.maybeNull(types.number),
+    previewObjectId: types.maybeNull(types.number),
     coordinates: CoordsStore,
     children: types.array(types.string)
 })

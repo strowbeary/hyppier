@@ -32,7 +32,7 @@ const CatalogStore = types.model("CatalogStore", {
                 return self.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]]
             },
             getEmptyLocation() {
-                let test =  self.objectTypes.map(objectType => {
+                return self.objectTypes.map(objectType => {
                     return objectType.objectKinds
                         .filter(objectKind => {
                             return objectKind.activeObject === null
@@ -42,8 +42,6 @@ const CatalogStore = types.model("CatalogStore", {
                             return objectKind;
                         })
                 }).flat();
-                console.log(test);
-                return test;
             },
             getAllObjectKindWithActiveObject() {
                 return self.objectTypes.map(objectType => {

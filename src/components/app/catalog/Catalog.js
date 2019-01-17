@@ -3,12 +3,8 @@ import React, {Component} from "react";
 import icon_close from "./img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import {CSSTransitionGroup} from "react-transition-group";
-import CameraStore from "../../../stores/CameraStore";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {CameraManager} from "../GameCanvas/CameraManager";
-import placeholder from "./img/placeholder.png";
-import ConfirmPopup from "./confirmPopup/ConfirmPopup";
+
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -20,41 +16,32 @@ const Catalog = observer(class Catalog extends Component {
         this.hasPreviousGeneration = this.objectKind.activeObject !== null;
         if(this.hasPreviousGeneration) {
             this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
-            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1, 0);
+            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1);
             this.path.push(this.objectKind.activeObject+1);
         } else {
             this.productNew = this.objectKind.objects[0];
-            this.objectKind.location.setPreviewObject(0, 0);
+            this.objectKind.location.setPreviewObject(0);
             this.path.push(0);
         }
-        this.productNew.thumbnailUrl = placeholder;
     }
 
     componentDidMount() {
-        CameraStore.setTarget(
-            this.productNew.getModel().mesh.name,
-            CameraManager.CATALOG_OFFSET
-        );
-    }
-
-    componentWillUnmount() {
-        this.objectKind.location.removePreviewObject();
     }
 
     onClose() {
-
+        CatalogStore.closeCatalog();
+        this.objectKind.location.removePreviewObject();
     }
 
     onValidate() {
         if (this.objectKind.activeObject !== null) {
-            this.objectKind.setActiveObject(this.objectKind.activeObject + 1, 0);
+            this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
         } else {
-            this.objectKind.setActiveObject(0, 0);
+            this.objectKind.setActiveObject(0);
         }
         GameStore.hype.setLevelByDiff(0.1);
         //skip generation
         this.props.onClose();
-        CameraStore.setTarget();
         this.objectKind.location.removePreviewObject();
     }
 

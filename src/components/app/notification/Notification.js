@@ -60,10 +60,7 @@ const Notification = observer(class Notification extends Component {
             ),
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(
-                this.scene.activeCamera.getEngine().getRenderWidth(),
-                this.scene.activeCamera.getEngine().getRenderHeight()
-            )
+            this.scene.activeCamera.viewport.toGlobal(this.scene.activeCamera.getEngine())
         );
     }
 

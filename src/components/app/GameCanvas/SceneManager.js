@@ -13,7 +13,7 @@ export class SceneManager {
             canvas,
             true,
             { preserveDrawingBuffer: true, stencil: true },
-            false
+            true
         );
         this.scene = new BABYLON.Scene(this.engine);
         this.cameraManager = new CameraManager(this.scene);
@@ -24,7 +24,7 @@ export class SceneManager {
         this.scene.shadowsEnabled = true;
 
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
-        defaultPipeline.samples = 4;
+        defaultPipeline.samples = 8;
         defaultPipeline.fxaaEnabled = true;
         defaultPipeline.grainEnabled = true;
         defaultPipeline.grain.intensity = 0.5;

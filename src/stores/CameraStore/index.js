@@ -9,6 +9,7 @@ export default types.model("CameraStore", {
     .actions(self =>
         ({
             setTarget(meshName = "", offset = new BABYLON.Vector3(0, 0, 0)) {
+                console.log(meshName);
                 self.meshName = meshName;
                 self.offset = CoordsStore.create({
                     x: offset.x,

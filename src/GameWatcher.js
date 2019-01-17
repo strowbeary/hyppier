@@ -1,5 +1,7 @@
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {onPatch} from "mobx-state-tree";
+import CameraStore from "./stores/CameraStore";
+import {CameraManager} from "./components/app/GameCanvas/CameraManager";
 
 export class GameWatcher {
 
@@ -10,6 +12,7 @@ export class GameWatcher {
             resolve(
                 CatalogStore.objectTypes.forEach(objectType => {
                     objectType.objectKinds.forEach(objectKind => {
+                        let oldPreviewObjectId = null;
                         onPatch(objectKind, patch => {
                             try {
                                 console.log(objectKind.name, patch);
@@ -35,11 +38,36 @@ export class GameWatcher {
                                      * New object
                                      */
                                     const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                    console.log(lambdaMesh.mesh.name);
                                     lambdaMesh.mesh.position = objectKind.location.toVector3();
                                     GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, null));
                                 }
+                                if (patch.path.includes("previewObjectId")) {
+                                    if (patch.value !== null) {
+                                        oldPreviewObjectId = objectKind.location.previewObjectId;
+                                        let oldLambdaMesh = null;
+                                        if (objectKind.activeObject !== null) {
+                                            oldLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
+                                        }
+                                        const lambdaMesh = objectKind.objects[objectKind.location.previewObjectId].getModel();
+                                        lambdaMesh.mesh.position = objectKind.location.toVector3();
+                                        console.log("MESH", lambdaMesh.mesh.name);
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh));
+                                        CameraStore.setTarget(
+                                            lambdaMesh.mesh.name,
+                                            CameraManager.CATALOG_OFFSET
+                                        );
 
+                                    } else {
+                                        const lambdaMesh = objectKind.objects[oldPreviewObjectId].getModel();
+                                        CameraStore.setTarget();
+                                        let activeLambdaMesh = null;
+                                        if (objectKind.activeObject !== null) {
+                                            activeLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
+                                        }
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh));
+                                        oldPreviewObjectId = null;
+                                    }
+                                }
 
                             } catch (e) {
                                 console.error(e);

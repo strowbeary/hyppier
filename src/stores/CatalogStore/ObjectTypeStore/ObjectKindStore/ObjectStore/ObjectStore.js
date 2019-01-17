@@ -6,6 +6,7 @@ const meshShelf = [];
 export default types.model("ObjectStore", {
     name: types.string,
     adUrl: types.string,
+    thumbnailUrl: types.string,
     closeButtonLabel: types.string,
     returnCatalogButtonLabel: types.string,
     catalogSlogan: types.string,

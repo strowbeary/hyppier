@@ -40,10 +40,7 @@ export default observer(class EmptySpace extends Component {
             this.objectKind.location.toVector3(),
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(
-                this.scene.activeCamera.getEngine().getRenderWidth(),
-                this.scene.activeCamera.getEngine().getRenderHeight()
-            )
+            this.scene.activeCamera.viewport.toGlobal(this.scene.activeCamera.getEngine())
         );
     }
 

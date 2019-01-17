@@ -9,7 +9,7 @@ export class MeshManager {
             if (newLambdaMesh !== null && oldLambdaMesh !== null) {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
-                oldLambdaMesh.mesh.dispose();
+                this.scene.removeMesh(oldLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
             } else if (
                 newLambdaMesh !== null &&
@@ -20,7 +20,7 @@ export class MeshManager {
                 this.scene.addMesh(newLambdaMesh.mesh);
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
-                oldLambdaMesh.mesh.dispose();
+                this.scene.removeMesh(oldLambdaMesh.mesh);
             }
         } catch (e) {
             console.error(e);

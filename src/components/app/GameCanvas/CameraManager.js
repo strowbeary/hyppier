@@ -2,7 +2,7 @@ import * as BABYLON from "babylonjs";
 
 export class CameraManager {
 
-    static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0.4, 0);
+    static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0, 0);
 
     initialValues = {
         width: window.innerWidth,
