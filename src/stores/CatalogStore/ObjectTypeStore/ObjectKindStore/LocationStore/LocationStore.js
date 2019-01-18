@@ -17,6 +17,11 @@ export default types.model("LocationStore", {
             },
             addChild(objectKindName) {
                 self.children.push(objectKindName);
+                self.children
+                    .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
+                    .forEach(childLocation=> {
+                        childLocation.setPosition(childLocation.toVector3().add(self.coordinates.toVector3()))
+                    })
             },
             setPosition(vector3) {
                 const oldCoordinates = self.coordinates.toVector3();
@@ -28,7 +33,7 @@ export default types.model("LocationStore", {
                 self.children
                     .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
                     .forEach(childLocation=> {
-                        childLocation.setPosition(childLocation.toVector3().add(vector3.subtract(oldCoordinates)))
+                        childLocation.setPosition(childLocation.toVector3().add(vector3))
                     })
             }
         })

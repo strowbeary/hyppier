@@ -60,29 +60,31 @@ export class CameraManager {
             toPosition = mesh.position.clone();
         }
         const fromDistance = this.distance;
-        console.log("CAMERA", mesh.name, toPosition, toDistance);
         toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
         let fromPosition = this.camera.target;
-
+        if(this.animationRequest) {
+            cancelAnimationFrame(this.animationRequest);
+        }
         const animation = () => {
-            this.distance = this.distance + (Math.abs(fromDistance - toDistance) / 60) * (toDistance - this.distance);
+            this.distance = this.distance + 0.1 * (toDistance - this.distance);
 
             this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
             this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
-
-            console.log(Math.abs(this.distance-toDistance).toFixed(3));
-            this.updateCamera();
-            if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0) {
-                animationRequest = requestAnimationFrame(animation)
+            console.log(Math.abs(this.distance-toDistance).toFixed(3), BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4));
+            if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || 
+                BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
+            ) {
+                this.updateCamera();
+                this.animationRequest = requestAnimationFrame(animation)
             } else {
-                console.log("CANCELED");
-                cancelAnimationFrame(animationRequest);
+                cancelAnimationFrame(this.animationRequest);
+                this.animationRequest = null;
             }
         };
-        let animationRequest = requestAnimationFrame(animation);
+        this.animationRequest = requestAnimationFrame(animation);
 
     }
 

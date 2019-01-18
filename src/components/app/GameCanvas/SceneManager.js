@@ -27,7 +27,7 @@ export class SceneManager {
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
-        defaultPipeline.grainEnabled = false;
+        defaultPipeline.grainEnabled = true;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         const ambient = 0.5;
