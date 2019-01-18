@@ -22,7 +22,7 @@ export default observer(class GameCanvas extends React.Component {
         this.setState({
             ready: true
         });
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => this.updateTrackingPosition());
+        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => GameCanvas.updateTrackingPosition());
     }
 
     onResize() {
@@ -30,10 +30,10 @@ export default observer(class GameCanvas extends React.Component {
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
         this.scene.activeCamera.getProjectionMatrix(true);
-        this.updateTrackingPosition();
+        GameCanvas.updateTrackingPosition();
     }
 
-    updateTrackingPosition() {
+    static updateTrackingPosition() {
         EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
         Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
     }

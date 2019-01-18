@@ -1,4 +1,5 @@
 import * as BABYLON from "babylonjs";
+import GameCanvas from "./index";
 
 export class CameraManager {
 
@@ -59,7 +60,7 @@ export class CameraManager {
             toPosition = mesh.position.clone();
         }
 
-        console.log("CAMERA", mesh.name, toPosition, toDistance);
+        //console.log("CAMERA", mesh.name, toPosition, toDistance);
         toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
@@ -73,11 +74,11 @@ export class CameraManager {
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
 
             this.updateCamera();
-            console.log(fromPosition, ">", toPosition);
+            //console.log(fromPosition, ">", toPosition);
             if (this.distance !== toDistance) {
                 animationRequest = requestAnimationFrame(animation)
             } else {
-                console.log("CANCELED");
+                //console.log("CANCELED");
                 cancelAnimationFrame(animationRequest);
             }
         };

@@ -6,6 +6,7 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import PopupStore from "../../../stores/PopupStore/PopupStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import placehoder from "./img/popup_placeholder.png";
+import {SceneManager} from "../GameCanvas/SceneManager";
 
 const Popup = observer(class Popup extends Component {
 
@@ -39,8 +40,8 @@ const Popup = observer(class Popup extends Component {
         Popup.popupRef = Popup.popupRef.filter(popup => popup.current !== null);
         this.setState({
             draggablePosition: {
-                top: PopupStore.firstPosition.y - height,
-                left: PopupStore.firstPosition.x - width / 2,
+                top: (PopupStore.firstPosition.y - height) / SceneManager.DEVICE_PIXEL_RATIO,
+                left: (PopupStore.firstPosition.x - width / 2) / SceneManager.DEVICE_PIXEL_RATIO,
                 transform: "scale(0)",
                 visibility: "hidden"
             },

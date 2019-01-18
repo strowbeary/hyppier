@@ -35,7 +35,8 @@ const Notification = observer(class Notification extends Component {
                 let {x, y} = this.state.position;
                 PopupStore.firstPosition.setPosition({x, y});
                 PopupStore.addPopup(this.path);
-            }});
+            }
+        });
     }
 
     componentDidMount() {
@@ -61,7 +62,10 @@ const Notification = observer(class Notification extends Component {
             ),
             BABYLON.Matrix.Identity(),
             this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(this.scene.activeCamera.getEngine())
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
         );
     }
 
@@ -72,31 +76,49 @@ const Notification = observer(class Notification extends Component {
     }
 
     render() {
-        let {x, y} = this.state.position;
+        let {x, y} = BABYLON.Vector3.Project(
+            this.objectKind.location.toVector3().add(
+                new BABYLON.Vector3(
+                    0,
+                    this.objectKind.objects[this.objectKind.activeObject].getModel().mesh.getBoundingInfo().boundingBox.maximum.y * this.lambdaMesh.mesh.scaling.y + 0.20,
+                    0
+                )
+            ),
+            BABYLON.Matrix.Identity(),
+            this.scene.getTransformMatrix(),
+            this.scene.activeCamera.viewport.toGlobal(
+                this.scene.activeCamera.getEngine().getRenderWidth(),
+                this.scene.activeCamera.getEngine().getRenderHeight()
+            )
+        );
+
+        if (isNaN(x) && isNaN(y)) {
+            x = 0;
+            y = 0;
+        }
 
         x /= SceneManager.DEVICE_PIXEL_RATIO;
         y /= SceneManager.DEVICE_PIXEL_RATIO;
 
-        const size = 30;
-        const dashSize = 2 * Math.PI * size;
-        const rayon = (size - (3 / 2)) / 2;
+        const dashSize = Math.PI * 60;
 
-        let hide = (CatalogStore.isOpen || !this.timer.running) ? 'hide': '';
+        let hide = (CatalogStore.isOpen || !this.timer.running) ? 'hide' : '';
         let style = {
-            'top': y - size / 2,
-            'left': x - size / 2
+            'top': y - 15,
+            'left': x - 15
         };
 
+
         return (
-            <div className={`notification ${hide}`} style={style} onClick={() => this.buildCatalog()}>
-                <div className={`notification ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}>
-                    <svg height={size + 2} width={size + 2}>
-                        <circle cx={size / 2} cy={size / 2} r={rayon} stroke="red" strokeWidth="2" fill="transparent"
-                                strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
-                                strokeDasharray={dashSize}/>
-                        <circle cx={size / 2} cy={size / 2} r={rayon - 5} fill="red"/>
-                    </svg>
-                </div>
+            <div
+                className={`notification ${hide} ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}
+                style={style} onClick={() => this.buildCatalog()}>
+                <svg height={32} width={32}>
+                    <circle cx={15} cy={15} r={14.25} stroke="red" strokeWidth="2" fill="transparent"
+                            strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
+                            strokeDasharray={dashSize}/>
+                    <circle cx={15} cy={15} r={9.25} fill="red"/>
+                </svg>
             </div>
         )
     }
