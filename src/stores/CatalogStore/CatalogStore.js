@@ -35,9 +35,13 @@ const CatalogStore = types.model("CatalogStore", {
                 return self.objectTypes.map(objectType => {
                     return objectType.objectKinds
                         .filter(objectKind => {
-                            return objectKind.activeObject === null
+                            if (objectKind.activeObject === null) {
+                                if (typeof objectKind.location !== "undefined") {
+                                    return true;
+                                }
+                            }
+                            return false;
                         })
-                        .filter(objectKind =>  typeof objectKind.location !== "undefined")
                         .map(objectKind => {
                             return objectKind;
                         })

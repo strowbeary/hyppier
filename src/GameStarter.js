@@ -4,7 +4,7 @@ import CatalogStore from "./stores/CatalogStore/CatalogStore";
 export class GameStarter {
     static async loadRoom(scene) {
         const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(
-            "/models/",
+            "./models/",
             "room.babylon"
         );
         return container.meshes.forEach(loadedMesh => {

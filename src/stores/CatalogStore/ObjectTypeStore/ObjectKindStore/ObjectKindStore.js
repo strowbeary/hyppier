@@ -8,7 +8,7 @@ import CoordsStore from "./LocationStore/CoordsStore/CoordsStore";
 
 function loadObject(objectKind) {
     BABYLON.SceneLoader.LoadAssetContainerAsync(
-        "/models/",
+        "./models/",
         objectKind.objects[objectKind.activeObject].modelUrl
     ).then((container) => {
         container.meshes.forEach(loadedMesh => {
@@ -28,7 +28,7 @@ function preloadNextObject(objectKind) {
     const objectIndex = (objectKind.activeObject === null) ? 0 : (objectKind.activeObject + 1);
     if (objectIndex < objectKind.objects.length) {
         BABYLON.SceneLoader.LoadAssetContainerAsync(
-            "/models/",
+            "./models/",
             objectKind.objects[objectIndex].modelUrl
         ).then((container) => {
             container.meshes.forEach(loadedMesh => {

@@ -14,6 +14,7 @@ export class GameWatcher {
                     objectType.objectKinds.forEach(objectKind => {
                         let oldPreviewObjectId = null;
                         onPatch(objectKind, patch => {
+                            console.log(patch);
                             try {
                                 console.log(objectKind.name, patch);
                                 if (patch.path === "/location/coordinates") {

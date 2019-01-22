@@ -28,6 +28,10 @@ export class SceneManager {
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
         defaultPipeline.grainEnabled = true;
+        defaultPipeline.grain.intensity = 10;
+        defaultPipeline.imageProcessingEnabled = true;
+
+        const pipeline = new BABYLON.SSAORenderingPipeline("default", this.scene,1.0, [this.camera]);
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         const ambient = 0.5;
