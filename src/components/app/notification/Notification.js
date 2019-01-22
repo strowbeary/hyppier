@@ -114,10 +114,10 @@ const Notification = observer(class Notification extends Component {
                 className={`notification ${hide} ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`}
                 style={style} onClick={() => this.buildCatalog()}>
                 <svg height={32} width={32}>
-                    <circle cx={15} cy={15} r={14.25} stroke="red" strokeWidth="2" fill="transparent"
+                    <circle cx={15} cy={15} r={14.25} stroke="black" strokeWidth="2" fill="transparent"
                             strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
                             strokeDasharray={dashSize}/>
-                    <circle cx={15} cy={15} r={9.25} fill="red"/>
+                    <circle cx={15} cy={15} r={9.25} fill="black"/>
                 </svg>
             </div>
         )

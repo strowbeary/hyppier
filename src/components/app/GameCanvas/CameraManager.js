@@ -1,5 +1,4 @@
 import * as BABYLON from "babylonjs";
-import GameCanvas from "./index";
 
 export class CameraManager {
 
@@ -59,7 +58,7 @@ export class CameraManager {
             )) * 2.5);
             toPosition = mesh.position.clone();
         }
-        const fromDistance = this.distance;
+
         toPosition.addInPlace(offset);
 
         this.distance = Math.round(this.distance);
@@ -73,7 +72,6 @@ export class CameraManager {
             this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
             this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
-            console.log(Math.abs(this.distance-toDistance).toFixed(3), BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4));
             if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || 
                 BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
             ) {
