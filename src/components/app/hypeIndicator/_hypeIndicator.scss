@@ -10,36 +10,32 @@ $yellow: #FFE07D;
   align-items: center;
   height: 100vh;
 
-  &__label {
-    font-size: 100px;
-    font-weight: bold;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    text-transform: uppercase;
-    color: transparent;
+  &__level {
+    display: block;
+    width: 50px;
+    height: 200px;
+    border-radius: 25px;
+    background-color: white;
     background-image: url("./img/wave.svg");
     background-repeat: repeat-x;
-    background-position: left bottom;
-    background-clip: text;
+    background-size: auto 100%;
     animation: animate 1s linear infinite alternate;
     transition: all 1s linear;
-    -webkit-text-stroke-width: 4px;
-    -webkit-text-stroke-color: #575757;
+    border: solid 3px white;
   }
-
 }
 
 @keyframes animate {
   0% {
-    background-position: left 0 bottom 0;
+    background-position-x: 0;
   }
   40% {
-    background-position: left 50% bottom 0;
+    background-position-x: 50%;
   }
   80% {
-    background-position: left 0 bottom 0;
+    background-position-x: 0;
   }
   100% {
-    background-position: left 50% bottom 0;
+    background-position-x: 50%;
   }
 }
