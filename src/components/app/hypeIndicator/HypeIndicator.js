@@ -7,7 +7,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
     render() {
         let style = {
-          backgroundPositionY: `${GameStore.hype.level * 200}px`
+          backgroundPositionY: `${200 - (200*GameStore.hype.level)}px`
         };
 
         return (
