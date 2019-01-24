@@ -45,7 +45,7 @@ export class SceneManager {
                 EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
                 Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
             })
-            .watch(this.scene)
+            .watch()
             .then(() => {
                 GameStarter.init(this.scene)
                     .then(/*() => onReadyCB()*/);

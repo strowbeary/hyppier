@@ -5,7 +5,9 @@ import CatalogStore from "../../../CatalogStore";
 export default types.model("LocationStore", {
     previewObjectId: types.maybeNull(types.number),
     coordinates: CoordsStore,
-    children: types.array(types.string)
+    children: types.array(types.string),
+    firstPosition: false,
+    parent: types.maybe(types.string)
 })
     .actions(self =>
         ({
@@ -15,25 +17,34 @@ export default types.model("LocationStore", {
             removePreviewObject() {
                 self.previewObjectId = null;
             },
-            addChild(objectKindName) {
-                self.children.push(objectKindName);
-                self.children
-                    .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
-                    .forEach(childLocation=> {
-                        childLocation.setPosition(childLocation.toVector3().add(self.coordinates.toVector3()))
-                    })
+            addChild(objectKindName, parentKindName) {
+                if (self.children.indexOf(objectKindName) === -1) {
+                    self.children.push(objectKindName);
+                    CatalogStore.getObjectKind(objectKindName).location.setParent(parentKindName);
+                }
+            },
+            setParent(objectKindName) {
+                self.parent = objectKindName;
             },
             setPosition(vector3) {
+                let vector = vector3;
+                if (!self.firstPosition) {
+                    self.firstPosition = true;
+                    if (self.parent) {
+                        vector = CatalogStore.getObjectKind(self.parent).location.toVector3().add(vector3);
+                    }
+                }
                 const oldCoordinates = self.coordinates.toVector3();
                 self.coordinates = CoordsStore.create({
-                    x: vector3.x,
-                    y: vector3.y,
-                    z: vector3.z
+                    x: vector.x,
+                    y: vector.y,
+                    z: vector.z
                 });
+                const finalVector = oldCoordinates.add(vector);
                 self.children
                     .map(objectKindName => CatalogStore.getObjectKind(objectKindName).location)
                     .forEach(childLocation=> {
-                        childLocation.setPosition(childLocation.toVector3().add(vector3))
+                        childLocation.setPosition(childLocation.toVector3().add(finalVector));
                     })
             }
         })
