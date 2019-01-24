@@ -6,6 +6,8 @@ import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import EmptySpace from "../emptySpace/EmptySpace";
 import Notification from "../notification/Notification";
+import {AtticManager} from "./AtticManager";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -38,9 +40,13 @@ export class SceneManager {
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
         this.meshManager = new MeshManager(this.scene, lights);
+        this.atticManager = new AtticManager(this.scene);
 
         GameWatcher
             .onUpdate((newMesh, oldMesh) => {
+                if (oldMesh && !CatalogStore.isOpen) {
+                    this.atticManager.createCarton(oldMesh.mesh);
+                }
                 this.meshManager.patch(newMesh, oldMesh);
                 EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
                 Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
@@ -48,7 +54,9 @@ export class SceneManager {
             .watch()
             .then(() => {
                 GameStarter.init(this.scene)
-                    .then(/*() => onReadyCB()*/);
+                    .then(() => {
+                        this.atticManager.prepareGravity()
+                    });
             });
 
         this.engine.runRenderLoop(() => {
