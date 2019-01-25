@@ -11,8 +11,11 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         };
 
         return (
-           <div className="hypeIndicator">
-               <div className="hypeIndicator__level" style={style}></div>
+           <div className="gameIndicator">
+               <div className="gameIndicator__wrapper">
+                   <div className="gameIndicator__hypeLevel" style={style}></div>
+                   <div className={`pipo ${GameStore.pipo}`}></div>
+               </div>
            </div>
         )
     }

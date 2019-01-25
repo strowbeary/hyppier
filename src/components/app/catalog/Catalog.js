@@ -45,6 +45,18 @@ const Catalog = observer(class Catalog extends Component {
         })
     }
 
+    pipoYes() {
+        GameStore.setPipo("yes");
+    }
+
+    pipoNo() {
+        GameStore.setPipo("no");
+    }
+
+    pipoStop() {
+        GameStore.setPipo("");
+    }
+
     onValidate() {
         if (this.objectKind.activeObject !== null) {
             this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
@@ -67,12 +79,13 @@ const Catalog = observer(class Catalog extends Component {
                 >
                     {this.state.confirmVisibility &&
                     <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
-                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}/>
+                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
+                                  pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
                     }
                 </CSSTransitionGroup>
                 <div className="catalog__header">
                     <span>Catalogue</span>
-                    <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)}>
+                    <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>
                         <img src={icon_close} alt="close_icon"/>
                     </button>
                 </div>
@@ -92,7 +105,7 @@ const Catalog = observer(class Catalog extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={`catalog__footer`} onClick={() => this.onValidate()}>
+                <div className={`catalog__footer`} onClick={() => this.onValidate()} onMouseOver={() => this.pipoYes()} onMouseLeave={() => this.pipoStop()}>
                     <button className="catalog__footer__validation">
                         Oui, je craque !
                     </button>

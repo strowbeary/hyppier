@@ -166,6 +166,18 @@ const Popup = observer(class Popup extends Component {
         //update object with "PROMO" effect
     }
 
+    pipoYes() {
+        GameStore.setPipo("yes");
+    }
+
+    pipoNo() {
+        GameStore.setPipo("no");
+    }
+
+    pipoStop() {
+        GameStore.setPipo("");
+    }
+
     render() {
         let disabled = this.state.focus ? '' : 'disabled';
         let buttonsDisabled = !this.state.focus && !this.state.hovered;
@@ -177,9 +189,9 @@ const Popup = observer(class Popup extends Component {
                  onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>
                 <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}
-                        ref={this.buttonClose}>Bof, pas intéressé(e)</button>
+                        ref={this.buttonClose} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)</button>
                 <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled}
-                        onClick={() => this.onCatalog()} ref={this.buttonCatalog}>Oh oui, je veux !</button>
+                        onClick={() => this.onCatalog()} ref={this.buttonCatalog} onMouseOver={() => this.pipoYes()} onMouseLeave={() => this.pipoStop()}>Oh oui, je veux !</button>
             </div>
         )
     }
