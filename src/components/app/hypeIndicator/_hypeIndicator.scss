@@ -34,10 +34,10 @@ $yellow: #FFE07D;
   bottom: -32px;
   width: 64px;
   height: 64px;
-  background: url('./img/monster.png') left center;
-  background-size: 640px 64px;
-  transform: scale(1);
+  transform: scale(0.5);
   transition: scale 1s ease-in;
+  background: url('./img/Pipo-Idle.png') left center;
+  animation: playX 2s steps(10) infinite, playY 2.4s steps(12) infinite;
 
   &.happy {
     //do not make this infinite
@@ -48,18 +48,35 @@ $yellow: #FFE07D;
   }
 
   &.yes {
-    transform: scale(2);
-    animation: play 0.8s steps(10) infinite;
+    background: url('./img/Pipo-Yes.png') left center;
+    transform: scale(1);
+    animation: playXNo 0.1s steps(7) infinite, playYNo 0.9s steps(9) infinite;
+
   }
 
   &.no {
-    transform: scale(2);
-    animation: play 0.8s steps(10) infinite;
+    background: url('./img/Pipo-No.png') left center;
+    transform: scale(1);
+    animation: playXNo 0.1s steps(7) infinite, playYNo 0.9s steps(9) infinite;
   }
 }
 
-@keyframes play {
-  100% { background-position: -640px; }
+@keyframes playXNo {
+  from {background-position-x: 0;}
+  to {background-position-x: -448px;}
+}
+@keyframes playYNo {
+  from {background-position-y: 0;}
+  to {background-position-y: -576px;}
+}
+
+@keyframes playX {
+  from {background-position-x: 0;}
+  to {background-position-x: -640px;}
+}
+@keyframes playY {
+  from {background-position-y: 0;}
+  to {background-position-y: -768px;}
 }
 
 @keyframes animate {

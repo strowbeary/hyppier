@@ -14,11 +14,11 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
     }
 
     onCloseOver() {
-        this.props.pipoYes();
+        this.props.pipoNo();
     }
 
     onCatalogOver() {
-        this.props.pipoNo();
+        this.props.pipoYes();
     }
 
     onMouseOut() {
