@@ -43,8 +43,8 @@ export class SceneManager {
         this.atticManager = new AtticManager(this.scene);
 
         GameWatcher
-            .onUpdate((newMesh, oldMesh) => {
-                if (oldMesh && !CatalogStore.isOpen) {
+            .onUpdate((newMesh, oldMesh, isReplacement) => {
+                if (isReplacement) {
                     this.atticManager.createCarton(oldMesh.mesh);
                 }
                 this.meshManager.patch(newMesh, oldMesh);
