@@ -25,6 +25,9 @@ export default types
         }
     })
     .actions(self => ({
+        setDuration(duration) {
+            self.duration =  duration
+        },
         _loop() {
             self.metaElapsedTime = GameStore.hype.level * (performance.now() - self.startTime);
             if (self.metaElapsedTime >= self.duration) {

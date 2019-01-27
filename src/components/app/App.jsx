@@ -9,13 +9,38 @@ import Message from "./message/Message"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import PopupStore from "../../stores/PopupStore/PopupStore"
 import Popup from "./popup/Popup"
+import Toast from "./toast/Toast";
+import TimerStore from "../../stores/TimerStore/TimerStore";
+import {onPatch} from "mobx-state-tree";
 
 const App = observer(class App extends Component {
 
-    state = {catalogShow: false, message: null};
+    state = {message: null, toast: false};
+
+    constructor(props) {
+        super(props);
+        this.timer = TimerStore.create(3000);
+        this.timer.start();
+        onPatch(this.timer, patch => {
+            if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
+                if (this.state.toast) {
+                    this.setState({toast: false});
+                    let random = Math.round(Math.random() * 3000 + 500);
+                    this.timer.setDuration(random);
+                    this.timer.stop();
+                    this.timer.start();
+                } else {
+                    this.setState({toast: true});
+                    this.timer.setDuration(3000);
+                    this.timer.stop();
+                    this.timer.start();
+                }
+            }
+        });
+    }
 
     componentDidMount() {
-        this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
+        this.setState({message: "Tu peux désormais accéder à ton grenier."});
     }
 
     testChangeObject() {
@@ -27,10 +52,6 @@ const App = observer(class App extends Component {
         }
     }
 
-    onClose() {
-        this.setState({catalogShow: false});
-    }
-
     render() {
         return (
             <div id="app">
@@ -39,17 +60,23 @@ const App = observer(class App extends Component {
                 {this.state.message &&
                     <Message message={this.state.message}/>
                 }
-                {PopupStore.activePopup.map(path => {
-                    return Popup.createPopup(path);
-                })}
+                <CSSTransitionGroup
+                    transitionName="catalog"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {this.state.toast &&
+                        <Toast></Toast>
+                    }
+                </CSSTransitionGroup>
                 <CSSTransitionGroup
                     transitionName="grow"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    {PopupStore.catalogPopup &&
-                        <Popup path={PopupStore.catalogPopup}/>
-                    }
+                    {PopupStore.activePopup.map(path => {
+                        return Popup.createPopup(path);
+                    })}
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
                     transitionName="catalog"
