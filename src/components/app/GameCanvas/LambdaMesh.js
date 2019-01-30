@@ -16,13 +16,24 @@ export class LambdaMesh {
         }
     }
 
+    addClone() {
+        this.clone = this.mesh.clone("clone");
+        this.clone.position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y, this.mesh.position.z);
+    }
+
     cloneMaterial() {// Need to clone material before animation
         if (this.multimaterial) {
             for (let i = 0; i < this.mesh.material.subMaterials.length; i++) {
                 this.mesh.material.subMaterials[i] = this.mesh.material.subMaterials[i].clone();
+                if (this.clone) {
+                    this.clone.material.subMaterials[i] = this.mesh.material.subMaterials[i].clone();
+                }
             }
         } else {
             this.mesh.material = this.mesh.material.clone();
+            if (this.clone) {
+                this.clone.material = this.clone.material.clone();
+            }
         }
     }
 

@@ -45,6 +45,9 @@ export class SceneManager {
         GameWatcher
             .onUpdate((newMesh, oldMesh, isReplacement) => {
                 if (isReplacement) {
+                    if (oldMesh.clone) {
+                        this.atticManager.createCarton(oldMesh.mesh);
+                    }
                     this.atticManager.createCarton(oldMesh.mesh);
                 }
                 this.meshManager.patch(newMesh, oldMesh);

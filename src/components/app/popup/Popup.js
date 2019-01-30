@@ -164,6 +164,7 @@ const Popup = observer(class Popup extends Component {
         GameStore.hype.setLevelByDiff(0.1);
         PopupStore.removePopup(this.props.path);
         //update object with "PROMO" effect
+        this.objectKind.objects[this.objectKind.activeObject].getModel().addClone();
     }
 
     pipoYes() {

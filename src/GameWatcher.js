@@ -14,9 +14,7 @@ export class GameWatcher {
                     objectType.objectKinds.forEach(objectKind => {
                         let oldPreviewObjectId = null;
                         onPatch(objectKind, patch => {
-                            console.log(patch);
                             try {
-                                console.log(objectKind.name, patch);
                                 if (patch.path === "/location/coordinates") {
                                     /**
                                      * Location changes
@@ -51,7 +49,6 @@ export class GameWatcher {
                                         }
                                         const lambdaMesh = objectKind.objects[objectKind.location.previewObjectId].getModel();
                                         lambdaMesh.mesh.position = objectKind.location.toVector3();
-                                        console.log("MESH", lambdaMesh.mesh.name);
                                         GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh));
                                         CameraStore.setTarget(
                                             lambdaMesh.mesh.name,
