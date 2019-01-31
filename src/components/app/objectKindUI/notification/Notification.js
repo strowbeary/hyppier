@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import {onPatch} from "mobx-state-tree";
-import TimerStore from "../../../stores/TimerStore/TimerStore";
-import PopupStore from "../../../stores/PopupStore/PopupStore";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import TimerStore from "../../../../stores/TimerStore/TimerStore";
+import PopupStore from "../../../../stores/PopupStore/PopupStore";
+import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 
 const Notification = observer(class Notification extends Component {
 

@@ -4,8 +4,8 @@ import "./_objectKindUI.scss";
 import * as BABYLON from "babylonjs";
 import {SceneManager} from "../GameCanvas/SceneManager";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import Notification from "../notification/Notification";
-import EmptySpace from "../emptySpace/EmptySpace";
+import Notification from "./notification/Notification";
+import EmptySpace from "./emptySpace/EmptySpace";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 

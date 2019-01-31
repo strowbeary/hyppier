@@ -10,11 +10,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Bureau",
           "modelUrl": "table.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
               "url": "http://localhost:8080"
             }
           ]
@@ -34,11 +34,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Tabouret",
           "modelUrl": "tabouret.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
               "url": "http://localhost:8080"
             }
           ]
@@ -58,11 +58,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Lit de camp",
           "modelUrl": "Bed_01_Camping.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Lit de camp !",
               "url": "http://localhost:8080"
             }
           ]
@@ -82,11 +82,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Macintosh",
           "modelUrl": "computer.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
               "url": "http://localhost:8080"
             }
           ]
@@ -106,11 +106,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Walkman",
           "modelUrl": "walkman.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Walkman !",
               "url": "http://localhost:8080"
             }
           ]
@@ -121,11 +121,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Ipod",
           "modelUrl": "ipod.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Ipod",
               "url": "http://localhost:8080"
             }
           ]
@@ -136,11 +136,11 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Et si tu remplaçais ce Macintosh 128K défraîchi et vieillissant par un nouveau modèle ?",
+          "catalogSlogan": "Je suis un super Casque",
           "modelUrl": "headset.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Patrick étoile de mer !",
+              "slogan": "N'attends plus tu risquerais de louper ce super Casque",
               "url": "http://localhost:8080"
             }
           ]
