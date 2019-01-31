@@ -10,8 +10,7 @@ export class GameWatcher {
     static watch() {
         return new Promise(resolve => {
             resolve(
-                CatalogStore.objectTypes.forEach(objectType => {
-                    objectType.objectKinds.forEach(objectKind => {
+                CatalogStore.objectKinds.forEach(objectKind => {
                         let oldPreviewObjectId = null;
                         onPatch(objectKind, patch => {
                             try {
@@ -31,7 +30,7 @@ export class GameWatcher {
                                 else if (patch.path.includes("activeObject") && patch.op === "replace" && objectKind.activeObject > 0) {
                                     const oldlambdaMesh = objectKind.objects[objectKind.activeObject - 1].getModel();
                                     const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectType));
+                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectKind.type));
                                 } else if (objectKind.activeObject !== null && patch.path.includes("model")) {
                                     /**
                                      * New object
@@ -71,8 +70,7 @@ export class GameWatcher {
                                 console.error(e);
                             }
                         });
-                    });
-                })
+                    })
             )
         })
 

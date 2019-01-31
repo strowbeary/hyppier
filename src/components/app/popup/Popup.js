@@ -10,13 +10,7 @@ import {SceneManager} from "../GameCanvas/SceneManager";
 
 const Popup = observer(class Popup extends Component {
 
-    static popupRef = [];
-
-    static createPopup(path) {
-        const ref = React.createRef();
-        Popup.popupRef.push(ref);
-        return <Popup ref={ref} path={path} key={path.toJSON()}/>;
-    }
+    static refs = [];
 
     startingPos = {};
     popup = React.createRef();
@@ -27,9 +21,7 @@ const Popup = observer(class Popup extends Component {
     constructor(props) {
         super(props);
 
-        this.path = props.path;
-        this.objectKind = CatalogStore.objectTypes[this.path[0]].objectKinds[this.path[1]];
-        const object = this.objectKind.objects[this.path[2]];
+        this.objectKind = CatalogStore.objectKinds[props.index];
 
         this.adUrl = placehoder;
         //this.adUrl = object.adUrl;
@@ -37,7 +29,7 @@ const Popup = observer(class Popup extends Component {
 
     componentDidMount() {
         let {height, width} = this.popup.current.getBoundingClientRect();
-        Popup.popupRef = Popup.popupRef.filter(popup => popup.current !== null);
+        Popup.refs = Popup.refs.filter(popup => popup !== null);
         this.setState({
             draggablePosition: {
                 top: (PopupStore.firstPosition.y - height) / SceneManager.DEVICE_PIXEL_RATIO,
@@ -45,7 +37,7 @@ const Popup = observer(class Popup extends Component {
                 transform: "scale(0)",
                 visibility: "hidden"
             },
-            focus: Popup.popupRef.length < 2,
+            focus: Popup.refs.length < 2,
             hovered: false
         });
     }
@@ -77,11 +69,7 @@ const Popup = observer(class Popup extends Component {
             }
         } else if (this.state.draggablePosition.transform && this.state.draggablePosition.transform === "scale(0)" && this.state.isClosing) {
             setTimeout(() => {
-                PopupStore.removePopup(this.props.path.toJSON());
-                if (this.objectKind.activeObject !== null) {
-                    GameStore.hype.setLevelByDiff(-0.1);
-                    this.objectKind.updateReplacementCounter();
-                }
+                PopupStore.removePopup(this.props.index);
                 CameraStore.setTarget();
             }, 500);
         }
@@ -98,10 +86,10 @@ const Popup = observer(class Popup extends Component {
     onDragStart(e) {
         if (e.target !== this.buttonClose.current && e.target !== this.buttonCatalog.current) {
             e.preventDefault();
-            Popup.popupRef = Popup.popupRef.filter(popup => popup.current !== null);
+            Popup.refs = Popup.refs.filter(popup => popup !== null);
             if (!this.focus) {
-                Popup.popupRef.forEach((popup) => {
-                    popup.current.changeFocus(false);
+                Popup.refs.forEach((popup) => {
+                    popup.changeFocus(false);
                 });
                 this.changeFocus(true);
             }
@@ -133,9 +121,9 @@ const Popup = observer(class Popup extends Component {
 
     onClose() {
         if (this.state.focus) {
-            Popup.popupRef = Popup.popupRef.filter(popup => popup.current !== null).filter((popup) => !popup.current.state.focus);
-            if (Popup.popupRef.length > 0) {
-                Popup.popupRef[0].current.changeFocus(true);
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
         }
         this.setState({
@@ -147,25 +135,22 @@ const Popup = observer(class Popup extends Component {
             },
             focus: false
         });
+        this.objectKind.updateReplacementCounter();
     }
 
     onCatalog() {
         if (this.state.focus) {
-            Popup.popupRef = Popup.popupRef.filter(popup => popup.current !== null).filter((popup) => !popup.current.state.focus);
-            if (Popup.popupRef.length > 0) {
-                Popup.popupRef[0].current.changeFocus(true);
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
         }
-        if (this.objectKind.activeObject !== null) {
-            this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
-        } else {
-            this.objectKind.setActiveObject(0);
-        }
-        GameStore.hype.setLevelByDiff(0.1);
-        PopupStore.removePopup(this.props.path);
         this.objectKind.updateReplacementCounter();
+        this.objectKind.setActiveObject(this.objectKind.replacementCounter);
+        GameStore.hype.setLevelByDiff(0.1);
+        PopupStore.removePopup(this.props.index);
         //update object with "PROMO" effect
-        this.objectKind.objects[this.objectKind.activeObject].getModel().addClone();
+        this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
     }
 
     pipoYes() {

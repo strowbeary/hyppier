@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree";
 import * as BABYLON from "babylonjs";
-import CoordsStore from "../CatalogStore/ObjectTypeStore/ObjectKindStore/LocationStore/CoordsStore/CoordsStore";
+import CoordsStore from "../CatalogStore/ObjectKindStore/LocationStore/CoordsStore/CoordsStore";
 
 export default types.model("CameraStore", {
     meshName: types.string,

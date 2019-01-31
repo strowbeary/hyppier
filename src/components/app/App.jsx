@@ -74,8 +74,8 @@ const App = observer(class App extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    {PopupStore.activePopup.map(path => {
-                        return Popup.createPopup(path);
+                    {PopupStore.activePopup.map(index => {
+                        return <Popup ref={ref => Popup.refs.push(ref)} index={index} key={index}/>;
                     })}
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
@@ -84,7 +84,7 @@ const App = observer(class App extends Component {
                     transitionLeaveTimeout={500}
                 >
                     {CatalogStore.isOpen &&
-                        <Catalog path={CatalogStore.objectKindPath}/>
+                        <Catalog index={CatalogStore.objectKindIndex}/>
                     }
                 </CSSTransitionGroup>
                 <button style={{

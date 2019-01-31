@@ -42,6 +42,7 @@ export class SceneManager {
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType) => {
+                console.log(objectKindType);
                 if (objectKindType) {
                     if (oldMesh.clone) {
                         this.atticManager.createCarton(oldMesh.mesh);

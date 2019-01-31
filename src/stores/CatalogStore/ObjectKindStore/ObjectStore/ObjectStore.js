@@ -10,7 +10,6 @@ export default types.model("ObjectStore", {
     closeButtonLabel: types.string,
     returnCatalogButtonLabel: types.string,
     catalogSlogan: types.string,
-    parcelSize: types.number,
     modelUrl: types.string,
     model: types.maybe(types.number),
     infos: types.array(InfoStore)

@@ -12,14 +12,13 @@ const Toast = observer(class Toast extends Component {
         faker.locale = "fr";
         this.username = faker.internet.userName();
         this.city = faker.address.city();
-        let random = Math.round(Math.random() * (CatalogStore.objectTypes.length - 1));
-        let catalogRandom = Math.round(Math.random() * (CatalogStore.objectTypes[random].objectKinds.length - 1));
-        let objectKind = CatalogStore.objectTypes[random].objectKinds[catalogRandom];
+        let random = Math.round(Math.random() * (CatalogStore.objectKinds.length - 1));
+        let objectKind = CatalogStore.objectKinds[random];
         let nextObject;
         if (objectKind.activeObject < objectKind.objects.length - 1) {
-            nextObject = CatalogStore.objectTypes[random].objectKinds[catalogRandom].objects[objectKind.activeObject + 1];
+            nextObject = CatalogStore.objectKinds[random].objects[objectKind.replacementCounter + 1];
         } else {
-            nextObject = CatalogStore.objectTypes[random].objectKinds[catalogRandom].objects[objectKind.activeObject];
+            nextObject = CatalogStore.objectKinds[random].objects[objectKind.replacementCounter];
         }
         this.objectName = nextObject.name;
     }

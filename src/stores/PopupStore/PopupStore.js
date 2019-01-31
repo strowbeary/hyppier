@@ -2,26 +2,26 @@ import {types} from "mobx-state-tree";
 import PositionStore from "./PositionStore/PositionStore";
 
 export default types.model("PopupStore", {
-    activePopup: types.maybeNull(types.array(types.array(types.number))),
+    activePopup: types.maybeNull(types.array(types.number)),
     firstPosition: PositionStore
 })
     .actions(self => ({
-        addPopup(objectPath) {
-            let index = self.activePopup.indexOf(objectPath);
+        addPopup(objectIndex) {
+            let index = self.activePopup.indexOf(objectIndex);
             if (index === -1) {
-                self.activePopup.push(objectPath);
+                self.activePopup.push(objectIndex);
             }
         },
-        removePopup(objectPath) {
-            let index = self.activePopup.indexOf(objectPath);
+        removePopup(objectIndex) {
+            let index = self.activePopup.indexOf(objectIndex);
             if (index !== -1) {
                 self.activePopup.splice(index, 1);
             }
         }
     }))
     .views(self => ({
-        isActivePopup(objectPath) {
-            return self.activePopup.indexOf(objectPath) > -1;
+        isActivePopup(objectIndex) {
+            return self.activePopup.indexOf(objectIndex) > -1;
         }
     }))
     .create({

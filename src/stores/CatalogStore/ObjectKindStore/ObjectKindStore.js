@@ -2,8 +2,8 @@ import {types} from "mobx-state-tree";
 import LocationStore from "./LocationStore/LocationStore";
 import ObjectStore from "./ObjectStore/ObjectStore";
 import * as BABYLON from "babylonjs";
-import CatalogStore from "../../CatalogStore";
-import {LambdaMesh} from "../../../../components/app/GameCanvas/LambdaMesh";
+import CatalogStore from "../CatalogStore";
+import {LambdaMesh} from "../../../components/app/GameCanvas/LambdaMesh";
 import CoordsStore from "./LocationStore/CoordsStore/CoordsStore";
 
 function loadObject(objectKind) {
@@ -50,7 +50,8 @@ export default types
         objectTimeout: types.number,
         replacementCounter: types.number,
         location: types.maybe(LocationStore),
-        activeObject: types.maybeNull(types.number)
+        activeObject: types.maybeNull(types.number),
+        type: types.string
     })
     .actions(self => ({
         afterCreate() {

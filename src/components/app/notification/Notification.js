@@ -12,7 +12,6 @@ const Notification = observer(class Notification extends Component {
         super(props);
         this.delayTimer = TimerStore.create(props.objectKind.objectTimeout);
         this.timer = TimerStore.create(props.objectKind.objectTimeout);
-        this.path = [...CatalogStore.findobjectKindPath(props.objectKind.name), props.objectKind.activeObject + 1];
         onPatch(this.delayTimer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
                 this.timer.start();
@@ -21,7 +20,7 @@ const Notification = observer(class Notification extends Component {
         onPatch(this.timer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
                 PopupStore.firstPosition.setPosition(props.position);
-                PopupStore.addPopup(this.path);
+                PopupStore.addPopup(CatalogStore.findobjectKindIndex(props.objectKind.name));
             }
         });
         this.startDelayTimer();

@@ -16,19 +16,12 @@ const Catalog = observer(class Catalog extends Component {
 
     constructor(props) {
         super(props);
-        this.path = props.path.toJSON();
-        this.productType = CatalogStore.objectTypes[this.path[0]];
-        this.objectKind = this.productType.objectKinds[this.path[1]];
-        this.hasPreviousGeneration = this.objectKind.activeObject !== null;
-        if (this.hasPreviousGeneration) {
-            this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
-            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1);
-            this.path.push(this.objectKind.activeObject + 1);
-        } else {
-            this.productNew = this.objectKind.objects[0];
-            this.objectKind.location.setPreviewObject(0);
-            this.path.push(0);
-        }
+        this.path = [props.index];
+        this.objectKind = CatalogStore.objectKinds[this.path[0]];
+        this.productType = this.objectKind.type;
+        this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
+        this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
+        this.path.push(this.objectKind.replacementCounter + 1);
     }
 
     componentDidMount() {
@@ -37,10 +30,12 @@ const Catalog = observer(class Catalog extends Component {
     onClose() {
         this.closeCatalog();
         this.updateConfirmVisibilty(false);
+        if (this.objectKind.replacementCounter > -1) {
+            this.objectKind.updateReplacementCounter();
+        }
     }
 
     closeCatalog() {
-        this.objectKind.updateReplacementCounter();
         CatalogStore.closeCatalog();
         ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(true));
         this.objectKind.location.removePreviewObject();
@@ -66,8 +61,8 @@ const Catalog = observer(class Catalog extends Component {
 
     onValidate() {
         this.objectKind.updateReplacementCounter();
-        if (this.objectKind.activeObject !== null) {
-            this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
+        if (this.objectKind.replacementCounter > 0) {
+            this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         } else {
             this.objectKind.setActiveObject(0);
         }
@@ -101,7 +96,7 @@ const Catalog = observer(class Catalog extends Component {
 
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">
-                            <p>{this.productType.name}</p>
+                            <p>{this.productType}</p>
                         </div>
                         <div className="catalog__content__main__productTitle">
                             <span>{this.productNew.name}</span>

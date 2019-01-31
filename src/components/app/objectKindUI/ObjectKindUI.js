@@ -20,7 +20,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         super(props);
         this.scene = props.scene;
         this.objectKind = props.objectKind;
-        this.objectKindPath = CatalogStore.findobjectKindPath(this.objectKind.name);
+        this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
     }
 
     changeVisibility(value) {
@@ -76,7 +76,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     buildCatalog() {
         ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(false));
-        CatalogStore.openCatalog(this.objectKindPath);
+        CatalogStore.openCatalog(this.objectKindIndex);
     }
 
     render() {

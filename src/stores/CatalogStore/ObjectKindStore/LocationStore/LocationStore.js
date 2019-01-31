@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree";
 import CoordsStore from "./CoordsStore/CoordsStore";
-import CatalogStore from "../../../CatalogStore";
+import CatalogStore from "../../CatalogStore";
 
 export default types.model("LocationStore", {
     previewObjectId: types.maybeNull(types.number),
