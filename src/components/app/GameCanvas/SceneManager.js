@@ -4,10 +4,8 @@ import {GameWatcher} from "../../../GameWatcher";
 import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
-import EmptySpace from "../emptySpace/EmptySpace";
-import Notification from "../notification/Notification";
 import {AtticManager} from "./AtticManager";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {ObjectKindUI} from "./../objectKindUI/ObjectKindUI"
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -42,6 +40,8 @@ export class SceneManager {
         this.meshManager = new MeshManager(this.scene, lights);
         this.atticManager = new AtticManager(this.scene);
 
+        this.objectKindUIRefs = [];
+
         GameWatcher
             .onUpdate((newMesh, oldMesh, isReplacement) => {
                 if (isReplacement) {
@@ -51,8 +51,10 @@ export class SceneManager {
                     this.atticManager.createCarton(oldMesh.mesh);
                 }
                 this.meshManager.patch(newMesh, oldMesh);
-                EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
-                Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+                this.updateTrackingPosition();
+                //this.objectKindUIRefs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+                //EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+                //Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
             })
             .watch()
             .then(() => {
@@ -65,5 +67,9 @@ export class SceneManager {
         this.engine.runRenderLoop(() => {
                 this.scene.render();
         });
+    }
+
+    updateTrackingPosition() {
+        this.objectKindUIRefs.forEach(ref => ref.updatePosition());
     }
 }

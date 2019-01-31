@@ -31,6 +31,9 @@ const CatalogStore = types.model("CatalogStore", {
                 const objectKindPath = this.findobjectKindPath(objectKindName);
                 return self.objectTypes[objectKindPath[0]].objectKinds[objectKindPath[1]]
             },
+            getAllObjectKind() {
+                return self.objectTypes.map(objectType => objectType.objectKinds.map(objectKind => {return objectKind})).flat();
+            },
             getEmptyLocation() {
                 return self.objectTypes.map(objectType => {
                     return objectType.objectKinds
