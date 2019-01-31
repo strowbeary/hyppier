@@ -31,7 +31,7 @@ export class GameWatcher {
                                 else if (patch.path.includes("activeObject") && patch.op === "replace" && objectKind.activeObject > 0) {
                                     const oldlambdaMesh = objectKind.objects[objectKind.activeObject - 1].getModel();
                                     const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, true));
+                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectType));
                                 } else if (objectKind.activeObject !== null && patch.path.includes("model")) {
                                     /**
                                      * New object

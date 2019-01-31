@@ -5,7 +5,7 @@ import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import {AtticManager} from "./AtticManager";
-import {ObjectKindUI} from "./../objectKindUI/ObjectKindUI"
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -40,11 +40,9 @@ export class SceneManager {
         this.meshManager = new MeshManager(this.scene, lights);
         this.atticManager = new AtticManager(this.scene);
 
-        this.objectKindUIRefs = [];
-
         GameWatcher
-            .onUpdate((newMesh, oldMesh, isReplacement) => {
-                if (isReplacement) {
+            .onUpdate((newMesh, oldMesh, objectKindType) => {
+                if (objectKindType) {
                     if (oldMesh.clone) {
                         this.atticManager.createCarton(oldMesh.mesh);
                     }
@@ -52,9 +50,6 @@ export class SceneManager {
                 }
                 this.meshManager.patch(newMesh, oldMesh);
                 this.updateTrackingPosition();
-                //this.objectKindUIRefs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
-                //EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
-                //Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
             })
             .watch()
             .then(() => {
@@ -70,6 +65,6 @@ export class SceneManager {
     }
 
     updateTrackingPosition() {
-        this.objectKindUIRefs.forEach(ref => ref.updatePosition());
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
     }
 }

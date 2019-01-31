@@ -25,7 +25,7 @@ function loadObject(objectKind) {
     });
 }
 function preloadNextObject(objectKind) {
-    const objectIndex = (objectKind.activeObject === null) ? 0 : (objectKind.activeObject + 1);
+    const objectIndex = objectKind.replacementCounter + 1;
     if (objectIndex < objectKind.objects.length) {
         BABYLON.SceneLoader.LoadAssetContainerAsync(
             "./models/",
@@ -65,8 +65,14 @@ export default types
             });
             if (self.activeObject !== null) {
                 loadObject(self);
+                self.replacementCounter = 0;
+            } else {
+                self.replacementCounter = -1;
             }
             preloadNextObject(self);
+        },
+        updateReplacementCounter() {
+            self.replacementCounter++;
         },
         setActiveObject(objectId) {
             if (self.activeObject !== objectId) {

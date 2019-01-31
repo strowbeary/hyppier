@@ -84,7 +84,7 @@ const App = observer(class App extends Component {
                     transitionLeaveTimeout={500}
                 >
                     {CatalogStore.isOpen &&
-                        <Catalog path={CatalogStore.objectKindPath} onClose={() => CatalogStore.closeCatalog()}/>
+                        <Catalog path={CatalogStore.objectKindPath}/>
                     }
                 </CSSTransitionGroup>
                 <button style={{

@@ -6,6 +6,7 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import {CSSTransitionGroup} from "react-transition-group";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -34,9 +35,15 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     onClose() {
-        CatalogStore.closeCatalog();
-        this.objectKind.location.removePreviewObject();
+        this.closeCatalog();
         this.updateConfirmVisibilty(false);
+    }
+
+    closeCatalog() {
+        this.objectKind.updateReplacementCounter();
+        CatalogStore.closeCatalog();
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(true));
+        this.objectKind.location.removePreviewObject();
     }
 
     updateConfirmVisibilty(value) {
@@ -58,6 +65,7 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     onValidate() {
+        this.objectKind.updateReplacementCounter();
         if (this.objectKind.activeObject !== null) {
             this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
         } else {
@@ -65,8 +73,7 @@ const Catalog = observer(class Catalog extends Component {
         }
         GameStore.hype.setLevelByDiff(0.1);
         //skip generation
-        this.props.onClose();
-        this.objectKind.location.removePreviewObject();
+        this.closeCatalog();
     }
 
     render() {

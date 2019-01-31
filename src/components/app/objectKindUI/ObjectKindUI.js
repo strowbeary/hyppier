@@ -9,8 +9,11 @@ import EmptySpace from "../emptySpace/EmptySpace";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
+    static refs = [];
+
     state = {
-        position: new BABYLON.Vector3(0, 0, 0)
+        position: new BABYLON.Vector3(0, 0, 0),
+        visible: true
     };
 
     constructor(props) {
@@ -18,6 +21,12 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.scene = props.scene;
         this.objectKind = props.objectKind;
         this.objectKindPath = CatalogStore.findobjectKindPath(this.objectKind.name);
+    }
+
+    changeVisibility(value) {
+        this.setState({
+            visible: value
+        })
     }
 
     getLambdaMesh() {
@@ -66,6 +75,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog() {
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(false));
         CatalogStore.openCatalog(this.objectKindPath);
     }
 
@@ -85,14 +95,16 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             'left': x - 15
         };
 
+        let hide = this.objectKind.activeObject < this.objectKind.objects.length - 1 && this.state.visible? '': 'hide';
+
         return (
-            <div className={`objectKindUI`} style={style}>
+            <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.activeObject === null && <EmptySpace catalogOpened={CatalogStore.isOpen} onClick={() => this.buildCatalog()}/>
+                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
                     this.objectKind.activeObject !== null && this.objectKind.activeObject < this.objectKind.objects.length - 1 &&
-                    <Notification objectKind={this.objectKind} catalogOpened={CatalogStore.isOpen} buildCatalog={() => {this.buildCatalog()}}/>
+                    <Notification objectKind={this.objectKind} buildCatalog={() => {this.buildCatalog()}} position={{x, y}} />
                 }
             </div>
         )

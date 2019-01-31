@@ -80,7 +80,7 @@ const Popup = observer(class Popup extends Component {
                 PopupStore.removePopup(this.props.path.toJSON());
                 if (this.objectKind.activeObject !== null) {
                     GameStore.hype.setLevelByDiff(-0.1);
-                    //skip generation
+                    this.objectKind.updateReplacementCounter();
                 }
                 CameraStore.setTarget();
             }, 500);
@@ -163,6 +163,7 @@ const Popup = observer(class Popup extends Component {
         }
         GameStore.hype.setLevelByDiff(0.1);
         PopupStore.removePopup(this.props.path);
+        this.objectKind.updateReplacementCounter();
         //update object with "PROMO" effect
         this.objectKind.objects[this.objectKind.activeObject].getModel().addClone();
     }

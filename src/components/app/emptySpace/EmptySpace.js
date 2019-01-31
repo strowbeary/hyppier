@@ -6,7 +6,7 @@ export default observer(class EmptySpace extends Component {
 
     render() {
         return (
-            <div className={`emptySpace`}>
+            <div className={`emptySpace`} onClick={() => {this.props.buildCatalog()}}>
                 <div className="emptySpace__wrapper">
                     <span>+</span>
                 </div>

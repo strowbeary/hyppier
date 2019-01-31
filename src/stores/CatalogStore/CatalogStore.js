@@ -33,37 +33,6 @@ const CatalogStore = types.model("CatalogStore", {
             },
             getAllObjectKind() {
                 return self.objectTypes.map(objectType => objectType.objectKinds.map(objectKind => {return objectKind})).flat();
-            },
-            getEmptyLocation() {
-                return self.objectTypes.map(objectType => {
-                    return objectType.objectKinds
-                        .filter(objectKind => {
-                            if (objectKind.activeObject === null) {
-                                if (typeof objectKind.location !== "undefined") {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        })
-                        .map(objectKind => {
-                            return objectKind;
-                        })
-                }).flat();
-            },
-            getAllObjectKindWithActiveObject() {
-                return self.objectTypes.map(objectType => {
-                    return objectType.objectKinds
-                        .filter(objectKind => {
-                            if(objectKind.activeObject !== null) {
-                                return typeof objectKind.objects[objectKind.activeObject].model !== "undefined";
-                            } else {
-                                return false;
-                            }
-                        })
-                        .map(objectKind => {
-                            return objectKind
-                        })
-                }).flat()
             }
         })
     )

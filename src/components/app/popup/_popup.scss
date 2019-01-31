@@ -8,7 +8,7 @@ $pointer-url: "../../../assets/img/cursor_pointer.svg";
 $default-cursor-url: "../../../assets/img/cursor_default.svg";
 
 .popup {
-  position: absolute;
+  position: fixed;
   border-radius: $border-radius;
   background-color: white;
   padding: $vertical-space $horizontal-space;
