@@ -9,6 +9,7 @@ $horizontal-space: 20px;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   background-color: white;
   padding: $vertical-space $horizontal-space;
   border-radius: $border-radius;
