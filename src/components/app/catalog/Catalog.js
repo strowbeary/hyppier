@@ -36,6 +36,7 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     closeCatalog() {
+        this.pipoStop();
         CatalogStore.closeCatalog();
         ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(true));
         this.objectKind.location.removePreviewObject();
@@ -67,7 +68,6 @@ const Catalog = observer(class Catalog extends Component {
             this.objectKind.setActiveObject(0);
         }
         GameStore.hype.setLevelByDiff(0.1);
-        //skip generation
         this.closeCatalog();
     }
 

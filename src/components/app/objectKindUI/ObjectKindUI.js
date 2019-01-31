@@ -6,6 +6,8 @@ import {SceneManager} from "../GameCanvas/SceneManager";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import Notification from "./notification/Notification";
 import EmptySpace from "./emptySpace/EmptySpace";
+import Popup from "../popup/Popup";
+import {CSSTransitionGroup} from "react-transition-group";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -13,7 +15,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     state = {
         position: new BABYLON.Vector3(0, 0, 0),
-        visible: true
+        visible: true,
+        popupVisibility: false
     };
 
     constructor(props) {
@@ -74,6 +77,18 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         );
     }
 
+    openPopup() {
+        this.setState({
+            popupVisibility: true
+        });
+    }
+
+    closePopup() {
+        this.setState({
+            popupVisibility: false
+        });
+    }
+
     buildCatalog() {
         ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(false));
         CatalogStore.openCatalog(this.objectKindIndex);
@@ -104,8 +119,18 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 }
                 {
                     this.objectKind.activeObject !== null && this.objectKind.activeObject < this.objectKind.objects.length - 1 &&
-                    <Notification objectKind={this.objectKind} buildCatalog={() => {this.buildCatalog()}} position={{x, y}} />
+                    <Notification objectKind={this.objectKind} buildCatalog={() => {this.buildCatalog()}} openPopup={() => this.openPopup()}/>
                 }
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {
+                        this.state.popupVisibility &&
+                        <Popup ref={(ref) => Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()}/>
+                    }
+                </CSSTransitionGroup>
             </div>
         )
     }

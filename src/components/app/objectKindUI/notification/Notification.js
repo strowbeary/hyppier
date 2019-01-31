@@ -3,8 +3,6 @@ import "./_notification.scss";
 import {observer} from "mobx-react";
 import {onPatch} from "mobx-state-tree";
 import TimerStore from "../../../../stores/TimerStore/TimerStore";
-import PopupStore from "../../../../stores/PopupStore/PopupStore";
-import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 
 const Notification = observer(class Notification extends Component {
 
@@ -19,8 +17,7 @@ const Notification = observer(class Notification extends Component {
         });
         onPatch(this.timer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
-                PopupStore.firstPosition.setPosition(props.position);
-                PopupStore.addPopup(CatalogStore.findobjectKindIndex(props.objectKind.name));
+                this.props.openPopup();
             }
         });
         this.startDelayTimer();

@@ -6,7 +6,7 @@
       "objects": [
         {
           "name": "Bureau",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -30,7 +30,7 @@
       "objects": [
         {
           "name": "Tabouret",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -54,7 +54,7 @@
       "objects": [
         {
           "name": "Lit de camp",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -78,7 +78,7 @@
       "objects": [
         {
           "name": "Macintosh",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -102,7 +102,7 @@
       "objects": [
         {
           "name": "Walkman",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -117,7 +117,7 @@
         },
         {
           "name": "Ipod",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -132,7 +132,7 @@
         },
         {
           "name": "Casque",
-          "adUrl": "img/catalog/table/promo.png",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",

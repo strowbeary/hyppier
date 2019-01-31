@@ -3,9 +3,7 @@ import React, {Component} from "react";
 import "./_popup.scss";
 import CameraStore from "../../../stores/CameraStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import PopupStore from "../../../stores/PopupStore/PopupStore";
 import GameStore from "../../../stores/GameStore/GameStore";
-import placehoder from "./img/popup_placeholder.png";
 import {SceneManager} from "../GameCanvas/SceneManager";
 
 const Popup = observer(class Popup extends Component {
@@ -16,15 +14,14 @@ const Popup = observer(class Popup extends Component {
     popup = React.createRef();
     buttonClose = React.createRef();
     buttonCatalog = React.createRef();
-    state = {draggablePosition: {visibility: "hidden"}, isClosing: false};
+    state = {draggablePosition: {}};
 
     constructor(props) {
         super(props);
 
         this.objectKind = CatalogStore.objectKinds[props.index];
-
-        this.adUrl = placehoder;
-        //this.adUrl = object.adUrl;
+        this.firstPosition = this.props.position;
+        this.adUrl = this.objectKind.objects[this.objectKind.replacementCounter + 1].adUrl;
     }
 
     componentDidMount() {
@@ -32,47 +29,12 @@ const Popup = observer(class Popup extends Component {
         Popup.refs = Popup.refs.filter(popup => popup !== null);
         this.setState({
             draggablePosition: {
-                top: (PopupStore.firstPosition.y - height) / SceneManager.DEVICE_PIXEL_RATIO,
-                left: (PopupStore.firstPosition.x - width / 2) / SceneManager.DEVICE_PIXEL_RATIO,
-                transform: "scale(0)",
-                visibility: "hidden"
+                top: (this.firstPosition.y + 15 - height),
+                left: (this.firstPosition.x + 15 - (width / 2))
             },
             focus: Popup.refs.length < 2,
             hovered: false
         });
-    }
-
-    componentDidUpdate() {
-        if (this.state.draggablePosition.transform && this.state.draggablePosition.transform === "scale(0)" && !this.state.isClosing) {
-            if (this.state.visibility === "hidden") {
-                setTimeout(() => {
-                    this.setState({
-                        draggablePosition: {
-                            top: this.state.draggablePosition.top,
-                            left: this.state.draggablePosition.left,
-                            transform: "scale(0)",
-                            visibility: "visible"
-                        },
-                    })
-                }, 500);
-            }
-            else {
-                setTimeout(() => {
-                    this.setState({
-                        draggablePosition: {
-                            top: this.state.draggablePosition.top,
-                            left: this.state.draggablePosition.left,
-                            transform: "scale(1)"
-                        },
-                    })
-                }, 500);
-            }
-        } else if (this.state.draggablePosition.transform && this.state.draggablePosition.transform === "scale(0)" && this.state.isClosing) {
-            setTimeout(() => {
-                PopupStore.removePopup(this.props.index);
-                CameraStore.setTarget();
-            }, 500);
-        }
     }
 
     changeFocus(value) {
@@ -126,16 +88,11 @@ const Popup = observer(class Popup extends Component {
                 Popup.refs[0].changeFocus(true);
             }
         }
-        this.setState({
-            isClosing: true,
-            draggablePosition: {
-                top: this.state.draggablePosition.top,
-                left: this.state.draggablePosition.left,
-                transform: "scale(0)"
-            },
-            focus: false
-        });
         this.objectKind.updateReplacementCounter();
+        GameStore.hype.setLevelByDiff(-0.1);
+        CameraStore.setTarget();
+        this.pipoStop();
+        this.props.closePopup();
     }
 
     onCatalog() {
@@ -144,13 +101,15 @@ const Popup = observer(class Popup extends Component {
             if (Popup.refs.length > 0) {
                 Popup.refs[0].changeFocus(true);
             }
+            this.changeFocus(false);
         }
         this.objectKind.updateReplacementCounter();
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
-        PopupStore.removePopup(this.props.index);
         //update object with "PROMO" effect
         this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
+        this.pipoStop();
+        this.props.closePopup();
     }
 
     pipoYes() {
@@ -168,10 +127,9 @@ const Popup = observer(class Popup extends Component {
     render() {
         let disabled = this.state.focus ? '' : 'disabled';
         let buttonsDisabled = !this.state.focus && !this.state.hovered;
-        let hide = PopupStore.isActivePopup(this.path) && CatalogStore.isOpen ? 'hide' : '';
 
         return (
-            <div className={`popup ${disabled} ${hide}`} style={this.state.draggablePosition}
+            <div className={`popup ${disabled}`} style={this.state.draggablePosition}
                  onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}
                  onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>

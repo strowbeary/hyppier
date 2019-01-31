@@ -7,8 +7,6 @@ import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
-import PopupStore from "../../stores/PopupStore/PopupStore"
-import Popup from "./popup/Popup"
 import Toast from "./toast/Toast";
 import TimerStore from "../../stores/TimerStore/TimerStore";
 import {onPatch} from "mobx-state-tree";
@@ -57,7 +55,7 @@ const App = observer(class App extends Component {
             <div id="app">
                 <GameCanvas/>
                 <HypeIndicator/>
-                {this.state.message &&
+                {/*{this.state.message &&
                     <Message message={this.state.message}/>
                 }
                 <CSSTransitionGroup
@@ -68,16 +66,7 @@ const App = observer(class App extends Component {
                     {this.state.toast &&
                         <Toast></Toast>
                     }
-                </CSSTransitionGroup>
-                <CSSTransitionGroup
-                    transitionName="grow"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}
-                >
-                    {PopupStore.activePopup.map(index => {
-                        return <Popup ref={ref => Popup.refs.push(ref)} index={index} key={index}/>;
-                    })}
-                </CSSTransitionGroup>
+                </CSSTransitionGroup>*/}
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
