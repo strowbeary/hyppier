@@ -10,6 +10,7 @@ import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Toast from "./toast/Toast";
 import TimerStore from "../../stores/TimerStore/TimerStore";
 import {onPatch} from "mobx-state-tree";
+import GameStore from "../../stores/GameStore/GameStore";
 
 const App = observer(class App extends Component {
 
@@ -51,8 +52,10 @@ const App = observer(class App extends Component {
     }
 
     render() {
+        let isAtticVisible = GameStore.attic.atticVisible ? 'attic': '';
+
         return (
-            <div id="app">
+            <div id="app" className={isAtticVisible}>
                 <GameCanvas/>
                 <HypeIndicator/>
                 {/*{this.state.message &&

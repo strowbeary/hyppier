@@ -1,6 +1,7 @@
 import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore";
 import {GameManager} from "./GameManager";
+import GameStore from "../../../stores/GameStore/GameStore";
 
 export class CameraManager {
 
@@ -40,11 +41,13 @@ export class CameraManager {
     goToAttic() {
         CameraStore.setTarget("Grenier");
         this.gameManager.pauseGame();
+        GameStore.attic.setAtticVisibility(true);
     }
 
     goToRoom() {
         CameraStore.setTarget();
         this.gameManager.playGame();
+        GameStore.attic.setAtticVisibility(false);
     }
 
     updateCamera() {
