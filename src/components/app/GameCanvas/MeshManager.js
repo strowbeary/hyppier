@@ -6,7 +6,8 @@ export class MeshManager {
     }
     patch(newLambdaMesh, oldLambdaMesh) {
         try {
-            if (newLambdaMesh !== null && oldLambdaMesh !== null) {
+            if (newLambdaMesh !== null && oldLambdaMesh !== null
+                && this.scene.getMeshByName(newLambdaMesh.mesh.name) === null) {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.removeMesh(oldLambdaMesh.mesh);
