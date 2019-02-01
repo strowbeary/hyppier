@@ -3,23 +3,38 @@ import GameStore from "../../../stores/GameStore/GameStore";
 
 export class GameManager {
 
-    static pauseCatalog(countdown) {
+    static GameManager;
+
+    constructor(scene) {
+        if (GameManager.GameManager) {
+            return GameManager.GameManager;
+        } else {
+            this.scene = scene;
+            GameManager.GameManager = this;
+        }
+    }
+
+    pauseCatalog(countdown) {
         TimerStore.pauseAllExcept(countdown);
         GameStore.options.setPause(true);
+        this.scene.animatables.forEach(animatable => animatable.pause())
     }
 
-    static playCatalog(countdown) {
+    playCatalog(countdown) {
         TimerStore.startAllExcept(countdown);
         GameStore.options.setPause(false);
+        this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
-    static pauseGame() {
+    pauseGame() {
         TimerStore.pauseAll();
         GameStore.options.setPause(true);
+        this.scene.animatables.forEach(animatable => animatable.pause())
     }
 
-    static playGame() {
+    playGame() {
         TimerStore.startAll();
         GameStore.options.setPause(false);
+        this.scene.animatables.forEach(animatable => animatable.restart())
     }
 }

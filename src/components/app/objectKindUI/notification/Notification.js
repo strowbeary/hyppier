@@ -13,6 +13,7 @@ const Notification = observer(class Notification extends Component {
         onPatch(this.delayTimer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
                 this.timer.start();
+                props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation();
             }
         });
         onPatch(this.timer, patch => {

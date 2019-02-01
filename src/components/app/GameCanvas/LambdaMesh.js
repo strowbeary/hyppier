@@ -1,13 +1,13 @@
 import * as BABYLON from "babylonjs";
 
 export class LambdaMesh {
-    constructor(mesh) {
+    constructor(mesh, objectTimeout) {
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = false;
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
-            this.time = 1000;
+            this.time = 60 * objectTimeout;
             this.cloneMaterial();
             this.freezeMaterials();
             /*if (this.mesh._scene) {
@@ -73,7 +73,7 @@ export class LambdaMesh {
                 });
                 keys.push({
                     frame: frameNumber,
-                    value: new BABYLON.Color3.White()
+                    value: new BABYLON.Color3.Black()
                 });
                 animationBox.setKeys(keys);
 
@@ -91,7 +91,7 @@ export class LambdaMesh {
             });
             keys.push({
                 frame: frameNumber,
-                value: new BABYLON.Color3.White()
+                value: new BABYLON.Color3.Black()
             });
             animationBox.setKeys(keys);
 

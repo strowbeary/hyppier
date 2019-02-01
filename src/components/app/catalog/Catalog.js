@@ -15,6 +15,8 @@ const Catalog = observer(class Catalog extends Component {
         confirmVisibility: false
     };
 
+    gameManager = new GameManager();
+
     constructor(props) {
         super(props);
         this.path = [props.index];
@@ -39,9 +41,9 @@ const Catalog = observer(class Catalog extends Component {
         let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKindIndex === this.props.index);
         if (objectKindUI.notification) {
             let timer = objectKindUI.notification.restartTimer();
-            GameManager.playCatalog(timer);
+            this.gameManager.playCatalog(timer);
         } else {
-            GameManager.playGame();
+            this.gameManager.playGame();
         }
         this.objectKind.location.removePreviewObject();
     }

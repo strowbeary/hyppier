@@ -6,6 +6,7 @@ import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import {AtticManager} from "./AtticManager";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import {GameManager} from "./GameManager";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -39,6 +40,7 @@ export class SceneManager {
 
         this.meshManager = new MeshManager(this.scene, lights);
         this.atticManager = new AtticManager(this.scene);
+        this.gameManager = new GameManager(this.scene);
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType) => {

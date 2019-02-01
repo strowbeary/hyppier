@@ -20,6 +20,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         popupVisibility: false
     };
 
+    gameManager = new GameManager();
+
     constructor(props) {
         super(props);
         this.scene = props.scene;
@@ -97,7 +99,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog(timer) {
-        GameManager.pauseCatalog(timer);
+        this.gameManager.pauseCatalog(timer);
         CatalogStore.openCatalog(this.objectKindIndex);
     }
 

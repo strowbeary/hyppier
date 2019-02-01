@@ -19,7 +19,7 @@ function loadObject(objectKind) {
                 objectKind.location.addChild(locationOption[0], objectKind.name);
                 CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position)
             } else {
-                objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh));
+                objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout));
             }
         });
     });
@@ -36,7 +36,7 @@ function preloadNextObject(objectKind) {
                     if (objectKind.location) {
                         loadedMesh.position = objectKind.location.toVector3();
                     }
-                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh));
+                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout));
                 }
             });
         }).catch(e => console.log(e));
@@ -51,6 +51,7 @@ export default types
         replacementCounter: types.number,
         location: types.maybe(LocationStore),
         activeObject: types.maybeNull(types.number),
+        oldActiveObject: types.maybeNull(types.number),
         type: types.string
     })
     .actions(self => ({
@@ -78,6 +79,7 @@ export default types
         },
         setActiveObject(objectId) {
             if (self.activeObject !== objectId) {
+                self.oldActiveObject = self.activeObject;
                 self.activeObject = objectId;
             }
         }
