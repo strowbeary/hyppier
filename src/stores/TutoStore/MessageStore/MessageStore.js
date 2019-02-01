@@ -1,16 +1,14 @@
 import {types} from "mobx-state-tree";
 
-export default types.model("MessageStore", {
-    message: types.string,
-    expiration: types.number,
-    action: types.string
-})
-    .actions(self =>
-        ({
-
-        })
-    )
+export default types
+    .model("MessageStore",
+    {
+        message: types.string,
+        expiration: types.number,
+        action: types.string
+    })
     .create({
         messages: [],
-        currentMessage: 0
+        currentMessage: 0,
+        action: ""
     });
