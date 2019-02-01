@@ -1,4 +1,6 @@
 import * as BABYLON from "babylonjs";
+import CameraStore from "../../../stores/CameraStore";
+import {GameManager} from "./GameManager";
 
 export class CameraManager {
 
@@ -28,11 +30,21 @@ export class CameraManager {
         this.updateCamera();
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
-
+        this.gameManager = new GameManager(scene);
     }
 
     attachControl(canvas) {
         this.camera.attachControl(canvas);
+    }
+
+    goToAttic() {
+        CameraStore.setTarget("Grenier");
+        this.gameManager.pauseGame();
+    }
+
+    goToRoom() {
+        CameraStore.setTarget();
+        this.gameManager.playGame();
     }
 
     updateCamera() {
