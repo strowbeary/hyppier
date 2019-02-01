@@ -11,6 +11,9 @@ export class MeshManager {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.removeMesh(oldLambdaMesh.mesh);
+                if (oldLambdaMesh.clone) {
+                    this.scene.removeMesh(oldLambdaMesh.clone);
+                }
                 this.scene.addMesh(newLambdaMesh.mesh);
             } else if (
                 newLambdaMesh !== null &&
