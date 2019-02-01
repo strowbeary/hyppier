@@ -17,7 +17,7 @@ const App = observer(class App extends Component {
 
     constructor(props) {
         super(props);
-        this.timer = TimerStore.create(3000);
+        /*this.timer = TimerStore.create(3000);
         this.timer.start();
         onPatch(this.timer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
@@ -34,7 +34,7 @@ const App = observer(class App extends Component {
                     this.timer.start();
                 }
             }
-        });
+        });*/
     }
 
     componentDidMount() {

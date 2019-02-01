@@ -79,9 +79,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     openPopup() {
-        if (this.notification) {
-            GameManager.pauseCatalog(this.notification.timer);
-        }
         if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
             this.setState({
                 popupVisibility: true
@@ -91,10 +88,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     closePopup() {
         if (this.notification) {
-            let timer = this.notification.restartTimer();
-            GameManager.playCatalog(timer);
-        } else {
-            GameManager.playGame();
+            this.notification.restartTimer();
+            this.notification.delayTimer.start();
         }
         this.setState({
             popupVisibility: false

@@ -17,8 +17,7 @@ const Notification = observer(class Notification extends Component {
         });
         onPatch(this.timer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
-                this.timer.stop();
-                this.props.openPopup();
+                this.openPopup();
             }
         });
         this.delayTimer.start();
@@ -26,9 +25,14 @@ const Notification = observer(class Notification extends Component {
 
     restartTimer() {
         if (this.props.objectKind.replacementCounter < this.props.objectKind.objects.length - 1) {
+            this.timer.stop();
             this.delayTimer.stop();
         }
         return this.timer;
+    }
+
+    openPopup() {
+        this.props.openPopup();
     }
 
     buildCatalog() {
