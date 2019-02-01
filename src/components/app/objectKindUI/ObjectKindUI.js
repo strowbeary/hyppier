@@ -6,16 +6,17 @@ import {SceneManager} from "../GameCanvas/SceneManager";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import Notification from "./notification/Notification";
 import EmptySpace from "./emptySpace/EmptySpace";
-import Popup from "../popup/Popup";
+import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
+import GameStore from "../../../stores/GameStore/GameStore";
+import {GameManager} from "../GameCanvas/GameManager";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     static refs = [];
 
     state = {
-        position: new BABYLON.Vector3(0, 0, 0),
-        visible: true,
+        position: {x: 0, y: 0},
         popupVisibility: false
     };
 
@@ -26,16 +27,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
     }
 
-    changeVisibility(value) {
-        this.setState({
-            visible: value
-        })
-    }
-
     getLambdaMesh() {
-        if (this.objectKind.activeObject < this.objectKind.objects.length - 1
-            && this.objectKind.activeObject !== null) {
-            return this.objectKind.objects[this.objectKind.activeObject].getModel();
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1
+            && this.objectKind.replacementCounter > -1) {
+            return this.objectKind.objects[this.objectKind.replacementCounter].getModel();
         } else {
             return null;
         }
@@ -45,10 +40,16 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.updatePosition();
     }
 
+    isVisible() {
+        return this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && !GameStore.options.isPaused;
+    }
+
     updatePosition() {
-        this.setState({
-            position: this.get2dPosition()
-        });
+        if (this.isVisible()) {
+            this.setState({
+                position: this.get2dPosition()
+            });
+        }
     }
 
     getYVectorValue() {
@@ -78,23 +79,35 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     openPopup() {
-        this.setState({
-            popupVisibility: true
-        });
+        if (this.notification) {
+            GameManager.pauseCatalog(this.notification.timer);
+        }
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
+            this.setState({
+                popupVisibility: true
+            });
+        }
     }
 
     closePopup() {
+        if (this.notification) {
+            let timer = this.notification.restartTimer();
+            GameManager.playCatalog(timer);
+        } else {
+            GameManager.playGame();
+        }
         this.setState({
             popupVisibility: false
         });
     }
 
-    buildCatalog() {
-        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(false));
+    buildCatalog(timer) {
+        GameManager.pauseCatalog(timer);
         CatalogStore.openCatalog(this.objectKindIndex);
     }
 
     render() {
+        let hide = this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && !GameStore.options.isPaused? '': 'hide';
         let {x, y} = this.state.position;
 
         if (isNaN(x) && isNaN(y)) {
@@ -110,16 +123,14 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             'left': x - 15
         };
 
-        let hide = this.objectKind.activeObject < this.objectKind.objects.length - 1 && this.state.visible? '': 'hide';
-
         return (
             <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
+                    this.objectKind.replacementCounter === -1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && this.objectKind.activeObject < this.objectKind.objects.length - 1 &&
-                    <Notification objectKind={this.objectKind} buildCatalog={() => {this.buildCatalog()}} openPopup={() => this.openPopup()}/>
+                    this.objectKind.replacementCounter > -1 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
                 }
                 <CSSTransitionGroup
                     transitionName="grow"

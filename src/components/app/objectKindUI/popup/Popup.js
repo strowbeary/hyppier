@@ -1,10 +1,9 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_popup.scss";
-import CameraStore from "../../../stores/CameraStore";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import GameStore from "../../../stores/GameStore/GameStore";
-import {SceneManager} from "../GameCanvas/SceneManager";
+import CameraStore from "../../../../stores/CameraStore";
+import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
+import GameStore from "../../../../stores/GameStore/GameStore";
 
 const Popup = observer(class Popup extends Component {
 

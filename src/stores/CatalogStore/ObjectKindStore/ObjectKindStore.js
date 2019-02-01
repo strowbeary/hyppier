@@ -74,11 +74,11 @@ export default types
         },
         updateReplacementCounter() {
             self.replacementCounter++;
+            preloadNextObject(self);
         },
         setActiveObject(objectId) {
             if (self.activeObject !== objectId) {
                 self.activeObject = objectId;
-                preloadNextObject(self);
             }
         }
     }));

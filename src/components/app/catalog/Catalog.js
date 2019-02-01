@@ -6,6 +6,7 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import {CSSTransitionGroup} from "react-transition-group";
+import {GameManager} from "../GameCanvas/GameManager";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 const Catalog = observer(class Catalog extends Component {
@@ -24,9 +25,6 @@ const Catalog = observer(class Catalog extends Component {
         this.path.push(this.objectKind.replacementCounter + 1);
     }
 
-    componentDidMount() {
-    }
-
     onClose() {
         this.closeCatalog();
         this.updateConfirmVisibilty(false);
@@ -38,7 +36,13 @@ const Catalog = observer(class Catalog extends Component {
     closeCatalog() {
         this.pipoStop();
         CatalogStore.closeCatalog();
-        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.changeVisibility(true));
+        let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKindIndex === this.props.index);
+        if (objectKindUI.notification) {
+            let timer = objectKindUI.notification.restartTimer();
+            GameManager.playCatalog(timer);
+        } else {
+            GameManager.playGame();
+        }
         this.objectKind.location.removePreviewObject();
     }
 
@@ -62,11 +66,7 @@ const Catalog = observer(class Catalog extends Component {
 
     onValidate() {
         this.objectKind.updateReplacementCounter();
-        if (this.objectKind.replacementCounter > 0) {
-            this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-        } else {
-            this.objectKind.setActiveObject(0);
-        }
+        this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         this.closeCatalog();
     }

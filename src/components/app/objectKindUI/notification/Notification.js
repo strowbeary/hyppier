@@ -17,19 +17,23 @@ const Notification = observer(class Notification extends Component {
         });
         onPatch(this.timer, patch => {
             if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
+                this.timer.stop();
                 this.props.openPopup();
             }
         });
-        this.startDelayTimer();
+        this.delayTimer.start();
     }
 
-    startDelayTimer() {
-        this.delayTimer.start();
+    restartTimer() {
+        if (this.props.objectKind.replacementCounter < this.props.objectKind.objects.length - 1) {
+            this.delayTimer.stop();
+        }
+        return this.timer;
     }
 
     buildCatalog() {
         this.timer.stop();
-        this.props.buildCatalog();
+        this.props.buildCatalog(this.timer);
     }
 
     render() {
