@@ -1,4 +1,5 @@
 import * as BABYLON from "babylonjs";
+import GameStore from "../../../stores/GameStore/GameStore";
 
 export class LambdaMesh {
     constructor(mesh, objectTimeout) {
@@ -7,7 +8,7 @@ export class LambdaMesh {
         this.mesh.receiveShadows = false;
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
-            this.time = 60 * objectTimeout;
+            this.time = objectTimeout * 0.03;
             this.cloneMaterial();
             this.freezeMaterials();
             /*if (this.mesh._scene) {
@@ -102,10 +103,15 @@ export class LambdaMesh {
         }
     }
 
+    getTime() {
+        return this.time / GameStore.hype.level;
+    }
+
     launchMaterialDegradation() {
+        let time = this.getTime();
         this.unfreezeMaterials();
-        this.materialDegradation(this.time);
-        this.mesh._scene.beginAnimation(this.mesh, 0, this.time, false, 1, this.freezeMaterials.bind(this));
+        this.materialDegradation(time);
+        this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1, this.freezeMaterials.bind(this));
     }
 
     launchAppearAnimation() {
