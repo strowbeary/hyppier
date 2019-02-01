@@ -21,7 +21,7 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
         this.props.pipoYes();
     }
 
-    onMouseOut() {
+    onMouseLeave() {
         this.props.pipoStop();
     }
 
@@ -35,8 +35,8 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
                     <p>{infos[0].slogan}</p>
                     <a href={infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
                 </div>
-                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()} onMouseOver={() => this.onCloseOver()} onMouseOut={() => this.onMouseOut()}>{closeButtonLabel}</button>
-                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()} onMouseOver={() => this.onCatalogOver()} onMouseOut={() => this.onMouseOut()}>{returnCatalogButtonLabel}</button>
+                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()} onMouseOver={() => this.onCloseOver()} onMouseLeave={() => this.onMouseLeave()}>{closeButtonLabel}</button>
+                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()} onMouseOver={() => this.onCatalogOver()} onMouseLeave={() => this.onMouseLeave()}>{returnCatalogButtonLabel}</button>
             </div>
         )
     }

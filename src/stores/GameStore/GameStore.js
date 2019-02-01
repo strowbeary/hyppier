@@ -13,6 +13,9 @@ export default types.model({
         ({
             setPipo(state) {
                 self.pipo = state;
+                if (state === "happy") {
+                    setTimeout(() => {this.setPipo("")}, 4000);
+                }
             }
         })
     )

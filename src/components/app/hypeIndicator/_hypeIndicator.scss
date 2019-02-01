@@ -38,7 +38,7 @@ $yellow: #FFE07D;
   transform: scale(0.5);
   transition: scale 1s ease-in;
   background: url('./img/Pipo-Idle.png') left center;
-  animation: playX 2s steps(10) infinite, playY 2.4s steps(12) infinite;
+  animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
 
   &.happy {
     //do not make this infinite
@@ -51,14 +51,14 @@ $yellow: #FFE07D;
   &.yes {
     background: url('./img/Pipo-Yes.png') left center;
     transform: scale(0.65);
-    animation: playXYes 0.3s steps(8) infinite, playYYes 2.1s steps(7) infinite;
+    animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
 
   }
 
   &.no {
     background: url('./img/Pipo-No.png') left center;
     transform: scale(0.65);
-    animation: playXNo 0.3s steps(8) infinite, playYNo 1.8s steps(6) infinite;
+    animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
   }
 }
 

@@ -53,9 +53,10 @@ const App = observer(class App extends Component {
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic': '';
+        let pipoMood = GameStore.pipo === 'happy'? 'happy' : '';
 
         return (
-            <div id="app" className={isAtticVisible}>
+            <div id="app" className={`${isAtticVisible} ${pipoMood}`}>
                 <GameCanvas/>
                 <HypeIndicator/>
                 {/*{this.state.message &&

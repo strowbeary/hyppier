@@ -25,9 +25,11 @@ const Catalog = observer(class Catalog extends Component {
         this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         this.path.push(this.objectKind.replacementCounter + 1);
+        this.isClosing = false;
     }
 
     onClose() {
+        this.pipoStop();
         this.closeCatalog();
         this.updateConfirmVisibilty(false);
         if (this.objectKind.replacementCounter > -1) {
@@ -36,7 +38,7 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     closeCatalog() {
-        this.pipoStop();
+        this.isClosing = true;
         CatalogStore.closeCatalog();
         let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKindIndex === this.props.index);
         if (objectKindUI.notification) {
@@ -63,13 +65,16 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     pipoStop() {
-        GameStore.setPipo("");
+        if (!this.isClosing) {
+            GameStore.setPipo("");
+        }
     }
 
     onValidate() {
         this.objectKind.updateReplacementCounter();
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
+        GameStore.setPipo("happy");
         this.closeCatalog();
     }
 

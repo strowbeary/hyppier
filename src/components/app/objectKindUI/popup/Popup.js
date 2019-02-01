@@ -107,7 +107,7 @@ const Popup = observer(class Popup extends Component {
         GameStore.hype.setLevelByDiff(0.1);
         //update object with "PROMO" effect
         this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
-        this.pipoStop();
+        GameStore.setPipo("happy");
         this.props.closePopup();
     }
 
