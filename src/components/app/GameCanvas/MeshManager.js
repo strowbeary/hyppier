@@ -34,7 +34,7 @@ export class MeshManager {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer)});
             } else {
-                this.gameManager.playAfterCatalog(timer)
+                this.gameManager.playAfterCatalog(timer);
             }
         } catch (e) {
             console.error(e);

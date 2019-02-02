@@ -39,7 +39,7 @@ export class GameManager {
     }
 
     playAfterCatalog(timer) {
-        if (timer !== null) {
+        if (timer) {
             if (typeof timer !== 'boolean') {
                 this.playCatalog(timer);
             } else {

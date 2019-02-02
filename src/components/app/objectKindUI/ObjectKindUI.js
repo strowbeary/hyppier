@@ -60,7 +60,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     getYVectorValue() {
-        if (this.getLambdaMesh() !== null && typeof this.getLambdaMesh() !== 'undefined') {
+        if (this.getLambdaMesh()) {
             return this.getLambdaMesh().mesh.getBoundingInfo().boundingBox.maximum.y * this.getLambdaMesh().mesh.scaling.y + 0.20
         } else {
             return 0;
