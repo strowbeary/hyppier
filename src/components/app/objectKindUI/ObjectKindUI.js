@@ -55,7 +55,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     getYVectorValue() {
-        if (this.getLambdaMesh() !== null) {
+        if (this.getLambdaMesh() !== null && typeof this.getLambdaMesh() !== 'undefined') {
             return this.getLambdaMesh().mesh.getBoundingInfo().boundingBox.maximum.y * this.getLambdaMesh().mesh.scaling.y + 0.20
         } else {
             return 0;
@@ -119,7 +119,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
         let style = {
             'top': y - 15,
-            'left': x - 15
+            'left': x - 15,
+            'zIndex': this.state.popupVisibility? 1:0
         };
 
         return (
