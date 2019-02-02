@@ -91,7 +91,7 @@ const Popup = observer(class Popup extends Component {
         GameStore.hype.setLevelByDiff(-0.1);
         CameraStore.setTarget();
         this.pipoStop();
-        this.props.closePopup();
+        this.props.closePopup(false);
     }
 
     onCatalog() {
@@ -108,7 +108,7 @@ const Popup = observer(class Popup extends Component {
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");
-        this.props.closePopup();
+        this.props.closePopup(true);
     }
 
     pipoYes() {

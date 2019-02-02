@@ -88,8 +88,9 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         }
     }
 
-    closePopup() {
+    closePopup(fromValidate) {
         if (this.notification) {
+            this.notification.changeDelayTimer(fromValidate);
             this.notification.restartTimer();
             this.notification.delayTimer.start();
         }

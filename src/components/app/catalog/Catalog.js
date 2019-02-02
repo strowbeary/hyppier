@@ -30,18 +30,19 @@ const Catalog = observer(class Catalog extends Component {
 
     onClose() {
         this.pipoStop();
-        this.closeCatalog();
+        this.closeCatalog(false);
         this.updateConfirmVisibilty(false);
         if (this.objectKind.replacementCounter > -1) {
             this.objectKind.updateReplacementCounter();
         }
     }
 
-    closeCatalog() {
+    closeCatalog(fromValidate) {
         this.isClosing = true;
         CatalogStore.closeCatalog();
         let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKindIndex === this.props.index);
         if (objectKindUI.notification) {
+            objectKindUI.notification.changeDelayTimer(fromValidate);
             let timer = objectKindUI.notification.restartTimer();
             this.gameManager.playCatalog(timer);
         } else {
@@ -75,7 +76,7 @@ const Catalog = observer(class Catalog extends Component {
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");
-        this.closeCatalog();
+        this.closeCatalog(true);
     }
 
     render() {

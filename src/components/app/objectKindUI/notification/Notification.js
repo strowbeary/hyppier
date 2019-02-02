@@ -24,6 +24,14 @@ const Notification = observer(class Notification extends Component {
         this.delayTimer.start();
     }
 
+    changeDelayTimer(fromValidate) {
+        if (fromValidate) {
+            this.delayTimer.setDuration(this.props.objectKind.objectTimeout);
+        } else {
+            this.delayTimer.setDuration(this.props.objectKind.objectTimeout/2);
+        }
+    }
+
     restartTimer() {
         if (this.props.objectKind.replacementCounter < this.props.objectKind.objects.length - 1) {
             this.timer.stop();
