@@ -101,6 +101,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     buildCatalog(timer) {
         this.gameManager.pauseCatalog(timer);
+        this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
     }
 

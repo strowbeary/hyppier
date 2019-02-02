@@ -37,4 +37,14 @@ export class GameManager {
         GameStore.options.setPause(false);
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
+
+    playAfterCatalog(timer) {
+        if (timer !== null) {
+            if (typeof timer !== 'boolean') {
+                this.playCatalog(timer);
+            } else {
+                this.playGame();
+            }
+        }
+    }
 }

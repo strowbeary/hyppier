@@ -45,11 +45,11 @@ export class LambdaMesh {
             value: 0
         });
         keys.push({
-            frame: 30,
+            frame: 15,
             value: 1.15
         });
         keys.push({
-            frame: 45,
+            frame: 30,
             value: 1
         });
         animationBox.setKeys(keys);
@@ -117,7 +117,7 @@ export class LambdaMesh {
         this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1,  () => {this.freezeMaterials(this.mesh)});
     }
 
-    launchAppearAnimation() {
+    launchAppearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.setEnabled(true);
         this.scaleAppearAnimation(this.mesh);
@@ -125,9 +125,9 @@ export class LambdaMesh {
             this.clone.setEnabled(true);
             this.clone.unfreezeWorldMatrix();
             this.scaleAppearAnimation(this.clone);
-            this.clone._scene.beginAnimation(this.clone, 0, 45, false, 1, () => {this.clone.freezeWorldMatrix()});
+            this.clone._scene.beginAnimation(this.clone, 0, 30, false, 1, () => {this.clone.freezeWorldMatrix()});
         }
-        this.mesh._scene.beginAnimation(this.mesh, 0, 45, false, 1, () => {this.mesh.freezeWorldMatrix()});
+        this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {this.mesh.freezeWorldMatrix(); typeof callback === 'function' && callback()});
     }
 
     launchDisappearAnimation(callback) {
@@ -136,9 +136,9 @@ export class LambdaMesh {
         if (this.clone) {
             this.clone.unfreezeWorldMatrix();
             this.scaleAppearAnimation(this.clone);
-            this.clone._scene.beginAnimation(this.clone, 45, 0, false, 1, () => {this.clone.scalingDeterminant = 0; this.clone.freezeWorldMatrix()});
+            this.clone._scene.beginAnimation(this.clone, 30, 0, false, 1, () => {this.clone.scalingDeterminant = 0; this.clone.freezeWorldMatrix()});
         }
-        this.mesh._scene.beginAnimation(this.mesh, 45, 0, false, 1, () => {this.mesh.scalingDeterminant = 0; this.mesh.freezeWorldMatrix(); callback()});
+        this.mesh._scene.beginAnimation(this.mesh, 30, 0, false, 1, () => {this.mesh.scalingDeterminant = 0; this.mesh.freezeWorldMatrix(); typeof callback === 'function' && callback()});
     }
 
     setClickEvent() {

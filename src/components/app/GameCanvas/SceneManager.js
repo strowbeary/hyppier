@@ -38,20 +38,18 @@ export class SceneManager {
         const ambient = 0.5;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
-        this.meshManager = new MeshManager(this.scene, lights);
         this.atticManager = new AtticManager(this.scene);
         this.gameManager = new GameManager(this.scene);
+        this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
         GameWatcher
-            .onUpdate((newMesh, oldMesh, objectKindType) => {
+            .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
                 if (objectKindType) {
-                    if (oldMesh.clone) {
-                        this.atticManager.createCarton(oldMesh.mesh);
-                    }
+                    oldMesh.clone && this.atticManager.createCarton(oldMesh.mesh);
                     this.atticManager.createCarton(oldMesh.mesh);
                 }
-                this.meshManager.patch(newMesh, oldMesh);
-                this.updateTrackingPosition();
+                this.meshManager.patch(newMesh, oldMesh, timer);
+                newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
             .watch()
             .then(() => {

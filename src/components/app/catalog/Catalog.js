@@ -6,8 +6,6 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import {CSSTransitionGroup} from "react-transition-group";
-import {GameManager} from "../GameCanvas/GameManager";
-import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -15,15 +13,12 @@ const Catalog = observer(class Catalog extends Component {
         confirmVisibility: false
     };
 
-    gameManager = new GameManager();
-
     constructor(props) {
         super(props);
         this.path = [props.index];
         this.objectKind = CatalogStore.objectKinds[this.path[0]];
         this.productType = this.objectKind.type;
         this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
-        this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         this.path.push(this.objectKind.replacementCounter + 1);
         this.isClosing = false;
     }
@@ -37,17 +32,9 @@ const Catalog = observer(class Catalog extends Component {
         }
     }
 
-    closeCatalog(fromValidate) {
+    closeCatalog() {
         this.isClosing = true;
         CatalogStore.closeCatalog();
-        let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKindIndex === this.props.index);
-        if (objectKindUI.notification) {
-            objectKindUI.notification.changeDelayTimer(fromValidate);
-            let timer = objectKindUI.notification.restartTimer();
-            this.gameManager.playCatalog(timer);
-        } else {
-            this.gameManager.playGame();
-        }
         this.objectKind.location.removePreviewObject();
     }
 

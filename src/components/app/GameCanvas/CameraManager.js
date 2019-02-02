@@ -83,7 +83,6 @@ export class CameraManager {
         }
         const animation = () => {
             this.distance = this.distance + 0.1 * (toDistance - this.distance);
-
             this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
             this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
