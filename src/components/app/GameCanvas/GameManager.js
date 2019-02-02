@@ -17,7 +17,9 @@ export class GameManager {
     pauseCatalog(countdown) {
         TimerStore.pauseAllExcept(countdown);
         GameStore.options.setPause(true);
-        this.scene.animatables.forEach(animatable => animatable.pause())
+        this.scene.animatables
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .forEach(animatable => animatable.pause());
     }
 
     playCatalog(countdown) {
@@ -29,7 +31,9 @@ export class GameManager {
     pauseGame() {
         TimerStore.pauseAll();
         GameStore.options.setPause(true);
-        this.scene.animatables.forEach(animatable => animatable.pause())
+        this.scene.animatables
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .forEach(animatable => animatable.pause())
     }
 
     playGame() {
