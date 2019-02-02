@@ -66,14 +66,16 @@ button, a {
   width: 100vw;
   height: 100vh;
 
-  &.attic {
-    background: black;
-  }
-
   &.happy {
     background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
     background-size: 400% 400%;
     animation: Gradient 2s ease 1;
+  }
+
+  &.attic {
+    background: black;
+    background-size: 100%;
+    animation-duration: 0s;
   }
 }
 

@@ -14,6 +14,7 @@ const Popup = observer(class Popup extends Component {
     buttonClose = React.createRef();
     buttonCatalog = React.createRef();
     state = {draggablePosition: {}};
+    isClosing = false;
 
     constructor(props) {
         super(props);
@@ -110,6 +111,7 @@ const Popup = observer(class Popup extends Component {
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");
+        this.isClosing = true;
         this.props.closePopup(true);
     }
 
@@ -122,7 +124,9 @@ const Popup = observer(class Popup extends Component {
     }
 
     pipoStop() {
-        GameStore.setPipo("");
+        if (!this.isClosing) {
+            GameStore.setPipo("");
+        }
     }
 
     render() {
