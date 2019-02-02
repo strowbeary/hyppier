@@ -30,18 +30,20 @@ const Popup = observer(class Popup extends Component {
             draggablePosition: {
                 top: (this.firstPosition.y + 15 - height),
                 left: (this.firstPosition.x + 15 - (width / 2))
-            },
+            }
+        });
+        this.props.changeCurrentState({
             focus: Popup.refs.length < 2,
             hovered: false
         });
     }
 
     changeFocus(value) {
-        this.setState({focus: value});
+        this.props.changeCurrentState({focus: value});
     }
 
     setHovered(value) {
-        this.setState({hovered: value});
+        this.props.changeCurrentState({hovered: value});
     }
 
     onDragStart(e) {
@@ -124,8 +126,8 @@ const Popup = observer(class Popup extends Component {
     }
 
     render() {
-        let disabled = this.state.focus ? '' : 'disabled';
-        let buttonsDisabled = !this.state.focus && !this.state.hovered;
+        let disabled = this.props.currentState.focus ? '' : 'disabled';
+        let buttonsDisabled = !this.props.currentState.focus && !this.props.currentState.hovered;
 
         return (
             <div className={`popup ${disabled}`} style={this.state.draggablePosition}

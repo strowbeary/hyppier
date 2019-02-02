@@ -17,7 +17,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     state = {
         position: {x: 0, y: 0},
-        popupVisibility: false
+        popupVisibility: false,
+        popup: {focus: false, hovered: false}
     };
 
     gameManager = new GameManager();
@@ -36,6 +37,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         } else {
             return null;
         }
+    }
+
+    changePopup(object) {
+        this.setState({popup: Object.assign({}, this.state.popup, object)});
     }
 
     componentDidMount() {
@@ -117,10 +122,18 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             y /= SceneManager.DEVICE_PIXEL_RATIO;
         }
 
+        let zIndex = 0;
+        if (this.state.popup.focus) {
+            zIndex++;
+        }
+        if (this.state.popup.hovered) {
+            zIndex++;
+        }
+
         let style = {
             'top': y - 15,
             'left': x - 15,
-            'zIndex': this.state.popupVisibility? 1:0
+            'zIndex': zIndex
         };
 
         return (
@@ -139,7 +152,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 >
                     {
                         this.state.popupVisibility &&
-                        <Popup ref={(ref) => Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()}/>
+                        <Popup ref={(ref) => Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
                     }
                 </CSSTransitionGroup>
             </div>

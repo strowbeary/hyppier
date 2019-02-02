@@ -33,6 +33,8 @@ export class MeshManager {
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer)});
+            } else {
+                this.gameManager.playAfterCatalog(timer)
             }
         } catch (e) {
             console.error(e);
