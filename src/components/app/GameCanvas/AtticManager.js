@@ -16,10 +16,10 @@ export class AtticManager {
             this.attic.position.y - this.attic.getBoundingInfo().boundingBox.maximum.y * this.attic.scaling.y,
             0
         );
-        let ground = BABYLON.Mesh.CreateGround("ground", 32, 32, 2, this.scene);
-        ground.position = this.groundPosition;
-        ground.isVisible = false;
-        ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.5 }, this.scene);
+        this.ground = BABYLON.Mesh.CreateGround("ground", 32, 32, 2, this.scene);
+        this.ground.position = this.groundPosition;
+        this.ground.isVisible = false;
+        this.ground.physicsImpostor = new BABYLON.PhysicsImpostor(this.ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.5 }, this.scene);
     }
 
     createCarton(mesh) {
@@ -36,5 +36,13 @@ export class AtticManager {
         );
         instance.physicsImpostor = new BABYLON.PhysicsImpostor(instance, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0.5 }, this.scene);
         this.scene.addMesh(instance);
+    }
+
+    fall() {
+        this.ground.position = new BABYLON.Vector3(
+            0,
+            -this.attic.getBoundingInfo().boundingBox.maximum.y * this.attic.scaling.y,
+            0
+        );
     }
 }
