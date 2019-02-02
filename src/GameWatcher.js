@@ -1,6 +1,6 @@
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {onPatch} from "mobx-state-tree";
-import CameraStore from "./stores/CameraStore";
+import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
 
 export class GameWatcher {

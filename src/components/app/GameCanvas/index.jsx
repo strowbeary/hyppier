@@ -2,7 +2,7 @@ import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import CameraStore from "../../../stores/CameraStore";
+import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 export default observer(class GameCanvas extends React.Component {

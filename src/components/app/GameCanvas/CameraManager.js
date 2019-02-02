@@ -1,5 +1,5 @@
 import * as BABYLON from "babylonjs";
-import CameraStore from "../../../stores/CameraStore";
+import CameraStore from "../../../stores/CameraStore/CameraStore";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 
