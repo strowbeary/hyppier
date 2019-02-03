@@ -3,10 +3,11 @@ import * as cannon from "cannon";
 import GameStore from "../../../stores/GameStore/GameStore";
 
 export class AtticManager {
-    constructor(scene) {
+    constructor(scene, particleSystem) {
         this.scene = scene;
         this.mesh = BABYLON.MeshBuilder.CreateBox("box", {}, this.scene);
         this.mesh.setEnabled(false);
+        this.particleSystem = particleSystem;
     }
 
     prepareGravity() {
@@ -38,6 +39,7 @@ export class AtticManager {
         instance.physicsImpostor = new BABYLON.PhysicsImpostor(instance, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0.5 }, this.scene);
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
         this.scene.addMesh(instance);
+        this.particleSystem.start();
     }
 
     fall() {

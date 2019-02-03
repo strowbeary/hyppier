@@ -9,6 +9,7 @@ import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import flare from "./flare.png";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -27,6 +28,20 @@ export class SceneManager {
         lights.init(this.scene);
         this.scene.shadowsEnabled = true;
 
+        const particleSystem = new BABYLON.ParticleSystem("particles", 1000, this.scene);
+        particleSystem.particleTexture = new BABYLON.Texture(flare, this.scene);
+        particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0);
+        particleSystem.emitter = new BABYLON.Vector3(0, 3, 0);
+        particleSystem.minSize = 0.05;
+        particleSystem.maxSize = 0.1;
+        particleSystem.minEmitBox = new BABYLON.Vector3(-0.1, 0, 0);
+        particleSystem.maxEmitBox = new BABYLON.Vector3(0.1, 0, 0);
+        particleSystem.emitRate = 100;
+        particleSystem.minLifeTime = 0.1;
+        particleSystem.maxLifeTime = 0.75;
+        particleSystem.disposeOnStop = false;
+        particleSystem.targetStopDuration = 2;
+
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
@@ -40,7 +55,7 @@ export class SceneManager {
         const ambient = 0.5;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
-        this.atticManager = new AtticManager(this.scene);
+        this.atticManager = new AtticManager(this.scene, particleSystem);
         this.gameManager = new GameManager(this.scene);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
