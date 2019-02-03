@@ -12,6 +12,8 @@ export class GameManager {
             this.scene = scene;
             GameManager.GameManager = this;
         }
+        this.clueEvent = null;
+        this.clueEventTimer = null;
     }
 
     pauseCatalog(countdown) {
@@ -42,8 +44,29 @@ export class GameManager {
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
+    playAfterClueEvent() {
+        GameStore.setClueEvent("");
+        if (this.clueEventTimer) {
+            if (typeof this.clueEventTimer !== 'boolean') {
+                this.playCatalog(this.clueEventTimer);
+            } else {
+                this.playGame();
+            }
+            this.clueEventTimer = null;
+        }
+    }
+
     playAfterCatalog(timer) {
-        if (timer) {
+        if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
+            GameStore.setClueEvent(this.clueEvent);
+            if (!timer) {
+                this.pauseGame();
+                this.clueEventTimer = true;
+            } else {
+                this.clueEventTimer = timer;
+            }
+            this.clueEvent = null;
+        } else if (timer) {
             if (typeof timer !== 'boolean') {
                 this.playCatalog(timer);
             } else {

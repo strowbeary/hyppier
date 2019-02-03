@@ -43,10 +43,6 @@ const App = observer(class App extends Component {
         this.setState({message: "Tu peux désormais accéder à ton grenier."});
     }
 
-    showClueEvent(value) {
-        this.setState({clueEvent: value});
-    }
-
     testChangeObject() {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
         if (objectKindPath.activeObject === null) {
@@ -56,12 +52,20 @@ const App = observer(class App extends Component {
         }
     }
 
+    resetPipo(e) {
+        if (e.target === this.app) {
+            if (GameStore.pipo === 'happy') {
+                GameStore.setPipo("");
+            }
+        }
+    }
+
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
         let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`}>
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)} ref={(ref) => this.app = ref}>
                 <GameCanvas/>
                 <HypeIndicator/>
                 {/*{this.state.message &&
@@ -80,8 +84,8 @@ const App = observer(class App extends Component {
                     transitionName="grow"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}>
-                    {this.state.clueEvent &&
-                        <ClueEvent closeClueEvent={() => {this.showClueEvent(false)}}/>
+                    {GameStore.clueEvent &&
+                        <ClueEvent clueEventType={GameStore.clueEvent}/>
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup

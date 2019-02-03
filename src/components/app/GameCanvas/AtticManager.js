@@ -1,5 +1,6 @@
 import * as BABYLON from "babylonjs";
 import * as cannon from "cannon";
+import GameStore from "../../../stores/GameStore/GameStore";
 
 export class AtticManager {
     constructor(scene) {
@@ -22,7 +23,7 @@ export class AtticManager {
         this.ground.physicsImpostor = new BABYLON.PhysicsImpostor(this.ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.5 }, this.scene);
     }
 
-    createCarton(mesh) {
+    createParcel(mesh, objectKindType) {
         let instance = this.mesh.createInstance(mesh.name);
         instance.scaling = new BABYLON.Vector3(
             mesh.getBoundingInfo().boundingBox.maximum.x,
@@ -35,6 +36,7 @@ export class AtticManager {
             mesh.position.z
         );
         instance.physicsImpostor = new BABYLON.PhysicsImpostor(instance, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0.5 }, this.scene);
+        GameStore.attic.incrementParcelsNumberOf(objectKindType);
         this.scene.addMesh(instance);
     }
 

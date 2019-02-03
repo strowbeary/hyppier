@@ -7,6 +7,8 @@ import {Lights} from "./Lights";
 import {AtticManager} from "./AtticManager";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {GameManager} from "./GameManager";
+import GameStore from "../../../stores/GameStore/GameStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -45,10 +47,17 @@ export class SceneManager {
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
                 if (objectKindType) {
-                    oldMesh.clone && this.atticManager.createCarton(oldMesh.mesh);
-                    this.atticManager.createCarton(oldMesh.mesh);
+                    oldMesh.clone && this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                    this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                    if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                        this.gameManager.clueEvent = objectKindType;
+                        this.meshManager.patch(null, oldMesh, timer);
+                    } else {
+                        this.meshManager.patch(newMesh, oldMesh, timer);
+                    }
+                } else {
+                    this.meshManager.patch(newMesh, oldMesh, timer);
                 }
-                this.meshManager.patch(newMesh, oldMesh, timer);
                 newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
             .watch()
