@@ -11,6 +11,7 @@ import Toast from "./toast/Toast";
 import TimerStore from "../../stores/TimerStore/TimerStore";
 import {onPatch} from "mobx-state-tree";
 import GameStore from "../../stores/GameStore/GameStore";
+import ClueEvent from "./clueEvent/ClueEvent"
 
 const App = observer(class App extends Component {
 
@@ -42,9 +43,13 @@ const App = observer(class App extends Component {
         this.setState({message: "Tu peux désormais accéder à ton grenier."});
     }
 
+    showClueEvent(value) {
+        this.setState({clueEvent: value});
+    }
+
     testChangeObject() {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
-        if(objectKindPath.activeObject === null) {
+        if (objectKindPath.activeObject === null) {
             objectKindPath.setActiveObject(0, 0);
         } else if (objectKindPath.activeObject + 1 < objectKindPath.objects.length) {
             objectKindPath.setActiveObject(objectKindPath.activeObject + 1, 0);
@@ -52,8 +57,8 @@ const App = observer(class App extends Component {
     }
 
     render() {
-        let isAtticVisible = GameStore.attic.atticVisible ? 'attic': '';
-        let pipoMood = GameStore.pipo === 'happy'? 'happy' : '';
+        let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
+        let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
 
         return (
             <div id="app" className={`${pipoMood} ${isAtticVisible}`}>
@@ -72,19 +77,29 @@ const App = observer(class App extends Component {
                     }
                 </CSSTransitionGroup>*/}
                 <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {this.state.clueEvent &&
+                        <ClueEvent closeClueEvent={() => {this.showClueEvent(false)}}/>
+                    }
+                </CSSTransitionGroup>
+                <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
                     {CatalogStore.isOpen &&
-                        <Catalog index={CatalogStore.objectKindIndex}/>
+                    <Catalog index={CatalogStore.objectKindIndex}/>
                     }
                 </CSSTransitionGroup>
                 <button style={{
                     position: "fixed",
                     bottom: 10,
                     right: 10
-                }} onClick={() => this.testChangeObject()}>Change object</button>
+                }} onClick={() => this.showClueEvent(true)}>
+                    Change object
+                </button>
             </div>
         )
     }
