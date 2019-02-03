@@ -1,7 +1,8 @@
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {onPatch} from "mobx-state-tree";
-import CameraStore from "./stores/CameraStore";
+import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
+import ObjectKindUI from "./components/app/objectKindUI/ObjectKindUI";
 
 export class GameWatcher {
 
@@ -10,13 +11,10 @@ export class GameWatcher {
     static watch() {
         return new Promise(resolve => {
             resolve(
-                CatalogStore.objectTypes.forEach(objectType => {
-                    objectType.objectKinds.forEach(objectKind => {
+                CatalogStore.objectKinds.forEach(objectKind => {
                         let oldPreviewObjectId = null;
                         onPatch(objectKind, patch => {
-                            console.log(patch);
                             try {
-                                console.log(objectKind.name, patch);
                                 if (patch.path === "/location/coordinates") {
                                     /**
                                      * Location changes
@@ -30,10 +28,10 @@ export class GameWatcher {
                                     }
                                 }
 
-                                if (patch.path.includes("activeObject") && patch.op === "replace" && objectKind.activeObject > 0) {
-                                    const oldlambdaMesh = objectKind.objects[objectKind.activeObject - 1].getModel();
+                                else if (patch.path.includes("activeObject") && patch.op === "replace" && objectKind.oldActiveObject !== null) {
+                                    const oldlambdaMesh = objectKind.objects[objectKind.oldActiveObject].getModel();
                                     const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh));
+                                    GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectKind.type));
                                 } else if (objectKind.activeObject !== null && patch.path.includes("model")) {
                                     /**
                                      * New object
@@ -42,7 +40,7 @@ export class GameWatcher {
                                     lambdaMesh.mesh.position = objectKind.location.toVector3();
                                     GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, null));
                                 }
-                                if (patch.path.includes("previewObjectId")) {
+                                else if (patch.path.includes("previewObjectId")) {
                                     if (patch.value !== null) {
                                         oldPreviewObjectId = objectKind.location.previewObjectId;
                                         let oldLambdaMesh = null;
@@ -51,8 +49,7 @@ export class GameWatcher {
                                         }
                                         const lambdaMesh = objectKind.objects[objectKind.location.previewObjectId].getModel();
                                         lambdaMesh.mesh.position = objectKind.location.toVector3();
-                                        console.log("MESH", lambdaMesh.mesh.name);
-                                        GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh));
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh, null));
                                         CameraStore.setTarget(
                                             lambdaMesh.mesh.name,
                                             CameraManager.CATALOG_OFFSET
@@ -60,13 +57,19 @@ export class GameWatcher {
 
                                     } else {
                                         const lambdaMesh = objectKind.objects[oldPreviewObjectId].getModel();
-                                        CameraStore.setTarget();
                                         let activeLambdaMesh = null;
                                         if (objectKind.activeObject !== null) {
                                             activeLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                         }
-                                        GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh));
+                                        let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === objectKind);
+                                        let timer = true;
+                                        if (objectKindUI.notification) {
+                                            objectKindUI.notification.changeDelayTimer(objectKind.activeObject !== null);
+                                            timer = objectKindUI.notification.restartTimer();
+                                        }
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null, timer));
                                         oldPreviewObjectId = null;
+                                        CameraStore.setTarget();
                                     }
                                 }
 
@@ -74,8 +77,7 @@ export class GameWatcher {
                                 console.error(e);
                             }
                         });
-                    });
-                })
+                    })
             )
         })
 

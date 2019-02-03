@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree";
 import * as BABYLON from "babylonjs";
-import CoordsStore from "../CatalogStore/ObjectTypeStore/ObjectKindStore/LocationStore/CoordsStore/CoordsStore";
+import CoordsStore from "../CatalogStore/ObjectKindStore/LocationStore/CoordsStore/CoordsStore";
 
 export default types.model("CameraStore", {
     meshName: types.string,
@@ -9,7 +9,6 @@ export default types.model("CameraStore", {
     .actions(self =>
         ({
             setTarget(meshName = "", offset = new BABYLON.Vector3(0, 0, 0)) {
-                console.log(meshName);
                 self.meshName = meshName;
                 self.offset = CoordsStore.create({
                     x: offset.x,

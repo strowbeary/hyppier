@@ -1,20 +1,24 @@
 $yellow: #FFE07D;
 
-.hypeIndicator {
+.gameIndicator {
   position: fixed;
   top: 0;
   right: 5vw;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
-  &__level {
+  &__wrapper {
+    position: relative;
+  }
+
+  &__hypeLevel {
     display: block;
-    width: 50px;
-    height: 200px;
-    border-radius: 25px;
+    width: 75px;
+    height: 250px;
+    border-radius: 50px;
     background-color: white;
     background-image: url("./img/wave.svg");
     background-repeat: repeat-x;
@@ -23,6 +27,66 @@ $yellow: #FFE07D;
     transition: all 1s linear;
     border: solid 3px white;
   }
+}
+
+.pipo {
+  position: absolute;
+  left: -88px;
+  bottom: -128px;
+  width: 256px;
+  height: 256px;
+  transform: scale(0.5);
+  transition: scale 1s ease-in;
+  background: url('./img/Pipo-Idle.png') left center;
+  animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
+
+  &.happy {
+    //do not make this infinite
+  }
+
+  &.sad {
+    //do not make this infinite
+  }
+
+  &.yes {
+    background: url('./img/Pipo-Yes.png') left center;
+    transform: scale(0.65);
+    animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
+
+  }
+
+  &.no {
+    background: url('./img/Pipo-No.png') left center;
+    transform: scale(0.65);
+    animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
+  }
+}
+
+@keyframes playXYes {
+  from {background-position-x: 0;}
+  to {background-position-x: -2048px;}
+}
+@keyframes playYYEs {
+  from {background-position-y: 0;}
+  to {background-position-y: -1792px;}
+}
+
+@keyframes playXNo {
+  from {background-position-x: 0;}
+  to {background-position-x: -2048px;}
+}
+@keyframes playYNo {
+  from {background-position-y: -512px;}
+  to {background-position-y: -2048px;}
+}
+
+@keyframes playX {
+  from {background-position-x: 0;}
+  to {background-position-x: -2560px;}
+}
+@keyframes playY {
+  from {background-position-y: 0;}
+  to {background-position-y: -3072px;}
 }
 
 @keyframes animate {

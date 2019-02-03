@@ -15,28 +15,27 @@ const Catalog = observer(class Catalog extends Component {
 
     constructor(props) {
         super(props);
-        this.path = props.path.toJSON();
-        this.productType = CatalogStore.objectTypes[this.path[0]];
-        this.objectKind = this.productType.objectKinds[this.path[1]];
-        this.hasPreviousGeneration = this.objectKind.activeObject !== null;
-        if (this.hasPreviousGeneration) {
-            this.productNew = this.objectKind.objects[this.objectKind.activeObject + 1];
-            this.objectKind.location.setPreviewObject(this.objectKind.activeObject + 1);
-            this.path.push(this.objectKind.activeObject + 1);
-        } else {
-            this.productNew = this.objectKind.objects[0];
-            this.objectKind.location.setPreviewObject(0);
-            this.path.push(0);
-        }
-    }
-
-    componentDidMount() {
+        this.path = [props.index];
+        this.objectKind = CatalogStore.objectKinds[this.path[0]];
+        this.productType = this.objectKind.type;
+        this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
+        this.path.push(this.objectKind.replacementCounter + 1);
+        this.isClosing = false;
     }
 
     onClose() {
+        this.pipoStop();
+        this.closeCatalog(false);
+        this.updateConfirmVisibilty(false);
+        if (this.objectKind.replacementCounter > -1) {
+            this.objectKind.updateReplacementCounter();
+        }
+    }
+
+    closeCatalog() {
+        this.isClosing = true;
         CatalogStore.closeCatalog();
         this.objectKind.location.removePreviewObject();
-        this.updateConfirmVisibilty(false);
     }
 
     updateConfirmVisibilty(value) {
@@ -45,16 +44,26 @@ const Catalog = observer(class Catalog extends Component {
         })
     }
 
-    onValidate() {
-        if (this.objectKind.activeObject !== null) {
-            this.objectKind.setActiveObject(this.objectKind.activeObject + 1);
-        } else {
-            this.objectKind.setActiveObject(0);
+    pipoYes() {
+        GameStore.setPipo("yes");
+    }
+
+    pipoNo() {
+        GameStore.setPipo("no");
+    }
+
+    pipoStop() {
+        if (!this.isClosing) {
+            GameStore.setPipo("");
         }
+    }
+
+    onValidate() {
+        this.objectKind.updateReplacementCounter();
+        this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
-        //skip generation
-        this.props.onClose();
-        this.objectKind.location.removePreviewObject();
+        GameStore.setPipo("happy");
+        this.closeCatalog(true);
     }
 
     render() {
@@ -67,12 +76,13 @@ const Catalog = observer(class Catalog extends Component {
                 >
                     {this.state.confirmVisibility &&
                     <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
-                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}/>
+                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
+                                  pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
                     }
                 </CSSTransitionGroup>
                 <div className="catalog__header">
                     <span>Catalogue</span>
-                    <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)}>
+                    <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>
                         <img src={icon_close} alt="close_icon"/>
                     </button>
                 </div>
@@ -81,7 +91,7 @@ const Catalog = observer(class Catalog extends Component {
 
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">
-                            <p>{this.productType.name}</p>
+                            <p>{this.productType}</p>
                         </div>
                         <div className="catalog__content__main__productTitle">
                             <span>{this.productNew.name}</span>
@@ -92,7 +102,7 @@ const Catalog = observer(class Catalog extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={`catalog__footer`} onClick={() => this.onValidate()}>
+                <div className={`catalog__footer`} onClick={() => this.onValidate()} onMouseOver={() => this.pipoYes()} onMouseLeave={() => this.pipoStop()}>
                     <button className="catalog__footer__validation">
                         Oui, je craque !
                     </button>

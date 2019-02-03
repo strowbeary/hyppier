@@ -7,48 +7,81 @@ import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
-import PopupStore from "../../stores/PopupStore/PopupStore"
-import Popup from "./popup/Popup"
+import Toast from "./toast/Toast";
+import TimerStore from "../../stores/TimerStore/TimerStore";
+import {onPatch} from "mobx-state-tree";
+import GameStore from "../../stores/GameStore/GameStore";
+import ClueEvent from "./clueEvent/ClueEvent"
 
 const App = observer(class App extends Component {
 
-    state = {catalogShow: false, message: null};
+    state = {message: null, toast: false};
+
+    constructor(props) {
+        super(props);
+        /*this.timer = TimerStore.create(3000);
+        this.timer.start();
+        onPatch(this.timer, patch => {
+            if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
+                if (this.state.toast) {
+                    this.setState({toast: false});
+                    let random = Math.round(Math.random() * 3000 + 500);
+                    this.timer.setDuration(random);
+                    this.timer.stop();
+                    this.timer.start();
+                } else {
+                    this.setState({toast: true});
+                    this.timer.setDuration(3000);
+                    this.timer.stop();
+                    this.timer.start();
+                }
+            }
+        });*/
+    }
 
     componentDidMount() {
-        this.setState({catalogShow: true, message: "Tu peux désormais accéder à ton grenier."});
+        this.setState({message: "Tu peux désormais accéder à ton grenier."});
+    }
+
+    showClueEvent(value) {
+        this.setState({clueEvent: value});
     }
 
     testChangeObject() {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
-        if(objectKindPath.activeObject === null) {
+        if (objectKindPath.activeObject === null) {
             objectKindPath.setActiveObject(0, 0);
         } else if (objectKindPath.activeObject + 1 < objectKindPath.objects.length) {
             objectKindPath.setActiveObject(objectKindPath.activeObject + 1, 0);
         }
     }
 
-    onClose() {
-        this.setState({catalogShow: false});
-    }
-
     render() {
+        let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
+        let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
+
         return (
-            <div id="app">
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`}>
                 <GameCanvas/>
                 <HypeIndicator/>
-                {this.state.message &&
+                {/*{this.state.message &&
                     <Message message={this.state.message}/>
                 }
-                {PopupStore.activePopup.map(path => {
-                    return Popup.createPopup(path);
-                })}
                 <CSSTransitionGroup
-                    transitionName="grow"
+                    transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    {PopupStore.catalogPopup &&
-                        <Popup path={PopupStore.catalogPopup}/>
+                    {this.state.toast &&
+                        <Toast></Toast>
+                    }
+                </CSSTransitionGroup>*/}
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {this.state.clueEvent &&
+                        <ClueEvent closeClueEvent={() => {this.showClueEvent(false)}}/>
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
@@ -57,14 +90,16 @@ const App = observer(class App extends Component {
                     transitionLeaveTimeout={500}
                 >
                     {CatalogStore.isOpen &&
-                        <Catalog path={CatalogStore.objectKindPath} onClose={() => CatalogStore.closeCatalog()}/>
+                    <Catalog index={CatalogStore.objectKindIndex}/>
                     }
                 </CSSTransitionGroup>
                 <button style={{
                     position: "fixed",
                     bottom: 10,
                     right: 10
-                }} onClick={() => this.testChangeObject()}>Change object</button>
+                }} onClick={() => this.showClueEvent(true)}>
+                    Change object
+                </button>
             </div>
         )
     }

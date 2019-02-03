@@ -1,4 +1,7 @@
 import * as BABYLON from "babylonjs";
+import CameraStore from "../../../stores/CameraStore/CameraStore";
+import {GameManager} from "./GameManager";
+import GameStore from "../../../stores/GameStore/GameStore";
 
 export class CameraManager {
 
@@ -28,11 +31,23 @@ export class CameraManager {
         this.updateCamera();
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
-
+        this.gameManager = new GameManager(scene);
     }
 
     attachControl(canvas) {
         this.camera.attachControl(canvas);
+    }
+
+    goToAttic() {
+        CameraStore.setTarget("Grenier");
+        this.gameManager.pauseGame();
+        GameStore.attic.setAtticVisibility(true);
+    }
+
+    goToRoom() {
+        CameraStore.setTarget();
+        this.gameManager.playGame();
+        GameStore.attic.setAtticVisibility(false);
     }
 
     updateCamera() {
@@ -68,7 +83,6 @@ export class CameraManager {
         }
         const animation = () => {
             this.distance = this.distance + 0.1 * (toDistance - this.distance);
-
             this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
             this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
             this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);

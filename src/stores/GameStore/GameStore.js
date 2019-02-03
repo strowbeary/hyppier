@@ -6,8 +6,19 @@ import OptionsStore from "./OptionsStore/OptionsStore";
 export default types.model({
     attic: AtticStore,
     hype: HypeStore,
-    options: OptionsStore
+    options: OptionsStore,
+    pipo: types.maybe(types.string)
 })
+    .actions(self =>
+        ({
+            setPipo(state) {
+                self.pipo = state;
+                if (state === "happy") {
+                    setTimeout(() => {this.setPipo("")}, 4000);
+                }
+            }
+        })
+    )
     .create({
     attic: AtticStore.create({
 
@@ -15,6 +26,7 @@ export default types.model({
     hype: HypeStore.create({
         level: 0.5
     }),
+    pipo: "",
     options: OptionsStore.create((() => {
         if (sessionStorage.getItem("hyppierOptions") !== null){
             return JSON.parse(sessionStorage.getItem("hyppierOptions"))

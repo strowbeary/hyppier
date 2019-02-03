@@ -1,0 +1,28 @@
+.objectKindUI {
+  position: fixed;
+  opacity: 1;
+  transition: opacity 500ms linear;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.grow-enter {
+  transform: scale(0);
+}
+
+.grow-enter.grow-enter-active {
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+.grow-leave {
+  transform: scale(1);
+}
+
+.grow-leave.grow-leave-active {
+  transform: scale(0);
+  transition: transform 300ms ease-in-out;
+}

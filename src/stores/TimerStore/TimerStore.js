@@ -6,6 +6,12 @@ export default types.model("TimerStore", {
 })
     .actions(self => {
         return {
+            pauseAllExcept(countdownValue) {
+                self.countdowns.filter(countdown => countdown !== countdownValue).forEach(tm => tm.pause());
+            },
+            startAllExcept(countdownValue) {
+                self.countdowns.filter(countdown => countdown !== countdownValue).forEach(tm => tm.start());
+            },
             pauseAll() {
                 self.countdowns.forEach(tm => tm.pause());
             },

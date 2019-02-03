@@ -4,8 +4,9 @@ import {GameWatcher} from "../../../GameWatcher";
 import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
-import EmptySpace from "../emptySpace/EmptySpace";
-import Notification from "../notification/Notification";
+import {AtticManager} from "./AtticManager";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import {GameManager} from "./GameManager";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -37,22 +38,33 @@ export class SceneManager {
         const ambient = 0.5;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
-        this.meshManager = new MeshManager(this.scene, lights);
+        this.atticManager = new AtticManager(this.scene);
+        this.gameManager = new GameManager(this.scene);
+        this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
         GameWatcher
-            .onUpdate((newMesh, oldMesh) => {
-                this.meshManager.patch(newMesh, oldMesh);
-                EmptySpace.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
-                Notification.refs.filter(ref => ref.current !== null).forEach(ref => ref.current.updatePosition());
+            .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
+                if (objectKindType) {
+                    oldMesh.clone && this.atticManager.createCarton(oldMesh.mesh);
+                    this.atticManager.createCarton(oldMesh.mesh);
+                }
+                this.meshManager.patch(newMesh, oldMesh, timer);
+                newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
-            .watch(this.scene)
+            .watch()
             .then(() => {
                 GameStarter.init(this.scene)
-                    .then(/*() => onReadyCB()*/);
+                    .then(() => {
+                        this.atticManager.prepareGravity()
+                    });
             });
 
         this.engine.runRenderLoop(() => {
                 this.scene.render();
         });
+    }
+
+    updateTrackingPosition() {
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
     }
 }
