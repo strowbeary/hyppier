@@ -34,7 +34,7 @@ export class GameWatcher {
                                     const oldlambdaMesh = objectKind.objects[objectKind.oldActiveObject].getModel();
                                     const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                     GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectKind.type));
-                                } else if (objectKind.activeObject !== null && patch.path.includes("model")) {
+                                } else if (objectKind.activeObject === 0 && patch.path.includes("model")) {
                                     /**
                                      * New object
                                      */

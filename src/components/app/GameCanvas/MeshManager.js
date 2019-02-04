@@ -15,11 +15,11 @@ export class MeshManager {
                  */
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
-                if (oldLambdaMesh.clone) {
-                    oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.clone)});
-                }
                 oldLambdaMesh.launchDisappearAnimation(() => {
                     setTimeout(() => {
+                        oldLambdaMesh.clone.forEach(clone => {
+                            this.scene.removeMesh(clone);
+                        });
                         this.scene.removeMesh(oldLambdaMesh.mesh);
                         newLambdaMesh.launchAppearAnimation(() => this.gameManager.playAfterCatalog(timer));
                     }, 0)
@@ -35,6 +35,7 @@ export class MeshManager {
                  */
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
+                console.log("test");
                 newLambdaMesh.launchAppearAnimation();
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
                 /**

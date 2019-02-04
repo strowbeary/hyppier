@@ -7,6 +7,7 @@ export class LambdaMesh {
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
+        this.clone = [];
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
             this.time = objectTimeout * 0.03;
@@ -19,11 +20,12 @@ export class LambdaMesh {
     }
 
     addClone() {
-        this.clone = this.mesh.clone("clone");
-        this.clone.setEnabled(false);
-        this.clone.position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y, this.mesh.position.z);
-        this.cloneMaterial(this.clone);
-        this.freezeMaterials(this.clone);
+        let cloneIndex = this.clone.length;
+        this.clone.push(this.mesh.clone("clone"));
+        this.clone[cloneIndex].setEnabled(false);
+        this.clone[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        this.cloneMaterial(this.clone[cloneIndex]);
+        this.freezeMaterials(this.clone[cloneIndex]);
     }
 
     cloneMaterial(mesh) {// Need to clone material before animation
@@ -64,7 +66,7 @@ export class LambdaMesh {
         mesh.animations = [];
         if (this.multimaterial) {
             for (let i = 0; i < this.mesh.material.subMaterials.length; i++) {
-                let animationBox = new BABYLON.Animation(`materialDegradation-${mesh.id}-${i}`, "material.subMaterials."+i+".diffuseColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                let animationBox = new BABYLON.Animation(`materialDegradation-${mesh.id}-${i}`, "material.subMaterials." + i + ".diffuseColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
                 let keys = [];
                 keys.push({
                     frame: 0,
@@ -109,36 +111,48 @@ export class LambdaMesh {
         let time = this.getTime();
         this.unfreezeMaterials(this.mesh);
         this.materialDegradation(time, this.mesh);
-        if (this.clone) {
-            this.unfreezeMaterials(this.clone);
-            this.materialDegradation(time, this.clone);
-            this.clone._scene.beginAnimation(this.clone, 0, time, false, 1, () => {this.freezeMaterials(this.clone)});
+        if (this.clone.length > 0) {
+            this.clone.forEach(clone => {
+                this.unfreezeMaterials(clone);
+                this.materialDegradation(time, clone);
+                clone._scene.beginAnimation(clone, 0, time, false, 1, () => {
+                    this.freezeMaterials(clone)
+                });
+            })
         }
-        this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1,  () => {this.freezeMaterials(this.mesh)});
+        this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1, () => {
+            this.freezeMaterials(this.mesh)
+        });
     }
 
     launchAppearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.setEnabled(true);
         this.scaleAppearAnimation(this.mesh);
-        if (this.clone) {
-            this.clone.setEnabled(true);
-            this.clone.unfreezeWorldMatrix();
-            this.scaleAppearAnimation(this.clone);
-            this.clone._scene.beginAnimation(this.clone, 0, 30, false, 1, () => {this.clone.freezeWorldMatrix()});
+        if (this.clone.length > 0) {
+            this.clone.forEach(clone => {
+                clone.setEnabled(true);
+                clone.unfreezeWorldMatrix();
+                this.scaleAppearAnimation(clone);
+                clone._scene.beginAnimation(clone, 0, 30, false, 1, () => {
+                    clone.freezeWorldMatrix()
+                });
+            });
         }
-        this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {this.mesh.freezeWorldMatrix(); typeof callback === 'function' && callback()});
+        this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {
+            this.mesh.freezeWorldMatrix();
+            typeof callback === 'function' && callback()
+        });
     }
 
     launchDisappearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.scaleAppearAnimation(this.mesh);
-        if (this.clone) {
-            this.clone.unfreezeWorldMatrix();
-            this.scaleAppearAnimation(this.clone);
-            this.clone._scene.beginAnimation(this.clone, 30, 0, false, 1, () => {this.clone.scalingDeterminant = 0; this.clone.freezeWorldMatrix()});
-        }
-        this.mesh._scene.beginAnimation(this.mesh, 30, 0, false, 1, () => {this.mesh.scalingDeterminant = 0; this.mesh.freezeWorldMatrix(); typeof callback === 'function' && callback()});
+        this.mesh._scene.beginAnimation(this.mesh, 30, 0, false, 1, () => {
+            this.mesh.scalingDeterminant = 0;
+            this.mesh.freezeWorldMatrix();
+            typeof callback === 'function' && callback()
+        });
     }
 
     setClickEvent() {

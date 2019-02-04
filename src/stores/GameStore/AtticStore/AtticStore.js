@@ -18,7 +18,7 @@ export default types.model("AtticStore", {
 ).views(self =>
     ({
         shouldLaunchClueEvent(objectKindType) {
-            if(!self[objectKindType].clueEventLaunched && self[objectKindType].parcelsNumber >= 1) { //1 is the limit for testing
+            if(!self[objectKindType].clueEventLaunched && self[objectKindType].parcelsNumber >= self[objectKindType].parcelsNumberLimit) {
                 self[objectKindType].updateClueEventLaunched();
                 return true;
             } else {
