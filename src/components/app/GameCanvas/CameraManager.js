@@ -31,7 +31,6 @@ export class CameraManager {
         this.updateCamera();
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
-        this.gameManager = new GameManager(scene);
     }
 
     attachControl(canvas) {
@@ -40,13 +39,13 @@ export class CameraManager {
 
     goToAttic() {
         CameraStore.setTarget("Grenier");
-        this.gameManager.pauseGame();
+        GameManager.GameManager && GameManager.GameManager.pauseGame();
         GameStore.attic.setAtticVisibility(true);
     }
 
     goToRoom() {
         CameraStore.setTarget();
-        this.gameManager.playGame();
+        GameManager.GameManager && GameManager.GameManager.playGame();
         GameStore.attic.setAtticVisibility(false);
     }
 

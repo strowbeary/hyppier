@@ -5,13 +5,16 @@ export class GameManager {
 
     static GameManager;
 
-    constructor(scene) {
+    constructor(scene, atticManager) {
         if (GameManager.GameManager) {
             return GameManager.GameManager;
         } else {
             this.scene = scene;
             GameManager.GameManager = this;
         }
+        this.clueEvent = null;
+        this.clueEventTimer = null;
+        this.atticManager = atticManager;
     }
 
     pauseCatalog(countdown) {
@@ -42,8 +45,35 @@ export class GameManager {
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
+    playAfterClueEvent() {
+        GameStore.setClueEvent("");
+        if (this.clueEventTimer) {
+            if (typeof this.clueEventTimer !== 'boolean') {
+                this.playCatalog(this.clueEventTimer);
+            } else {
+                this.playGame();
+            }
+            this.clueEventTimer = null;
+        }
+    }
+
     playAfterCatalog(timer) {
-        if (timer) {
+        if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
+            GameStore.setClueEvent(this.clueEvent);
+            if (!timer) {
+                this.pauseGame();
+                this.clueEventTimer = true;
+            } else {
+                this.clueEventTimer = timer;
+            }
+            this.clueEvent = null;
+        } else if (timer) {
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
             if (typeof timer !== 'boolean') {
                 this.playCatalog(timer);
             } else {

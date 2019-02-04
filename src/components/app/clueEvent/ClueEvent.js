@@ -2,14 +2,25 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_clueEvent.scss";
 import SpaceBar from "../spacebar/Spacebar";
+import {GameManager} from "../GameCanvas/GameManager"
 
 const ClueEvent = observer(class ClueEvent extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    closeClueEvent() {
+        if (GameManager.GameManager) {
+            GameManager.GameManager.playAfterClueEvent();
+        }
+    }
 
     render() {
         return (
             <div className="clueEvent">
                 <p> Oooh tu as déclenché un évènement ;) </p>
-                <SpaceBar onSpaceUp={() => this.props.closeClueEvent()}/>
+                <SpaceBar onSpaceUp={() => this.closeClueEvent()}/>
             </div>
         )
     }

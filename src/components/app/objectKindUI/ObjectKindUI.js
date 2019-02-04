@@ -21,8 +21,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         popup: {focus: false, hovered: false}
     };
 
-    gameManager = new GameManager();
-
     constructor(props) {
         super(props);
         this.scene = props.scene;
@@ -105,7 +103,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog(timer) {
-        this.gameManager.pauseCatalog(timer);
+        GameManager.GameManager && GameManager.GameManager.pauseCatalog(timer);
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");

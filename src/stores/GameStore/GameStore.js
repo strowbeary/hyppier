@@ -7,21 +7,23 @@ export default types.model({
     attic: AtticStore,
     hype: HypeStore,
     options: OptionsStore,
-    pipo: types.maybe(types.string)
+    pipo: types.maybe(types.string),
+    clueEvent: types.maybe(types.string)
 })
     .actions(self =>
         ({
             setPipo(state) {
                 self.pipo = state;
-                if (state === "happy") {
-                    setTimeout(() => {this.setPipo("")}, 4000);
-                }
+            },
+            setClueEvent(objectKindType) {
+                self.clueEvent = objectKindType
             }
         })
     )
     .create({
     attic: AtticStore.create({
-
+        electric: {parcelsNumber: 0, clueEventLaunched: false},
+        furniture: {parcelsNumber: 0, clueEventLaunched: false}
     }),
     hype: HypeStore.create({
         level: 0.5
