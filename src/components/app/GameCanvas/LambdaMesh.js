@@ -149,6 +149,16 @@ export class LambdaMesh {
     launchDisappearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.scaleAppearAnimation(this.mesh);
+        if (this.clone.length > 0) {
+            this.clone.forEach(clone => {
+                clone.unfreezeWorldMatrix();
+                this.scaleAppearAnimation(clone);
+                clone._scene.beginAnimation(clone, 30, 0, false, 1, () => {
+                    clone.scalingDeterminant = 0;
+                    clone.freezeWorldMatrix();
+                });
+            });
+        }
         this.mesh._scene.beginAnimation(this.mesh, 30, 0, false, 1, () => {
             this.mesh.scalingDeterminant = 0;
             this.mesh.freezeWorldMatrix();

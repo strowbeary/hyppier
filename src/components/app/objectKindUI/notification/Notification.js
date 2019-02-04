@@ -1,27 +1,45 @@
 import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
-import {onPatch} from "mobx-state-tree";
-import TimerStore from "../../../../stores/TimerStore/TimerStore";
+import {createTimer} from "../../../../utils/TimerManager"
 
 const Notification = observer(class Notification extends Component {
 
+    state = {
+      elapsedTime: 0,
+      running: false
+    };
+
     constructor(props) {
         super(props);
-        this.delayTimer = TimerStore.create(props.objectKind.objectTimeout);
-        this.timer = TimerStore.create(props.objectKind.objectTimeout);
-        onPatch(this.delayTimer, patch => {
-            if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
-                this.timer.start();
-                props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation();
-            }
+        this.duration = props.objectKind.objectTimeout;
+        this.delayTimer = createTimer(this.duration);
+        this.timer = createTimer(this.duration);
+        this.delayTimer.onFinish(() => {
+            this.timer.start();
+            this.setState({
+                running: true
+            });
+            props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation();
         });
-        onPatch(this.timer, patch => {
-            if (patch.op === "replace" && patch.path === "/ended" && patch.value === true) {
-                this.openPopup();
-            }
+        this.timer.addLoopHook((data) => {
+            this.setState({
+                elapsedTime: data.elapsedTime,
+                running: data.running
+            });
+        });
+        this.timer.onFinish(() => {
+            this.setState({
+                running: false
+            });
+            this.openPopup();
         });
         this.delayTimer.start();
+    }
+
+    componentWillUnmount() {
+        this.delayTimer.destroy();
+        this.timer.destroy();
     }
 
     changeDelayTimer(fromValidate) {
@@ -33,11 +51,9 @@ const Notification = observer(class Notification extends Component {
     }
 
     restartTimer() {
-        if (this.props.objectKind.replacementCounter < this.props.objectKind.objects.length - 1) {
-            this.timer.stop();
-            this.delayTimer.stop();
-        }
-        return this.timer;
+        this.delayTimer.stop();
+        this.timer.stop();
+        return this.timer.timerId;
     }
 
     openPopup() {
@@ -46,18 +62,21 @@ const Notification = observer(class Notification extends Component {
 
     buildCatalog() {
         this.timer.stop();
+        this.setState({
+            running: false
+        });
         this.props.buildCatalog(this.timer);
     }
 
     render() {
         const dashSize = Math.PI * 60;
-        let hide = this.timer.running? '': 'hide';
+        let hide = this.state.running? '': 'hide';
 
         return (
-            <div className={`notification ${hide} ${(this.timer.running && (this.timer.elapsedTime / this.timer.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>
+            <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>
                 <svg height={32} width={32}>
                     <circle cx={15} cy={15} r={14.25} stroke="black" strokeWidth="2" fill="transparent"
-                            strokeDashoffset={this.timer.elapsedTime / this.timer.duration * -dashSize}
+                            strokeDashoffset={this.state.elapsedTime / this.duration * -dashSize}
                             strokeDasharray={dashSize}/>
                     <circle cx={15} cy={15} r={9.25} fill="black"/>
                 </svg>

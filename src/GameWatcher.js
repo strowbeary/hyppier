@@ -31,12 +31,12 @@ export class GameWatcher {
                                 }
 
                                 else if (patch.path.includes("activeObject") && patch.op === "replace" && objectKind.oldActiveObject !== null) {
-                                    if (patch.value) {
+                                    const oldlambdaMesh = objectKind.objects[objectKind.oldActiveObject].getModel();
+                                    if (patch.value !== null) {
                                         const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                        const oldlambdaMesh = objectKind.objects[objectKind.oldActiveObject].getModel();
                                         GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldlambdaMesh, objectKind.type));
                                     } else {
-                                        GameWatcher.updateWatchers.forEach(watcher => watcher(null, null, null));
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(null, oldlambdaMesh, null));
                                     }
                                 } else if (objectKind.activeObject === 0 && patch.path.includes("model")) {
                                     /**

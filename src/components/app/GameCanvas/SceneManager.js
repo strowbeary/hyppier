@@ -68,10 +68,8 @@ export class SceneManager {
                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                     if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) { //popup clueEvent
                         this.gameManager.clueEvent = objectKindType;
-                        this.meshManager.patch(null, oldMesh, timer);
-                    } else {
-                        this.meshManager.patch(newMesh, oldMesh, timer);
                     }
+                    this.meshManager.patch(newMesh, oldMesh, timer);
                 } else {
                     this.meshManager.patch(newMesh, oldMesh, timer);
                 }

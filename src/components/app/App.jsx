@@ -8,7 +8,7 @@ import Catalog from "./catalog/Catalog"
 import Message from "./message/Message"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Toast from "./toast/Toast";
-import TimerStore from "../../stores/TimerStore/TimerStore";
+//import TimerStore from "../../stores/TimerStore/TimerStore";
 import {onPatch} from "mobx-state-tree";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent"

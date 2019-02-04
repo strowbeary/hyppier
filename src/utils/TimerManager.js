@@ -7,16 +7,20 @@ export const TimerManager = {
         timers.forEach(timer => timer.stop());
     },
     startAll() {
-        timers.forEach(timer => timer.start());
+        timers.forEach(timer => {timer && timer.start && timer.start()});
     },
     pauseAll() {
-        timers.forEach(timer => timer.pause());
+        timers.forEach(timer => {timer && timer.pause && timer.pause()});
     },
     pauseAllExcept(timerId) {
-        timers.forEach((timer, id) => { if (id !== timerId) timer.stop() });
+        timers.forEach((timer, id) => {
+            if (id !== timerId) timer.stop()
+        });
     },
     startAllExcept(timerId) {
-        timers.forEach((timer, id) => { if (id !== timerId) timer.start() });
+        timers.forEach((timer, id) => {
+            if (id !== timerId) timer.start()
+        });
     }
 };
 
@@ -69,14 +73,15 @@ export function createTimer(duration) {
         metaElapsedTime = GameStore.hype.level * (performance.now() - startTime);
         loopHooks.forEach(hook => hook({
             elapsedTime: Math.min(Math.max(metaElapsedTime, 0), duration),
-            remainingTime:  Math.max(duration - metaElapsedTime, 0)
+            remainingTime: Math.max(duration - metaElapsedTime, 0),
+            running: running
         }));
         if (metaElapsedTime >= duration) {
             ended = true;
             running = false;
             finishListeners.forEach(listener => listener());
         }
-        if(paused || ended) {
+        if (paused || ended) {
             cancelAnimationFrame(animationRequest)
         } else {
             animationRequest = requestAnimationFrame(loop);
@@ -112,7 +117,7 @@ export function createTimer(duration) {
         timerId: timers.length
     }, {
         get(target, prop) {
-            if(!destroyed) {
+            if (!destroyed) {
                 return target[prop];
             }
         },

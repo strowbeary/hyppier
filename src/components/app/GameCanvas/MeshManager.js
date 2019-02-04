@@ -35,7 +35,6 @@ export class MeshManager {
                  */
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
-                console.log("test");
                 newLambdaMesh.launchAppearAnimation();
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
                 /**
@@ -44,7 +43,11 @@ export class MeshManager {
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName)});
             } else {
-                this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName);
+                if (oldLambdaMesh) {
+                    this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName);
+                } else {
+                    this.gameManager.playAfterCatalog(timer, null);
+                }
             }
         } catch (e) {
             console.error(e);
