@@ -11,9 +11,7 @@ const ClueEvent = observer(class ClueEvent extends Component {
     }
 
     closeClueEvent() {
-        if (GameManager.GameManager) {
-            GameManager.GameManager.playAfterClueEvent();
-        }
+        GameManager.GameManager.playAfterClueEvent();
     }
 
     render() {
