@@ -64,6 +64,7 @@ export function createTimer(duration) {
         running = false;
         ended = false;
     }
+
     function loop() {
         metaElapsedTime = GameStore.hype.level * (performance.now() - startTime);
         loopHooks.forEach(hook => hook({
@@ -93,6 +94,7 @@ export function createTimer(duration) {
     function setDuration(newDuration) {
         duration = newDuration;
     }
+
     function destroy() {
         destroyed = true;
         loopHooks = [];
@@ -106,7 +108,8 @@ export function createTimer(duration) {
         stop,
         pause,
         setDuration,
-        destroy
+        destroy,
+        timerId: timers.length
     }, {
         get(target, prop) {
             if(!destroyed) {
