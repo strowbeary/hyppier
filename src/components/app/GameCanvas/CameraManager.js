@@ -2,10 +2,31 @@ import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 export class CameraManager {
 
     static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0, 0);
+
+    static lerp(currentTime, startValue, endValue, duration) {
+        currentTime /= duration;
+        return (1 - currentTime) * startValue + currentTime * endValue;
+    }
+
+    static easeOutQuad (currentTime, startValue, deltaValue, duration) {
+        currentTime /= duration;
+        return -deltaValue * currentTime * (currentTime-2) + startValue;
+    };
+    static easeInQuad(currentTime, startValue, deltaValue, duration) {
+        currentTime /= duration;
+        return deltaValue * currentTime * currentTime + startValue;
+    }
+    static easeInOutQuad (t, b, c, d) {
+        t /= d/2;
+        if (t < 1) return c/2*t*t + b;
+        t--;
+        return -c/2 * (t*(t-2) - 1) + b;
+    };
 
     initialValues = {
         width: window.innerWidth,
@@ -56,6 +77,7 @@ export class CameraManager {
         this.camera.orthoBottom = -distance * ratio * (window.innerHeight / this.initialValues.height);
         this.camera.orthoLeft = -distance * ratio * (window.innerWidth / this.initialValues.height);
         this.camera.orthoRight = distance * ratio * (window.innerWidth / this.initialValues.height);
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
     }
 
     setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
@@ -80,20 +102,26 @@ export class CameraManager {
         if(this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
         }
+        const FRAME_NUMBER = 30;
+
+        const fromDistance = this.distance;
+
+        let i = 0;
         const animation = () => {
-            this.distance = this.distance + 0.1 * (toDistance - this.distance);
-            this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
-            this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
-            this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
-            if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || 
-                BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
-            ) {
+
+            this.distance = CameraManager.easeInOutQuad(i, fromDistance, toDistance - fromDistance, FRAME_NUMBER);
+            this.camera.target.x = CameraManager.easeInOutQuad(i, fromPosition.x, toPosition.x - fromPosition.x, FRAME_NUMBER);
+            this.camera.target.y = CameraManager.easeInOutQuad(i, fromPosition.y, toPosition.y - fromPosition.y, FRAME_NUMBER);
+            this.camera.target.z = CameraManager.easeInOutQuad(i, fromPosition.z, toPosition.z - fromPosition.z, FRAME_NUMBER);
+
+            if (i < FRAME_NUMBER) {
                 this.updateCamera();
                 this.animationRequest = requestAnimationFrame(animation)
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
             }
+            i++;
         };
         this.animationRequest = requestAnimationFrame(animation);
 
