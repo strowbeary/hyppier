@@ -5,7 +5,6 @@ import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import {AtticManager} from "./AtticManager";
-import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
@@ -73,7 +72,6 @@ export class SceneManager {
                 } else {
                     this.meshManager.patch(newMesh, oldMesh, timer);
                 }
-                newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
             .watch()
             .then(() => {
@@ -86,9 +84,5 @@ export class SceneManager {
         this.engine.runRenderLoop(() => {
                 this.scene.render();
         });
-    }
-
-    updateTrackingPosition() {
-        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
     }
 }

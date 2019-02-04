@@ -12,6 +12,7 @@ import TimerStore from "../../stores/TimerStore/TimerStore";
 import {onPatch} from "mobx-state-tree";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent"
+import TutoStore from "../../stores/TutoStore/TutoStore";
 
 const App = observer(class App extends Component {
 
@@ -39,10 +40,6 @@ const App = observer(class App extends Component {
         });*/
     }
 
-    componentDidMount() {
-        this.setState({message: "Tu peux désormais accéder à ton grenier."});
-    }
-
     testChangeObject() {
         const objectKindPath = CatalogStore.getObjectKind("Sound");
         if (objectKindPath.activeObject === null) {
@@ -52,26 +49,28 @@ const App = observer(class App extends Component {
         }
     }
 
-    resetPipo(e) {
-        if (e.target === this.app) {
-            if (GameStore.pipo === 'happy') {
-                GameStore.setPipo("");
-            }
+    resetPipo() {
+        if (GameStore.pipo === 'happy') {
+            GameStore.setPipo("");
         }
     }
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
-        let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
+        let pipoMood = "";
+        if(GameStore.pipo === 'happy') {
+            pipoMood = "happy";
+            setTimeout(() => this.resetPipo(), 2000);
+        }
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)} ref={(ref) => this.app = ref}>
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`} ref={(ref) => this.app = ref}>
                 <GameCanvas/>
                 <HypeIndicator/>
-                {/*{this.state.message &&
-                    <Message message={this.state.message}/>
+                {TutoStore.displayTip() &&
+                    <Message message={TutoStore.getCurrentMessage()}/>
                 }
-                <CSSTransitionGroup
+                {/*<CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
@@ -97,13 +96,6 @@ const App = observer(class App extends Component {
                     <Catalog index={CatalogStore.objectKindIndex}/>
                     }
                 </CSSTransitionGroup>
-                <button style={{
-                    position: "fixed",
-                    bottom: 10,
-                    right: 10
-                }} onClick={() => this.showClueEvent(true)}>
-                    Change object
-                </button>
             </div>
         )
     }
