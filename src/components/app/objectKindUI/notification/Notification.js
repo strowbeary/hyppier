@@ -36,6 +36,9 @@ const Notification = observer(class Notification extends Component {
         });
         this.delayTimer.start();
     }
+    componentDidMount() {
+        TutoStore.reportAction("Notification", "appear");
+    }
 
     componentWillUnmount() {
         this.delayTimer.destroy();
@@ -66,11 +69,13 @@ const Notification = observer(class Notification extends Component {
             running: false
         });
         this.props.buildCatalog(this.timer);
+        TutoStore.reportAction("Notification", "actionned");
     }
 
     render() {
         const dashSize = Math.PI * 60;
         let hide = this.state.running? '': 'hide';
+
 
         return (
             <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>

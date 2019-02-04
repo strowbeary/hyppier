@@ -10,9 +10,16 @@ export default types.model("TutoStore",
     .actions(self =>
         ({
             reportAction(origin, type) {
-                if(type === "appear" && self.messages[self.currentMessage + 1].originTarget === origin) {
-
-
+                if(type === "appear") {
+                    if(self.messages[self.currentMessage + 1].originTarget === origin) {
+                        self.currentMessage++;
+                        self.showTip = true;
+                    }
+                }
+                else if (type === "actionned") {
+                    if(self.messages[self.currentMessage].originTarget === origin) {
+                        self.showTip = false;
+                    }
                 }
             }
         })
@@ -32,6 +39,13 @@ export default types.model("TutoStore",
                 expiration: 10,
                 action: "click",
                 originTarget: "EmptySpace",
+                read: false
+            },
+            {
+                text: "Un nouveau modèle d'un objet est disponible, mais attention tu n'as que peu de temps pour en profiter",
+                expiration: 10,
+                action: "click",
+                originTarget: "Notification",
                 read: false
             }
         ],
