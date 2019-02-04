@@ -19,7 +19,7 @@ function loadObject(objectKind) {
                 objectKind.location.addChild(locationOption[0], objectKind.name);
                 CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position)
             } else {
-                objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout));
+                objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
             }
         });
     });
@@ -36,7 +36,7 @@ function preloadNextObject(objectKind) {
                     if (objectKind.location) {
                         loadedMesh.position = objectKind.location.toVector3();
                     }
-                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout));
+                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
                 }
             });
         }).catch(e => console.log(e));

@@ -2,7 +2,8 @@ import * as BABYLON from "babylonjs";
 import GameStore from "../../../stores/GameStore/GameStore";
 
 export class LambdaMesh {
-    constructor(mesh, objectTimeout) {
+    constructor(mesh, objectTimeout, objectKindName) {
+        this.objectKindName = objectKindName;
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = false;

@@ -1,5 +1,6 @@
 import TimerStore from "../../../stores/TimerStore/TimerStore";
 import GameStore from "../../../stores/GameStore/GameStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export class GameManager {
 
@@ -14,6 +15,7 @@ export class GameManager {
         }
         this.clueEvent = null;
         this.clueEventTimer = null;
+        this.objectKindName = null;
         this.atticManager = atticManager;
     }
 
@@ -46,6 +48,7 @@ export class GameManager {
     }
 
     playAfterClueEvent() {
+        CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         GameStore.setClueEvent("");
         if (this.clueEventTimer) {
             if (typeof this.clueEventTimer !== 'boolean') {
@@ -57,8 +60,9 @@ export class GameManager {
         }
     }
 
-    playAfterCatalog(timer) {
+    playAfterCatalog(timer, objectKindName) {
         if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
+            this.objectKindName = objectKindName;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
             }
@@ -71,6 +75,7 @@ export class GameManager {
             }
             this.clueEvent = null;
         } else if (timer) {
+            this.objectKindName = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
             }
@@ -79,6 +84,8 @@ export class GameManager {
             } else {
                 this.playGame();
             }
+        } else {
+            this.objectKindName = null;
         }
     }
 }

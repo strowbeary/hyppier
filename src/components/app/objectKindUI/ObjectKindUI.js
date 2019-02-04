@@ -30,8 +30,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     getLambdaMesh() {
         if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1
-            && this.objectKind.replacementCounter > -1) {
-            return this.objectKind.objects[this.objectKind.replacementCounter].getModel();
+            && this.objectKind.activeObject !== null) {
+            return this.objectKind.objects[this.objectKind.activeObject].getModel();
         } else {
             return null;
         }

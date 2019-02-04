@@ -61,13 +61,12 @@ export class SceneManager {
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                console.log(newMesh, oldMesh, objectKindType, timer);
-                if (objectKindType) {
+                if (objectKindType) { //replacement
                     oldMesh.clone.forEach(clone => {
                         this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                     });
                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                    if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) { //popup clueEvent
                         this.gameManager.clueEvent = objectKindType;
                         this.meshManager.patch(null, oldMesh, timer);
                     } else {
