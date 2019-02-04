@@ -27,7 +27,7 @@ const Catalog = observer(class Catalog extends Component {
         this.pipoStop();
         this.closeCatalog(false);
         this.updateConfirmVisibilty(false);
-        if (this.objectKind.replacementCounter > -1) {
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 2 && this.objectKind.activeObject) {
             this.objectKind.updateReplacementCounter();
         }
     }

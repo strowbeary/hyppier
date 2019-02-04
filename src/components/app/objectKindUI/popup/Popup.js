@@ -90,7 +90,9 @@ const Popup = observer(class Popup extends Component {
                 Popup.refs[0].changeFocus(true);
             }
         }
-        this.objectKind.updateReplacementCounter();
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 2 && this.objectKind.activeObject) {
+            this.objectKind.updateReplacementCounter();
+        }
         GameStore.hype.setLevelByDiff(-0.1);
         CameraStore.setTarget();
         this.pipoStop();
