@@ -56,7 +56,7 @@ export class SceneManager {
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
         this.atticManager = new AtticManager(this.scene, particleSystem);
-        this.gameManager = new GameManager(this.scene);
+        this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
         GameWatcher

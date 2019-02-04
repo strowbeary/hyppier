@@ -5,7 +5,7 @@ export class GameManager {
 
     static GameManager;
 
-    constructor(scene) {
+    constructor(scene, atticManager) {
         if (GameManager.GameManager) {
             return GameManager.GameManager;
         } else {
@@ -14,6 +14,7 @@ export class GameManager {
         }
         this.clueEvent = null;
         this.clueEventTimer = null;
+        this.atticManager = atticManager;
     }
 
     pauseCatalog(countdown) {
@@ -58,6 +59,9 @@ export class GameManager {
 
     playAfterCatalog(timer) {
         if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
             GameStore.setClueEvent(this.clueEvent);
             if (!timer) {
                 this.pauseGame();
@@ -67,6 +71,9 @@ export class GameManager {
             }
             this.clueEvent = null;
         } else if (timer) {
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
             if (typeof timer !== 'boolean') {
                 this.playCatalog(timer);
             } else {

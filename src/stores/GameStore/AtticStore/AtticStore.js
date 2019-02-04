@@ -2,7 +2,7 @@ import {types} from "mobx-state-tree";
 import ParcelTypeStore from "./ParcelTypeStore/ParcelTypeStore"
 
 export default types.model("AtticStore", {
-    parcelsNumberLimit: 10,
+    parcelsNumberLimit: 2,
     electric: ParcelTypeStore,
     furniture: ParcelTypeStore,
     atticVisible: false
@@ -26,7 +26,7 @@ export default types.model("AtticStore", {
             }
         },
         isGameOver() {
-            return self.electric.parcelsNumber + self.furniture.parcelsNumber >= 10;
+            return self.electric.parcelsNumber + self.furniture.parcelsNumber >= self.parcelsNumberLimit;
         }
     })
 );
