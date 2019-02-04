@@ -90,7 +90,7 @@ const Popup = observer(class Popup extends Component {
                 Popup.refs[0].changeFocus(true);
             }
         }
-        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 2 && this.objectKind.activeObject !== null) {
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
             this.objectKind.updateReplacementCounter();
         }
         GameStore.hype.setLevelByDiff(-0.1);

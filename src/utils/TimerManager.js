@@ -4,7 +4,7 @@ const timers = [];
 
 export const TimerManager = {
     stopAll() {
-        timers.forEach(timer => timer.stop());
+        timers.forEach(timer => {timer && timer.stop && timer.stop()});
     },
     startAll() {
         timers.forEach(timer => {timer && timer.start && timer.start()});
@@ -14,12 +14,12 @@ export const TimerManager = {
     },
     pauseAllExcept(timerId) {
         timers.forEach((timer, id) => {
-            if (id !== timerId) timer.stop()
+            if (id !== timerId && timer && timer.stop) timer.stop()
         });
     },
     startAllExcept(timerId) {
         timers.forEach((timer, id) => {
-            if (id !== timerId) timer.start()
+            if (id !== timerId && timer && timer.start) timer.start()
         });
     }
 };
