@@ -9,7 +9,8 @@ import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Toast from "./toast/Toast";
 import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
-import ClueEvent from "./clueEvent/ClueEvent"
+import ClueEvent from "./clueEvent/ClueEvent";
+//import Message from "./message/Message";
 
 const App = observer(class App extends Component {
 
@@ -52,10 +53,11 @@ const App = observer(class App extends Component {
         let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)} ref={(ref) => this.app = ref}>
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
+                 ref={(ref) => this.app = ref}>
                 <GameCanvas/>
                 <HypeIndicator/>
-                {/*{this.state.message &&
+                {/*{{this.state.message &&
                     <Message message={this.state.message}/>
                 }*/}
                 <CSSTransitionGroup
@@ -64,7 +66,7 @@ const App = observer(class App extends Component {
                     transitionLeaveTimeout={500}
                 >
                     {this.state.toast && !GameStore.options.isPaused &&
-                        <Toast></Toast>
+                    <Toast></Toast>
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
@@ -72,7 +74,7 @@ const App = observer(class App extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}>
                     {GameStore.clueEvent &&
-                        <ClueEvent clueEventType={GameStore.clueEvent}/>
+                    <ClueEvent clueEventType={GameStore.clueEvent}/>
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup

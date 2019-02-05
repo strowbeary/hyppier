@@ -32,8 +32,10 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
             <div className="confirmPopup">
                 <div className="confirmPopup__content">
                     <img src={errorIcon} alt="error"/>
-                    <p>{infos[0].slogan}</p>
-                    <a href={infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                    <div>
+                        <p>{infos[0].slogan}</p>
+                        <a href={infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                    </div>
                 </div>
                 <button className="confirmPopup__buttonClose" onClick={() => this.onClose()} onMouseOver={() => this.onCloseOver()} onMouseLeave={() => this.onMouseLeave()}>{closeButtonLabel}</button>
                 <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()} onMouseOver={() => this.onCatalogOver()} onMouseLeave={() => this.onMouseLeave()}>{returnCatalogButtonLabel}</button>

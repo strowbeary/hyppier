@@ -5,7 +5,6 @@ import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
-import {CSSTransitionGroup} from "react-transition-group";
 
 const Catalog = observer(class Catalog extends Component {
 
