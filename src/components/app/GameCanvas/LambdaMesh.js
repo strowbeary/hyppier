@@ -133,6 +133,9 @@ export class LambdaMesh {
         this.scaleAppearAnimation(this.mesh);
         if (this.clone.length > 0) {
             this.clone.forEach(clone => {
+                if (this.mesh._scene.meshes.indexOf(clone) === -1) {
+                    this.mesh._scene.addMesh(clone);
+                }
                 clone.setEnabled(true);
                 clone.unfreezeWorldMatrix();
                 this.scaleAppearAnimation(clone);
