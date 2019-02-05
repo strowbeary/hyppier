@@ -45,13 +45,11 @@ export class SceneManager {
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
         defaultPipeline.grainEnabled = true;
-        defaultPipeline.grain.intensity = 10;
+        defaultPipeline.grain.intensity = 20;
         defaultPipeline.imageProcessingEnabled = true;
 
-        const pipeline = new BABYLON.SSAORenderingPipeline("default", this.scene,1.0, [this.camera]);
-
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-        const ambient = 0.5;
+        const ambient = 0.9;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
 
         this.atticManager = new AtticManager(this.scene, particleSystem);
