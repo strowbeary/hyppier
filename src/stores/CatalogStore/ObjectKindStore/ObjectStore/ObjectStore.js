@@ -12,7 +12,8 @@ export default types.model("ObjectStore", {
     catalogSlogan: types.string,
     modelUrl: types.string,
     model: types.maybe(types.number),
-    infos: types.array(InfoStore)
+    infos: types.array(InfoStore),
+    cloneNumber: types.number
 })
     .actions(self =>
         ({

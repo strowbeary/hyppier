@@ -17,7 +17,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 0
         }
       ],
       "objectTimeout": 5000,
@@ -41,7 +42,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 1
         }
       ],
       "objectTimeout": 500,
@@ -65,7 +67,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Lit de camp !",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 1
         }
       ],
       "objectTimeout": 500,
@@ -89,7 +92,8 @@
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 1
         }
       ],
       "objectTimeout": 500,
@@ -113,7 +117,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Walkman !",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 1
         },
         {
           "name": "Ipod",
@@ -128,7 +133,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Ipod",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 39
         },
         {
           "name": "Casque",
@@ -143,7 +149,8 @@
               "slogan": "N'attends plus tu risquerais de louper ce super Casque",
               "url": "http://localhost:8080"
             }
-          ]
+          ],
+          "cloneNumber": 1
         }
       ],
       "objectTimeout": 5000,

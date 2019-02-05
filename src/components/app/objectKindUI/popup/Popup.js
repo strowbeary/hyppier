@@ -90,7 +90,9 @@ const Popup = observer(class Popup extends Component {
                 Popup.refs[0].changeFocus(true);
             }
         }
-        this.objectKind.updateReplacementCounter();
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
+            this.objectKind.updateReplacementCounter();
+        }
         GameStore.hype.setLevelByDiff(-0.1);
         CameraStore.setTarget();
         this.pipoStop();
@@ -106,8 +108,9 @@ const Popup = observer(class Popup extends Component {
             this.changeFocus(false);
         }
         this.objectKind.updateReplacementCounter();
-        //update object with "PROMO" effect
-        this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
+        for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
+            this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
+        }
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");

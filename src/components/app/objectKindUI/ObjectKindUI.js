@@ -30,8 +30,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     getLambdaMesh() {
         if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1
-            && this.objectKind.replacementCounter > -1) {
-            return this.objectKind.objects[this.objectKind.replacementCounter].getModel();
+            && this.objectKind.activeObject !== null) {
+            return this.objectKind.objects[this.objectKind.activeObject].getModel();
         } else {
             return null;
         }
@@ -138,10 +138,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         return (
             <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.replacementCounter === -1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
+                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.replacementCounter > -1 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
                 }
                 <CSSTransitionGroup
@@ -151,7 +151,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 >
                     {
                         this.state.popupVisibility &&
-                        <Popup ref={(ref) => Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
+                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) !== -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
                     }
                 </CSSTransitionGroup>
             </div>

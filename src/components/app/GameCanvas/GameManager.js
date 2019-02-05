@@ -1,5 +1,6 @@
-import TimerStore from "../../../stores/TimerStore/TimerStore";
 import GameStore from "../../../stores/GameStore/GameStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {TimerManager} from "../../../utils/TimerManager";
 
 export class GameManager {
 
@@ -14,11 +15,12 @@ export class GameManager {
         }
         this.clueEvent = null;
         this.clueEventTimer = null;
+        this.objectKindName = null;
         this.atticManager = atticManager;
     }
 
     pauseCatalog(countdown) {
-        TimerStore.pauseAllExcept(countdown);
+        TimerManager.pauseAllExcept(countdown);
         GameStore.options.setPause(true);
         this.scene.animatables
             .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
@@ -26,13 +28,13 @@ export class GameManager {
     }
 
     playCatalog(countdown) {
-        TimerStore.startAllExcept(countdown);
+        TimerManager.startAllExcept(countdown);
         GameStore.options.setPause(false);
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
     pauseGame() {
-        TimerStore.pauseAll();
+        TimerManager.pauseAll();
         GameStore.options.setPause(true);
         this.scene.animatables
             .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
@@ -40,37 +42,30 @@ export class GameManager {
     }
 
     playGame() {
-        TimerStore.startAll();
+        TimerManager.startAll();
         GameStore.options.setPause(false);
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
     playAfterClueEvent() {
+        CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         GameStore.setClueEvent("");
-        if (this.clueEventTimer) {
-            if (typeof this.clueEventTimer !== 'boolean') {
-                this.playCatalog(this.clueEventTimer);
-            } else {
-                this.playGame();
-            }
-            this.clueEventTimer = null;
+        if (GameStore.attic.isGameOver()) {
+            this.atticManager.fall();
         }
+        this.playGame();
     }
 
-    playAfterCatalog(timer) {
+    playAfterCatalog(timer, objectKindName) {
         if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
-            if (GameStore.attic.isGameOver()) {
-                this.atticManager.fall();
-            }
+            this.objectKindName = objectKindName;
             GameStore.setClueEvent(this.clueEvent);
             if (!timer) {
                 this.pauseGame();
-                this.clueEventTimer = true;
-            } else {
-                this.clueEventTimer = timer;
             }
             this.clueEvent = null;
         } else if (timer) {
+            this.objectKindName = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
             }
@@ -79,6 +74,8 @@ export class GameManager {
             } else {
                 this.playGame();
             }
+        } else {
+            this.objectKindName = null;
         }
     }
 }

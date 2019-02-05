@@ -15,13 +15,13 @@ export class MeshManager {
                  */
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
-                if (oldLambdaMesh.clone) {
-                    oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.clone)});
-                }
                 oldLambdaMesh.launchDisappearAnimation(() => {
                     setTimeout(() => {
+                        oldLambdaMesh.clone.forEach(clone => {
+                            this.scene.removeMesh(clone);
+                        });
                         this.scene.removeMesh(oldLambdaMesh.mesh);
-                        newLambdaMesh.launchAppearAnimation(() => this.gameManager.playAfterCatalog(timer));
+                        newLambdaMesh.launchAppearAnimation(() => this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName));
                     }, 0)
                 });
                 this.scene.addMesh(newLambdaMesh.mesh);
@@ -41,9 +41,13 @@ export class MeshManager {
                  * Suppression de mesh
                  */
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
-                oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer)});
+                oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName)});
             } else {
-                this.gameManager.playAfterCatalog(timer);
+                if (oldLambdaMesh) {
+                    this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName);
+                } else {
+                    this.gameManager.playAfterCatalog(timer, null);
+                }
             }
         } catch (e) {
             console.error(e);

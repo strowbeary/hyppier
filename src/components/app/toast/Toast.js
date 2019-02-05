@@ -15,7 +15,7 @@ const Toast = observer(class Toast extends Component {
         let random = Math.round(Math.random() * (CatalogStore.objectKinds.length - 1));
         let objectKind = CatalogStore.objectKinds[random];
         let nextObject;
-        if (objectKind.activeObject < objectKind.objects.length - 1) {
+        if (objectKind.replacementCounter < objectKind.objects.length - 1) {
             nextObject = CatalogStore.objectKinds[random].objects[objectKind.replacementCounter + 1];
         } else {
             nextObject = CatalogStore.objectKinds[random].objects[objectKind.replacementCounter];
