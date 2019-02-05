@@ -81,10 +81,10 @@ export class CameraManager {
             cancelAnimationFrame(this.animationRequest);
         }
         const animation = () => {
-            this.distance = this.distance + 0.1 * (toDistance - this.distance);
-            this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
-            this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
-            this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
+            this.distance = this.distance + 0.2 * (toDistance - this.distance);
+            this.camera.target.x = fromPosition.x + 0.2 * (toPosition.x - fromPosition.x);
+            this.camera.target.y = fromPosition.y + 0.2 * (toPosition.y - fromPosition.y);
+            this.camera.target.z = fromPosition.z + 0.2 * (toPosition.z - fromPosition.z);
             if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || 
                 BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
             ) {
