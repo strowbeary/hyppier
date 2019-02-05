@@ -7,14 +7,16 @@ $horizontal-space: 20px;
 
 .confirmPopup {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
   z-index: 1;
   background-color: white;
   padding: $vertical-space $horizontal-space;
   border-radius: $border-radius;
   border: solid 1px $light-grey;
   display: grid;
+  height: auto;
   grid-column-gap: $horizontal-space;
   grid-row-gap: $vertical-space;
   grid-template-columns: min-content min-content;
