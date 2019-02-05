@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import {createTimer} from "../../../../utils/TimerManager"
+import TutoStore from "../../../../stores/TutoStore/TutoStore";
 
 const Notification = observer(class Notification extends Component {
 
