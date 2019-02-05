@@ -1,9 +1,11 @@
+$border-radius: 15px;
+
 .toast {
   position: fixed;
   left: 30px;
   bottom: 30px;
   background-color: white;
-  border-radius: 15px;
+  border-radius: $border-radius;
   padding: 20px 15px;
   font-size: 2rem;
   max-width: 275px;

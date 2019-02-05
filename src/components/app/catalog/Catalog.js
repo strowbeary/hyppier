@@ -69,17 +69,11 @@ const Catalog = observer(class Catalog extends Component {
     render() {
         return (
             <div className={`catalog`}>
-                <CSSTransitionGroup
-                    transitionName="grow"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}
-                >
-                    {this.state.confirmVisibility &&
-                    <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
-                                  closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
-                                  pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
-                    }
-                </CSSTransitionGroup>
+                {this.state.confirmVisibility &&
+                <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
+                              closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
+                              pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
+                }
                 <div className="catalog__header">
                     <span>Catalogue</span>
                     <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>

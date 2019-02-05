@@ -106,7 +106,7 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
       border: none;
       background-color: $yellow;
       color: white;
-      border-radius: 2rem;
+      border-radius: 10px;
       padding: 10px 25px;
       font-size: 1.6rem;
       text-transform: uppercase;
@@ -129,24 +129,5 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
   100% {
     box-shadow: 0 0 0 10px rgba(255, 216, 50, 0);
   }
-}
-
-
-.grow-enter {
-  transform: scale(0);
-}
-
-.grow-enter.grow-enter-active {
-  transform: scale(1);
-  transition: transform 300ms ease-in-out;
-}
-
-.grow-leave {
-  transform: scale(1);
-}
-
-.grow-leave.grow-leave-active {
-  transform: scale(0);
-  transition: transform 300ms ease-in-out;
 }
 
