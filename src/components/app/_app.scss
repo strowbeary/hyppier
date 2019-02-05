@@ -31,6 +31,23 @@ $yellow: #ffdf70;
   font-weight: 100;
 }
 
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Regular.otf");
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Black.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Light.otf");
+  font-weight: 100;
+}
+
 @keyframes Gradient {
   0% {
     background-position: 0% 50%
