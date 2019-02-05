@@ -1,6 +1,5 @@
 import * as BABYLON from "babylonjs";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {GameManager} from "./GameManager";
 
 export class LambdaMesh {
     constructor(mesh, objectTimeout, objectKindName) {
@@ -9,7 +8,7 @@ export class LambdaMesh {
         this.mesh.convertToFlatShadedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
-        this.clone = [];
+        this.clones = [];
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
             this.time = objectTimeout * 0.03;
@@ -22,12 +21,11 @@ export class LambdaMesh {
     }
 
     addClone() {
-        let cloneIndex = this.clone.length;
-        this.clone.push(this.mesh.clone("clone"));
-        this.clone[cloneIndex].setEnabled(false);
-        this.clone[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
-        this.cloneMaterial(this.clone[cloneIndex]);
-        this.freezeMaterials(this.clone[cloneIndex]);
+        let cloneIndex = this.clones.length;
+        let clone = this.mesh.createInstance(this.mesh.name);
+        this.clones.push(clone);
+        this.clones[cloneIndex].setEnabled(false);
+        this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
     }
 
     cloneMaterial(mesh) {// Need to clone material before animation
@@ -113,15 +111,6 @@ export class LambdaMesh {
         let time = this.getTime();
         this.unfreezeMaterials(this.mesh);
         this.materialDegradation(time, this.mesh);
-        if (this.clone.length > 0) {
-            this.clone.forEach(clone => {
-                this.unfreezeMaterials(clone);
-                this.materialDegradation(time, clone);
-                clone._scene.beginAnimation(clone, 0, time, false, 1, () => {
-                    this.freezeMaterials(clone)
-                });
-            })
-        }
         this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1, () => {
             this.freezeMaterials(this.mesh)
         });
@@ -131,8 +120,8 @@ export class LambdaMesh {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.setEnabled(true);
         this.scaleAppearAnimation(this.mesh);
-        if (this.clone.length > 0) {
-            this.clone.forEach(clone => {
+        if (this.clones.length > 0) {
+            this.clones.forEach(clone => {
                 if (this.mesh._scene.meshes.indexOf(clone) === -1) {
                     this.mesh._scene.addMesh(clone);
                 }
@@ -151,7 +140,7 @@ export class LambdaMesh {
     }
 
     launchCloneDisappearAnimation(callback) {
-        const lastClone = this.clone[this.clone.length - 1];
+        const lastClone = this.clones[this.clones.length - 1];
         lastClone.unfreezeWorldMatrix();
         this.scaleAppearAnimation(lastClone);
         lastClone._scene.beginAnimation(lastClone, 30, 0, false, 1, () => {
@@ -164,8 +153,8 @@ export class LambdaMesh {
     launchDisappearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.scaleAppearAnimation(this.mesh);
-        if (this.clone.length > 0) {
-            this.clone.forEach(clone => {
+        if (this.clones.length > 0) {
+            this.clones.forEach(clone => {
                 clone.unfreezeWorldMatrix();
                 this.scaleAppearAnimation(clone);
                 clone._scene.beginAnimation(clone, 30, 0, false, 1, () => {

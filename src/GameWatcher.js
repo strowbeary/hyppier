@@ -3,8 +3,6 @@ import {onPatch} from "mobx-state-tree";
 import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
 import ObjectKindUI from "./components/app/objectKindUI/ObjectKindUI";
-import GameStore from "./stores/GameStore/GameStore";
-import {GameManager} from "./components/app/GameCanvas/GameManager"
 
 export class GameWatcher {
 
@@ -73,12 +71,7 @@ export class GameWatcher {
                                             objectKindUI.notification.changeDelayTimer(objectKind.activeObject !== null);
                                             timer = objectKindUI.notification.restartTimer();
                                         }
-                                        if (GameStore.attic.shouldLaunchClueEvent(objectKind.type) && GameManager) {
-                                            GameManager.GameManager.clueEvent = objectKind.type;
-                                            GameWatcher.updateWatchers.forEach(watcher => watcher(null, lambdaMesh, null, timer));
-                                        } else {
-                                            GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null, timer));
-                                        }
+                                        GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null, timer));
                                         oldPreviewObjectId = null;
                                         CameraStore.setTarget();
                                     }

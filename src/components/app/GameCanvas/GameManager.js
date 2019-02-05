@@ -48,10 +48,10 @@ export class GameManager {
     }
 
     playAfterClueEvent() {
-        const lambdaMesh = CatalogStore.getObjectKind(this.objectKindName).objects[CatalogStore.getObjectKind(this.objectKindName).activeObject].getModel();
-        const clone = lambdaMesh.clone;
-        if (clone.length > 0) {
-            const lastClone = clone[clone.length - 1];
+        let lambdaMesh = CatalogStore.getObjectKind(this.objectKindName).objects[CatalogStore.getObjectKind(this.objectKindName).activeObject].getModel();
+        const clones = lambdaMesh.clones;
+        if (clones.length > 0) {
+            const lastClone = clones[clones.length - 1];
             lambdaMesh.launchCloneDisappearAnimation(() => this.scene.removeMesh(lastClone));
         } else {
             CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
@@ -60,20 +60,24 @@ export class GameManager {
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
-        this.playGame();
+        this.clueEvent = null;
         this.objectKindName = null;
+        this.playGame();
     }
 
     playAfterCatalog(timer, objectKindName) {
-        if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
-            this.objectKindName = objectKindName;
-            GameStore.setClueEvent(this.clueEvent);
-            if (!timer) {
-                this.pauseGame();
+        if (this.clueEvent !== null) {
+            if (GameStore.clueEvent !== this.clueEvent) {
+                this.objectKindName = objectKindName;
+                if (!timer) {
+                    this.pauseGame();
+                } else if (typeof timer !== 'boolean') {
+                    this.playCatalog(timer);
+                    this.pauseGame();
+                }
+                GameStore.setClueEvent(this.clueEvent);
             }
-            this.clueEvent = null;
         } else if (timer) {
-            this.objectKindName = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
             }
@@ -82,8 +86,6 @@ export class GameManager {
             } else {
                 this.playGame();
             }
-        } else {
-            this.objectKindName = null;
         }
     }
 }

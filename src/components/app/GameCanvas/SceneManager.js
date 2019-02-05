@@ -8,7 +8,6 @@ import {AtticManager} from "./AtticManager";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import flare from "../../../assets/img/flare.png";
 
 export class SceneManager {
@@ -62,17 +61,15 @@ export class SceneManager {
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
                 if (objectKindType) { //replacement
-                    oldMesh.clone.forEach(clone => {
+                    oldMesh.clones.forEach(clone => {
                         this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                     });
                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) { //popup clueEvent
+                    if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
                         this.gameManager.clueEvent = objectKindType;
                     }
-                    this.meshManager.patch(newMesh, oldMesh, timer);
-                } else {
-                    this.meshManager.patch(newMesh, oldMesh, timer);
                 }
+                this.meshManager.patch(newMesh, oldMesh, timer);
                 newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
             .watch()
