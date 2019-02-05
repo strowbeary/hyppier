@@ -10,15 +10,16 @@ import Toast from "./toast/Toast";
 import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
-//import Message from "./message/Message";
+import Message from "./message/Message";
+import StartScreen from "./startScreen/StartScreen";
 
 const App = observer(class App extends Component {
 
-    state = {message: null, toast: false};
+    state = {message: null, toast: false, loading: false, ready: false};
 
     constructor(props) {
         super(props);
-        this.timer = createTimer(3000);
+        /*this.timer = createTimer(3000);
         this.timer.start();
         this.timer.onFinish(() => {
             if (this.state.toast) {
@@ -33,7 +34,7 @@ const App = observer(class App extends Component {
                 this.timer.stop();
                 this.timer.start();
             }
-        });
+        });*/
     }
 
     componentDidMount() {
@@ -48,6 +49,18 @@ const App = observer(class App extends Component {
         }
     }
 
+    launchLoading() {
+        this.setState({
+            loading: true
+        });
+    }
+
+    updateReady() {
+        this.setState({
+            ready: true
+        });
+    }
+
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
         let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
@@ -55,11 +68,18 @@ const App = observer(class App extends Component {
         return (
             <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
                  ref={(ref) => this.app = ref}>
-                <GameCanvas/>
-                <HypeIndicator/>
-                {/*{{this.state.message &&
-                    <Message message={this.state.message}/>
-                }*/}
+                {!this.state.ready &&
+                    <StartScreen launchLoading={() => {this.launchLoading()}}/>
+                }
+                {this.state.loading &&
+                    <GameCanvas onReady={() => this.updateReady()}/>
+                }
+                {this.state.loading &&
+                    <HypeIndicator/>
+                }
+                {/*{this.state.message &&
+                        <Message message={this.state.message}/>
+                        }*/}
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}

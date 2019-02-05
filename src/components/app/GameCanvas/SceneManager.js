@@ -90,7 +90,10 @@ export class SceneManager {
             .then(() => {
                 GameStarter.init(this.scene)
                     .then(() => {
-                        this.atticManager.prepareGravity()
+                        this.atticManager.prepareGravity();
+                        if (typeof onReadyCB === 'function') {
+                            onReadyCB();
+                        }
                     });
             });
 

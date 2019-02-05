@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree";
-import catalogDatas from "../../assets/datas";
 import ObjectKindStore from "./ObjectKindStore/ObjectKindStore";
+import catalogDatas from "../../assets/datas";
 
 const CatalogStore = types.model("CatalogStore", {
     objectKinds: types.array(ObjectKindStore),

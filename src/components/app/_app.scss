@@ -82,6 +82,7 @@ button, a {
   transition: background 1s;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 
   &.happy {
     background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
