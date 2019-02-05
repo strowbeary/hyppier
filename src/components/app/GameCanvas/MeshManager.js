@@ -5,7 +5,7 @@ export class MeshManager {
         this.lights = lights;
         this.gameManager = gameManager;
     }
-    patch(newLambdaMesh, oldLambdaMesh, timer) {
+    patch(newLambdaMesh, oldLambdaMesh) {
         try {
             if (newLambdaMesh !== null && oldLambdaMesh !== null
                 && this.scene.meshes.indexOf(newLambdaMesh.mesh) === -1 && newLambdaMesh.mesh.name !== oldLambdaMesh.mesh.name) {
@@ -23,7 +23,7 @@ export class MeshManager {
                             this.scene.removeMesh(clone);
                         });
                         this.scene.removeMesh(oldLambdaMesh.mesh);
-                        newLambdaMesh.launchAppearAnimation(() => this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName));
+                        newLambdaMesh.launchAppearAnimation(() => this.gameManager.playAfterPopup(oldLambdaMesh.objectKindName));
                     }, 0)
                 });
                 this.scene.addMesh(newLambdaMesh.mesh);
@@ -43,9 +43,9 @@ export class MeshManager {
                  * Suppression de mesh
                  */
                 this.lights.shadowGenerator.removeShadowCaster(oldLambdaMesh.mesh);
-                oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName)});
+                oldLambdaMesh.launchDisappearAnimation(() => {this.scene.removeMesh(oldLambdaMesh.mesh); this.gameManager.playAfterPopup(oldLambdaMesh.objectKindName)});
             } else if (oldLambdaMesh !== null) {
-                this.gameManager.playAfterCatalog(timer, oldLambdaMesh.objectKindName);
+                this.gameManager.playAfterPopup(oldLambdaMesh.objectKindName);
             }
         } catch (e) {
             console.error(e);

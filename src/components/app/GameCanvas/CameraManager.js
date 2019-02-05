@@ -93,6 +93,13 @@ export class CameraManager {
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
+                if (GameManager.GameManager && GameManager.GameManager.objectKindType !== null
+                    && toPosition.x === 0 && toPosition.y === 0 && toPosition.z === 0) {
+                    if (GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
+                        GameManager.GameManager.clueEvent = GameManager.GameManager.objectKindType;
+                    }
+                    GameManager.GameManager.playAfterCatalog();
+                }
             }
         };
         this.animationRequest = requestAnimationFrame(animation);

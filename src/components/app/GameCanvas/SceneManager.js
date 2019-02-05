@@ -8,15 +8,17 @@ import {AtticManager} from "./AtticManager";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {GameManager} from "./GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import flare from "../../../assets/img/flare.png";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
+
     constructor(canvas, onReadyCB) {
         this.engine = new BABYLON.Engine(
             canvas,
             true,
-            { preserveDrawingBuffer: true, stencil: true },
+            {preserveDrawingBuffer: true, stencil: true},
             true
         );
         this.scene = new BABYLON.Scene(this.engine);
@@ -48,7 +50,7 @@ export class SceneManager {
         defaultPipeline.grain.intensity = 10;
         defaultPipeline.imageProcessingEnabled = true;
 
-        const pipeline = new BABYLON.SSAORenderingPipeline("default", this.scene,1.0, [this.camera]);
+        const pipeline = new BABYLON.SSAORenderingPipeline("default", this.scene, 1.0, [this.camera]);
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         const ambient = 0.5;
@@ -60,16 +62,28 @@ export class SceneManager {
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                if (objectKindType) { //replacement
-                    oldMesh.clones.forEach(clone => {
+                if (objectKindType) {
+                    if (oldMesh !== null) {
+                        oldMesh.clones.forEach(clone => {
+                            this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                        });
                         this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    });
-                    this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
-                        this.gameManager.clueEvent = objectKindType;
+                        if (!CatalogStore.isOpen) {
+                            if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                                this.gameManager.clueEvent = objectKindType;
+                            }
+                        } else {
+                            this.gameManager.objectKindType = objectKindType;
+                            this.gameManager.objectKindName = oldMesh.objectKindName;
+                            this.gameManager.timer = timer;
+                        }
+                    } else if (newMesh !== null) {
+                        this.gameManager.objectKindType = objectKindType;
+                        this.gameManager.objectKindName = newMesh.objectKindName;
+                        this.gameManager.timer = timer;
                     }
                 }
-                this.meshManager.patch(newMesh, oldMesh, timer);
+                this.meshManager.patch(newMesh, oldMesh);
                 newMesh === null && oldMesh === null && this.updateTrackingPosition();
             })
             .watch()
@@ -81,11 +95,13 @@ export class SceneManager {
             });
 
         this.engine.runRenderLoop(() => {
-                this.scene.render();
+            this.scene.render();
         });
     }
 
     updateTrackingPosition() {
-        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
+        ObjectKindUI.refs.filter(ref => {
+            return ref !== null
+        }).forEach(ref => ref.updatePosition());
     }
 }
