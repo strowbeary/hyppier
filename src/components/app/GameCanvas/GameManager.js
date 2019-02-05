@@ -47,7 +47,7 @@ export class GameManager {
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
-    playAfterClueEvent() {
+    playAfterClueEventClosed() {
         let lambdaMesh = CatalogStore.getObjectKind(this.objectKindName).objects[CatalogStore.getObjectKind(this.objectKindName).activeObject].getModel();
         const clones = lambdaMesh.clones;
         if (clones.length > 0) {
@@ -56,17 +56,20 @@ export class GameManager {
         } else {
             CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         }
-        GameStore.setClueEvent("");
+        this.objectKindName = null;
+        this.playGame();
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
+    }
+
+    playAfterClueEvent() {
         this.clueEvent = null;
-        this.objectKindName = null;
-        this.playGame();
+        GameStore.setClueEvent("");
     }
 
     playAfterCatalog(timer, objectKindName) {
-        if (this.clueEvent !== null) {
+        if (this.clueEvent !== null) { //replacement with ClueEvent
             if (GameStore.clueEvent !== this.clueEvent) {
                 this.objectKindName = objectKindName;
                 if (!timer) {
@@ -77,14 +80,18 @@ export class GameManager {
                 }
                 GameStore.setClueEvent(this.clueEvent);
             }
-        } else if (timer) {
-            if (GameStore.attic.isGameOver()) {
-                this.atticManager.fall();
-            }
+        } else if (timer) { //replacement in Catalog
             if (typeof timer !== 'boolean') {
                 this.playCatalog(timer);
             } else {
                 this.playGame();
+            }
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
+        } else { //replacement in Popup
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
             }
         }
     }
