@@ -48,12 +48,20 @@ export class GameManager {
     }
 
     playAfterClueEvent() {
-        CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
+        const lambdaMesh = CatalogStore.getObjectKind(this.objectKindName).objects[CatalogStore.getObjectKind(this.objectKindName).activeObject].getModel();
+        const clone = lambdaMesh.clone;
+        if (clone.length > 0) {
+            const lastClone = clone[clone.length - 1];
+            lambdaMesh.launchCloneDisappearAnimation(() => this.scene.removeMesh(lastClone));
+        } else {
+            CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
+        }
         GameStore.setClueEvent("");
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
         this.playGame();
+        this.objectKindName = null;
     }
 
     playAfterCatalog(timer, objectKindName) {

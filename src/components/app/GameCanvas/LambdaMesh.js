@@ -1,5 +1,6 @@
 import * as BABYLON from "babylonjs";
 import GameStore from "../../../stores/GameStore/GameStore";
+import {GameManager} from "./GameManager";
 
 export class LambdaMesh {
     constructor(mesh, objectTimeout, objectKindName) {
@@ -142,6 +143,17 @@ export class LambdaMesh {
         }
         this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {
             this.mesh.freezeWorldMatrix();
+            typeof callback === 'function' && callback()
+        });
+    }
+
+    launchCloneDisappearAnimation(callback) {
+        const lastClone = this.clone[this.clone.length - 1];
+        lastClone.unfreezeWorldMatrix();
+        this.scaleAppearAnimation(lastClone);
+        lastClone._scene.beginAnimation(lastClone, 30, 0, false, 1, () => {
+            lastClone.scalingDeterminant = 0;
+            lastClone.freezeWorldMatrix();
             typeof callback === 'function' && callback()
         });
     }
