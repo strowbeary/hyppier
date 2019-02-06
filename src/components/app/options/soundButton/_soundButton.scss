@@ -1,0 +1,12 @@
+.soundButton {
+
+  svg  {
+    color: white;
+  }
+
+  &:hover {
+    svg {
+      color: orange;
+    }
+  }
+}

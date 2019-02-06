@@ -30,6 +30,23 @@ $yellow: #ffdf70;
   font-weight: 100;
 }
 
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Regular.otf");
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Black.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Light.otf");
+  font-weight: 100;
+}
+
 @keyframes Gradient {
   0% {
     background-position: 100% 0%;
@@ -68,6 +85,7 @@ button, a {
   transition: background 1s;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 
   canvas {
     position: absolute;
@@ -102,6 +120,27 @@ button, a {
   }
   &.attic:before {
     opacity: 0;
+  }
+}
+
+.game__footer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+
+  * {
+    margin-left: 0.5rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  button {
+    background: none;
+    border: none;
   }
 }
 

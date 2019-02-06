@@ -14,6 +14,10 @@ const ClueEvent = observer(class ClueEvent extends Component {
         GameManager.GameManager.playAfterClueEvent();
     }
 
+    componentWillUnmount() {
+        GameManager.GameManager.playAfterClueEventClosed()
+    }
+
     render() {
         return (
             <div className="clueEvent">

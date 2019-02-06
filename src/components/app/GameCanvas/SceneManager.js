@@ -13,11 +13,12 @@ import * as cannon from "cannon";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
+
     constructor(canvas, onReadyCB) {
         this.engine = new BABYLON.Engine(
             canvas,
             true,
-            { preserveDrawingBuffer: true, stencil: true },
+            {preserveDrawingBuffer: true, stencil: true},
             true
         );
         this.scene = new BABYLON.Scene(this.engine);
@@ -80,29 +81,42 @@ export class SceneManager {
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                if (objectKindType) { //replacement
-                    oldMesh.clone.forEach(clone => {
+                if (objectKindType) {
+                    if (oldMesh !== null) {
+                        oldMesh.clones.forEach(clone => {
+                            this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                        });
                         this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    });
-                    this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                    if (!CatalogStore.isOpen && GameStore.attic.shouldLaunchClueEvent(objectKindType)) { //popup clueEvent
-                        this.gameManager.clueEvent = objectKindType;
+                        if (!CatalogStore.isOpen) {
+                            if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                                this.gameManager.clueEvent = objectKindType;
+                            }
+                        } else {
+                            this.gameManager.objectKindType = objectKindType;
+                            this.gameManager.objectKindName = oldMesh.objectKindName;
+                            this.gameManager.timer = timer;
+                        }
+                    } else if (newMesh !== null) {
+                        this.gameManager.objectKindType = objectKindType;
+                        this.gameManager.objectKindName = newMesh.objectKindName;
+                        this.gameManager.timer = timer;
                     }
-                    this.meshManager.patch(newMesh, oldMesh, timer);
-                } else {
-                    this.meshManager.patch(newMesh, oldMesh, timer);
                 }
+                this.meshManager.patch(newMesh, oldMesh);
             })
             .watch()
             .then(() => {
                 GameStarter.init(this.scene)
                     .then(() => {
-                        this.atticManager.prepareGravity()
+                        this.atticManager.prepareGravity();
+                        if (typeof onReadyCB === 'function') {
+                            onReadyCB();
+                        }
                     });
             });
 
         this.engine.runRenderLoop(() => {
-                this.scene.render();
+            this.scene.render();
         });
     }
 }

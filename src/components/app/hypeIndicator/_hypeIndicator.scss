@@ -1,5 +1,23 @@
 $yellow: #FFE07D;
 
+@keyframes scale {
+  0% {
+    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
+  }
+  25% {
+    transform: scaleX(1) scaleY(1) rotate(0);
+  }
+  50% {
+    transform: scaleX(1.5) scaleY(0.75) rotate(30deg);
+  }
+  75% {
+    transform: scaleX(1) scaleY(1) rotate(0);
+  }
+  100% {
+    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
+  }
+}
+
 .gameIndicator {
   position: fixed;
   top: 0;
@@ -12,6 +30,16 @@ $yellow: #FFE07D;
 
   &__wrapper {
     position: relative;
+  }
+
+  &__word {
+    font-family: Selfie, sans-serif;
+    font-size: 4rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    transform-origin: center;
+    animation: scale 4s infinite;
   }
 
   &__hypeLevel {

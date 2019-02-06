@@ -2,7 +2,7 @@ $vertical-space: 15px;
 $border-radius: 15px;
 $horizontal-space: 20px;
 $yellow: #FFD832;
-$light-grey: #E6E6E6;
+$light-grey: #FAFAFA;
 
 $pointer-url: "../../../../assets/img/cursor_pointer.svg";
 $default-cursor-url: "../../../../assets/img/cursor_default.svg";
@@ -62,7 +62,7 @@ $default-cursor-url: "../../../../assets/img/cursor_default.svg";
       grid-area: buttonCatalog;
       white-space: nowrap;
       border: none;
-      border-radius: 2rem;
+      border-radius: 10px;
       background-color: $yellow;
       text-transform: uppercase;
       letter-spacing: 0.1rem;

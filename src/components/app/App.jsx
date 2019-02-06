@@ -9,17 +9,20 @@ import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Toast from "./toast/Toast";
 import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
-import ClueEvent from "./clueEvent/ClueEvent"
-import TutoStore from "../../stores/TutoStore/TutoStore";
+import ClueEvent from "./clueEvent/ClueEvent";
 import Message from "./message/Message";
+import StartScreen from "./startScreen/StartScreen";
+import AboutModal from "./aboutModal/AboutModal";
+import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
+import TutoStore from "../../stores/TutoStore/TutoStore";
 
 const App = observer(class App extends Component {
 
-    state = {message: null, toast: false};
+    state = {message: null, toast: false, loading: false, ready: false};
 
     constructor(props) {
         super(props);
-        this.timer = createTimer(3000);
+        /*this.timer = createTimer(3000);
         this.timer.start();
         this.timer.onFinish(() => {
             if (this.state.toast) {
@@ -34,7 +37,7 @@ const App = observer(class App extends Component {
                 this.timer.stop();
                 this.timer.start();
             }
-        });
+        });*/
     }
 
     testChangeObject() {
@@ -52,6 +55,18 @@ const App = observer(class App extends Component {
         }
     }
 
+    launchLoading() {
+        this.setState({
+            loading: true
+        });
+    }
+
+    updateReady() {
+        this.setState({
+            ready: true
+        });
+    }
+
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
         let pipoMood = "";
@@ -61,27 +76,33 @@ const App = observer(class App extends Component {
         }
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} ref={(ref) => this.app = ref}>
-                <GameCanvas/>
-                <HypeIndicator/>
-                {TutoStore.displayTip() &&
-                    <Message message={TutoStore.getCurrentMessage()}/>
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
+                 ref={(ref) => this.app = ref}>
+                {!this.state.ready &&
+                    <StartScreen launchLoading={() => {this.launchLoading()}}/>
                 }
+                {this.state.loading &&
+                    <GameCanvas onReady={() => this.updateReady()}/>
+                }
+                {this.state.loading &&
+                    <HypeIndicator/>
+                }
+                {this.state.loading &&
+                    <div className={"game__footer"}>
+                        <AboutModal/>
+                        <FullScreenButton/>
+                    </div>
+                }
+                {/*{this.state.message &&
+                        <Message message={this.state.message}/>
+                        }*/}
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
                     {this.state.toast && !GameStore.options.isPaused &&
-                        <Toast></Toast>
-                    }
-                </CSSTransitionGroup>
-                <CSSTransitionGroup
-                    transitionName="grow"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}>
-                    {GameStore.clueEvent &&
-                        <ClueEvent clueEventType={GameStore.clueEvent}/>
+                    <Toast></Toast>
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
@@ -91,6 +112,14 @@ const App = observer(class App extends Component {
                 >
                     {CatalogStore.isOpen &&
                     <Catalog index={CatalogStore.objectKindIndex}/>
+                    }
+                </CSSTransitionGroup>
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {GameStore.clueEvent &&
+                    <ClueEvent clueEventType={GameStore.clueEvent}/>
                     }
                 </CSSTransitionGroup>
             </div>
