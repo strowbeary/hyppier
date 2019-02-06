@@ -99,8 +99,18 @@ button, a {
 
 .game__footer {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+
+  * {
+    margin-left: 0.5rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 
   button {
     background: none;

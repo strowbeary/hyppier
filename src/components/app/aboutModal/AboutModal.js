@@ -30,7 +30,7 @@ const AboutModal = observer(class AboutModal extends Component {
         return (
             <div className="aboutModal">
                 <button className={"aboutModal__openButton"} onClick={() => this.openModal()}>
-                    À propos de Hyppier !
+                    About Hyppier!
                 </button>
                 <CSSTransitionGroup
                     transitionName="grow"
@@ -42,7 +42,7 @@ const AboutModal = observer(class AboutModal extends Component {
                             <SvgButton type={"close"}/>
                         </button>
                         <div className={"aboutModal__wrapper"}>
-                            <h2 className={"aboutModal__title"}>About Hyppier</h2>
+                            <h2 className={"aboutModal__title"}>About Hyppier!</h2>
                             <div className={"aboutModal__textWrapper"}>
                                 <div className={"aboutModal__textBlock"}>
                                     <div>

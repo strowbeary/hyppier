@@ -13,6 +13,7 @@ import ClueEvent from "./clueEvent/ClueEvent";
 import Message from "./message/Message";
 import StartScreen from "./startScreen/StartScreen";
 import AboutModal from "./aboutModal/AboutModal";
+import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
 
 const App = observer(class App extends Component {
 
@@ -81,6 +82,7 @@ const App = observer(class App extends Component {
                 {this.state.loading &&
                     <div className={"game__footer"}>
                         <AboutModal/>
+                        <FullScreenButton/>
                     </div>
                 }
                 {/*{this.state.message &&
