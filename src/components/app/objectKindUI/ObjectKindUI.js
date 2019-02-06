@@ -9,7 +9,7 @@ import EmptySpace from "./emptySpace/EmptySpace";
 import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {GameManager} from "../GameCanvas/GameManager";
+import {GameManager} from "../../../GameManager";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 

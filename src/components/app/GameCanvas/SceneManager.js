@@ -5,10 +5,11 @@ import {MeshManager} from "./MeshManager";
 import {CameraManager} from "./CameraManager";
 import {Lights} from "./Lights";
 import {AtticManager} from "./AtticManager";
-import {GameManager} from "./GameManager";
+import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import flare from "./flare.png";
+import * as cannon from "cannon";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -22,7 +23,7 @@ export class SceneManager {
         this.scene = new BABYLON.Scene(this.engine);
         this.cameraManager = new CameraManager(this.scene);
         this.camera = this.cameraManager.camera;
-        //this.camera.attachControl(canvas);
+        this.camera.attachControl(canvas);
         const lights = new Lights();
         lights.init(this.scene);
         this.scene.shadowsEnabled = true;
@@ -45,16 +46,37 @@ export class SceneManager {
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
         defaultPipeline.grainEnabled = true;
-        defaultPipeline.grain.intensity = 20;
+        defaultPipeline.grain.intensity = 30;
         defaultPipeline.imageProcessingEnabled = true;
+
+        const ssaoRatio = {
+            ssaoRatio: 0.5, // Ratio of the SSAO post-process, in a lower resolution
+            combineRatio: 1.0 // Ratio of the combine post-process (combines the SSAO and the scene)
+        };
+
+        const ssao = new BABYLON.SSAORenderingPipeline("ssao", this.scene, ssaoRatio, [this.camera]);
+        ssao.fallOff = 0.000001;
+        ssao.area = 1;
+        ssao.radius = 0.0001;
+        ssao.totalStrength = 2.0;
+        ssao.base = 0;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         const ambient = 0.9;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
+        this.scene.blockMaterialDirtyMechanism = true;
+        this.scene.useGeometryIdsMap = true;
+        this.scene.useMaterialMeshMap = true;
+        this.scene.useClonedMeshMap = true;
+
+
+        this.scene.enablePhysics(null);
 
         this.atticManager = new AtticManager(this.scene, particleSystem);
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
+
+
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {

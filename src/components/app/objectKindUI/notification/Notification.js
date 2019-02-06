@@ -17,6 +17,7 @@ const Notification = observer(class Notification extends Component {
         this.delayTimer = createTimer(this.duration);
         this.timer = createTimer(this.duration);
         this.delayTimer.onFinish(() => {
+            TutoStore.reportAction("Notification", "appear");
             this.timer.start();
             this.setState({
                 running: true
@@ -36,9 +37,6 @@ const Notification = observer(class Notification extends Component {
             this.openPopup();
         });
         this.delayTimer.start();
-    }
-    componentDidMount() {
-        TutoStore.reportAction("Notification", "appear");
     }
 
     componentWillUnmount() {

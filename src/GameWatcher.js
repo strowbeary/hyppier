@@ -4,7 +4,7 @@ import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
 import ObjectKindUI from "./components/app/objectKindUI/ObjectKindUI";
 import GameStore from "./stores/GameStore/GameStore";
-import {GameManager} from "./components/app/GameCanvas/GameManager"
+import {GameManager} from "./GameManager"
 
 export class GameWatcher {
 

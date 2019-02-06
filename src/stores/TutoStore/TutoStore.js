@@ -9,16 +9,22 @@ export default types.model("TutoStore",
     })
     .actions(self =>
         ({
+            hideTip() {
+                self.showTip = false;
+            },
             reportAction(origin, type) {
-                if(type === "appear") {
-                    if(self.messages[self.currentMessage + 1].originTarget === origin) {
-                        self.currentMessage++;
-                        self.showTip = true;
+                if (type === "appear") {
+                    if (typeof self.messages[self.currentMessage + 1] !== "undefined") {
+                        if (self.messages[self.currentMessage + 1].originTarget === origin) {
+                            self.currentMessage++;
+                            self.showTip = true;
+                        }
                     }
-                }
-                else if (type === "actionned") {
-                    if(self.messages[self.currentMessage].originTarget === origin) {
-                        self.showTip = false;
+                } else if (type === "actionned") {
+                    if (typeof self.messages[self.currentMessage] !== "undefined") {
+                        if (self.messages[self.currentMessage].originTarget === origin) {
+                            self.showTip = false;
+                        }
                     }
                 }
             }
@@ -36,16 +42,22 @@ export default types.model("TutoStore",
         messages: [
             {
                 text: "En cliquant sur le bouton + tu peux ajouter des objets dans ta chambre",
-                expiration: 10,
+                expiration: 0,
                 action: "click",
                 originTarget: "EmptySpace",
                 read: false
             },
             {
                 text: "Un nouveau modèle d'un objet est disponible, mais attention tu n'as que peu de temps pour en profiter",
-                expiration: 10,
+                expiration: 0,
                 action: "click",
                 originTarget: "Notification",
+                read: false
+            }, {
+                text: "Tu peut maintenant acceder au grenier",
+                expiration: 10000,
+                action: "timer",
+                originTarget: "Attic",
                 read: false
             }
         ],

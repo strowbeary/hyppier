@@ -11,6 +11,7 @@ import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent"
 import TutoStore from "../../stores/TutoStore/TutoStore";
+import Message from "./message/Message";
 
 const App = observer(class App extends Component {
 
@@ -66,7 +67,7 @@ const App = observer(class App extends Component {
                 {TutoStore.displayTip() &&
                     <Message message={TutoStore.getCurrentMessage()}/>
                 }
-                {/*<CSSTransitionGroup
+                <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}

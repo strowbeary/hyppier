@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_clueEvent.scss";
 import SpaceBar from "../spacebar/Spacebar";
-import {GameManager} from "../GameCanvas/GameManager"
+import {GameManager} from "../../../GameManager"
 
 const ClueEvent = observer(class ClueEvent extends Component {
 

@@ -1,32 +1,39 @@
 import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
-import {GameManager} from "./GameManager";
+import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+const EasingFunctions = {
+    // no easing, no acceleration
+    linear: function (t) { return t },
+    // accelerating from zero velocity
+    easeInQuad: function (t) { return t*t },
+    // decelerating to zero velocity
+    easeOutQuad: function (t) { return t*(2-t) },
+    // acceleration until halfway, then deceleration
+    easeInOutQuad: function (t) { return t<.5 ? 2*t*t : -1+(4-2*t)*t },
+    // accelerating from zero velocity
+    easeInCubic: function (t) { return t*t*t },
+    // decelerating to zero velocity
+    easeOutCubic: function (t) { return (--t)*t*t+1 },
+    // acceleration until halfway, then deceleration
+    easeInOutCubic: function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 },
+    // accelerating from zero velocity
+    easeInQuart: function (t) { return t*t*t*t },
+    // decelerating to zero velocity
+    easeOutQuart: function (t) { return 1-(--t)*t*t*t },
+    // acceleration until halfway, then deceleration
+    easeInOutQuart: function (t) { return t<.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t },
+    // accelerating from zero velocity
+    easeInQuint: function (t) { return t*t*t*t*t },
+    // decelerating to zero velocity
+    easeOutQuint: function (t) { return 1+(--t)*t*t*t*t },
+    // acceleration until halfway, then deceleration
+    easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
+}
 
 export class CameraManager {
-
     static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0, 0);
-
-    static lerp(currentTime, startValue, endValue, duration) {
-        currentTime /= duration;
-        return (1 - currentTime) * startValue + currentTime * endValue;
-    }
-
-    static easeOutQuad (currentTime, startValue, deltaValue, duration) {
-        currentTime /= duration;
-        return -deltaValue * currentTime * (currentTime-2) + startValue;
-    };
-    static easeInQuad(currentTime, startValue, deltaValue, duration) {
-        currentTime /= duration;
-        return deltaValue * currentTime * currentTime + startValue;
-    }
-    static easeInOutQuad (t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t + b;
-        t--;
-        return -c/2 * (t*(t-2) - 1) + b;
-    };
 
     initialValues = {
         width: window.innerWidth,
@@ -102,26 +109,26 @@ export class CameraManager {
         if(this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
         }
-        const FRAME_NUMBER = 30;
 
         const fromDistance = this.distance;
-
         let i = 0;
+        let step = 1 / 30;
+        console.log(step);
         const animation = () => {
+            let t = EasingFunctions.linear(i);
+            this.distance = (1 - t) * fromDistance + t * toDistance;
+            this.camera.target.x = (1 - t) * fromPosition.x + t * toPosition.x;
+            this.camera.target.y = (1 - t) * fromPosition.y + t * toPosition.y;
+            this.camera.target.z = (1 - t) * fromPosition.z + t * toPosition.z;
 
-            this.distance = CameraManager.easeInOutQuad(i, fromDistance, toDistance - fromDistance, FRAME_NUMBER);
-            this.camera.target.x = CameraManager.easeInOutQuad(i, fromPosition.x, toPosition.x - fromPosition.x, FRAME_NUMBER);
-            this.camera.target.y = CameraManager.easeInOutQuad(i, fromPosition.y, toPosition.y - fromPosition.y, FRAME_NUMBER);
-            this.camera.target.z = CameraManager.easeInOutQuad(i, fromPosition.z, toPosition.z - fromPosition.z, FRAME_NUMBER);
-
-            if (i < FRAME_NUMBER) {
+            if (i <= 1) {
                 this.updateCamera();
                 this.animationRequest = requestAnimationFrame(animation)
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
             }
-            i++;
+            i += step;
         };
         this.animationRequest = requestAnimationFrame(animation);
 

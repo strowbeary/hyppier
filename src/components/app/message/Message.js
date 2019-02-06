@@ -1,7 +1,9 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_message.scss";
-import TimerStore from "../../../stores/TimerStore/TimerStore";
+import {TimerManager} from "../../../utils/TimerManager";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
+import * as GameManager from "../../../GameManager";
 
 const Message = observer(class Message extends Component {
 
@@ -13,10 +15,14 @@ const Message = observer(class Message extends Component {
 
     componentDidMount() {
         this.typeWriter();
-        TimerStore.pauseAll();
+        if(this.message.action === "timer") {
+
+            setTimeout(() => {
+                TutoStore.hideTip();
+            }, this.message.expiration);
+        }
     }
     componentWillUnmount() {
-        TimerStore.startAll();
     }
 
     typeWriter(i = 0) {
@@ -24,7 +30,7 @@ const Message = observer(class Message extends Component {
             let currentMessage = this.state.message;
             this.setState({message: currentMessage += this.message.text[i]});
             i++;
-            setTimeout(() => {this.typeWriter(i)}, 50);
+            setTimeout(() => {this.typeWriter(i)}, 35);
         } else {
             this.setState({typingEnd: true});
         }

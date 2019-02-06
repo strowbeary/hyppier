@@ -10,11 +10,11 @@ export class GameStarter {
         return container.meshes.forEach(loadedMesh => {
             try{
                 if (loadedMesh.name.includes("Location")) {
-                    const locationOption = loadedMesh.name.substring(0, loadedMesh.name.length - 1).split("(")[1].split(",");
-                    /* *
+                    const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
+                   /* *
                     * Set location to corresponding object kind
                     * */
-                    CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position);
+                    CatalogStore.getObjectKind(locationOption).location.setPosition(loadedMesh.position);
                     loadedMesh.scaling = new BABYLON.Vector3(0, 0, 0);
                 } else {
                     loadedMesh.receiveShadows = true;
