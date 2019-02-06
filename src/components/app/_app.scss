@@ -97,6 +97,17 @@ button, a {
   }
 }
 
+.game__footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  button {
+    background: none;
+    border: none;
+  }
+}
+
 .catalog-enter {
   opacity: 0;
   transform: translateY(10%);

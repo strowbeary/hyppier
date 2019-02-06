@@ -1,0 +1,155 @@
+$false-black: #272727;
+$light-grey: #FAFAFA;
+$yellow: #FFD832;
+
+.aboutModal {
+
+  &__openButton {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: white;
+  }
+
+  button {
+    svg {
+      color: $light-grey;
+
+      &:hover {
+        color: orange;
+      }
+    }
+  }
+
+  &__closeButton {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  &__wrapper {
+    max-width: 50vw;
+    font-size: 1.5rem;
+  }
+
+  &__team {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 1rem;
+    list-style-type: none;
+    margin: 1rem 0 0;
+
+    >li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__textBlock {
+    margin-top: 1rem;
+    display: flex;
+
+    div {
+      margin-top: 4rem;
+    }
+
+    &:before {
+      font-size: 8rem;
+      margin-right: -5px;
+      color: transparent;
+      font-weight: bold;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #aaaaaa;
+    }
+
+    &:first-child {
+      &:before {
+        content: "1";
+      }
+
+      &:last-child {
+        p {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      &:before {
+        content: "2";
+      }
+    }
+  }
+
+  &__thanks {
+    margin-top: 3rem;
+  }
+
+  &__logos {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 100px max-content 150px;
+    grid-gap: 2rem;
+    align-items: center;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__modal {
+    position: relative;
+    background-color: $false-black;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+
+    button {
+      margin-left: 2rem;
+    }
+  }
+
+  &__title {
+    font-family: Selfie, sans-serif;
+    font-weight: normal;
+    font-size: 8rem;
+    text-align: center;
+    text-shadow: 0 0 20px white;
+  }
+}
+
+.grow-enter {
+  transform: scale(0);
+}
+
+.grow-enter.grow-enter-active {
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+.grow-leave {
+  transform: scale(1);
+}
+
+.grow-leave.grow-leave-active {
+  transform: scale(0);
+  transition: transform 300ms ease-in-out;
+}

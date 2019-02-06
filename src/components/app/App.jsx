@@ -12,6 +12,7 @@ import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
 import Message from "./message/Message";
 import StartScreen from "./startScreen/StartScreen";
+import AboutModal from "./aboutModal/AboutModal";
 
 const App = observer(class App extends Component {
 
@@ -77,6 +78,11 @@ const App = observer(class App extends Component {
                 {this.state.loading &&
                     <HypeIndicator/>
                 }
+                {this.state.loading &&
+                    <div className={"game__footer"}>
+                        <AboutModal/>
+                    </div>
+                }
                 {/*{this.state.message &&
                         <Message message={this.state.message}/>
                         }*/}
@@ -90,20 +96,20 @@ const App = observer(class App extends Component {
                     }
                 </CSSTransitionGroup>
                 <CSSTransitionGroup
-                    transitionName="grow"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}>
-                    {GameStore.clueEvent &&
-                    <ClueEvent clueEventType={GameStore.clueEvent}/>
-                    }
-                </CSSTransitionGroup>
-                <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
                     {CatalogStore.isOpen &&
                     <Catalog index={CatalogStore.objectKindIndex}/>
+                    }
+                </CSSTransitionGroup>
+                <CSSTransitionGroup
+                    transitionName="grow"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {GameStore.clueEvent &&
+                    <ClueEvent clueEventType={GameStore.clueEvent}/>
                     }
                 </CSSTransitionGroup>
             </div>
