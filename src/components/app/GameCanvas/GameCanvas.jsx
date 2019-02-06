@@ -21,7 +21,7 @@ export default observer(class GameCanvas extends React.Component {
                 ready: true
             });
         });
-        this.scene = this.sceneManager;
+        this.scene = this.sceneManager.scene;
         this.engine = this.sceneManager.engine;
     }
 
@@ -60,7 +60,7 @@ export default observer(class GameCanvas extends React.Component {
                                 return (
                                     <ObjectKindUI
                                         ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind}
-                                        scene={this.scene}
+                                        scene={this.sceneManager}
                                         key={objectKind.name}/>
                                 );
                             })

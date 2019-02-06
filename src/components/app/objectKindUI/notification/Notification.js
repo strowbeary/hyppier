@@ -60,6 +60,7 @@ const Notification = observer(class Notification extends Component {
     restartTimer() {
         this.delayTimer.stop();
         this.timer.stop();
+        this.timer.lock();
         return this.timer.timerId;
     }
 
@@ -69,6 +70,7 @@ const Notification = observer(class Notification extends Component {
 
     buildCatalog() {
         this.timer.stop();
+        this.timer.lock();
         this.setState({
             running: false
         });
