@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class SvgButton extends Component {
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {
                     this.props.type === "close" &&
                     <svg height="25" viewBox="0 0 35 35" width="25" xmlns="http://www.w3.org/2000/svg">
@@ -52,9 +52,7 @@ class SvgButton extends Component {
                     this.props.type === "fullscreen" &&
                     <svg height="35" viewBox="0 0 50 50" width="35" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fillRule="evenodd" stroke="currentColor">
-                            <path
-                                d="m0 13.1786784v23.6427035c0 7.2460508 6.06392294 13.1786181 13.4632224 13.1786181h23.0735552c7.3992995 0 13.4632224-5.9325673 13.4632224-13.1786181v-23.6427035c0-7.24605074-6.0639229-13.17861801-13.4632224-13.17861801h-23.0735552c-7.42119088-.02189139-13.4632224 5.91067587-13.4632224 13.17861801z"
-                                strokeWidth="2"/>
+
                             <g strokeLinecap="round" transform="translate(11 11)">
                                 <path d="m-1.26315789 23.3960203h11.44736839"
                                       transform="matrix(.70710678 -.70710678 .70710678 .70710678 -15.237027 10.006604)"/>
@@ -97,7 +95,7 @@ class SvgButton extends Component {
                         </g>
                     </svg>
                 }
-            </div>
+            </React.Fragment>
         )
     }
 };

@@ -66,7 +66,7 @@ export class CameraManager {
     }
 
     goToAttic() {
-        CameraStore.setTarget("Grenier");
+        CameraStore.setTarget("Attic");
         GameManager.GameManager && GameManager.GameManager.pauseGame();
         GameStore.attic.setAtticVisibility(true);
     }
@@ -123,11 +123,13 @@ export class CameraManager {
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
-                if (GameManager.GameManager && GameManager.GameManager.objectKindType !== null &&
-                    typeof GameManager.GameManager.objectKindType !== 'undefined'
-                    && toPosition.x === 0 && toPosition.y === 0 && toPosition.z === 0) {
+                if (GameManager.GameManager &&
+                    typeof GameManager.GameManager.objectKindType !== 'undefined' &&
+                    toPosition.x === 0 &&
+                    toPosition.y === 0 &&
+                    toPosition.z === 0) {
                     console.log("hello");
-                    if (GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
+                    if (GameManager.GameManager.objectKindType !== null && GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
                         GameManager.GameManager.clueEvent = GameManager.GameManager.objectKindType;
                     }
                     GameManager.GameManager.playAfterCatalog();

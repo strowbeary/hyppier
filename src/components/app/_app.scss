@@ -1,4 +1,7 @@
-$yellow: #ffdf70;
+$false-black: #272727;
+$light-grey: #FAFAFA;
+$yellow: #ffd764;
+
 
 @font-face {
   font-family: Brown;
@@ -136,11 +139,6 @@ button, a {
     &:first-child {
       margin-left: 0;
     }
-  }
-
-  button {
-    background: none;
-    border: none;
   }
 }
 

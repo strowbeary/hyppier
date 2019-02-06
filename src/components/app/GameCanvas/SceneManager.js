@@ -10,6 +10,7 @@ import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
+import {showAxis} from "../utils/Axis";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -77,7 +78,9 @@ export class SceneManager {
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
-
+        showAxis(this.scene, {
+            position: new BABYLON.Vector3(0, 0, 0)
+        });
 
         GameWatcher
             .onUpdate((newMesh, oldMesh, objectKindType, timer) => {

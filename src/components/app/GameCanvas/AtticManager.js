@@ -13,7 +13,7 @@ export class AtticManager {
     }
 
     prepareGravity() {
-        this.attic = this.scene.getMeshByName("Grenier");
+        this.attic = this.scene.getMeshByName("Attic");
         this.groundPosition = new BABYLON.Vector3(
             0,
             this.attic.position.y - this.attic.getBoundingInfo().boundingBox.maximum.y * this.attic.scaling.y,
