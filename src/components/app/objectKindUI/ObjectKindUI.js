@@ -9,6 +9,8 @@ import EmptySpace from "./emptySpace/EmptySpace";
 import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
+import {GameManager} from "../../../GameManager";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -133,13 +135,15 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             'zIndex': zIndex
         };
 
+        let tutoStateMessage = TutoStore.getCurrentMessage();
+
         return (
             <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
+                    this.objectKind.activeObject === null && tutoStateMessage > 2 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && tutoStateMessage > 3 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
                 }
                 <CSSTransitionGroup
