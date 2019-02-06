@@ -110,10 +110,6 @@ export class CameraManager {
             cancelAnimationFrame(this.animationRequest);
         }
 
-        const fromDistance = this.distance;
-        let i = 0;
-        let step = 1 / 30;
-        console.log(step);
         const animation = () => {
             this.distance = this.distance + 0.2 * (toDistance - this.distance);
             this.camera.target.x = fromPosition.x + 0.2 * (toPosition.x - fromPosition.x);
@@ -127,15 +123,16 @@ export class CameraManager {
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
-                if (GameManager.GameManager && GameManager.GameManager.objectKindType !== null
+                if (GameManager.GameManager && GameManager.GameManager.objectKindType !== null &&
+                    typeof GameManager.GameManager.objectKindType !== 'undefined'
                     && toPosition.x === 0 && toPosition.y === 0 && toPosition.z === 0) {
+                    console.log("hello");
                     if (GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
                         GameManager.GameManager.clueEvent = GameManager.GameManager.objectKindType;
                     }
                     GameManager.GameManager.playAfterCatalog();
                 }
             }
-            i += step;
         };
         this.animationRequest = requestAnimationFrame(animation);
 

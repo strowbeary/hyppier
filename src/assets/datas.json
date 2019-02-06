@@ -142,8 +142,40 @@
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Macintosh",
-          "modelUrl": "Lampe.babylon",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "01_lampe.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1
+        },
+        {
+          "name": "Lampe suspendue",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Belle lampe suspendue",
+          "modelUrl": "02_lampe.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1
+        },
+        {
+          "name": "Lemp",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe design",
+          "modelUrl": "03_lampe.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
@@ -155,7 +187,7 @@
       ],
       "objectTimeout": 500,
       "replacementCounter": 0,
-      "activeObject": 0
+      "activeObject": null
     }
   ]
 }

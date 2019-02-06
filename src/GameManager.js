@@ -14,8 +14,9 @@ export class GameManager {
             GameManager.GameManager = this;
         }
         this.clueEvent = null;
-        this.clueEventTimer = null;
         this.objectKindName = null;
+        this.objectKindType = null;
+        this.timer = null;
         this.atticManager = atticManager;
     }
 
@@ -47,36 +48,64 @@ export class GameManager {
         this.scene.animatables.forEach(animatable => animatable.restart())
     }
 
-    playAfterClueEvent() {
-        console.log(this.objectKindName, CatalogStore);
-        CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
-        GameStore.setClueEvent("");
+    playAfterClueEventClosed() {
+        let lambdaMesh = CatalogStore.getObjectKind(this.objectKindName).objects[CatalogStore.getObjectKind(this.objectKindName).activeObject].getModel();
+        const clones = lambdaMesh.clones;
+        if (clones.length > 0) {
+            const lastClone = clones[clones.length - 1];
+            lambdaMesh.launchCloneDisappearAnimation(() => this.scene.removeMesh(lastClone));
+        } else {
+            CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
+        }
+        this.objectKindName = null;
+
+        if (this.timer !== null) {
+            this.playCatalog(this.timer);
+            this.timer = null;
+        } else {
+            this.playGame();
+        }
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
-        this.playGame();
     }
 
-    playAfterCatalog(timer, objectKindName) {
-        if (this.clueEvent !== null && this.clueEvent !== GameStore.clueEvent) {
-            this.objectKindName = objectKindName;
-            GameStore.setClueEvent(this.clueEvent);
-            if (!timer) {
-                this.pauseGame();
+    playAfterClueEvent() {
+        this.clueEvent = null;
+        this.objectKindType = null;
+        GameStore.setClueEvent("");
+    }
+
+    playAfterCatalog() {
+        if (this.clueEvent !== null) {
+            if (GameStore.clueEvent !== this.clueEvent) {
+                GameStore.setClueEvent(this.clueEvent);
             }
-            this.clueEvent = null;
-        } else if (timer) {
-            this.objectKindName = null;
+        } else {
+            if (typeof this.timer !== 'boolean') {
+                this.playGame();
+            } else {
+                this.playCatalog(this.timer);
+            }
+            this.timer = null;
+            this.objectKindType = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
             }
-            if (typeof timer !== 'boolean') {
-                this.playCatalog(timer);
-            } else {
-                this.playGame();
+        }
+    }
+
+    playAfterPopup(objectKindName) {
+        if (this.clueEvent !== null) { //replacement with ClueEvent
+            if (GameStore.clueEvent !== this.clueEvent) {
+                this.objectKindName = objectKindName;
+                GameStore.setClueEvent(this.clueEvent);
+                this.pauseGame();
             }
-        } else {
-            this.objectKindName = null;
+        } else if (!GameStore.options.isPaused) { //replacement in Popup
+            if (GameStore.attic.isGameOver()) {
+                this.atticManager.fall();
+            }
         }
     }
 }

@@ -15,10 +15,16 @@ import StartScreen from "./startScreen/StartScreen";
 import AboutModal from "./aboutModal/AboutModal";
 import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
 import TutoStore from "../../stores/TutoStore/TutoStore";
+import {GameManager} from "../../GameManager";
 
 const App = observer(class App extends Component {
 
-    state = {message: null, toast: false, loading: false, ready: false};
+    state = {
+        message: null,
+        toast: false,
+        loading: false,
+        ready: false
+    };
 
     constructor(props) {
         super(props);

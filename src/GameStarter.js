@@ -8,17 +8,25 @@ export class GameStarter {
             "room.babylon"
         );
         return container.meshes.forEach(loadedMesh => {
-            try{
+            try {
                 if (loadedMesh.name.includes("Location")) {
                     const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
-                   /* *
-                    * Set location to corresponding object kind
-                    * */
-                    CatalogStore.getObjectKind(locationOption).location.setPosition(loadedMesh.position);
+                    /* *
+                     * Set location to corresponding object kind
+                     * */
+                    const objectKind = CatalogStore.getObjectKind(locationOption);
+                    if(objectKind) {
+                        objectKind.location.setPosition(loadedMesh.position);
+                    }
                     loadedMesh.scaling = new BABYLON.Vector3(0, 0, 0);
-                } else {
+                } else if(loadedMesh.name.includes("Ladder-Position")) {
+                    console.log("Echeeeeeelle !!!");
+                }
+                else {
                     loadedMesh.receiveShadows = true;
+                    console.log(loadedMesh.name);
                     loadedMesh.convertToFlatShadedMesh();
+                    loadedMesh.convertToUnIndexedMesh();
                     loadedMesh.freezeWorldMatrix();
                     //loadedMesh.material.freeze();
                     scene.addMesh(loadedMesh);
@@ -29,7 +37,8 @@ export class GameStarter {
 
         });
     }
+
     static async init(scene) {
-        await GameStarter.loadRoom(scene);
+        return await GameStarter.loadRoom(scene);
     }
 }

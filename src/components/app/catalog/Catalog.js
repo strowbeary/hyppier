@@ -1,6 +1,6 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
-import icon_close from "./img/icon_close.svg";
+import icon_close from "../../../assets/img/icon_close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";

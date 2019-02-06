@@ -8,7 +8,7 @@ import {AtticManager} from "./AtticManager";
 import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import flare from "./flare.png";
+import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 
 export class SceneManager {
@@ -108,10 +108,14 @@ export class SceneManager {
             .then(() => {
                 GameStarter.init(this.scene)
                     .then(() => {
-                        this.atticManager.prepareGravity();
                         if (typeof onReadyCB === 'function') {
                             onReadyCB();
                         }
+                        try {
+
+                            this.atticManager.prepareGravity();
+                        } catch(e) { console.error(e)}
+
                     });
             });
 
