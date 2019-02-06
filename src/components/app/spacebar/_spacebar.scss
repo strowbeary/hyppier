@@ -10,13 +10,15 @@
   &__spacebutton {
     position: relative;
     display: block;
-    padding: 15px 60px;
+    padding: 10px 60px;
     border: solid 2px white;
     border-radius: 30px;
     font-size: 1.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.3rem;
+    font-weight: 200;
     animation: toto 1s linear infinite;
+
     &:before {
       content: "";
       position: absolute;
