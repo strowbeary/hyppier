@@ -3,12 +3,9 @@ import {types} from "mobx-state-tree";
 export default types
     .model("MessageStore",
     {
-        message: types.string,
+        text: types.string,
         expiration: types.number,
-        action: types.string
-    })
-    .create({
-        messages: [],
-        currentMessage: 0,
-        action: ""
+        action: types.string,
+        originTarget: types.string,
+        read: types.boolean
     });

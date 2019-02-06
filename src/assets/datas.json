@@ -5,13 +5,45 @@
       "type": "furniture",
       "objects": [
         {
-          "name": "Bureau",
+          "name": "Table",
           "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
-          "modelUrl": "table.babylon",
+          "modelUrl": "01_table.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        },
+        {
+          "name": "Bureau Simple",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "02_table.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        },
+        {
+          "name": "Boburo",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "03_table.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
@@ -86,7 +118,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Macintosh",
-          "modelUrl": "computer.babylon",
+          "modelUrl": "Computer.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
@@ -101,61 +133,29 @@
       "activeObject": 0
     },
     {
-      "name": "Sound",
+      "name": "Lampe",
       "type": "electric",
       "objects": [
         {
-          "name": "Walkman",
+          "name": "Lampe standard",
           "adUrl": "img/catalog/table/popup_placeholder.png",
           "thumbnailUrl": "img/catalog/table/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Walkman",
-          "modelUrl": "walkman.babylon",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Lampe.babylon",
           "infos": [
             {
-              "slogan": "N'attends plus tu risquerais de louper ce super Walkman !",
-              "url": "http://localhost:8080"
-            }
-          ],
-          "cloneNumber": 1
-        },
-        {
-          "name": "Ipod",
-          "adUrl": "img/catalog/table/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/table/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Ipod",
-          "modelUrl": "ipod.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Ipod",
-              "url": "http://localhost:8080"
-            }
-          ],
-          "cloneNumber": 39
-        },
-        {
-          "name": "Casque",
-          "adUrl": "img/catalog/table/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/table/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Casque",
-          "modelUrl": "headset.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Casque",
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
               "url": "http://localhost:8080"
             }
           ],
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 500,
       "replacementCounter": 0,
-      "activeObject": null
+      "activeObject": 0
     }
   ]
 }

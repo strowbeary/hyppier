@@ -1,6 +1,6 @@
-import GameStore from "../../../stores/GameStore/GameStore";
-import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import {TimerManager} from "../../../utils/TimerManager";
+import GameStore from "./stores/GameStore/GameStore";
+import CatalogStore from "./stores/CatalogStore/CatalogStore";
+import {TimerManager} from "./utils/TimerManager";
 
 export class GameManager {
 
@@ -48,6 +48,7 @@ export class GameManager {
     }
 
     playAfterClueEvent() {
+        console.log(this.objectKindName, CatalogStore);
         CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         GameStore.setClueEvent("");
         if (GameStore.attic.isGameOver()) {

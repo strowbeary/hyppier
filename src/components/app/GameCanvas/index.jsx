@@ -21,7 +21,6 @@ export default observer(class GameCanvas extends React.Component {
         this.setState({
             ready: true
         });
-        this.scene.activeCamera.onViewMatrixChangedObservable.add(() => this.sceneManager.updateTrackingPosition());
     }
 
     onResize() {
@@ -29,17 +28,25 @@ export default observer(class GameCanvas extends React.Component {
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
         this.scene.activeCamera.getProjectionMatrix(true);
-        this.sceneManager.updateTrackingPosition();
     }
 
     render() {
         if (this.sceneManager !== null) {
             this.sceneManager.cameraManager.setTarget(CameraStore.meshName, CameraStore.offset.toVector3());
         }
-        let objectKindUI = this.state.ready ? CatalogStore.getAllObjectKind().map((objectKind) => <ObjectKindUI ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind} scene={this.scene} key={objectKind.name}/>) : null;
+        let objectKindUI = this.state.ready ? CatalogStore.getAllObjectKind().map((objectKind) => <ObjectKindUI
+            ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind} scene={this.scene}
+            key={objectKind.name}/>) : null;
 
         return (
-            <div>
+            <React.Fragment>
+                <canvas
+                    style={{
+                        width: "100vw",
+                        height: "100vh"
+                    }}
+                    ref={(canvas) => this.canvas = canvas}
+                />
                 <div style={{
                     position: "fixed",
                     top: 10,
@@ -50,14 +57,8 @@ export default observer(class GameCanvas extends React.Component {
                     <button onClick={() => this.sceneManager.atticManager.fall()}>Attic down</button>
                 </div>
                 {objectKindUI}
-                <canvas
-                    style={{
-                        width: "100vw",
-                        height: "100vh"
-                    }}
-                    ref={(canvas) => this.canvas = canvas}
-                />
-            </div>
+
+            </React.Fragment>
         );
     }
 });

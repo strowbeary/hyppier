@@ -10,13 +10,13 @@ export class Lights{
             1,
             0,
             scene);
-        light.intensity = 0.7;
+        light.intensity = 0.3;
 
         const light2 = new BABYLON.DirectionalLight(
             "Light2",
             new BABYLON.Vector3(0, -1, 0),
             scene);
-        light2.intensity = 0.2;
+        light2.intensity = 0.1;
 
         light.position = new BABYLON.Vector3(-4, 4, -4);
         light2.position = new BABYLON.Vector3(0, 1, 0);
@@ -32,7 +32,7 @@ export class Lights{
         lightSphere2.material.emissiveColor = new BABYLON.Color3(1, 0, 1);
         */
         this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 13), light);
-        this.shadowGenerator.setDarkness(0.3);
+        this.shadowGenerator.setDarkness(0.6);
         this.shadowGenerator.useExponentialShadowMap = true;
         this.shadowGenerator.setTransparencyShadow(false);
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "./_notification.scss";
 import {observer} from "mobx-react";
 import {createTimer} from "../../../../utils/TimerManager"
+import TutoStore from "../../../../stores/TutoStore/TutoStore";
 
 const Notification = observer(class Notification extends Component {
 
@@ -16,6 +17,7 @@ const Notification = observer(class Notification extends Component {
         this.delayTimer = createTimer(this.duration);
         this.timer = createTimer(this.duration);
         this.delayTimer.onFinish(() => {
+            TutoStore.reportAction("Notification", "appear");
             this.timer.start();
             this.setState({
                 running: true
@@ -66,11 +68,13 @@ const Notification = observer(class Notification extends Component {
             running: false
         });
         this.props.buildCatalog(this.timer);
+        TutoStore.reportAction("Notification", "actionned");
     }
 
     render() {
         const dashSize = Math.PI * 60;
         let hide = this.state.running? '': 'hide';
+
 
         return (
             <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>

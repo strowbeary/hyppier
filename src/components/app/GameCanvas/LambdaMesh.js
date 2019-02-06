@@ -6,8 +6,11 @@ export class LambdaMesh {
         this.objectKindName = objectKindName;
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
+        this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
+        //this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.5 }, this.mesh._scene);
+
         this.clone = [];
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;

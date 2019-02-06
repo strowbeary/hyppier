@@ -1,10 +1,38 @@
 import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
-import {GameManager} from "./GameManager";
+import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+const EasingFunctions = {
+    // no easing, no acceleration
+    linear: function (t) { return t },
+    // accelerating from zero velocity
+    easeInQuad: function (t) { return t*t },
+    // decelerating to zero velocity
+    easeOutQuad: function (t) { return t*(2-t) },
+    // acceleration until halfway, then deceleration
+    easeInOutQuad: function (t) { return t<.5 ? 2*t*t : -1+(4-2*t)*t },
+    // accelerating from zero velocity
+    easeInCubic: function (t) { return t*t*t },
+    // decelerating to zero velocity
+    easeOutCubic: function (t) { return (--t)*t*t+1 },
+    // acceleration until halfway, then deceleration
+    easeInOutCubic: function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 },
+    // accelerating from zero velocity
+    easeInQuart: function (t) { return t*t*t*t },
+    // decelerating to zero velocity
+    easeOutQuart: function (t) { return 1-(--t)*t*t*t },
+    // acceleration until halfway, then deceleration
+    easeInOutQuart: function (t) { return t<.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t },
+    // accelerating from zero velocity
+    easeInQuint: function (t) { return t*t*t*t*t },
+    // decelerating to zero velocity
+    easeOutQuint: function (t) { return 1+(--t)*t*t*t*t },
+    // acceleration until halfway, then deceleration
+    easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
+}
 
 export class CameraManager {
-
     static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0, 0);
 
     initialValues = {
@@ -56,6 +84,7 @@ export class CameraManager {
         this.camera.orthoBottom = -distance * ratio * (window.innerHeight / this.initialValues.height);
         this.camera.orthoLeft = -distance * ratio * (window.innerWidth / this.initialValues.height);
         this.camera.orthoRight = distance * ratio * (window.innerWidth / this.initialValues.height);
+        ObjectKindUI.refs.filter(ref => {return ref !== null}).forEach(ref => ref.updatePosition());
     }
 
     setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
@@ -80,20 +109,26 @@ export class CameraManager {
         if(this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
         }
+
+        const fromDistance = this.distance;
+        let i = 0;
+        let step = 1 / 30;
+        console.log(step);
         const animation = () => {
-            this.distance = this.distance + 0.1 * (toDistance - this.distance);
-            this.camera.target.x = fromPosition.x + 0.1 * (toPosition.x - fromPosition.x);
-            this.camera.target.y = fromPosition.y + 0.1 * (toPosition.y - fromPosition.y);
-            this.camera.target.z = fromPosition.z + 0.1 * (toPosition.z - fromPosition.z);
-            if (Math.abs(this.distance-toDistance).toFixed(3) > 0 || 
-                BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
-            ) {
+            let t = EasingFunctions.linear(i);
+            this.distance = (1 - t) * fromDistance + t * toDistance;
+            this.camera.target.x = (1 - t) * fromPosition.x + t * toPosition.x;
+            this.camera.target.y = (1 - t) * fromPosition.y + t * toPosition.y;
+            this.camera.target.z = (1 - t) * fromPosition.z + t * toPosition.z;
+
+            if (i <= 1) {
                 this.updateCamera();
                 this.animationRequest = requestAnimationFrame(animation)
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
             }
+            i += step;
         };
         this.animationRequest = requestAnimationFrame(animation);
 

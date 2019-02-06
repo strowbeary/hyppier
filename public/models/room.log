@@ -11,45 +11,75 @@ Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
 		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
 	Python World class constructor completed
 	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
-	processing begun of mesh:  Grenier
-		processing begun of Standard material:  Clay.002
-		num positions      :  7
-		num normals        :  7
+	processing begun of node:  Location(Table).001
+	processing begun of node:  Location(Transport).001
+	processing begun of mesh:  Room
+		processing begun of Standard material:  Blender-White
+		num positions      :  88
+		num normals        :  88
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  18
-	processing begun of node:  Location(Table)
-	processing begun of node:  Location(Chair)
-	processing begun of node:  Location(Bed)
-	processing begun of mesh:  Chambre
-		processing begun of Standard material:  Clay
-		num positions      :  68
-		num normals        :  68
+		num indices        :  516
+	processing begun of mesh:  _ROOM-Door.000
+		registered as also a user of material:  Blender-White
+		num positions      :  365
+		num normals        :  365
+		num uvs            :  730
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  1260
+	processing begun of mesh:  Light.000
+		registered as also a user of material:  Blender-White
+		num positions      :  125
+		num normals        :  125
+		num uvs            :  250
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  420
+	processing begun of mesh:  _ROOM.002
+		registered as also a user of material:  Blender-White
+		num positions      :  23
+		num normals        :  23
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  312
-	processing begun of mesh:  _ROOM_Door.002
-		registered as also a user of material:  Clay
-		num positions      :  192
-		num normals        :  192
+		num indices        :  84
+	processing begun of mesh:  Plane.000
+		registered as also a user of material:  Blender-White
+		num positions      :  8
+		num normals        :  8
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  1140
-	processing begun of mesh:  Plane.001
-		processing begun of Standard material:  Clay.005
-		processing begun of Standard material:  Clay.004
-		processing begun of multimaterial:  room.Multimaterial#0
-		num positions      :  47
-		num normals        :  47
+		num indices        :  12
+	processing begun of mesh:  Tshirt_hook_wall.002
+		registered as also a user of material:  Blender-White
+		num positions      :  31
+		num normals        :  31
 		num uvs            :  0
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  234
-		WARNING: # of 0 area faces found:  14
+		num indices        :  174
+	processing begun of mesh:  Tshirt_hook.000
+		registered as also a user of material:  Blender-White
+		num positions      :  60
+		num normals        :  60
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  348
+	processing begun of node:  Location(Shoes).001
+	processing begun of node:  Location(Poster).001
+	processing begun of node:  Location(Plant).001
+	processing begun of node:  Location(Mobile).001
+	processing begun of node:  Location(Console).001
+	processing begun of node:  Location(Clothing).001
+	processing begun of node:  Location(Chair).001
+	processing begun of node:  Location(Bed).001
+	processing begun of node:  Location(Bag).001
+	processing begun of node:  Ladder-Position.001
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 0.032 secs
+elapsed time:  0 min, 0.0556 secs

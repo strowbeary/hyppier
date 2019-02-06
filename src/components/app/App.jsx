@@ -10,6 +10,8 @@ import Toast from "./toast/Toast";
 import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent"
+import TutoStore from "../../stores/TutoStore/TutoStore";
+import Message from "./message/Message";
 
 const App = observer(class App extends Component {
 
@@ -35,29 +37,36 @@ const App = observer(class App extends Component {
         });
     }
 
-    componentDidMount() {
-        this.setState({message: "Tu peux désormais accéder à ton grenier."});
+    testChangeObject() {
+        const objectKindPath = CatalogStore.getObjectKind("Sound");
+        if (objectKindPath.activeObject === null) {
+            objectKindPath.setActiveObject(0, 0);
+        } else if (objectKindPath.activeObject + 1 < objectKindPath.objects.length) {
+            objectKindPath.setActiveObject(objectKindPath.activeObject + 1, 0);
+        }
     }
 
-    resetPipo(e) {
-        if (e.target === this.app) {
-            if (GameStore.pipo === 'happy') {
-                GameStore.setPipo("");
-            }
+    resetPipo() {
+        if (GameStore.pipo === 'happy') {
+            GameStore.setPipo("");
         }
     }
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
-        let pipoMood = GameStore.pipo === 'happy' ? 'happy' : '';
+        let pipoMood = "";
+        if(GameStore.pipo === 'happy') {
+            pipoMood = "happy";
+            setTimeout(() => this.resetPipo(), 3000);
+        }
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)} ref={(ref) => this.app = ref}>
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`} ref={(ref) => this.app = ref}>
                 <GameCanvas/>
                 <HypeIndicator/>
-                {/*{this.state.message &&
-                    <Message message={this.state.message}/>
-                }*/}
+                {TutoStore.displayTip() &&
+                    <Message message={TutoStore.getCurrentMessage()}/>
+                }
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}

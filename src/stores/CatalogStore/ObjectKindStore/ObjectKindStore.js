@@ -13,11 +13,10 @@ function loadObject(objectKind) {
     ).then((container) => {
         container.meshes.forEach(loadedMesh => {
             if (loadedMesh.name.includes("Location")) {
-                const locationOption = loadedMesh.name
-                    .substring(0, loadedMesh.name.length - 1)
-                    .split("(")[1].split(",");
-                objectKind.location.addChild(locationOption[0], objectKind.name);
-                CatalogStore.getObjectKind(locationOption[0]).location.setPosition(loadedMesh.position)
+                const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
+
+                objectKind.location.addChild(locationOption, objectKind.name);
+                CatalogStore.getObjectKind(locationOption).location.setPosition(loadedMesh.position)
             } else {
                 objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
             }
