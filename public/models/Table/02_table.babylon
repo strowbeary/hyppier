@@ -57,7 +57,7 @@
 ,209,211,210,211,213,205,208,210,205,206,213,211]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":214,"indexStart":0,"indexCount":1212}]
 ,"instances":[]}
-,{"name":"Location(Computer).003","id":"Location(Computer).003","position":[0.0433,0.6752,0.0234],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Lampe).003","id":"Location(Lampe).003","position":[-0.579,0.682,0.2202],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

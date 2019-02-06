@@ -11,6 +11,7 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import {showAxis} from "../utils/Axis";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -25,7 +26,7 @@ export class SceneManager {
         this.scene = new BABYLON.Scene(this.engine);
         this.cameraManager = new CameraManager(this.scene);
         this.camera = this.cameraManager.camera;
-        this.camera.attachControl(canvas);
+        // this.camera.attachControl(canvas);
         const lights = new Lights();
         lights.init(this.scene);
         this.scene.shadowsEnabled = true;
@@ -77,48 +78,61 @@ export class SceneManager {
         this.atticManager = new AtticManager(this.scene, particleSystem);
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
-
-        showAxis(this.scene, {
-            position: new BABYLON.Vector3(0, 0, 0),
-            label: "origin"
+        this.cameraManager.onOriginTargeted(() => {
+            if (typeof this.gameManager.objectKindType !== 'undefined' &&
+                this.gameManager.objectKindType !== null &&
+                GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
+                this.gameManager.clueEvent = this.gameManager.objectKindType;
+            }
+            this.gameManager.playAfterCatalog();
         });
 
-        GameWatcher
-            .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                if (objectKindType) {
-                    if (oldMesh !== null) {
-                        oldMesh.clones.forEach(clone => {
-                            this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                        });
-                        this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                        if (!CatalogStore.isOpen) {
-                            if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
-                                this.gameManager.clueEvent = objectKindType;
-                            }
-                        } else {
-                            this.gameManager.objectKindType = objectKindType;
-                            this.gameManager.objectKindName = oldMesh.objectKindName;
-                            this.gameManager.timer = timer;
-                        }
-                    } else if (newMesh !== null) {
-                        this.gameManager.objectKindType = objectKindType;
-                        this.gameManager.objectKindName = newMesh.objectKindName;
-                        this.gameManager.timer = timer;
-                    }
-                }
-                this.meshManager.patch(newMesh, oldMesh);
-            })
-            .watch()
+        /*showAxis(this.scene, {
+            position: new BABYLON.Vector3(0, 0, 0),
+            label: "origin"
+        });*/
+
+        GameStarter.init(this.scene)
             .then(() => {
-                GameStarter.init(this.scene)
+                GameWatcher
+                    .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
+                        if (objectKindType) {
+                            if (oldMesh !== null) {
+                                oldMesh.clones.forEach(clone => {
+                                    this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                                });
+                                this.atticManager.createParcel(oldMesh.mesh, objectKindType);
+                                if (!CatalogStore.isOpen) {
+                                    if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                                        this.gameManager.clueEvent = objectKindType;
+                                    }
+                                } else {
+                                    this.gameManager.objectKindType = objectKindType;
+                                    this.gameManager.objectKindName = oldMesh.objectKindName;
+                                    this.gameManager.timer = timer;
+                                }
+                            } else if (newMesh !== null) {
+                                this.gameManager.objectKindType = objectKindType;
+                                this.gameManager.objectKindName = newMesh.objectKindName;
+                                this.gameManager.timer = timer;
+                            }
+                        }
+                        this.meshManager.patch(newMesh, oldMesh);
+                    })
+                    .watch()
                     .then(() => {
                         if (typeof onReadyCB === 'function') {
                             onReadyCB();
                         }
-                        try {
+                        ObjectKindUI.refs.filter(ref => {
+                            return ref !== null
+                        }).forEach(ref => ref.updatePosition());
 
+                        try {
                             this.atticManager.prepareGravity();
-                        } catch(e) { console.error(e)}
+                        } catch (e) {
+                            console.error(e)
+                        }
 
                     });
             });

@@ -35,7 +35,7 @@
 ,118,117,120,115,119,120,118,114,113,112,121,120]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":124,"indexStart":0,"indexCount":612}]
 ,"instances":[]}
-,{"name":"Location(Computer).002","id":"Location(Computer).002","position":[-0.0588,0.6647,-0.0329],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Lampe).002","id":"Location(Lampe).002","position":[-0.595,0.6628,0.1826],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

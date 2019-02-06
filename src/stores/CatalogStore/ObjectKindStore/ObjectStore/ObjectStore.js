@@ -19,6 +19,7 @@ export default types.model("ObjectStore", {
         ({
             setModel(lambdaMesh) {
                 meshShelf.push(lambdaMesh);
+                console.log(lambdaMesh);
                 self.model = meshShelf.length - 1;
             },
             beforeDestroy() {

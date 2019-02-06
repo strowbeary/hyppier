@@ -1,23 +1,30 @@
 import GameStore from "./stores/GameStore/GameStore";
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {TimerManager} from "./utils/TimerManager";
+import CameraStore from "./stores/CameraStore/CameraStore";
+import {onPatch} from "mobx-state-tree";
 
 export class GameManager {
 
-    static GameManager;
-
     constructor(scene, atticManager) {
-        if (GameManager.GameManager) {
-            return GameManager.GameManager;
-        } else {
-            this.scene = scene;
-            GameManager.GameManager = this;
-        }
+        this.scene = scene;
         this.clueEvent = null;
         this.objectKindName = null;
         this.objectKindType = null;
         this.timer = null;
         this.atticManager = atticManager;
+        onPatch(CameraStore, (patch) => {
+            if(patch.path.includes("meshName")) {
+                if(patch.value === "Attic") {
+                    this.pauseGame();
+                    GameStore.attic.setAtticVisibility(true);
+                }
+                if(patch.value === "") {
+                    this.playGame();
+                    GameStore.attic.setAtticVisibility(false);
+                }
+            }
+        })
     }
 
     pauseCatalog(countdown) {

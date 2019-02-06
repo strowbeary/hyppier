@@ -18,11 +18,8 @@ export class GameStarter {
                     if(objectKind) {
                         objectKind.location.setPosition(loadedMesh.position);
                     }
-                    loadedMesh.scaling = new BABYLON.Vector3(0, 0, 0);
-                } else if(loadedMesh.name.includes("Ladder-Position")) {
-                    console.log("Echeeeeeelle !!!");
-                }
-                else {
+                    console.log(loadedMesh.name);
+                } else if(!loadedMesh.name.includes("Ladder-Position")) {
                     loadedMesh.receiveShadows = true;
                     console.log(loadedMesh.name);
                     loadedMesh.convertToFlatShadedMesh();

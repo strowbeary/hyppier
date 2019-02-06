@@ -9,7 +9,6 @@ import EmptySpace from "./emptySpace/EmptySpace";
 import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {GameManager} from "../../../GameManager";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -29,8 +28,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     getLambdaMesh() {
-        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1
-            && this.objectKind.activeObject !== null) {
+        if (this.objectKind.model) {
             return this.objectKind.objects[this.objectKind.activeObject].getModel();
         } else {
             return null;
@@ -57,28 +55,28 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         }
     }
 
-    getYVectorValue() {
-        if (this.getLambdaMesh()) {
-            return this.getLambdaMesh().mesh.getBoundingInfo().boundingBox.maximum.y * this.getLambdaMesh().mesh.scaling.y + 0.20
-        } else {
-            return 0;
-        }
-    }
-
     get2dPosition() {
+        let y = 0;
+        if(this.objectKind.model) {
+            const lambdaMesh = this.objectKind.objects[this.objectKind.activeObject].getModel();
+            if (lambdaMesh) {
+                y = lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * lambdaMesh.mesh.scaling.y + 0.20
+            }
+        }
+
         return BABYLON.Vector3.Project(
             this.objectKind.location.toVector3().add(
                 new BABYLON.Vector3(
                     0,
-                    this.getYVectorValue(),
+                    y,
                     0
                 )
             ),
             BABYLON.Matrix.Identity(),
-            this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(
-                this.scene.activeCamera.getEngine().getRenderWidth(),
-                this.scene.activeCamera.getEngine().getRenderHeight()
+            this.scene.scene.getTransformMatrix(),
+            this.scene.camera.viewport.toGlobal(
+                this.scene.camera.getEngine().getRenderWidth(),
+                this.scene.camera.getEngine().getRenderHeight()
             )
         );
     }
@@ -103,7 +101,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog(timer) {
-        GameManager.GameManager && GameManager.GameManager.pauseCatalog(timer);
+        this.scene.gameManager.pauseCatalog(timer);
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
