@@ -49,7 +49,9 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(options.size, 0, 0).add(options.position),
         new BABYLON.Vector3(options.size * 0.95, 0, -0.05 * options.size).add(options.position)
     ], scene);
-    axisX.color = new BABYLON.Color3(1, 0, 0);
+    axisX.enableEdgesRendering();
+    axisX.edgesWidth = 2.0;
+    axisX.edgesColor = new BABYLON.Color4(1, 0, 0, 1);
     axisX.freezeWorldMatrix();
     axisX.freezeNormals();
     var axisY = BABYLON.Mesh.CreateLines("axisY", [
@@ -63,7 +65,9 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(0, options.size, 0).add(options.position),
         new BABYLON.Vector3(0, options.size * 0.95, 0.05 * options.size).add(options.position),
     ], scene);
-    axisY.color = new BABYLON.Color3(0, 1, 0);
+    axisY.enableEdgesRendering();
+    axisY.edgesWidth = 2.0;
+    axisY.edgesColor = new BABYLON.Color4(0, 1, 0, 1);
     axisY.freezeWorldMatrix();
     axisY.freezeNormals();
     var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
@@ -77,7 +81,9 @@ export function showAxis(scene, options) {
         new BABYLON.Vector3(0, 0, options.size).add(options.position),
         new BABYLON.Vector3(0.05 * options.size, 0, options.size * 0.95).add(options.position),
     ], scene);
-    axisZ.color = new BABYLON.Color3(0, 0, 1);
+    axisZ.enableEdgesRendering();
+    axisZ.edgesWidth = 2.0;
+    axisZ.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
     axisZ.freezeWorldMatrix();
     axisZ.freezeNormals();
 };

@@ -3,6 +3,7 @@ import CameraStore from "../../../stores/CameraStore/CameraStore";
 import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import {onPatch} from "mobx-state-tree";
 const EasingFunctions = {
     // no easing, no acceleration
     linear: function (t) { return t },
@@ -59,6 +60,12 @@ export class CameraManager {
         this.updateCamera();
         this.camera.checkCollisions = true;
         this.camera.maxCameraSpeed = 0.05;
+        onPatch(CameraStore, (patch) => {
+            console.log("PAAATCH", patch);
+            if(patch.path.includes("meshName")) {
+                this.setTarget(CameraStore.meshName, CameraStore.offset);
+            }
+        })
     }
 
     attachControl(canvas) {
@@ -124,12 +131,10 @@ export class CameraManager {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
                 if (GameManager.GameManager &&
-                    typeof GameManager.GameManager.objectKindType !== 'undefined' &&
-                    toPosition.x === 0 &&
-                    toPosition.y === 0 &&
-                    toPosition.z === 0) {
-                    console.log("hello");
-                    if (GameManager.GameManager.objectKindType !== null && GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
+                    typeof mesh !== "undefined") {
+                    if (typeof GameManager.GameManager.objectKindType !== 'undefined' &&
+                        GameManager.GameManager.objectKindType !== null &&
+                        GameStore.attic.shouldLaunchClueEvent(GameManager.GameManager.objectKindType)) {
                         GameManager.GameManager.clueEvent = GameManager.GameManager.objectKindType;
                     }
                     GameManager.GameManager.playAfterCatalog();

@@ -79,7 +79,8 @@ export class SceneManager {
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
 
         showAxis(this.scene, {
-            position: new BABYLON.Vector3(0, 0, 0)
+            position: new BABYLON.Vector3(0, 0, 0),
+            label: "origin"
         });
 
         GameWatcher

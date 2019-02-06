@@ -31,9 +31,7 @@ export default observer(class GameCanvas extends React.Component {
     }
 
     render() {
-        if (this.sceneManager !== null) {
-            this.sceneManager.cameraManager.setTarget(CameraStore.meshName, CameraStore.offset.toVector3());
-        }
+
         let objectKindUI = this.state.ready ? CatalogStore.getAllObjectKind().map((objectKind) => <ObjectKindUI
             ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind} scene={this.scene}
             key={objectKind.name}/>) : null;

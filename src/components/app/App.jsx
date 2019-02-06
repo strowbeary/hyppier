@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./_app.scss";
 import {observer} from "mobx-react";
-import GameCanvas from "./GameCanvas";
+import GameCanvas from "./GameCanvas/GameCanvas";
 import {CSSTransitionGroup} from "react-transition-group";
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
