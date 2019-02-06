@@ -17,8 +17,10 @@ const Notification = observer(class Notification extends Component {
         this.duration = props.objectKind.objectTimeout;
         this.delayTimer = createTimer(this.duration);
         this.timer = createTimer(this.duration);
+        this.timer.lock();
         this.delayTimer.onFinish(() => {
             TutoStore.reportAction("Notification", "appear");
+            this.timer.unlock();
             this.timer.start();
             this.setState({
                 running: true

@@ -78,7 +78,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -103,7 +103,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -128,7 +128,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -185,7 +185,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
