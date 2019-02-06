@@ -26,6 +26,7 @@ export const TimerManager = {
 
 export function createTimer(duration) {
     let finishListeners = [];
+    let startListeners = [];
     let loopHooks = [];
     let animationRequest;
     let paused = false;
@@ -39,6 +40,10 @@ export function createTimer(duration) {
     function onFinish(listener) {
         finishListeners.push(listener);
         return finishListeners.length - 1;
+    }
+    function onStart(listener) {
+        startListeners.push(listener);
+        return startListeners.length - 1;
     }
 
     function addLoopHook(hook) {
@@ -56,6 +61,7 @@ export function createTimer(duration) {
             paused = false;
             running = true;
             loop();
+            startListeners.forEach(listener => listener());
         }
     }
 
@@ -114,6 +120,7 @@ export function createTimer(duration) {
         pause,
         setDuration,
         destroy,
+        onStart,
         timerId: timers.length
     }, {
         get(target, prop) {
