@@ -44,7 +44,14 @@ export default types.model("TutoStore",
                 text: "Bienvenue dans ta chambre! Bon...c'est vrai qu'elle est un peu vide avec que le strict minimum",
                 expiration: 0,
                 action: "keypress",
-                originTarget: "Space",
+                originTarget: "Intro",
+                read: false
+            },
+            {
+                text: "Mais ne t'en fais pas, tu vas pouvoir l'égayer un peu, tiens essayes d'abord pour voir!",
+                expiration: 0,
+                action: "keypress",
+                originTarget: "Intro",
                 read: false
             },
             {

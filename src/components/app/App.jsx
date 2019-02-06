@@ -68,7 +68,7 @@ const App = observer(class App extends Component {
     }
 
     updateReady() {
-        TutoStore.reportAction("Space", "appear");
+        TutoStore.reportAction("Intro", "appear");
         this.setState({
             ready: true
         });

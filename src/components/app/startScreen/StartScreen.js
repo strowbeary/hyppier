@@ -13,6 +13,9 @@ const StartScreen = observer(class StartScreen extends Component {
         super(props);
     }
 
+    componentWillUnmount() {
+    }
+
     render() {
         return (
             <div className="startScreen">

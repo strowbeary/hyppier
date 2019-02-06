@@ -4,24 +4,50 @@ import "./_spacebar.scss";
 
 const Spacebar = observer(class Spacebar extends Component {
 
+    state = {show: true};
+
+    constructor(props) {
+        super(props);
+        this.hideSpaceForListener = (e) => {this.hideSpace(e)};
+        this.dispatchEventForListener = (e) => {this.dispatchEvent(e)};
+    }
+
     componentDidMount() {
-        window.addEventListener("keyup", (e) => {this.dispatchEvent(e)});
+        window.addEventListener("keydown", this.hideSpaceForListener);
+        window.addEventListener("keyup", this.dispatchEventForListener);
     }
 
     componentWillUnmount() {
-        window.removeEventListener("keyup", (e) => {this.dispatchEvent(e)});
+        window.removeEventListener("keydown", this.hideSpaceForListener);
+        window.removeEventListener("keyup", this.dispatchEventForListener);
+    }
+
+    hideSpace(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.keyCode === 32) {
+            this.setState({show: false})
+        }
     }
 
     dispatchEvent(e) {
         e.preventDefault();
-        e.keyCode === 32 && this.props.onSpaceUp();
+        e.stopPropagation();
+        if(e.keyCode === 32) {
+            this.props.onSpaceUp();
+        }
     }
 
     render() {
         return (
-            <div className="spacebar">
-                <span className="spacebar__spacebutton">Espace</span>
-            </div>
+            <React.Fragment>
+                {
+                    this.state.show &&
+                    <div className="spacebar">
+                        <span className="spacebar__spacebutton">Espace</span>
+                    </div>
+                }
+            </React.Fragment>
         )
     }
 });

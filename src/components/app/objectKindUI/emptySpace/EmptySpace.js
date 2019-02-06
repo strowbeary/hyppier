@@ -4,13 +4,10 @@ import {observer} from "mobx-react";
 import TutoStore from "../../../../stores/TutoStore/TutoStore";
 
 export default observer(class EmptySpace extends Component {
-    componentDidMount() {
-        TutoStore.reportAction("EmptySpace", "appear");
-    }
 
     clickHandler() {
         this.props.buildCatalog();
-        TutoStore.reportAction("EmptySpace", "actionned")
+        TutoStore.reportAction("EmptySpace", "actioned");
     }
 
     render() {
