@@ -61,7 +61,7 @@ const App = observer(class App extends Component {
                 {this.state.loading &&
                     <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>
                 }
-                {this.state.loading &&
+                {this.state.loading && !GameStore.attic.atticVisible &&
                     <HypeIndicator/>
                 }
                 <CSSTransitionGroup

@@ -27,7 +27,7 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     closeModal() {
-        if(!CatalogStore.isOpen && !GameStore.attic.visibility) {
+        if(!CatalogStore.isOpen && !GameStore.attic.atticVisible) {
             this.gameManager.playGame();
         }
         this.setState({
