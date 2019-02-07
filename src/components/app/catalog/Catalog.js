@@ -33,10 +33,10 @@ const Catalog = observer(class Catalog extends Component {
         }
     }
 
-    closeCatalog() {
+    closeCatalog(fromValidate) {
         let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === this.objectKind);
         if (objectKindUI.notification) {
-            objectKindUI.notification.changeDelayTimer(true);
+            objectKindUI.notification.changeDelayTimer(fromValidate);
             objectKindUI.notification.restartTimer();
         }
         this.isClosing = true;

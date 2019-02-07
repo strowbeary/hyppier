@@ -12,6 +12,8 @@ import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
 import AboutModal from "./aboutModal/AboutModal";
 import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
+import TutoStore from "../../stores/TutoStore/TutoStore";
+import Message from "./message/Message";
 
 const App = observer(class App extends Component {
 
