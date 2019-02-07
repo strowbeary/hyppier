@@ -1,7 +1,16 @@
-$false-black: #272727;
-$light-grey: #FAFAFA;
-$yellow: #ffd764;
+@import "../../variables";
 
+@keyframes Gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
 
 @font-face {
   font-family: Brown;
@@ -48,18 +57,6 @@ $yellow: #ffd764;
   font-family: Selfie;
   src: url("../../assets/fonts/Selfie/Selfie_Light.otf");
   font-weight: 100;
-}
-
-@keyframes Gradient {
-  0% {
-    background-position: 100% 0%;
-  }
-  50% {
-    background-position: 0% 100%;
-  }
-  100% {
-    background-position: 100% 0%;
-  }
 }
 
 * {
@@ -140,44 +137,4 @@ button, a {
       margin-left: 0;
     }
   }
-}
-
-.catalog-enter {
-  opacity: 0;
-  transform: translateY(10%);
-}
-
-.catalog-enter.catalog-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 500ms ease-in;
-}
-
-.catalog-leave {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.catalog-leave.catalog-leave-active {
-  opacity: 0;
-  transform: translateY(10%);
-  transition: all 500ms ease-in;
-}
-
-.grow-enter {
-  transform: scale(0);
-}
-
-.grow-enter.grow-enter-active {
-  transform: scale(1);
-  transition: transform 300ms ease-in-out;
-}
-
-.grow-leave {
-  transform: scale(1);
-}
-
-.grow-leave.grow-leave-active {
-  transform: scale(0);
-  transition: transform 300ms ease-in-out;
 }

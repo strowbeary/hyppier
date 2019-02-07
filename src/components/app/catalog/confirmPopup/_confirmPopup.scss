@@ -1,9 +1,4 @@
-$default-cursor-url: "../../../../assets/img/cursor_default.svg";
-$yellow: #FFD832;
-$light-grey: #E6E6E6;
-$vertical-space: 15px;
-$border-radius: 15px;
-$horizontal-space: 20px;
+@import "../../../../variables";
 
 .confirmPopup {
   position: absolute;
@@ -58,7 +53,7 @@ $horizontal-space: 20px;
     background: none;
 
     &:disabled {
-      cursor: url($default-cursor-url), default;
+      cursor: url($default-cursor-url-levelDown), default;
     }
   }
 
@@ -79,7 +74,7 @@ $horizontal-space: 20px;
 
     &:disabled {
       animation-duration: 0s;
-      cursor: url($default-cursor-url), default;
+      cursor: url($default-cursor-url-levelDown), default;
 
       &:hover {
         transform: scale(1);

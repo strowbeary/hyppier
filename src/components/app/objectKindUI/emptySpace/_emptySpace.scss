@@ -1,15 +1,4 @@
-$pointer-url: "../../../../assets/img/cursor_pointer.svg";
-$light-grey: #FAFAFA;
-
-@keyframes tuto-pulse
-{
-  0% {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-  }
-}
+@import "../../../../variables";
 
 .glow {
   animation: tuto-pulse 1s infinite;
@@ -28,7 +17,7 @@ $light-grey: #FAFAFA;
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    cursor: url($pointer-url), pointer;
+    cursor: url($pointer-url-levelDown), pointer;
     transition: background-color 0.1s;
 
     &:hover {

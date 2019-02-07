@@ -1,19 +1,5 @@
-$yellow: #FFD832;
-$grey: #EEEEEE;
-$red: #FF8A8A;
-$purple: #8A8BFE;
-$green: #75E4A6;
-$orange: #E87D30;
-$false-black: #272727;
-$light-grey: #FAFAFA;
-
-$vertical-space: 15px;
-$border-radius: 15px;
-$horizontal-space: 20px;
-$catalog-width: 400px; //350px
-
-$pointer-url: "../../../assets/img/cursor_pointer.svg";
-$default-cursor-url: "../../../assets/img/cursor_default.svg";
+@import "../../../variables";
+$catalog-width: 400px;
 
 .catalog {
   position: absolute;
@@ -118,16 +104,6 @@ $default-cursor-url: "../../../assets/img/cursor_default.svg";
         animation-duration: 0s;
       }
     }
-  }
-}
-
-@keyframes shadow-pulse
-{
-  0% {
-    box-shadow: 0 0 0 0px rgba(255, 216, 50, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 10px rgba(255, 216, 50, 0);
   }
 }
 

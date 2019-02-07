@@ -1,22 +1,4 @@
-$yellow: #FFE07D;
 
-@keyframes scale {
-  0% {
-    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
-  }
-  25% {
-    transform: scaleX(1) scaleY(1) rotate(0);
-  }
-  50% {
-    transform: scaleX(1.5) scaleY(0.75) rotate(30deg);
-  }
-  75% {
-    transform: scaleX(1) scaleY(1) rotate(0);
-  }
-  100% {
-    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
-  }
-}
 
 .gameIndicator {
   position: fixed;
