@@ -102,8 +102,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
     }
 
-    buildCatalog(timer) {
-        this.scene.gameManager.pauseCatalog(timer);
+    buildCatalog() {
+        this.scene.gameManager.pauseGame();
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
@@ -134,8 +134,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             'left': x - 15,
             'zIndex': zIndex
         };
-
-        console.log(!GameStore.options.isPaused);
 
         return (
             <div className={`objectKindUI ${hide}`} style={style}>

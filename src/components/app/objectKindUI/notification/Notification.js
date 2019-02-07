@@ -61,7 +61,6 @@ const Notification = observer(class Notification extends Component {
         this.delayTimer.stop();
         this.timer.stop();
         this.timer.lock();
-        return this.timer.timerId;
     }
 
     openPopup() {
@@ -74,7 +73,7 @@ const Notification = observer(class Notification extends Component {
         this.setState({
             running: false
         });
-        this.props.buildCatalog(this.timer);
+        this.props.buildCatalog();
         TutoStore.reportAction("Notification", "actionned");
     }
 
