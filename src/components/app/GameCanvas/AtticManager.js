@@ -14,12 +14,6 @@ export class AtticManager {
         this.mesh.material = this.scene.getMaterialByName("Clay");
         this.mesh.setEnabled(false);
         this.particleSystem = particleSystem;
-
-        onPatch(TutoStore, (patch) => {
-            if (patch.path.includes("currentMessage") && patch.value === 4) {
-                this.launchLadderFall();
-            }
-        });
     }
 
     launchLadderFall() {
@@ -117,6 +111,7 @@ export class AtticManager {
                 BABYLON.ActionManager.OnPickTrigger,
                 () => { //DO SOMETHING ON CLICK
                     if (!CatalogStore.isOpen) {
+                        TutoStore.hideTip();
                         if (CameraStore.meshName !== "Attic") {
                             CameraStore.setTarget("Attic");
                         } else {

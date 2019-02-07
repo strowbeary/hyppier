@@ -10,7 +10,9 @@ export default types.model("TutoStore",
     .actions(self =>
         ({
             hideTip() {
-                self.showTip = false;
+                if (self.showTip) {
+                    self.showTip = false;
+                }
             },
             reportAction(origin, type) {
                 if (type === "appear") {
@@ -71,7 +73,7 @@ export default types.model("TutoStore",
             },
             {
                 text: "Tes anciens objets sont stockés dans ton grenier (rien ne se perd, rien ne se crée, tout se transforme...en carton) Tu peux cliquer sur l'échelle pour y accéder",
-                expiration: 10000,
+                expiration: 5000,
                 action: "timer",
                 originTarget: "Attic",
                 read: false

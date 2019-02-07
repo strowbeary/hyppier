@@ -69,9 +69,6 @@ const Catalog = observer(class Catalog extends Component {
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");
-        if (TutoStore.currentMessage === 2) {
-            TutoStore.reportAction("Notification", "appear");
-        }
         this.closeCatalog(true);
     }
 

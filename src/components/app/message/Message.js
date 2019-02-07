@@ -36,6 +36,9 @@ const Message = observer(class Message extends Component {
                 TutoStore.hideTip();
             }, this.message.expiration);
         }
+        if(this.message.originTarget === "Attic") {
+            this.props.launchLadderFall();
+        }
     }
 
     typeWriter(i = 0) {
