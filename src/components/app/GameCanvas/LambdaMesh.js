@@ -15,9 +15,6 @@ export class LambdaMesh {
             this.time = objectTimeout * 0.03;
             this.cloneMaterial(this.mesh);
             this.freezeMaterials(this.mesh);
-            /*if (this.mesh._scene) {
-                this.setClickEvent();
-            }*/
         }
     }
 
@@ -169,20 +166,6 @@ export class LambdaMesh {
             this.mesh.freezeWorldMatrix();
             typeof callback === 'function' && callback()
         });
-    }
-
-    setClickEvent() {
-        //Get Click Event on object
-        this.mesh.isPickable = true;
-        this.mesh.actionManager = new BABYLON.ActionManager(this.mesh._scene);
-        this.mesh.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(
-                BABYLON.ActionManager.OnPickTrigger,
-                () => { //DO SOMETHING ON CLICK
-                    this.launchDisappearAnimation();
-                }
-            )
-        );
     }
 
     freezeMaterials(mesh) {

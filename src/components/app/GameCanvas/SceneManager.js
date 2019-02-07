@@ -127,6 +127,7 @@ export class SceneManager {
 
                         try {
                             this.atticManager.prepareGravity();
+                            this.atticManager.prepareLadder();
                         } catch (e) {
                             console.error(e)
                         }

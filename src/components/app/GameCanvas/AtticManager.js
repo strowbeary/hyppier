@@ -2,6 +2,10 @@ import * as BABYLON from "babylonjs";
 import * as cannon from "cannon";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {showAxis} from "../utils/Axis";
+import {onPatch} from "mobx-state-tree";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
+import CameraStore from "../../../stores/CameraStore/CameraStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export class AtticManager {
     constructor(scene, particleSystem) {
@@ -10,6 +14,17 @@ export class AtticManager {
         this.mesh.material = this.scene.getMaterialByName("Clay");
         this.mesh.setEnabled(false);
         this.particleSystem = particleSystem;
+
+        onPatch(TutoStore, (patch) => {
+            if (patch.path.includes("currentMessage") && patch.value === 4) {
+                this.launchLadderFall();
+            }
+        });
+    }
+
+    launchLadderFall() {
+        this.ladder.unfreezeWorldMatrix();
+        BABYLON.Animation.CreateAndStartAnimation('ladderFall', this.ladder, 'position.y', 30, 30, 10, this.originalPosition, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     }
 
     prepareGravity() {
@@ -83,6 +98,34 @@ export class AtticManager {
             mass: 0,
             restitution: 0.5
         }, this.scene);
+    }
+
+    prepareLadder() {
+        this.ladder = this.scene.getMeshByName("Ladder.001");
+        this.ladder.unfreezeWorldMatrix();
+        this.originalPosition = this.ladder.position.y;
+        this.ladder.position.y = 10;
+        this.ladder.freezeWorldMatrix();
+        this.setClickEvent();
+    }
+
+    setClickEvent() {
+        this.ladder.isPickable = true;
+        this.ladder.actionManager = new BABYLON.ActionManager(this.scene);
+        this.ladder.actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(
+                BABYLON.ActionManager.OnPickTrigger,
+                () => { //DO SOMETHING ON CLICK
+                    if (!CatalogStore.isOpen) {
+                        if (CameraStore.meshName !== "Attic") {
+                            CameraStore.setTarget("Attic");
+                        } else {
+                            CameraStore.setTarget("");
+                        }
+                    }
+                }
+            )
+        );
     }
 
     createParcel(mesh, objectKindType) {
