@@ -15,12 +15,14 @@ export default observer(class GameCanvas extends React.Component {
 
     componentDidMount() {
         window.addEventListener('resize', () => this.onResize());
-        this.sceneManager = new SceneManager(this.canvas, () => this.props.onReady());
+        this.sceneManager = new SceneManager(this.canvas, () => {
+            this.props.onReady(this.sceneManager);
+            this.setState({
+                ready: true
+            });
+        });
         this.scene = this.sceneManager.scene;
         this.engine = this.sceneManager.engine;
-        this.setState({
-            ready: true
-        });
     }
 
     onResize() {
@@ -31,10 +33,6 @@ export default observer(class GameCanvas extends React.Component {
     }
 
     render() {
-
-        let objectKindUI = this.state.ready ? CatalogStore.getAllObjectKind().map((objectKind) => <ObjectKindUI
-            ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind} scene={this.scene}
-            key={objectKind.name}/>) : null;
 
         return (
             <React.Fragment>
@@ -50,13 +48,26 @@ export default observer(class GameCanvas extends React.Component {
                     top: 10,
                     left: 10
                 }}>
-                    <button onClick={() => this.sceneManager.cameraManager.goToAttic()}>Go to attic</button>
-                    <button onClick={() => this.sceneManager.cameraManager.goToRoom()}>reset target</button>
+                    <button onClick={() => CameraStore.setTarget("Attic")}>Go to attic</button>
+                    <button onClick={() => CameraStore.setTarget()}>reset target</button>
                     <button onClick={() => this.sceneManager.atticManager.fall()}>Attic down</button>
                 </div>
-                {objectKindUI}
+                {(() => {
+                    if (this.state.ready) {
+                        return CatalogStore
+                            .getAllObjectKind()
+                            .map((objectKind) => {
+                                return (
+                                    <ObjectKindUI
+                                        ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind}
+                                        scene={this.sceneManager}
+                                        key={objectKind.name}/>
+                                );
+                            })
+                    }
+                })()}
 
-            </React.Fragment>
-        );
-    }
-});
+                    </React.Fragment>
+                    );
+                }
+                });

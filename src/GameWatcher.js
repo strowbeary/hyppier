@@ -3,8 +3,6 @@ import {onPatch} from "mobx-state-tree";
 import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
 import ObjectKindUI from "./components/app/objectKindUI/ObjectKindUI";
-import GameStore from "./stores/GameStore/GameStore";
-import {GameManager} from "./GameManager"
 
 export class GameWatcher {
 
@@ -15,21 +13,9 @@ export class GameWatcher {
             CatalogStore.objectKinds.forEach(objectKind => {
                 let oldPreviewObjectId = null;
                 onPatch(objectKind, patch => {
+                    ObjectKindUI.refs.filter(ref => ref !== null).forEach(ref => ref.updatePosition());
                     try {
-                        if (patch.path === "/location/coordinates") {
-                            /**
-                             * Location changes
-                             */
-                            if (objectKind.activeObject !== null) {
-                                const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                                if (lambdaMesh) {
-                                    lambdaMesh.mesh.position = objectKind.location.toVector3();
-                                    GameWatcher.updateWatchers.forEach(watcher => watcher(null, null));
-                                }
-                            }
-                        }
-
-                        else if (patch.path.includes("activeObject") && patch.op === "replace") {
+                        if (patch.path.includes("activeObject") && patch.op === "replace") {
                             if (objectKind.oldActiveObject !== null) {
                                 const oldlambdaMesh = objectKind.objects[objectKind.oldActiveObject].getModel();
                                 if (patch.value !== null) {
@@ -42,13 +28,15 @@ export class GameWatcher {
                                 const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                 GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, null, objectKind.type));
                             }
-                        } else if (objectKind.activeObject != null && patch.path.includes("model")) {
-                            /**
-                             * New object
-                             */
-                            const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
-                            lambdaMesh.mesh.position = objectKind.location.toVector3();
-                            GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, null));
+                        } else if (objectKind.activeObject !== null && patch.path.includes("model")) {
+                            if(objectKind.objects[objectKind.activeObject].model >= 0) {
+                                /**
+                                 * New object
+                                 */
+                                const lambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
+                                lambdaMesh.mesh.position = objectKind.location.toVector3();
+                                GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, null));
+                            }
                         }
                         else if (patch.path.includes("previewObjectId")) {
                             if (patch.value !== null) {
@@ -71,13 +59,7 @@ export class GameWatcher {
                                 if (objectKind.activeObject !== null) {
                                     activeLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                 }
-                                let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === objectKind);
-                                let timer = true;
-                                if (objectKindUI.notification) {
-                                    objectKindUI.notification.changeDelayTimer(objectKind.activeObject !== null);
-                                    timer = objectKindUI.notification.restartTimer();
-                                }
-                                GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null, timer));
+                                GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null));
                                 oldPreviewObjectId = null;
                                 CameraStore.setTarget();
                             }

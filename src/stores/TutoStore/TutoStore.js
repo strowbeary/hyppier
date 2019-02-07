@@ -20,7 +20,7 @@ export default types.model("TutoStore",
                             self.showTip = true;
                         }
                     }
-                } else if (type === "actionned") {
+                } else if (type === "actioned") {
                     if (typeof self.messages[self.currentMessage] !== "undefined") {
                         if (self.messages[self.currentMessage].originTarget === origin) {
                             self.showTip = false;
@@ -41,6 +41,20 @@ export default types.model("TutoStore",
     .create({
         messages: [
             {
+                text: "Bienvenue dans ta chambre! Bon...c'est vrai qu'elle est un peu vide avec que le strict minimum",
+                expiration: 0,
+                action: "keypress",
+                originTarget: "Intro",
+                read: false
+            },
+            {
+                text: "Mais ne t'en fais pas, tu vas pouvoir l'égayer un peu, tiens essayes d'abord pour voir!",
+                expiration: 0,
+                action: "keypress",
+                originTarget: "Intro",
+                read: false
+            },
+            {
                 text: "En cliquant sur le bouton + tu peux ajouter des objets dans ta chambre",
                 expiration: 0,
                 action: "click",
@@ -48,13 +62,14 @@ export default types.model("TutoStore",
                 read: false
             },
             {
-                text: "Un nouveau modèle d'un objet est disponible, mais attention tu n'as que peu de temps pour en profiter",
+                text: "Haha tu vois c'est facile! (si seulement avoir des nouveaux meubles étaient aussi simples). " +
+                    "Dès qu'une nouveauté sort tu pourras te la procurer, mais attention, l'offre est limitée et ce que tu ne prends pas sera perdu à jamais!",
                 expiration: 0,
                 action: "click",
                 originTarget: "Notification",
                 read: false
             }, {
-                text: "Tu peut maintenant acceder au grenier",
+                text: "Tes anciens objets sont stockés dans ton grenier (rien ne se perd, rien ne se crée, tout se transforme...en carton) Tu peux cliquer sur l'échelle pour y accéder",
                 expiration: 10000,
                 action: "timer",
                 originTarget: "Attic",

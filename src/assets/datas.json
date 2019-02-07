@@ -11,7 +11,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
-          "modelUrl": "01_table.babylon",
+          "modelUrl": "Table/01_table.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
@@ -27,7 +27,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
-          "modelUrl": "02_table.babylon",
+          "modelUrl": "Table/02_table.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
@@ -43,7 +43,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
-          "modelUrl": "03_table.babylon",
+          "modelUrl": "Table/03_table.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
@@ -78,7 +78,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -103,7 +103,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -128,7 +128,7 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -143,7 +143,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis une lampe standard",
-          "modelUrl": "01_lampe.babylon",
+          "modelUrl": "Lampe/01_lampe.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
@@ -159,7 +159,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Belle lampe suspendue",
-          "modelUrl": "02_lampe.babylon",
+          "modelUrl": "Lampe/02_lampe.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
@@ -175,7 +175,7 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis une lampe design",
-          "modelUrl": "03_lampe.babylon",
+          "modelUrl": "Lampe/03_lampe.babylon",
           "infos": [
             {
               "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
@@ -185,7 +185,80 @@
           "cloneNumber": 1
         }
       ],
-      "objectTimeout": 500,
+      "objectTimeout": 5000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Transport",
+      "type": "furniture",
+      "objects": [
+        {
+          "name": "Boburo",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "Transport/01-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        },
+        {
+          "name": "Boburo",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "Transport/02-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        },
+        {
+          "name": "Boburo",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "Transport/04-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        },
+        {
+          "name": "Boburo",
+          "adUrl": "img/catalog/table/popup_placeholder.png",
+          "thumbnailUrl": "img/catalog/table/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Bureau",
+          "modelUrl": "Transport/05-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0
+        }
+      ],
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     }

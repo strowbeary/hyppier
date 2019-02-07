@@ -106,7 +106,7 @@
 ,404,400,416,412,416,415,411,403,417,419]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":424,"indexStart":0,"indexCount":2460}]
 ,"instances":[]}
-,{"name":"Location(Computer).004","id":"Location(Computer).004","position":[0.4708,0.6753,0.015],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Lampe).004","id":"Location(Lampe).004","position":[-0.5561,0.6831,0.15],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""}],
+],
 "morphTargetManagers":[],
 "cameras":[],
 "lights":[],

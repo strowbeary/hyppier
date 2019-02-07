@@ -36,6 +36,7 @@ export function createTimer(duration) {
     let startTime = 0;
     let pauseTime = 0;
     let metaElapsedTime = 0;
+    let locked = false;
 
     function onFinish(listener) {
         finishListeners.push(listener);
@@ -52,7 +53,7 @@ export function createTimer(duration) {
     }
 
     function start() {
-        if (!running && !ended) {
+        if (!running && !ended && !locked) {
             if (!ended && paused) {
                 startTime += performance.now() - pauseTime;
             } else if (!ended && !paused) {
@@ -66,13 +67,16 @@ export function createTimer(duration) {
     }
 
     function stop() {
-        cancelAnimationFrame(animationRequest);
-        pause();
-        metaElapsedTime = 0;
-        startTime = 0;
-        pauseTime = 0;
-        running = false;
-        ended = false;
+        if(!locked) {
+            cancelAnimationFrame(animationRequest);
+            pause();
+            metaElapsedTime = 0;
+            startTime = 0;
+            pauseTime = 0;
+            running = false;
+            ended = false;
+
+        }
     }
 
     function loop() {
@@ -95,7 +99,7 @@ export function createTimer(duration) {
     }
 
     function pause() {
-        if (!ended && !paused) {
+        if (!ended && !paused && !locked) {
             pauseTime = performance.now();
             paused = true;
             running = false;
@@ -112,6 +116,13 @@ export function createTimer(duration) {
         finishListeners = [];
     }
 
+    function lock() {
+        locked = true;
+    }
+
+    function unlock() {
+        locked = false;
+    }
     const timer = new Proxy({
         onFinish,
         addLoopHook,
@@ -121,7 +132,9 @@ export function createTimer(duration) {
         setDuration,
         destroy,
         onStart,
-        timerId: timers.length
+        timerId: timers.length,
+        lock,
+        unlock
     }, {
         get(target, prop) {
             if (!destroyed) {

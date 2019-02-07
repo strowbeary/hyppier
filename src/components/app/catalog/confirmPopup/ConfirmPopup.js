@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_confirmPopup.scss";
-import errorIcon from "./img/error_icon.png";
+import errorIcon from "../../../../assets/img/error_icon.png";
 
 const ConfirmPopup = observer(class ConfirmPopup extends Component {
 

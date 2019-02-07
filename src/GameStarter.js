@@ -8,6 +8,7 @@ export class GameStarter {
             "room.babylon"
         );
         return container.meshes.forEach(loadedMesh => {
+            console.log(loadedMesh.name);
             try {
                 if (loadedMesh.name.includes("Location")) {
                     const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
@@ -18,11 +19,7 @@ export class GameStarter {
                     if(objectKind) {
                         objectKind.location.setPosition(loadedMesh.position);
                     }
-                    loadedMesh.scaling = new BABYLON.Vector3(0, 0, 0);
-                } else if(loadedMesh.name.includes("Ladder-Position")) {
-                    console.log("Echeeeeeelle !!!");
-                }
-                else {
+                } else if(!loadedMesh.name.includes("Ladder-Position")) {
                     loadedMesh.receiveShadows = true;
                     console.log(loadedMesh.name);
                     loadedMesh.convertToFlatShadedMesh();

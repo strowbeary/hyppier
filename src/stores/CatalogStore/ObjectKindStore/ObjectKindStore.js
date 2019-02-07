@@ -2,7 +2,6 @@ import {types} from "mobx-state-tree";
 import LocationStore from "./LocationStore/LocationStore";
 import ObjectStore from "./ObjectStore/ObjectStore";
 import * as BABYLON from "babylonjs";
-import CatalogStore from "../CatalogStore";
 import {LambdaMesh} from "../../../components/app/GameCanvas/LambdaMesh";
 import CoordsStore from "./LocationStore/CoordsStore/CoordsStore";
 
@@ -12,12 +11,7 @@ function loadObject(objectKind) {
         objectKind.objects[objectKind.activeObject].modelUrl
     ).then((container) => {
         container.meshes.forEach(loadedMesh => {
-            if (loadedMesh.name.includes("Location")) {
-                const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
-
-                objectKind.location.addChild(locationOption, objectKind.name);
-                CatalogStore.getObjectKind(locationOption).location.setPosition(loadedMesh.position)
-            } else {
+            if (!loadedMesh.name.includes("Location")) {
                 objectKind.objects[objectKind.activeObject].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
             }
         });
@@ -32,9 +26,7 @@ function preloadNextObject(objectKind) {
         ).then((container) => {
             container.meshes.forEach(loadedMesh => {
                 if (!loadedMesh.name.includes("Location")) {
-                    if (objectKind.location) {
-                        loadedMesh.position = objectKind.location.toVector3();
-                    }
+                    loadedMesh.position = objectKind.location.toVector3();
                     objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
                 }
             });

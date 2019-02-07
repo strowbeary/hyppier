@@ -7,15 +7,13 @@ import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
 import Toast from "./toast/Toast";
-import {createTimer} from "../../utils/TimerManager";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
-import Message from "./message/Message";
 import StartScreen from "./startScreen/StartScreen";
 import AboutModal from "./aboutModal/AboutModal";
 import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
 import TutoStore from "../../stores/TutoStore/TutoStore";
-import {GameManager} from "../../GameManager";
+import Message from "./message/Message";
 
 const App = observer(class App extends Component {
 
@@ -67,9 +65,11 @@ const App = observer(class App extends Component {
         });
     }
 
-    updateReady() {
+    updateReady(sceneManager) {
+        TutoStore.reportAction("Intro", "appear");
         this.setState({
-            ready: true
+            ready: true,
+            sceneManager: sceneManager
         });
     }
 
@@ -88,7 +88,7 @@ const App = observer(class App extends Component {
                     <StartScreen launchLoading={() => {this.launchLoading()}}/>
                 }
                 {this.state.loading &&
-                    <GameCanvas onReady={() => this.updateReady()}/>
+                    <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>
                 }
                 {this.state.loading &&
                     <HypeIndicator/>
@@ -99,9 +99,9 @@ const App = observer(class App extends Component {
                         <FullScreenButton/>
                     </div>
                 }
-                {/*{this.state.message &&
-                        <Message message={this.state.message}/>
-                        }*/}
+                {TutoStore.displayTip() &&
+                    <Message message={TutoStore.getCurrentMessage()}/>
+                }
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
@@ -124,8 +124,8 @@ const App = observer(class App extends Component {
                     transitionName="grow"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}>
-                    {GameStore.clueEvent &&
-                    <ClueEvent clueEventType={GameStore.clueEvent}/>
+                    {GameStore.clueEvent && this.state.sceneManager &&
+                    <ClueEvent clueEventType={GameStore.clueEvent} sceneManager={this.state.sceneManager}/>
                     }
                 </CSSTransitionGroup>
             </div>

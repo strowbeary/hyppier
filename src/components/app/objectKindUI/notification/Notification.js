@@ -17,8 +17,10 @@ const Notification = observer(class Notification extends Component {
         this.duration = props.objectKind.objectTimeout;
         this.delayTimer = createTimer(this.duration);
         this.timer = createTimer(this.duration);
+        this.timer.lock();
         this.delayTimer.onFinish(() => {
             TutoStore.reportAction("Notification", "appear");
+            this.timer.unlock();
             this.timer.start();
             this.setState({
                 running: true
@@ -51,14 +53,14 @@ const Notification = observer(class Notification extends Component {
         if (fromValidate) {
             this.delayTimer.setDuration(this.props.objectKind.objectTimeout);
         } else {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout/2);
+            this.delayTimer.setDuration(this.props.objectKind.objectTimeout / 2);
         }
     }
 
     restartTimer() {
         this.delayTimer.stop();
         this.timer.stop();
-        return this.timer.timerId;
+        this.timer.lock();
     }
 
     openPopup() {
@@ -67,11 +69,12 @@ const Notification = observer(class Notification extends Component {
 
     buildCatalog() {
         this.timer.stop();
+        this.timer.lock();
         this.setState({
             running: false
         });
-        this.props.buildCatalog(this.timer);
-        TutoStore.reportAction("Notification", "actionned");
+        this.props.buildCatalog();
+        TutoStore.reportAction("Notification", "actioned");
     }
 
     render() {

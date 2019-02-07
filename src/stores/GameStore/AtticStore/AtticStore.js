@@ -3,7 +3,7 @@ import ParcelTypeStore from "./ParcelTypeStore/ParcelTypeStore"
 import TutoStore from "../../TutoStore/TutoStore";
 
 export default types.model("AtticStore", {
-    parcelsNumberLimit: 2,
+    parcelsNumberLimit: 1000,
     electric: ParcelTypeStore,
     furniture: ParcelTypeStore,
     atticVisible: false

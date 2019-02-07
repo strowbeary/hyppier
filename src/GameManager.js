@@ -1,37 +1,29 @@
 import GameStore from "./stores/GameStore/GameStore";
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {TimerManager} from "./utils/TimerManager";
+import CameraStore from "./stores/CameraStore/CameraStore";
+import {onPatch} from "mobx-state-tree";
 
 export class GameManager {
 
-    static GameManager;
-
     constructor(scene, atticManager) {
-        if (GameManager.GameManager) {
-            return GameManager.GameManager;
-        } else {
-            this.scene = scene;
-            GameManager.GameManager = this;
-        }
+        this.scene = scene;
         this.clueEvent = null;
         this.objectKindName = null;
         this.objectKindType = null;
-        this.timer = null;
         this.atticManager = atticManager;
-    }
-
-    pauseCatalog(countdown) {
-        TimerManager.pauseAllExcept(countdown);
-        GameStore.options.setPause(true);
-        this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
-            .forEach(animatable => animatable.pause());
-    }
-
-    playCatalog(countdown) {
-        TimerManager.startAllExcept(countdown);
-        GameStore.options.setPause(false);
-        this.scene.animatables.forEach(animatable => animatable.restart())
+        onPatch(CameraStore, (patch) => {
+            if(patch.path.includes("meshName")) {
+                if(patch.value === "Attic") {
+                    this.pauseGame();
+                    GameStore.attic.setAtticVisibility(true);
+                }
+                if(patch.value === "") {
+                    this.playGame();
+                    GameStore.attic.setAtticVisibility(false);
+                }
+            }
+        })
     }
 
     pauseGame() {
@@ -59,12 +51,8 @@ export class GameManager {
         }
         this.objectKindName = null;
 
-        if (this.timer !== null) {
-            this.playCatalog(this.timer);
-            this.timer = null;
-        } else {
-            this.playGame();
-        }
+        this.playGame();
+
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
@@ -82,12 +70,7 @@ export class GameManager {
                 GameStore.setClueEvent(this.clueEvent);
             }
         } else {
-            if (typeof this.timer !== 'boolean') {
-                this.playGame();
-            } else {
-                this.playCatalog(this.timer);
-            }
-            this.timer = null;
+            this.playGame();
             this.objectKindType = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();

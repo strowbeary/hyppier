@@ -10,6 +10,7 @@ import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {GameManager} from "../../../GameManager";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -28,15 +29,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
     }
 
-    getLambdaMesh() {
-        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1
-            && this.objectKind.activeObject !== null) {
-            return this.objectKind.objects[this.objectKind.activeObject].getModel();
-        } else {
-            return null;
-        }
-    }
-
     changePopup(object) {
         this.setState({popup: Object.assign({}, this.state.popup, object)});
     }
@@ -50,35 +42,32 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     updatePosition() {
-        if (this.isVisible()) {
             this.setState({
                 position: this.get2dPosition()
             });
-        }
-    }
-
-    getYVectorValue() {
-        if (this.getLambdaMesh()) {
-            return this.getLambdaMesh().mesh.getBoundingInfo().boundingBox.maximum.y * this.getLambdaMesh().mesh.scaling.y + 0.20
-        } else {
-            return 0;
-        }
     }
 
     get2dPosition() {
+        let y = 0;
+        let position = this.objectKind.location.toVector3();
+        if(this.objectKind.activeObject !== null) {
+            const lambdaMesh = this.objectKind.objects[this.objectKind.activeObject].getModel();
+            if (lambdaMesh) {
+                position = lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
+                    .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
+                        .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.minimumWorld)
+                        .divide(new BABYLON.Vector3(2, 2, 2))
+                    );
+            }
+        }
+
         return BABYLON.Vector3.Project(
-            this.objectKind.location.toVector3().add(
-                new BABYLON.Vector3(
-                    0,
-                    this.getYVectorValue(),
-                    0
-                )
-            ),
+            position,
             BABYLON.Matrix.Identity(),
-            this.scene.getTransformMatrix(),
-            this.scene.activeCamera.viewport.toGlobal(
-                this.scene.activeCamera.getEngine().getRenderWidth(),
-                this.scene.activeCamera.getEngine().getRenderHeight()
+            this.scene.scene.getTransformMatrix(),
+            this.scene.camera.viewport.toGlobal(
+                this.scene.camera.getEngine().getRenderWidth(),
+                this.scene.camera.getEngine().getRenderHeight()
             )
         );
     }
@@ -102,8 +91,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
     }
 
-    buildCatalog(timer) {
-        GameManager.GameManager && GameManager.GameManager.pauseCatalog(timer);
+    buildCatalog() {
+        this.scene.gameManager.pauseGame();
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
@@ -138,10 +127,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         return (
             <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
+                    this.objectKind.activeObject === null && TutoStore.currentMessage > 1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 2 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
                 }
                 <CSSTransitionGroup
@@ -151,7 +140,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 >
                     {
                         this.state.popupVisibility &&
-                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) !== -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
+                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) === -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
                     }
                 </CSSTransitionGroup>
             </div>

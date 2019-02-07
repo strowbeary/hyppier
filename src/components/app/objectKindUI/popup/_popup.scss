@@ -1,11 +1,4 @@
-$vertical-space: 15px;
-$border-radius: 15px;
-$horizontal-space: 20px;
-$yellow: #FFD832;
-$light-grey: #FAFAFA;
-
-$pointer-url: "../../../../assets/img/cursor_pointer.svg";
-$default-cursor-url: "../../../../assets/img/cursor_default.svg";
+@import "../../../../variables";
 
 .popup {
   position: fixed;
@@ -54,7 +47,7 @@ $default-cursor-url: "../../../../assets/img/cursor_default.svg";
       background: none;
 
       &:disabled {
-        cursor: url($default-cursor-url), default;
+        cursor: url($default-cursor-url-levelDown), default;
       }
     }
 
@@ -75,7 +68,7 @@ $default-cursor-url: "../../../../assets/img/cursor_default.svg";
 
       &:disabled {
         animation-duration: 0s;
-        cursor: url($default-cursor-url), default;
+        cursor: url($default-cursor-url-levelDown), default;
 
         &:hover {
           transform: scale(1);

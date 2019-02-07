@@ -1,6 +1,4 @@
-$false-black: #272727;
-$light-grey: #FAFAFA;
-$yellow: #FFD832;
+@import "../../../variables";
 
 .aboutModal {
 
@@ -26,16 +24,6 @@ $yellow: #FFD832;
       width: 100%;
       left: 0;
       right: inherit;
-    }
-  }
-
-  button {
-    svg {
-      color: $light-grey;
-
-      &:hover {
-        color: orange;
-      }
     }
   }
 
@@ -156,22 +144,4 @@ $yellow: #FFD832;
     text-align: center;
     text-shadow: 0 0 20px white;
   }
-}
-
-.grow-enter {
-  transform: scale(0);
-}
-
-.grow-enter.grow-enter-active {
-  transform: scale(1);
-  transition: transform 300ms ease-in-out;
-}
-
-.grow-leave {
-  transform: scale(1);
-}
-
-.grow-leave.grow-leave-active {
-  transform: scale(0);
-  transition: transform 300ms ease-in-out;
 }
