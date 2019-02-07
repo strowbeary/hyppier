@@ -26,20 +26,6 @@ export class GameManager {
         })
     }
 
-    pauseCatalog(countdown) {
-        TimerManager.pauseAllExcept(countdown);
-        GameStore.options.setPause(true);
-        this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
-            .forEach(animatable => animatable.pause());
-    }
-
-    playCatalog(countdown) {
-        TimerManager.startAllExcept(countdown);
-        GameStore.options.setPause(false);
-        this.scene.animatables.forEach(animatable => animatable.restart())
-    }
-
     pauseGame() {
         TimerManager.pauseAll();
         GameStore.options.setPause(true);
@@ -65,12 +51,8 @@ export class GameManager {
         }
         this.objectKindName = null;
 
-        if (this.timer !== null) {
-            this.playCatalog(this.timer);
-            this.timer = null;
-        } else {
-            this.playGame();
-        }
+        this.playGame();
+
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
         }
@@ -88,11 +70,7 @@ export class GameManager {
                 GameStore.setClueEvent(this.clueEvent);
             }
         } else {
-            if (typeof this.timer !== 'boolean') {
-                this.playGame();
-            } else {
-                this.playCatalog(this.timer);
-            }
+            this.playGame();
             this.objectKindType = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();

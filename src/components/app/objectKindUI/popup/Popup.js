@@ -34,7 +34,7 @@ const Popup = observer(class Popup extends Component {
             }
         });
         this.props.changeCurrentState({
-            focus: Popup.refs.length < 2,
+            focus: Popup.refs.length === 0,
             hovered: false
         });
     }

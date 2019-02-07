@@ -95,8 +95,8 @@ export class SceneManager {
         GameStarter.init(this.scene)
             .then(() => {
                 GameWatcher
-                    .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                        if (objectKindType !== null) {
+                    .onUpdate((newMesh, oldMesh, objectKindType) => {
+                        if (objectKindType) {
                             if (oldMesh !== null) {
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
@@ -109,12 +109,7 @@ export class SceneManager {
                                 } else {
                                     this.gameManager.objectKindType = objectKindType;
                                     this.gameManager.objectKindName = oldMesh.objectKindName;
-                                    this.gameManager.timer = timer;
                                 }
-                            } else if (newMesh !== null) {
-                                this.gameManager.objectKindType = objectKindType;
-                                this.gameManager.objectKindName = newMesh.objectKindName;
-                                this.gameManager.timer = timer;
                             }
                         }
                         this.meshManager.patch(newMesh, oldMesh);

@@ -9,6 +9,8 @@ import EmptySpace from "./emptySpace/EmptySpace";
 import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
+import {GameManager} from "../../../GameManager";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -89,8 +91,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
     }
 
-    buildCatalog(timer) {
-        this.scene.gameManager.pauseCatalog(timer);
+    buildCatalog() {
+        this.scene.gameManager.pauseGame();
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
@@ -125,10 +127,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         return (
             <div className={`objectKindUI ${hide}`} style={style}>
                 {
-                    this.objectKind.activeObject === null && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
+                    this.objectKind.activeObject === null && TutoStore.currentMessage > 1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 2 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
                 }
                 <CSSTransitionGroup
@@ -138,7 +140,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 >
                     {
                         this.state.popupVisibility &&
-                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) !== -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
+                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) === -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
                     }
                 </CSSTransitionGroup>
             </div>

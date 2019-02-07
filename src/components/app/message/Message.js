@@ -4,6 +4,7 @@ import "./_message.scss";
 import {TimerManager} from "../../../utils/TimerManager";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import * as GameManager from "../../../GameManager";
+import SpaceBar from "../spacebar/Spacebar";
 
 const Message = observer(class Message extends Component {
 
@@ -15,14 +16,17 @@ const Message = observer(class Message extends Component {
 
     componentDidMount() {
         this.typeWriter();
-        if(this.message.action === "timer") {
+    }
+    componentWillUnmount() {
+    }
 
+    onTypingEnd() {
+        this.setState({typingEnd: true});
+        if(this.message.action === "timer") {
             setTimeout(() => {
                 TutoStore.hideTip();
             }, this.message.expiration);
         }
-    }
-    componentWillUnmount() {
     }
 
     typeWriter(i = 0) {
@@ -32,17 +36,35 @@ const Message = observer(class Message extends Component {
             i++;
             setTimeout(() => {this.typeWriter(i)}, 35);
         } else {
-            this.setState({typingEnd: true});
+            this.onTypingEnd();
         }
     }
 
+    onSpaceUp() {
+        TutoStore.reportAction("Intro", "actioned");
+        setTimeout(() => {
+            if (TutoStore.currentMessage === 0) {
+                TutoStore.reportAction("Intro", "appear");
+            } else {
+                TutoStore.reportAction("EmptySpace", "appear");
+            }
+        }, 500);
+    }
+
     render() {
-        let arrow = this.state.typingEnd ? 'arrow' : '';
+        let arrow = this.state.typingEnd? (this.message.action === "keypress"? 'arrow' : 'end') : '';
 
         return (
-            <div className="message">
-                <p className={arrow}>{this.state.message}</p>
-            </div>
+            <React.Fragment>
+                <div className="message">
+                    <p className={`message__typing ${arrow}`}>{this.state.message}</p>
+                    <p className={"message__placeholder"}>{this.message.text}</p>
+                </div>
+                {
+                    this.state.typingEnd && this.message.action === "keypress" &&
+                        <SpaceBar onSpaceUp={() => this.onSpaceUp()}/>
+                }
+            </React.Fragment>
         )
     }
 });

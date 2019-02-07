@@ -59,10 +59,6 @@ export class GameWatcher {
                                 if (objectKind.activeObject !== null) {
                                     activeLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                 }
-                                let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === objectKind);
-                                if (objectKindUI.notification) {
-                                    objectKindUI.notification.changeDelayTimer(objectKind.activeObject !== null);
-                                }
                                 GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null));
                                 oldPreviewObjectId = null;
                                 CameraStore.setTarget();

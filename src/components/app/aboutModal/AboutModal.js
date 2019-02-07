@@ -2,8 +2,8 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_aboutModal.scss";
 import {CSSTransitionGroup} from "react-transition-group";
-import cciparis from "./img/logo-cciparis.png";
-import gobelins from "./img/logo-gobelins.png";
+import cciparis from "../../../assets/img/logo-cciparis.png";
+import gobelins from "../../../assets/img/logo-gobelins.png";
 import SvgButton from "../svgButton/SvgButton";
 
 const AboutModal = observer(class AboutModal extends Component {
@@ -28,7 +28,7 @@ const AboutModal = observer(class AboutModal extends Component {
 
     render() {
         return (
-            <div className="aboutModal">
+            <React.Fragment>
                 <button className={"aboutModal__openButton"} onClick={() => this.openModal()}>
                     About Hyppier!
                 </button>
@@ -136,7 +136,7 @@ const AboutModal = observer(class AboutModal extends Component {
                     </div>
                     }
                 </CSSTransitionGroup>
-            </div>
+            </React.Fragment>
         )
     }
 });

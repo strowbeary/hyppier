@@ -1,22 +1,4 @@
-$yellow: #FFE07D;
 
-@keyframes scale {
-  0% {
-    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
-  }
-  25% {
-    transform: scaleX(1) scaleY(1) rotate(0);
-  }
-  50% {
-    transform: scaleX(1.5) scaleY(0.75) rotate(30deg);
-  }
-  75% {
-    transform: scaleX(1) scaleY(1) rotate(0);
-  }
-  100% {
-    transform: scaleX(1.5) scaleY(0.5) rotate(-30deg);
-  }
-}
 
 .gameIndicator {
   position: fixed;
@@ -30,6 +12,9 @@ $yellow: #FFE07D;
 
   &__wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__word {
@@ -45,27 +30,25 @@ $yellow: #FFE07D;
   &__hypeLevel {
     display: block;
     width: 75px;
-    height: 250px;
+    height: 300px;
     border-radius: 50px;
     background-color: white;
-    background-image: url("./img/wave.svg");
+    background-image: url("../../../assets/img/wave.svg");
     background-repeat: repeat-x;
     background-size: auto 100%;
     animation: animate 1s linear infinite alternate;
     transition: all 1s linear;
-    border: solid 3px white;
+    border: solid 7px white;
+    margin-bottom: -100px;
   }
 }
 
 .pipo {
-  position: absolute;
-  left: -88px;
-  bottom: -128px;
-  width: 256px;
-  height: 256px;
-  transform: scale(0.5);
+  width: 128px;
+  height: 128px;
   transition: scale 1s ease-in;
-  background: url('./img/Pipo-Idle.png') left center;
+  background: url('../../../assets/img/Pipo-Idle.png') left top no-repeat;
+  background-size: (2560px/2) (3072px/2);
   animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
 
   &.happy {
@@ -77,44 +60,46 @@ $yellow: #FFE07D;
   }
 
   &.yes {
-    background: url('./img/Pipo-Yes.png') left center;
-    transform: scale(0.65);
+    background: url('../../../assets/img/Pipo-Yes.png') left center;
+    background-size: (2048px/2) (1792px/2);
+    transform: scale(1.15);
     animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
 
   }
 
   &.no {
-    background: url('./img/Pipo-No.png') left center;
-    transform: scale(0.65);
+    background: url('../../../assets/img/Pipo-No.png') left center;
+    background-size: (2048px/2);
+    transform: scale(1.15);
     animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
   }
 }
 
 @keyframes playXYes {
   from {background-position-x: 0;}
-  to {background-position-x: -2048px;}
+  to {background-position-x: -(2048px/2);}
 }
 @keyframes playYYEs {
   from {background-position-y: 0;}
-  to {background-position-y: -1792px;}
+  to {background-position-y: -(1792px/2);}
 }
 
 @keyframes playXNo {
   from {background-position-x: 0;}
-  to {background-position-x: -2048px;}
+  to {background-position-x: -(2048px/2);}
 }
 @keyframes playYNo {
-  from {background-position-y: -512px;}
-  to {background-position-y: -2048px;}
+  from {background-position-y: -(512px/2);}
+  to {background-position-y: -(2048px/2);}
 }
 
 @keyframes playX {
   from {background-position-x: 0;}
-  to {background-position-x: -2560px;}
+  to {background-position-x: -(2560px/2);}
 }
 @keyframes playY {
   from {background-position-y: 0;}
-  to {background-position-y: -3072px;}
+  to {background-position-y: -(3072px/2);}
 }
 
 @keyframes animate {

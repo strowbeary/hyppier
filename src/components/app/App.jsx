@@ -64,6 +64,7 @@ const App = observer(class App extends Component {
     }
 
     updateReady(sceneManager) {
+        TutoStore.reportAction("Intro", "appear");
         this.setState({
             ready: true,
             sceneManager: sceneManager
@@ -96,9 +97,9 @@ const App = observer(class App extends Component {
                         <FullScreenButton/>
                     </div>
                 }
-                {/*{this.state.message &&
-                        <Message message={this.state.message}/>
-                        }*/}
+                {TutoStore.displayTip() &&
+                    <Message message={TutoStore.getCurrentMessage()}/>
+                }
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}

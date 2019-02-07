@@ -17,7 +17,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3rem;
     font-weight: 200;
-    animation: toto 1s linear infinite;
+    animation: space-translate 1s linear infinite;
 
     &:before {
       content: "";
@@ -28,13 +28,13 @@
       bottom: -10px;
       border: solid 2px white;
       border-radius: 27px;
-      animation: tata 1s linear infinite;
+      animation: space-bottom 1s linear infinite;
 
     }
   }
 }
 
-@keyframes toto {
+@keyframes space-translate {
   0% {
     transform: translateY(0);
   }
@@ -46,7 +46,7 @@
   }
 }
 
-@keyframes tata {
+@keyframes space-bottom {
   0% {
     bottom: -10px;
   }

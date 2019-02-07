@@ -3,13 +3,23 @@
   background-color: white;
   border-radius: 15px;
   padding: 20px 15px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   left: 10vw;
   top: 10vh;
-  max-width: 275px;
+  max-width: 30vw;
 
-  p {
+  &__placeholder {
+    visibility: hidden;
+    line-height: 2rem;
+  }
+
+  &__typing {
     margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 15px;
+    line-height: 2rem;
 
     &:after {
       content: " ";
@@ -19,18 +29,21 @@
       background-color: orange;
     }
 
+    &.end {
+      &:after {
+        display: none;
+      }
+    }
+
     &.arrow {
       &:after {
         position: absolute;
+        content: url('../../../assets/img/message-arrow.svg');
         display: block;
-        background-color: transparent;
-        bottom: 20px;
-        right: 15px;
+        bottom: 26px;
+        right: 24px;
         width: 0;
         height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid orange;
         animation: up-down 500ms infinite alternate;
       }
     }

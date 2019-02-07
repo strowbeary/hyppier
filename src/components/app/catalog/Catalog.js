@@ -5,6 +5,8 @@ import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
+import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -32,6 +34,11 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     closeCatalog() {
+        let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === this.objectKind);
+        if (objectKindUI.notification) {
+            objectKindUI.notification.changeDelayTimer(true);
+            objectKindUI.notification.restartTimer();
+        }
         this.isClosing = true;
         CatalogStore.closeCatalog();
         this.objectKind.location.removePreviewObject();
@@ -62,6 +69,9 @@ const Catalog = observer(class Catalog extends Component {
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
         GameStore.hype.setLevelByDiff(0.1);
         GameStore.setPipo("happy");
+        if (TutoStore.currentMessage === 2) {
+            TutoStore.reportAction("Notification", "appear");
+        }
         this.closeCatalog(true);
     }
 
