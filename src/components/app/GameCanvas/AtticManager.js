@@ -17,6 +17,12 @@ export class AtticManager {
     }
 
     launchLadderFall() {
+        let spriteManagerDust = new BABYLON.SpriteManager("treesManager", "/img/Pipo-Idle.png", 1, 256, this.scene);
+        spriteManagerDust.renderingGroupId = 1;
+        let dust = new BABYLON.Sprite("dust", spriteManagerDust);
+        dust.position = new BABYLON.Vector3(this.ladder.position.x, this.originalPosition, this.ladder.position.z);
+        dust.playAnimation(0, 100, false, 5);
+        dust.disposeWhenFinishedAnimating = true;
         this.ladder.unfreezeWorldMatrix();
         BABYLON.Animation.CreateAndStartAnimation('ladderFall', this.ladder, 'position.y', 30, 30, 10, this.originalPosition, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     }
