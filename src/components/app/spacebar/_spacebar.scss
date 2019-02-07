@@ -34,7 +34,7 @@
   }
 }
 
-@keyframes space-tranform {
+@keyframes space-translate {
   0% {
     transform: translateY(0);
   }
@@ -46,7 +46,7 @@
   }
 }
 
-@keyframes space-translate {
+@keyframes space-bottom {
   0% {
     bottom: -10px;
   }
