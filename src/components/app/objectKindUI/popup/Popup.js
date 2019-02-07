@@ -4,6 +4,7 @@ import "./_popup.scss";
 import CameraStore from "../../../../stores/CameraStore/CameraStore";
 import CatalogStore from "../../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../../stores/GameStore/GameStore";
+import TutoStore from "../../../../stores/TutoStore/TutoStore";
 
 const Popup = observer(class Popup extends Component {
 
@@ -84,6 +85,7 @@ const Popup = observer(class Popup extends Component {
     }
 
     onClose() {
+        TutoStore.reportAction("Notification", "actioned");
         if (this.state.focus) {
             Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
             if (Popup.refs.length > 0) {
@@ -100,6 +102,7 @@ const Popup = observer(class Popup extends Component {
     }
 
     onCatalog() {
+        TutoStore.reportAction("Notification", "actioned");
         if (this.state.focus) {
             Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
             if (Popup.refs.length > 0) {

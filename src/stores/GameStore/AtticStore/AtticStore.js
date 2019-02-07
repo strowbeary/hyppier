@@ -1,6 +1,5 @@
 import {types} from "mobx-state-tree";
-import ParcelTypeStore from "./ParcelTypeStore/ParcelTypeStore"
-import TutoStore from "../../TutoStore/TutoStore";
+import ParcelTypeStore from "./ParcelTypeStore/ParcelTypeStore";
 
 export default types.model("AtticStore", {
     parcelsNumberLimit: 1000,
@@ -10,7 +9,6 @@ export default types.model("AtticStore", {
 }).actions(self =>
     ({
         incrementParcelsNumberOf(objectKindType) {
-            TutoStore.reportAction("Attic", "appear");
             self[objectKindType].incrementParcelsNumber();
         },
         setAtticVisibility(value) {

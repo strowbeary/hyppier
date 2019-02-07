@@ -22,8 +22,10 @@ export default types.model("TutoStore",
                     }
                 } else if (type === "actioned") {
                     if (typeof self.messages[self.currentMessage] !== "undefined") {
+                        console.log(self.messages[self.currentMessage].originTarget, origin);
                         if (self.messages[self.currentMessage].originTarget === origin) {
                             self.showTip = false;
+                            console.log(self.showTip);
                         }
                     }
                 }
@@ -68,7 +70,8 @@ export default types.model("TutoStore",
                 action: "click",
                 originTarget: "Notification",
                 read: false
-            }, {
+            },
+            {
                 text: "Tes anciens objets sont stockés dans ton grenier (rien ne se perd, rien ne se crée, tout se transforme...en carton) Tu peux cliquer sur l'échelle pour y accéder",
                 expiration: 10000,
                 action: "timer",

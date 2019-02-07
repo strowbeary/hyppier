@@ -111,6 +111,9 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         }
 
         let zIndex = 0;
+        if (this.state.popupVisibility) {
+            zIndex++;
+        }
         if (this.state.popup.focus) {
             zIndex++;
         }

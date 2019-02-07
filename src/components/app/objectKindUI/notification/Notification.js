@@ -19,7 +19,6 @@ const Notification = observer(class Notification extends Component {
         this.timer = createTimer(this.duration);
         this.timer.lock();
         this.delayTimer.onFinish(() => {
-            TutoStore.reportAction("Notification", "appear");
             this.timer.unlock();
             this.timer.start();
             this.setState({
@@ -40,6 +39,7 @@ const Notification = observer(class Notification extends Component {
             this.openPopup();
         });
         if (!GameStore.options.isPaused) {
+            this.delayTimer.setDuration(Math.round(this.duration / (Math.random() + 1)));
             this.delayTimer.start();
         }
     }
@@ -51,9 +51,9 @@ const Notification = observer(class Notification extends Component {
 
     changeDelayTimer(fromValidate) {
         if (fromValidate) {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout);
+            this.delayTimer.setDuration(this.duration);
         } else {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout / 2);
+            this.delayTimer.setDuration(this.duration / 2);
         }
     }
 
