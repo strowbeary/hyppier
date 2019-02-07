@@ -16,7 +16,7 @@ export default observer(class GameCanvas extends React.Component {
     componentDidMount() {
         window.addEventListener('resize', () => this.onResize());
         this.sceneManager = new SceneManager(this.canvas, () => {
-            this.props.onReady();
+            this.props.onReady(this.sceneManager);
             this.setState({
                 ready: true
             });

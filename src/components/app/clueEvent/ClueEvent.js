@@ -8,14 +8,15 @@ const ClueEvent = observer(class ClueEvent extends Component {
 
     constructor(props) {
         super(props);
+        this.sceneManager = props.sceneManager;
     }
 
     closeClueEvent() {
-        GameManager.GameManager.playAfterClueEvent();
+        this.sceneManager.gameManager.playAfterClueEvent();
     }
 
     componentWillUnmount() {
-        GameManager.GameManager.playAfterClueEventClosed()
+        this.sceneManager.gameManager.playAfterClueEventClosed()
     }
 
     render() {

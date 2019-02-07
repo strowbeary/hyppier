@@ -1,10 +1,7 @@
 import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
-import {GameManager} from "../../../GameManager";
-import GameStore from "../../../stores/GameStore/GameStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {onPatch} from "mobx-state-tree";
-import {showAxis} from "../utils/Axis";
 
 const EasingFunctions = {
     // no easing, no acceleration
@@ -118,6 +115,7 @@ export class CameraManager {
     }
 
     setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
+        console.log(mesh);
         let toDistance = this.initialValues.distance;
         let toPosition = BABYLON.Vector3.Zero();
         if (typeof mesh !== "undefined" && mesh !== "") {
@@ -125,7 +123,9 @@ export class CameraManager {
                 mesh = this.scene.getMeshByName(mesh);
             }
             toDistance = (mesh.getBoundingInfo().boundingBox.maximumWorld
-                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld).asArray().reduce((p, c) => p + c) / 3) + 1;
+                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld)
+                .asArray()
+                .reduce((p, c) => p + c) / 3) + 1;
             console.log(toDistance);
             toPosition = mesh.getBoundingInfo().boundingBox.maximumWorld
                 .subtract(mesh.getBoundingInfo().boundingBox.maximumWorld
@@ -135,7 +135,7 @@ export class CameraManager {
             toPosition.addInPlace(CameraManager.CATALOG_OFFSET);
         }
 
-
+        this.distance = Math.round(this.distance);
         let fromPosition = this.camera.target;
         if (this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
@@ -153,9 +153,7 @@ export class CameraManager {
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
-                console.log("FINISED");
                 if (typeof mesh === "undefined" || mesh === "") {
-                    console.log("Back to room");
                     transitionFinishListener.forEach(listener => listener());
                 }
             }
