@@ -3,9 +3,9 @@ import React, {Component} from "react";
 import "./_startScreen.scss";
 import SpaceBar from "../spacebar/Spacebar";
 
-import sound_catEars from "./img/sound_catEars.png"
-import sound_headset from "./img/sound_headset.png"
-import sound_iPod from "./img/sound_iPod.png"
+import sound_catEars from "../../../assets/img/sound_catEars.png"
+import sound_headset from "../../../assets/img/sound_headset.png"
+import sound_iPod from "../../../assets/img/sound_iPod.png"
 
 const StartScreen = observer(class StartScreen extends Component {
 

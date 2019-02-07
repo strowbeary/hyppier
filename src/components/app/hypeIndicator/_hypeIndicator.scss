@@ -51,7 +51,7 @@ $yellow: #FFE07D;
     height: 300px;
     border-radius: 50px;
     background-color: white;
-    background-image: url("./img/wave.svg");
+    background-image: url("../../../assets/img/wave.svg");
     background-repeat: repeat-x;
     background-size: auto 100%;
     animation: animate 1s linear infinite alternate;
@@ -65,7 +65,7 @@ $yellow: #FFE07D;
   width: 128px;
   height: 128px;
   transition: scale 1s ease-in;
-  background: url('./img/Pipo-Idle.png') left top no-repeat;
+  background: url('../../../assets/img/Pipo-Idle.png') left top no-repeat;
   background-size: (2560px/2) (3072px/2);
   animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
 
@@ -78,7 +78,7 @@ $yellow: #FFE07D;
   }
 
   &.yes {
-    background: url('./img/Pipo-Yes.png') left center;
+    background: url('../../../assets/img/Pipo-Yes.png') left center;
     background-size: (2048px/2) (1792px/2);
     transform: scale(1.15);
     animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
@@ -86,7 +86,7 @@ $yellow: #FFE07D;
   }
 
   &.no {
-    background: url('./img/Pipo-No.png') left center;
+    background: url('../../../assets/img/Pipo-No.png') left center;
     background-size: (2048px/2);
     transform: scale(1.15);
     animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
