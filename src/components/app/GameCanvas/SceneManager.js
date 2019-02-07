@@ -48,7 +48,7 @@ export class SceneManager {
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
         defaultPipeline.grainEnabled = true;
-        defaultPipeline.grain.intensity = 30;
+        defaultPipeline.grain.intensity = 15 * SceneManager.DEVICE_PIXEL_RATIO;
         defaultPipeline.imageProcessingEnabled = true;
 
         const ssaoRatio = {
@@ -64,7 +64,7 @@ export class SceneManager {
         ssao.base = 0;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-        const ambient = 0.9;
+        const ambient = 0.85;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
         this.scene.blockMaterialDirtyMechanism = true;
         this.scene.useGeometryIdsMap = true;
