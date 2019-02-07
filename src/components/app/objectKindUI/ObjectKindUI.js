@@ -151,7 +151,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 >
                     {
                         this.state.popupVisibility &&
-                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) !== -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
+                        <Popup ref={(ref) => (Popup.refs.indexOf(ref) === -1) && Popup.refs.push(ref)} index={this.objectKindIndex} position={{x, y}} closePopup={() => this.closePopup()} currentState={this.state.popup} changeCurrentState={(state) => {this.changePopup(state)}}/>
                     }
                 </CSSTransitionGroup>
             </div>
