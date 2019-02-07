@@ -125,7 +125,7 @@ export class CameraManager {
                 mesh = this.scene.getMeshByName(mesh);
             }
             toDistance = (mesh.getBoundingInfo().boundingBox.maximumWorld
-                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld).asArray().reduce((p, c) => p + c) / 3) + 0.5;
+                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld).asArray().reduce((p, c) => p + c) / 3) + 1;
             console.log(toDistance);
             toPosition = mesh.getBoundingInfo().boundingBox.maximumWorld
                 .subtract(mesh.getBoundingInfo().boundingBox.maximumWorld
@@ -140,16 +140,14 @@ export class CameraManager {
         if (this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
         }
-        const fromDistance = this.distance;
-        let i = 0;
-        let step = 1 / 60;
         const animation = () => {
-            let t = EasingFunctions.easeInOutQuint(i);
-            this.distance = (1 - t) * fromDistance + t * toDistance;
-            this.camera.target.x = (1 - t) * fromPosition.x + t * toPosition.x;
-            this.camera.target.y = (1 - t) * fromPosition.y + t * toPosition.y;
-            this.camera.target.z = (1 - t) * fromPosition.z + t * toPosition.z;
-            if (i <= 1) {
+            this.distance = this.distance + 0.2 * (toDistance - this.distance);
+            this.camera.target.x = fromPosition.x + 0.2 * (toPosition.x - fromPosition.x);
+            this.camera.target.y = fromPosition.y + 0.2 * (toPosition.y - fromPosition.y);
+            this.camera.target.z = fromPosition.z + 0.2 * (toPosition.z - fromPosition.z);
+            if (Math.abs(this.distance - toDistance).toFixed(3) > 0 ||
+                BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
+            ) {
                 this.updateCamera();
                 this.animationRequest = requestAnimationFrame(animation)
             } else {
@@ -161,7 +159,6 @@ export class CameraManager {
                     transitionFinishListener.forEach(listener => listener());
                 }
             }
-            i += step;
         };
         this.animationRequest = requestAnimationFrame(animation);
 

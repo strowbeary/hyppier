@@ -27,14 +27,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
     }
 
-    getLambdaMesh() {
-        if (this.objectKind.model) {
-            return this.objectKind.objects[this.objectKind.activeObject].getModel();
-        } else {
-            return null;
-        }
-    }
-
     changePopup(object) {
         this.setState({popup: Object.assign({}, this.state.popup, object)});
     }
@@ -48,30 +40,27 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     updatePosition() {
-        if (this.isVisible()) {
             this.setState({
                 position: this.get2dPosition()
             });
-        }
     }
 
     get2dPosition() {
         let y = 0;
-        if(this.objectKind.model) {
+        let position = this.objectKind.location.toVector3();
+        if(this.objectKind.activeObject !== null) {
             const lambdaMesh = this.objectKind.objects[this.objectKind.activeObject].getModel();
             if (lambdaMesh) {
-                y = lambdaMesh.mesh.getBoundingInfo().boundingBox.maximum.y * lambdaMesh.mesh.scaling.y + 0.20
+                position = lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
+                    .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
+                        .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.minimumWorld)
+                        .divide(new BABYLON.Vector3(2, 2, 2))
+                    );
             }
         }
 
         return BABYLON.Vector3.Project(
-            this.objectKind.location.toVector3().add(
-                new BABYLON.Vector3(
-                    0,
-                    y,
-                    0
-                )
-            ),
+            position,
             BABYLON.Matrix.Identity(),
             this.scene.scene.getTransformMatrix(),
             this.scene.camera.viewport.toGlobal(

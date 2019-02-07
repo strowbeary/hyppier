@@ -8,6 +8,7 @@ export class GameStarter {
             "room.babylon"
         );
         return container.meshes.forEach(loadedMesh => {
+            console.log(loadedMesh.name);
             try {
                 if (loadedMesh.name.includes("Location")) {
                     const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
