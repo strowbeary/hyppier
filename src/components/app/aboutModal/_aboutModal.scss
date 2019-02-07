@@ -27,16 +27,6 @@
     }
   }
 
-  button {
-    svg {
-      color: $light-grey;
-
-      &:hover {
-        color: orange;
-      }
-    }
-  }
-
   &__closeButton {
     position: absolute;
     top: 2rem;

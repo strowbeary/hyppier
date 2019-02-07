@@ -28,7 +28,7 @@ const AboutModal = observer(class AboutModal extends Component {
 
     render() {
         return (
-            <div className="aboutModal">
+            <React.Fragment>
                 <button className={"aboutModal__openButton"} onClick={() => this.openModal()}>
                     About Hyppier!
                 </button>
@@ -136,7 +136,7 @@ const AboutModal = observer(class AboutModal extends Component {
                     </div>
                     }
                 </CSSTransitionGroup>
-            </div>
+            </React.Fragment>
         )
     }
 });

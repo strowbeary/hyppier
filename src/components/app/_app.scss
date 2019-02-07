@@ -2,13 +2,13 @@
 
 @keyframes Gradient {
   0% {
-    background-position: 100% 0%;
+    background-position: 100% 0;
   }
   50% {
-    background-position: 0% 100%;
+    background-position: 0 100%;
   }
   100% {
-    background-position: 100% 0%;
+    background-position: 100% 0;
   }
 }
 
@@ -129,6 +129,20 @@ button, a {
   right: 2rem;
   display: flex;
   align-items: center;
+  z-index: 1;
+
+  button {
+    background: none;
+    border: none;
+
+    svg {
+      color: $light-grey;
+
+      &:hover {
+        color: orange;
+      }
+    }
+  }
 
   * {
     margin-left: 0.5rem;
