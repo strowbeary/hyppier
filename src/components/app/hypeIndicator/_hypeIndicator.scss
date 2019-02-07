@@ -87,7 +87,7 @@ $yellow: #FFE07D;
 
   &.no {
     background: url('./img/Pipo-No.png') left center;
-    background-size: (2048px/2) (512px/2);
+    background-size: (2048px/2);
     transform: scale(1.15);
     animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
   }
