@@ -1,5 +1,4 @@
 
-
 .gameIndicator {
   position: fixed;
   top: 0;
@@ -27,23 +26,27 @@
     animation: scale 4s infinite;
   }
 
-  &__hypeLevel {
-    display: block;
+  .jauge {
+    position: relative;
+    border: 7px solid white;
+    background: white;
     width: 75px;
     height: 300px;
-    border-radius: 50px;
-    background-color: white;
-    background-image: url("../../../assets/img/wave.svg");
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-    animation: animate 1s linear infinite alternate;
-    transition: all 1s linear;
-    border: solid 7px white;
-    margin-bottom: -100px;
+    border-radius: 50px 50px 0 0;
+    overflow: hidden;
+    margin-bottom: -55px;
+
+    svg {
+      position: absolute;
+      margin-top: -40px;
+      width: 100%;
+      transition: top 0.5s;
+    }
   }
 }
 
 .pipo {
+  z-index: 10;
   width: 128px;
   height: 128px;
   transition: scale 1s ease-in;
@@ -76,30 +79,57 @@
 }
 
 @keyframes playXYes {
-  from {background-position-x: 0;}
-  to {background-position-x: -(2048px/2);}
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(2048px/2);
+  }
 }
+
 @keyframes playYYEs {
-  from {background-position-y: 0;}
-  to {background-position-y: -(1792px/2);}
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(1792px/2);
+  }
 }
 
 @keyframes playXNo {
-  from {background-position-x: 0;}
-  to {background-position-x: -(2048px/2);}
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(2048px/2);
+  }
 }
+
 @keyframes playYNo {
-  from {background-position-y: -(512px/2);}
-  to {background-position-y: -(2048px/2);}
+  from {
+    background-position-y: -(512px/2);
+  }
+  to {
+    background-position-y: -(2048px/2);
+  }
 }
 
 @keyframes playX {
-  from {background-position-x: 0;}
-  to {background-position-x: -(2560px/2);}
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(2560px/2);
+  }
 }
+
 @keyframes playY {
-  from {background-position-y: 0;}
-  to {background-position-y: -(3072px/2);}
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(3072px/2);
+  }
 }
 
 @keyframes animate {
