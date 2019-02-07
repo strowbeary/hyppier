@@ -112,7 +112,7 @@ export class SceneManager {
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 if (!CatalogStore.isOpen) {
                                     TutoStore.reportAction("Attic", "appear");
-                                    if (TutoStore.currentMessage === 4) {
+                                    if (TutoStore.currentMessage === 4 && !TutoStore.end) {
                                         this.gameManager.pauseGame();
                                     } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
                                         this.gameManager.clueEvent = objectKindType;

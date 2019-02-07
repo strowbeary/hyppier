@@ -6,13 +6,15 @@ import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import Message from "../message/Message";
+import AboutModal from "../aboutModal/AboutModal";
+import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
     scene = null;
 
     state = {
-        ready: false
+        ready: false,
     };
 
     componentDidMount() {
@@ -76,7 +78,15 @@ export default observer(class GameCanvas extends React.Component {
                 })()}
                 {TutoStore.displayTip() &&
                 <Message message={TutoStore.getCurrentMessage()}
-                         launchLadderFall={() => {this.launchLadderFall()}}/>
+                         launchLadderFall={() => {
+                             this.launchLadderFall()
+                         }}/>
+                }
+                {this.state.ready &&
+                    <div className={"game__footer"}>
+                        <AboutModal gameManager={this.sceneManager.gameManager}/>
+                        <FullScreenButton/>
+                    </div>
                 }
             </React.Fragment>
         );

@@ -1,8 +1,12 @@
 import GameStore from "../stores/GameStore/GameStore";
 
 const timers = [];
+let timerException;
 
 export const TimerManager = {
+    setTimerException(timerId) {
+        timerException = timerId;
+    },
     stopAll() {
         timers.forEach(timer => {timer && timer.stop && timer.stop()});
     },
@@ -12,14 +16,9 @@ export const TimerManager = {
     pauseAll() {
         timers.forEach(timer => {timer && timer.pause && timer.pause()});
     },
-    pauseAllExcept(timerId) {
+    pauseAllExcept() {
         timers.forEach((timer, id) => {
-            if (id !== timerId && timer && timer.stop) timer.stop()
-        });
-    },
-    startAllExcept(timerId) {
-        timers.forEach((timer, id) => {
-            if (id !== timerId && timer && timer.start) timer.start()
+            if (id !== timerException && timer && timer.stop) timer.stop()
         });
     }
 };

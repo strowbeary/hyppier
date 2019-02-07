@@ -25,6 +25,14 @@ export class GameManager {
         });
     }
 
+    pauseCatalog() {
+        TimerManager.pauseAllExcept();
+        GameStore.options.setPause(true);
+        this.scene.animatables
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .forEach(animatable => animatable.pause())
+    }
+
     pauseGame() {
         TimerManager.pauseAll();
         GameStore.options.setPause(true);

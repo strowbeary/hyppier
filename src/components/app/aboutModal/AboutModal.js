@@ -12,15 +12,18 @@ const AboutModal = observer(class AboutModal extends Component {
 
     constructor(props) {
         super(props);
+        this.gameManager = props.gameManager;
     }
 
     openModal() {
+        this.gameManager.pauseGame();
         this.setState({
             isOpen: true
         })
     }
 
     closeModal() {
+        this.gameManager.playGame();
         this.setState({
             isOpen: false
         })
