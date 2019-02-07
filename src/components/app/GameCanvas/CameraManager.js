@@ -114,8 +114,7 @@ export class CameraManager {
         transitionFinishListener.push(listener);
     }
 
-    setTarget(mesh, offset = new BABYLON.Vector3(0, 0, 0)) {
-        console.log(mesh);
+    setTarget(mesh) {
         let toDistance = this.initialValues.distance;
         let toPosition = BABYLON.Vector3.Zero();
         if (typeof mesh !== "undefined" && mesh !== "") {
