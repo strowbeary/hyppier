@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_confirmPopup.scss";
-import errorIcon from "../../../../assets/img/error_icon.png";
+import errorSvg from "../../../../assets/img/error.svg";
 
 const ConfirmPopup = observer(class ConfirmPopup extends Component {
 
@@ -31,7 +31,7 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
         return (
             <div className="confirmPopup">
                 <div className="confirmPopup__content">
-                    <img src={errorIcon} alt="error"/>
+                    <img src={errorSvg} alt="error"/>
                     <div>
                         <p>{infos[0].slogan}</p>
                         <a href={infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>

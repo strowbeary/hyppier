@@ -5,6 +5,8 @@ import {CSSTransitionGroup} from "react-transition-group";
 import cciparis from "../../../assets/img/logo-cciparis.png";
 import gobelins from "../../../assets/img/logo-gobelins.png";
 import SvgButton from "../svgButton/SvgButton";
+import GameStore from "../../../stores/GameStore/GameStore";
+import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 const AboutModal = observer(class AboutModal extends Component {
 
@@ -16,14 +18,18 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     openModal() {
-        this.gameManager.pauseGame();
+        if(!GameStore.options.isPaused) {
+            this.gameManager.pauseGame();
+        }
         this.setState({
             isOpen: true
         })
     }
 
     closeModal() {
-        this.gameManager.playGame();
+        if(!CatalogStore.isOpen && !GameStore.attic.visibility) {
+            this.gameManager.playGame();
+        }
         this.setState({
             isOpen: false
         })

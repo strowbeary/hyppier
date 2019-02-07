@@ -3,7 +3,6 @@ import {Component} from 'react';
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
 import SvgButton from "../../svgButton/SvgButton";
-import "./_fullscreenButton.scss";
 
 const FullScreenButton = observer(class FullScreenButton extends Component {
 

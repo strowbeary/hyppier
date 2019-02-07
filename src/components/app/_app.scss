@@ -125,30 +125,27 @@ button, a {
 
 .game__footer {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 3rem;
+  right: 3rem;
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 
   button {
     background: none;
     border: none;
-
-    svg {
-      color: $light-grey;
-
-      &:hover {
-        color: orange;
-      }
-    }
-  }
-
-  * {
-    margin-left: 0.5rem;
+    margin-left: 1.5rem;
 
     &:first-child {
       margin-left: 0;
+    }
+
+    svg {
+      color: white;
+
+      &:hover {
+        color: black;
+      }
     }
   }
 }

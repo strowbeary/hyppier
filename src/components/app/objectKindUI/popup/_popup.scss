@@ -15,6 +15,7 @@
           "image image"
           "buttonClose buttonCatalog";
   transition: transform 300ms ease-in-out;
+  cursor: url($drag-and-drop-cursor), default;
 
   &.hide {
     display: none;
@@ -31,6 +32,7 @@
   &__image {
     width: 100%;
     grid-area: image;
+    cursor: url($default-cursor-url-levelDown), default;
   }
 
   &__footer {
