@@ -12,12 +12,21 @@ const Message = observer(class Message extends Component {
         super(props);
         this.message = props.message;
         this.state = {message: "", typingEnd: false};
+        this.skiped = false;
+        this.skipTypeWriterForListener = (e) => {this.skipTypeWriter(e)};
+        window.addEventListener("keyup", this.skipTypeWriterForListener);
     }
 
     componentDidMount() {
         this.typeWriter();
     }
     componentWillUnmount() {
+    }
+
+    skipTypeWriter(e) {
+        if (e.keyCode === 32) {
+            this.skiped = true;
+        }
     }
 
     onTypingEnd() {
@@ -30,12 +39,18 @@ const Message = observer(class Message extends Component {
     }
 
     typeWriter(i = 0) {
-        if (i < this.message.text.length) {
-            let currentMessage = this.state.message;
-            this.setState({message: currentMessage += this.message.text[i]});
-            i++;
-            setTimeout(() => {this.typeWriter(i)}, 35);
+        if (!this.skiped) {
+            if (i < this.message.text.length) {
+                let currentMessage = this.state.message;
+                this.setState({message: currentMessage += this.message.text[i]});
+                i++;
+                setTimeout(() => {this.typeWriter(i)}, 35);
+            } else {
+                this.onTypingEnd();
+            }
         } else {
+            this.setState({message: this.message.text});
+            window.removeEventListener("keyup", this.skipTypeWriterForListener);
             this.onTypingEnd();
         }
     }
