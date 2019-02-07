@@ -8,6 +8,7 @@ export default observer(class EmptySpace extends Component {
     clickHandler() {
         this.props.buildCatalog();
         TutoStore.reportAction("EmptySpace", "actioned");
+        //TutoStore.reportAction("Notification", "appear");
     }
 
     render() {

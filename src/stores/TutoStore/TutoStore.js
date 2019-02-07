@@ -62,13 +62,14 @@ export default types.model("TutoStore",
                 read: false
             },
             {
-                text: "Un nouveau modèle d'un objet est disponible, mais attention tu n'as que peu de temps pour en profiter",
+                text: "Haha tu vois c'est facile! (si seulement avoir des nouveaux meubles étaient aussi simples). " +
+                    "Dès qu'une nouveauté sort tu pourras te la procurer, mais attention, l'offre est limitée et ce que tu ne prends pas sera perdu à jamais!",
                 expiration: 0,
                 action: "click",
                 originTarget: "Notification",
                 read: false
             }, {
-                text: "Tu peut maintenant acceder au grenier",
+                text: "Tes anciens objets sont stockés dans ton grenier (rien ne se perd, rien ne se crée, tout se transforme...en carton) Tu peux cliquer sur l'échelle pour y accéder",
                 expiration: 10000,
                 action: "timer",
                 originTarget: "Attic",

@@ -74,7 +74,7 @@ const Notification = observer(class Notification extends Component {
             running: false
         });
         this.props.buildCatalog();
-        TutoStore.reportAction("Notification", "actionned");
+        TutoStore.reportAction("Notification", "actioned");
     }
 
     render() {
