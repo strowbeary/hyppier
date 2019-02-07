@@ -8,13 +8,14 @@ export default observer(class EmptySpace extends Component {
     clickHandler() {
         this.props.buildCatalog();
         TutoStore.reportAction("EmptySpace", "actioned");
-        //TutoStore.reportAction("Notification", "appear");
     }
 
     render() {
+        let glow = TutoStore.getCurrentMessage().originTarget === "EmptySpace"? 'glow': '';
+
         return (
             <div className={`emptySpace`} onClick={() => this.clickHandler()}>
-                <div className="emptySpace__wrapper">
+                <div className={`emptySpace__wrapper ${glow}`}>
                     <span>+</span>
                 </div>
             </div>
