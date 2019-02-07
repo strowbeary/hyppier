@@ -3,7 +3,6 @@ import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {TimerManager} from "./utils/TimerManager";
 import CameraStore from "./stores/CameraStore/CameraStore";
 import {onPatch} from "mobx-state-tree";
-import TutoStore from "./stores/TutoStore/TutoStore";
 
 export class GameManager {
 
@@ -19,10 +18,9 @@ export class GameManager {
                     this.pauseGame();
                     GameStore.attic.setAtticVisibility(true);
                 }
-                /*if(patch.value === "") {
-                    this.playGame();
+                if(patch.value === "") {
                     GameStore.attic.setAtticVisibility(false);
-                }*/
+                }
             }
         });
     }

@@ -13,7 +13,6 @@ import * as cannon from "cannon";
 import {showAxis} from "../utils/Axis";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
-import HypeStore from "../../../stores/GameStore/HypeStore/HypeStore";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -82,14 +81,16 @@ export class SceneManager {
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {
             if (typeof this.gameManager.objectKindType !== 'undefined' &&
-                this.gameManager.objectKindType !== null &&
-                GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
-                this.gameManager.clueEvent = this.gameManager.objectKindType;
+                this.gameManager.objectKindType !== null) {
+                TutoStore.reportAction("Attic", "appear");
+                if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
+                    this.gameManager.clueEvent = this.gameManager.objectKindType;
+                }
             }
             if (TutoStore.currentMessage === 2 && GameStore.hype.level > 0.5) {
                 TutoStore.reportAction("Notification", "appear");
             }
-            if (TutoStore.currentMessage !== 4) {
+            if (TutoStore.currentMessage !== 4 || TutoStore.end) {
                 this.gameManager.playAfterCatalog();
             }
         });
@@ -105,12 +106,12 @@ export class SceneManager {
                     .onUpdate((newMesh, oldMesh, objectKindType) => {
                         if (objectKindType) {
                             if (oldMesh !== null) {
-                                TutoStore.reportAction("Attic", "appear");
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 });
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 if (!CatalogStore.isOpen) {
+                                    TutoStore.reportAction("Attic", "appear");
                                     if (TutoStore.currentMessage === 4) {
                                         this.gameManager.pauseGame();
                                     } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {

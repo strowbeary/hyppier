@@ -1,9 +1,7 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_message.scss";
-import {TimerManager} from "../../../utils/TimerManager";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
-import * as GameManager from "../../../GameManager";
 import SpaceBar from "../spacebar/Spacebar";
 
 const Message = observer(class Message extends Component {
@@ -33,7 +31,7 @@ const Message = observer(class Message extends Component {
         this.setState({typingEnd: true});
         if(this.message.action === "timer") {
             setTimeout(() => {
-                TutoStore.hideTip();
+                TutoStore.reportAction("Attic", "actioned");
             }, this.message.expiration);
         }
         if(this.message.originTarget === "Attic") {

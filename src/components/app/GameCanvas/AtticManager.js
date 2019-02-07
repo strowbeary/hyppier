@@ -2,7 +2,6 @@ import * as BABYLON from "babylonjs";
 import * as cannon from "cannon";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {showAxis} from "../utils/Axis";
-import {onPatch} from "mobx-state-tree";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
@@ -117,7 +116,7 @@ export class AtticManager {
                 BABYLON.ActionManager.OnPickTrigger,
                 () => { //DO SOMETHING ON CLICK
                     if (!CatalogStore.isOpen) {
-                        TutoStore.hideTip();
+                        TutoStore.reportAction("Attic", "actioned");
                         if (CameraStore.meshName !== "Attic") {
                             CameraStore.setTarget("Attic");
                         } else {

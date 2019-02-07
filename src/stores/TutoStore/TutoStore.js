@@ -5,7 +5,8 @@ export default types.model("TutoStore",
     {
         messages: types.array(MessageStore),
         currentMessage: types.number,
-        showTip: types.boolean
+        showTip: types.boolean,
+        end: false
     })
     .actions(self =>
         ({
@@ -25,6 +26,9 @@ export default types.model("TutoStore",
                 } else if (type === "actioned") {
                     if (typeof self.messages[self.currentMessage] !== "undefined") {
                         if (self.messages[self.currentMessage].originTarget === origin) {
+                            if (origin === "Attic") {
+                                self.end = true;
+                            }
                             self.showTip = false;
                         }
                     }
