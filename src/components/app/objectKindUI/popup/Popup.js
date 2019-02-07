@@ -86,39 +86,45 @@ const Popup = observer(class Popup extends Component {
 
     onClose() {
         TutoStore.reportAction("Notification", "actioned");
-        if (this.state.focus) {
-            Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-            if (Popup.refs.length > 0) {
-                Popup.refs[0].changeFocus(true);
+        const timeout = TutoStore.currentMessage === 2? 500: 0;
+        setTimeout(() => {
+            if (this.state.focus) {
+                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
+                if (Popup.refs.length > 0) {
+                    Popup.refs[0].changeFocus(true);
+                }
             }
-        }
-        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
-            this.objectKind.updateReplacementCounter();
-        }
-        GameStore.hype.setLevelByDiff(-0.1);
-        CameraStore.setTarget();
-        this.pipoStop();
-        this.props.closePopup(false);
+            if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
+                this.objectKind.updateReplacementCounter();
+            }
+            GameStore.hype.setLevelByDiff(-0.1);
+            CameraStore.setTarget();
+            this.pipoStop();
+            this.props.closePopup(false);
+        }, timeout);
     }
 
     onCatalog() {
         TutoStore.reportAction("Notification", "actioned");
-        if (this.state.focus) {
-            Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-            if (Popup.refs.length > 0) {
-                Popup.refs[0].changeFocus(true);
+        const timeout = TutoStore.currentMessage === 2? 500: 0;
+        setTimeout(() => {
+            if (this.state.focus) {
+                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
+                if (Popup.refs.length > 0) {
+                    Popup.refs[0].changeFocus(true);
+                }
+                this.changeFocus(false);
             }
-            this.changeFocus(false);
-        }
-        this.objectKind.updateReplacementCounter();
-        for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
-            this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
-        }
-        this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-        GameStore.hype.setLevelByDiff(0.1);
-        GameStore.setPipo("happy");
-        this.isClosing = true;
-        this.props.closePopup(true);
+            this.objectKind.updateReplacementCounter();
+            for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
+                this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
+            }
+            this.objectKind.setActiveObject(this.objectKind.replacementCounter);
+            GameStore.hype.setLevelByDiff(0.1);
+            GameStore.setPipo("happy");
+            this.isClosing = true;
+            this.props.closePopup(true);
+        }, timeout);
     }
 
     pipoYes() {

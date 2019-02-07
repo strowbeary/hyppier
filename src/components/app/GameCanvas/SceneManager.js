@@ -12,6 +12,7 @@ import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import {showAxis} from "../utils/Axis";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -98,6 +99,7 @@ export class SceneManager {
                     .onUpdate((newMesh, oldMesh, objectKindType) => {
                         if (objectKindType) {
                             if (oldMesh !== null) {
+                                TutoStore.reportAction("Attic", "appear");
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 });

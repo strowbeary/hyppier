@@ -22,10 +22,8 @@ export default types.model("TutoStore",
                     }
                 } else if (type === "actioned") {
                     if (typeof self.messages[self.currentMessage] !== "undefined") {
-                        console.log(self.messages[self.currentMessage].originTarget, origin);
                         if (self.messages[self.currentMessage].originTarget === origin) {
                             self.showTip = false;
-                            console.log(self.showTip);
                         }
                     }
                 }
