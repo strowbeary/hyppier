@@ -13,7 +13,6 @@ export class GameWatcher {
             CatalogStore.objectKinds.forEach(objectKind => {
                 let oldPreviewObjectId = null;
                 onPatch(objectKind, patch => {
-                    console.log(objectKind.name, patch);
                     try {
                         if (patch.path.includes("activeObject") && patch.op === "replace") {
                             if (objectKind.oldActiveObject !== null) {
@@ -60,12 +59,10 @@ export class GameWatcher {
                                     activeLambdaMesh = objectKind.objects[objectKind.activeObject].getModel();
                                 }
                                 let objectKindUI = ObjectKindUI.refs.filter(objectKindUI => objectKindUI !== null).find(objectKindUI => objectKindUI.objectKind === objectKind);
-                                let timer = true;
                                 if (objectKindUI.notification) {
                                     objectKindUI.notification.changeDelayTimer(objectKind.activeObject !== null);
-                                    timer = objectKindUI.notification.restartTimer();
                                 }
-                                GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null, timer));
+                                GameWatcher.updateWatchers.forEach(watcher => watcher(activeLambdaMesh, lambdaMesh, null));
                                 oldPreviewObjectId = null;
                                 CameraStore.setTarget();
                             }

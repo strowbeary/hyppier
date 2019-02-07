@@ -232,22 +232,6 @@
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
-          "modelUrl": "Transport/03-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Bureau !",
-              "url": "http://localhost:8080"
-            }
-          ],
-          "cloneNumber": 0
-        },
-        {
-          "name": "Boburo",
-          "adUrl": "img/catalog/table/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/table/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Bureau",
           "modelUrl": "Transport/04-Transport.babylon",
           "infos": [
             {

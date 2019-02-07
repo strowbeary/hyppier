@@ -11,7 +11,6 @@ export class GameManager {
         this.clueEvent = null;
         this.objectKindName = null;
         this.objectKindType = null;
-        this.timer = null;
         this.atticManager = atticManager;
         onPatch(CameraStore, (patch) => {
             if(patch.path.includes("meshName")) {
@@ -94,7 +93,6 @@ export class GameManager {
             } else {
                 this.playCatalog(this.timer);
             }
-            this.timer = null;
             this.objectKindType = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();

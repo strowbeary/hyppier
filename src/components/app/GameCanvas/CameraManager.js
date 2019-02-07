@@ -4,6 +4,7 @@ import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {onPatch} from "mobx-state-tree";
+import {showAxis} from "../utils/Axis";
 
 const EasingFunctions = {
     // no easing, no acceleration
@@ -63,7 +64,7 @@ const EasingFunctions = {
 const transitionFinishListener = [];
 
 export class CameraManager {
-    static CATALOG_OFFSET = new BABYLON.Vector3(-0.2, 0, 0);
+    static CATALOG_OFFSET = new BABYLON.Vector3(-0.25, 0.1, 0);
 
     initialValues = {
         width: window.innerWidth,
@@ -123,41 +124,44 @@ export class CameraManager {
             if (typeof mesh === "string") {
                 mesh = this.scene.getMeshByName(mesh);
             }
-            toDistance = Math.ceil(Math.max(Math.max(
-                mesh.getBoundingInfo().boundingBox.maximum.y * mesh.scaling.y,
-                mesh.getBoundingInfo().boundingBox.maximum.x * mesh.scaling.x,
-                mesh.getBoundingInfo().boundingBox.maximum.z * mesh.scaling.z
-            )) * 2.5);
-            toPosition = mesh.position.clone();
+            toDistance = (mesh.getBoundingInfo().boundingBox.maximumWorld
+                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld).asArray().reduce((p, c) => p + c) / 3) + 0.5;
+            console.log(toDistance);
+            toPosition = mesh.getBoundingInfo().boundingBox.maximumWorld
+                .subtract(mesh.getBoundingInfo().boundingBox.maximumWorld
+                    .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld)
+                    .divide(new BABYLON.Vector3(2, 2, 2))
+                );
+            toPosition.addInPlace(CameraManager.CATALOG_OFFSET);
         }
 
-        toPosition.addInPlace(offset);
 
-        this.distance = Math.round(this.distance);
         let fromPosition = this.camera.target;
         if (this.animationRequest) {
             cancelAnimationFrame(this.animationRequest);
         }
-
+        const fromDistance = this.distance;
+        let i = 0;
+        let step = 1 / 60;
         const animation = () => {
-            this.distance = this.distance + 0.2 * (toDistance - this.distance);
-            this.camera.target.x = fromPosition.x + 0.2 * (toPosition.x - fromPosition.x);
-            this.camera.target.y = fromPosition.y + 0.2 * (toPosition.y - fromPosition.y);
-            this.camera.target.z = fromPosition.z + 0.2 * (toPosition.z - fromPosition.z);
-            if (Math.abs(this.distance - toDistance).toFixed(3) > 0 ||
-                BABYLON.Vector3.Distance(this.camera.target, toPosition).toFixed(4) > 0
-            ) {
+            let t = EasingFunctions.easeInOutQuint(i);
+            this.distance = (1 - t) * fromDistance + t * toDistance;
+            this.camera.target.x = (1 - t) * fromPosition.x + t * toPosition.x;
+            this.camera.target.y = (1 - t) * fromPosition.y + t * toPosition.y;
+            this.camera.target.z = (1 - t) * fromPosition.z + t * toPosition.z;
+            if (i <= 1) {
                 this.updateCamera();
                 this.animationRequest = requestAnimationFrame(animation)
             } else {
                 cancelAnimationFrame(this.animationRequest);
                 this.animationRequest = null;
-
-                if (typeof mesh === "undefined") {
+                console.log("FINISED");
+                if (typeof mesh === "undefined" || mesh === "") {
+                    console.log("Back to room");
                     transitionFinishListener.forEach(listener => listener());
                 }
-
             }
+            i += step;
         };
         this.animationRequest = requestAnimationFrame(animation);
 

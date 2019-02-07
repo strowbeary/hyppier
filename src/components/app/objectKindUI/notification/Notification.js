@@ -53,7 +53,7 @@ const Notification = observer(class Notification extends Component {
         if (fromValidate) {
             this.delayTimer.setDuration(this.props.objectKind.objectTimeout);
         } else {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout/2);
+            this.delayTimer.setDuration(this.props.objectKind.objectTimeout / 2);
         }
     }
 

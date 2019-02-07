@@ -26,7 +26,6 @@ function preloadNextObject(objectKind) {
         ).then((container) => {
             container.meshes.forEach(loadedMesh => {
                 if (!loadedMesh.name.includes("Location")) {
-                    console.log(objectKind.name, loadedMesh.name);
                     loadedMesh.position = objectKind.location.toVector3();
                     objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
                 }

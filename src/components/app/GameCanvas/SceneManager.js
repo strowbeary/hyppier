@@ -96,7 +96,7 @@ export class SceneManager {
             .then(() => {
                 GameWatcher
                     .onUpdate((newMesh, oldMesh, objectKindType, timer) => {
-                        if (objectKindType) {
+                        if (objectKindType !== null) {
                             if (oldMesh !== null) {
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);

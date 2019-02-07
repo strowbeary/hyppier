@@ -18,7 +18,6 @@ export class GameStarter {
                     if(objectKind) {
                         objectKind.location.setPosition(loadedMesh.position);
                     }
-                    console.log(loadedMesh.name);
                 } else if(!loadedMesh.name.includes("Ladder-Position")) {
                     loadedMesh.receiveShadows = true;
                     console.log(loadedMesh.name);
