@@ -6,7 +6,6 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
-import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -18,7 +17,7 @@ const Catalog = observer(class Catalog extends Component {
         super(props);
         this.path = [props.index];
         this.objectKind = CatalogStore.objectKinds[this.path[0]];
-        this.productType = this.objectKind.type;
+        this.productType = this.objectKind.name;
         this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
         this.path.push(this.objectKind.replacementCounter + 1);
         this.isClosing = false;
