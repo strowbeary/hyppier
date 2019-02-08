@@ -19,7 +19,6 @@ const Popup = observer(class Popup extends Component {
 
     constructor(props) {
         super(props);
-
         this.objectKind = CatalogStore.objectKinds[props.index];
         this.firstPosition = this.props.position;
         this.adUrl = this.objectKind.objects[this.objectKind.replacementCounter + 1].adUrl;
@@ -35,7 +34,7 @@ const Popup = observer(class Popup extends Component {
             }
         });
         this.props.changeCurrentState({
-            focus: Popup.refs.length === 0
+            focus: Popup.refs.length === 0 || Popup.refs[0].objectKind.name === this.objectKind.name
         });
     }
 
