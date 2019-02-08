@@ -3,7 +3,8 @@ import React, {Component} from "react";
 import "./_hypeIndicator.scss";
 import GameStore from "../../../stores/GameStore/GameStore";
 import SimplexNoise from "simplex-noise";
-
+import {onPatch} from "mobx-state-tree";
+import {spawn} from "../utils/spawn-worker";
 const simplex = new SimplexNoise("hyppier");
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
@@ -11,66 +12,100 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
     frame = 0;
 
     state = {
-        wave_height: 1.5 + GameStore.hype.level * 3,
-        point_number: 2,
-        delta_point: 5.45,
-        globalHeight: 45,
         path: "",
         bubbles: []
     };
 
     componentDidMount() {
-        for(let i = 1; i <= 26; i++) {
-            let speed = Math.random();
-            this.state.bubbles.push({
-                speed,
-                height: this.state.globalHeight * (this.frame + speed) % this.state.globalHeight,
-                scale: Math.random() / 6 + 0.05,
-                x: (i + 0.5) * (this.state.point_number * this.state.delta_point / 26)
-            });
-        }
+
         this.loop();
     }
 
     loop() {
-        let origin = [
-            0,
-            simplex.noise2D((this.frame * this.state.point_number) / 2, 0) * (this.state.wave_height / 2)
-        ];
+        const worker = spawn(function () {
+            let bubbles = [];
+            let frame = 0;
+            let wave_height = 2;
+            const point_number = 1;
+            const delta_point = 10 / point_number;
+            const globalHeight = 45;
+            const bubbleNumber = 7 * wave_height;
+            for(let i = 0; i < bubbleNumber; i++) {
+                let speed = Math.random();
+                bubbles.push({
+                    speed,
+                    scale: Math.random() / 6 + 0.05,
+                    globalHeight,
+                    x: (i + 0.5) * (point_number * delta_point) / (bubbleNumber)
+                });
+            }
 
-        let path = `M ${origin[0]},${origin[1]} `;
-        let previousPoint = origin;
-        for (let i = 1; i <= this.state.point_number; i++) {
-            let b = [
-                previousPoint[0] + this.state.delta_point,
-                simplex.noise2D((i + this.frame * this.state.point_number) / 2, 0) * (this.state.wave_height / 2)
-            ];
-            let p1 = [
-                this.state.delta_point / 2 + previousPoint[0],
-                previousPoint[1]
-            ];
-            let p2 = [
-                this.state.delta_point / 2 + previousPoint[0],
-                b[1]
-            ];
-            path += `C ${p1[0]},${p1[1]} ${p2[0]},${p2[1]} ${b[0]},${b[1]}`;
-            previousPoint = b;
-        }
-        path += `L ${previousPoint[0]},${previousPoint[0]} ${this.state.point_number * this.state.delta_point},${this.state.globalHeight} `;
-        path += `L ${this.state.point_number * this.state.delta_point},${this.state.globalHeight} 0,${this.state.globalHeight}`;
-        path += `L 0,${this.state.globalHeight} 0,${origin[1]} z`;
+            function noise(t, w) {
+                let freq = 0.02;
+                return Math.sin(t * freq + w) * Math.sin(t * freq / 3);
+            }
 
-        let bubbles = this.state.bubbles.map((bubble) => {
-            bubble.height = this.state.globalHeight * (this.frame + bubble.speed) % this.state.globalHeight;
-            return bubble;
+            function loop() {
+                let origin = [0,
+                    noise(frame * point_number, 0) * (wave_height / 2)
+                ];
+
+                let path = `M ${origin[0]},${origin[1]} `;
+                let previousPoint = origin;
+                for (let i = 1; i <= point_number; i++) {
+                    let b = [
+                        previousPoint[0] + delta_point,
+                        noise(frame * point_number, i) * (wave_height / 2)
+                    ];
+                    let p1 = [
+                        delta_point / 2 + previousPoint[0],
+                        previousPoint[1]
+                    ];
+                    let p2 = [
+                        delta_point / 2 + previousPoint[0],
+                        b[1]
+                    ];
+                    path += `C ${p1[0]},${p1[1]} ${p2[0]},${p2[1]} ${b[0]},${b[1]} `;
+                    previousPoint = b;
+                }
+                path += `L ${previousPoint[0]},${previousPoint[0]} ${point_number * delta_point},${globalHeight} `;
+                path += `L ${point_number * delta_point},${globalHeight} 0,${globalHeight} `;
+                path += `L 0,${globalHeight} 0,${origin[1]} z`;
+
+                postMessage({
+                    path,
+                    bubbles: bubbles.map((bubble, i) => {
+                        bubble.height = globalHeight * (frame / 1000 + bubble.speed) % globalHeight;
+                        return bubble;
+                    })
+                });
+                frame++;
+            }
+            onmessage = (e) => {
+                //wave_height = 1.5 + e.data * 3;
+               // console.log("current bubble number : ", bubbles.length, "\nbubble to add : ", Math.ceil(5 * wave_height - bubbles.length));
+                /*for(let i = 1; i <= Math.ceil(5 * wave_height - bubbles.length); i++) {
+                    let speed = Math.random();
+                    bubbles.push({
+                        speed,
+                        scale: Math.random() / 6 + 0.05,
+                        globalHeight
+                    });
+                }*/
+            };
+            setInterval(() => loop(), 4);
         });
-
-        this.setState({
-            path,
-            bubbles
-        });
-        this.frame += 1 / (300 / this.state.wave_height);
-        requestAnimationFrame(() => this.loop());
+        worker.onmessage = (event) => {
+            this.setState({
+                path: event.data.path,
+                bubbles: event.data.bubbles
+            });
+        };
+        onPatch(GameStore, (patch) => {
+            if(patch.path.includes("level")) {
+                worker.postMessage(GameStore.hype.level)
+            }
+        })
     }
 
     render() {
@@ -92,7 +127,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                                 </path>
                                 {(() => this.state.bubbles.map((bubble, id) => {
                                     return (
-                                        <g key={id} transform={`translate(${bubble.x} ${this.state.globalHeight - bubble.height})`}>
+                                        <g key={id} transform={`translate(${bubble.x} ${bubble.globalHeight - bubble.height})`}>
                                             <circle
                                                 transform={`scale(${bubble.scale} ${bubble.scale})`}
                                                 cx="0"
