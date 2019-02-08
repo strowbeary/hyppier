@@ -2,10 +2,7 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_hypeIndicator.scss";
 import GameStore from "../../../stores/GameStore/GameStore";
-import SimplexNoise from "simplex-noise";
-import {onPatch} from "mobx-state-tree";
 import {spawn} from "../utils/spawn-worker";
-const simplex = new SimplexNoise("hyppier");
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
 
@@ -13,7 +10,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
     state = {
         path: "",
-        bubbles: []
+        bubblePath: ""
     };
 
     componentDidMount() {
@@ -24,7 +21,6 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
     loop() {
         const worker = spawn(function () {
             let bubbles = [];
-            let frame = 0;
             let wave_height = 2;
             const point_number = 1;
             const delta_point = 10 / point_number;
@@ -34,18 +30,18 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                 let speed = Math.random();
                 bubbles.push({
                     speed,
-                    scale: Math.random() / 6 + 0.05,
+                    r: 3 * (Math.random() / 6 + 0.05),
                     globalHeight,
                     x: (i + 0.5) * (point_number * delta_point) / (bubbleNumber)
                 });
             }
 
             function noise(t, w) {
-                let freq = 0.02;
+                let freq = 0.1;
                 return Math.sin(t * freq + w) * Math.sin(t * freq / 3);
             }
 
-            function loop() {
+            function loop(frame) {
                 let origin = [0,
                     noise(frame * point_number, 0) * (wave_height / 2)
                 ];
@@ -72,16 +68,22 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                 path += `L ${point_number * delta_point},${globalHeight} 0,${globalHeight} `;
                 path += `L 0,${globalHeight} 0,${origin[1]} z`;
 
+                let bubblePath = "";
+                for(let bubble of bubbles) {
+                    let height = globalHeight * (frame / 1000 + bubble.speed) % globalHeight;
+                    bubblePath +=  `M ${bubble.x - bubble.r},${globalHeight - height} `;
+                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${bubble.r * 2},0 `;
+                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${-bubble.r * 2},0 `;
+                    bubblePath +=  `z`;
+                }
+
                 postMessage({
                     path,
-                    bubbles: bubbles.map((bubble, i) => {
-                        bubble.height = globalHeight * (frame / 1000 + bubble.speed) % globalHeight;
-                        return bubble;
-                    })
+                    bubblePath
                 });
-                frame++;
             }
             onmessage = (e) => {
+                loop(e.data);
                 //wave_height = 1.5 + e.data * 3;
                // console.log("current bubble number : ", bubbles.length, "\nbubble to add : ", Math.ceil(5 * wave_height - bubbles.length));
                 /*for(let i = 1; i <= Math.ceil(5 * wave_height - bubbles.length); i++) {
@@ -93,19 +95,22 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                     });
                 }*/
             };
-            setInterval(() => loop(), 4);
         });
         worker.onmessage = (event) => {
-            this.setState({
-                path: event.data.path,
-                bubbles: event.data.bubbles
-            });
+            this.setState(event.data);
         };
-        onPatch(GameStore, (patch) => {
+        let frame = 0;
+        const loop = () => {
+            worker.postMessage(frame);
+            frame++;
+            //requestAnimationFrame(loop)
+        };
+        loop();
+        /*onPatch(GameStore, (patch) => {
             if(patch.path.includes("level")) {
                 worker.postMessage(GameStore.hype.level)
             }
-        })
+        })*/
     }
 
     render() {
@@ -125,19 +130,11 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                                     fill="orange"
                                     stroke="none">
                                 </path>
-                                {(() => this.state.bubbles.map((bubble, id) => {
-                                    return (
-                                        <g key={id} transform={`translate(${bubble.x} ${bubble.globalHeight - bubble.height})`}>
-                                            <circle
-                                                transform={`scale(${bubble.scale} ${bubble.scale})`}
-                                                cx="0"
-                                                cy="0"
-                                                r="3"
-                                                fill="rgba(255, 255, 255, 0.5)"
-                                                stroke="none"/>
-                                        </g>
-                                    )
-                                }))()}
+                                <path
+                                    d={this.state.bubblePath}
+                                    fill="rgba(255, 255, 255, 0.5)"
+                                    stroke="none">
+                                </path>
 
                             </g>
 

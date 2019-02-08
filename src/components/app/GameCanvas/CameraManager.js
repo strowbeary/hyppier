@@ -2,6 +2,7 @@ import * as BABYLON from "babylonjs";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import {onPatch} from "mobx-state-tree";
+import {spawn} from "../utils/spawn-worker";
 const EasingFunctions = {
     // no easing, no acceleration
     linear: function (t) { return t },
@@ -88,22 +89,18 @@ export class CameraManager {
     }
 
     setTarget(mesh) {
+
         let toDistance = this.initialValues.distance;
         let toPosition = BABYLON.Vector3.Zero();
+
         if (typeof mesh !== "undefined" && mesh !== "") {
             if (typeof mesh === "string") {
                 mesh = this.scene.getMeshByName(mesh);
             }
-            toDistance = (mesh.getBoundingInfo().boundingBox.maximumWorld
-                .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld)
-                .asArray()
-                .reduce((p, c) => p + c) / 3) + 1;
+            toDistance = mesh
+                .getBoundingInfo().boundingBox.extendSize.length() + 1;
             console.log(toDistance);
-            toPosition = mesh.getBoundingInfo().boundingBox.maximumWorld
-                .subtract(mesh.getBoundingInfo().boundingBox.maximumWorld
-                    .subtract(mesh.getBoundingInfo().boundingBox.minimumWorld)
-                    .divide(new BABYLON.Vector3(2, 2, 2))
-                );
+            toPosition = mesh.getBoundingInfo().boundingBox.centerWorld;
             toPosition.addInPlace(CameraManager.CATALOG_OFFSET);
         }
 

@@ -4,6 +4,7 @@ import ObjectStore from "./ObjectStore/ObjectStore";
 import * as BABYLON from "babylonjs";
 import {LambdaMesh} from "../../../components/app/GameCanvas/LambdaMesh";
 import CoordsStore from "./LocationStore/CoordsStore/CoordsStore";
+import {showAxis} from "../../../components/app/utils/Axis";
 
 function loadObject(objectKind) {
     BABYLON.SceneLoader.LoadAssetContainerAsync(
@@ -27,6 +28,8 @@ function preloadNextObject(objectKind) {
             container.meshes.forEach(loadedMesh => {
                 if (!loadedMesh.name.includes("Location")) {
                     loadedMesh.position = objectKind.location.toVector3();
+
+
                     objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
                 }
             });

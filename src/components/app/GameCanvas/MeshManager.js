@@ -1,3 +1,4 @@
+import * as BABYLON from "babylonjs";
 
 export class MeshManager {
     constructor(scene, lights, gameManager) {
@@ -37,6 +38,7 @@ export class MeshManager {
                  */
                 this.lights.shadowGenerator.addShadowCaster(newLambdaMesh.mesh);
                 this.scene.addMesh(newLambdaMesh.mesh);
+
                 newLambdaMesh.launchAppearAnimation();
             } else if (newLambdaMesh === null && oldLambdaMesh !== null) {
                 /**

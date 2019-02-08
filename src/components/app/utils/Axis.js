@@ -24,15 +24,14 @@ export function showAxis(scene, options) {
             plane.material.backFaceCulling = false;
             plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
             plane.material.diffuseTexture = dynamicTexture;
-            plane.position = options.position.add({
-                x: (size / 4 * options.label.length) / 2 + size / 7,
-                y: size / 4,
-                z: 0
-            });
+            plane.setPivotPoint(plane.getBoundingInfo().boundingBox.centerWorld);
+            plane.position = options.position;
+            plane.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
             //plane.showBoundingBox = true;
             plane.material.freeze();
-            plane.freezeWorldMatrix();
+            //plane.freezeWorldMatrix();
             plane.freezeNormals();
+            plane.renderingGroupId = 1;
             return plane;
         };
         makeTextPlane(options.label, "black", Math.max(options.size, 2) / 10);

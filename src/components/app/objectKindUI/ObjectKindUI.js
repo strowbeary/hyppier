@@ -53,11 +53,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         if(this.objectKind.activeObject !== null) {
             const lambdaMesh = this.objectKind.objects[this.objectKind.activeObject].getModel();
             if (lambdaMesh) {
-                position = lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
-                    .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.maximumWorld
-                        .subtract(lambdaMesh.mesh.getBoundingInfo().boundingBox.minimumWorld)
-                        .divide(new BABYLON.Vector3(2, 2, 2))
-                    );
+                position =  lambdaMesh.mesh.getBoundingInfo().boundingBox.centerWorld;
             }
         }
 

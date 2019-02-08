@@ -27,7 +27,7 @@ export class SceneManager {
         this.scene = new BABYLON.Scene(this.engine);
         this.cameraManager = new CameraManager(this.scene);
         this.camera = this.cameraManager.camera;
-        // this.camera.attachControl(canvas);
+        this.camera.attachControl(canvas);
         const lights = new Lights();
         lights.init(this.scene);
         this.scene.shadowsEnabled = true;

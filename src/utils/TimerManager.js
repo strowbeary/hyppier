@@ -113,6 +113,7 @@ export function createTimer(duration) {
         destroyed = true;
         loopHooks = [];
         finishListeners = [];
+        delete timers[timer.timerId];
     }
 
     function lock() {

@@ -1,7 +1,9 @@
 import * as BABYLON from "babylonjs";
 import GameStore from "../../../stores/GameStore/GameStore";
+import {showAxis} from "../utils/Axis";
 
 export class LambdaMesh {
+
     constructor(mesh, objectTimeout, objectKindName) {
         this.objectKindName = objectKindName;
         this.mesh = mesh;
@@ -9,6 +11,17 @@ export class LambdaMesh {
         this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
+        const pivotPosition =  this.mesh.getBoundingInfo().boundingBox.maximumWorld
+            .subtract( this.mesh.getBoundingInfo().boundingBox.maximumWorld
+                .subtract( this.mesh.getBoundingInfo().boundingBox.minimumWorld)
+                .divide(new BABYLON.Vector3(2, 2, 2))
+            );
+        this.mesh.setPivotPoint(new BABYLON.Vector3(
+            pivotPosition.x - this.mesh.position.x,
+            pivotPosition.y - this.mesh.position.y,
+            pivotPosition.z - this.mesh.position.z
+        )); 
+
         this.clones = [];
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
@@ -114,6 +127,7 @@ export class LambdaMesh {
     }
 
     launchMaterialDegradation() {
+
         let time = this.getTime();
         this.unfreezeMaterials(this.mesh);
         this.materialDegradation(time, this.mesh);
@@ -125,6 +139,7 @@ export class LambdaMesh {
     launchAppearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.setEnabled(true);
+
         this.scaleAppearAnimation(this.mesh);
         if (this.clones.length > 0) {
             this.clones.forEach(clone => {
