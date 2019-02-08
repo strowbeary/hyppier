@@ -18,12 +18,20 @@ export class LambdaMesh {
         }
     }
 
-    addClone() {
+    addClone(direction) {
         let cloneIndex = this.clones.length;
         let clone = this.mesh.createInstance(this.mesh.name);
         this.clones.push(clone);
         this.clones[cloneIndex].setEnabled(false);
-        this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        if (direction === "up") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        } else if (direction === "left") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x - (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+        } else if (direction === "down") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y - (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        } else if (direction === "right") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x + (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+        }
     }
 
     cloneMaterial(mesh) {// Need to clone material before animation

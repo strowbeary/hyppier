@@ -7,7 +7,7 @@
         {
           "name": "Table",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -24,7 +24,7 @@
         {
           "name": "Bureau Simple",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -41,7 +41,7 @@
         {
           "name": "Boburo",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -67,7 +67,7 @@
         {
           "name": "Tabouret",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Tabouret",
@@ -78,7 +78,7 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         }
       ],
@@ -93,7 +93,7 @@
         {
           "name": "Lit de camp",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Lit de camp",
@@ -104,7 +104,7 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         }
       ],
@@ -119,7 +119,7 @@
         {
           "name": "Macintosh",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Macintosh",
@@ -130,7 +130,7 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         }
       ],
@@ -143,9 +143,9 @@
       "type": "electric",
       "objects": [
         {
-          "name": "Lampe standard",
+          "name": "MÅLOKÜ",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis une lampe standard",
@@ -156,13 +156,13 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
           "name": "Lampe suspendue",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Belle lampe suspendue",
@@ -174,12 +174,12 @@
             }
           ],
           "cloneNumber": 1,
-          "cloneDirection": ""
+          "cloneDirection": "up"
         },
         {
           "name": "Lemp",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis une lampe design",
@@ -191,7 +191,7 @@
             }
           ],
           "cloneNumber": 1,
-          "cloneDirection": ""
+          "cloneDirection": "up"
         }
       ],
       "objectTimeout": 5000,
@@ -203,9 +203,9 @@
       "type": "furniture",
       "objects": [
         {
-          "name": "Boburo",
+          "name": "Patins à roulettes",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -220,9 +220,9 @@
           "cloneDirection": ""
         },
         {
-          "name": "Boburo",
+          "name": "Skateboard",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -233,13 +233,13 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },
         {
           "name": "Boburo",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -250,13 +250,13 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },
         {
           "name": "Boburo",
           "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/catalog/promo/promo.png",
+          "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
           "catalogSlogan": "Je suis un super Bureau",
@@ -267,8 +267,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "down"
         }
       ],
       "objectTimeout": 5000,

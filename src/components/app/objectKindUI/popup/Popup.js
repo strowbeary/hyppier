@@ -117,7 +117,7 @@ const Popup = observer(class Popup extends Component {
             }
             this.objectKind.updateReplacementCounter();
             for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
-                this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone();
+                this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone(this.objectKind.objects[this.objectKind.replacementCounter].cloneDirection);
             }
             this.objectKind.setActiveObject(this.objectKind.replacementCounter);
             GameStore.hype.setLevelByDiff(0.1);
