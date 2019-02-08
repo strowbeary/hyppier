@@ -12,6 +12,7 @@ import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import {showAxis} from "../utils/Axis";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -80,11 +81,18 @@ export class SceneManager {
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {
             if (typeof this.gameManager.objectKindType !== 'undefined' &&
-                this.gameManager.objectKindType !== null &&
-                GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
-                this.gameManager.clueEvent = this.gameManager.objectKindType;
+                this.gameManager.objectKindType !== null) {
+                TutoStore.reportAction("Attic", "appear");
+                if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
+                    this.gameManager.clueEvent = this.gameManager.objectKindType;
+                }
             }
-            this.gameManager.playAfterCatalog();
+            if (TutoStore.currentMessage === 2 && GameStore.hype.level > 0.5) {
+                TutoStore.reportAction("Notification", "appear");
+            }
+            if (TutoStore.currentMessage !== 4 || TutoStore.end) {
+                this.gameManager.playAfterCatalog();
+            }
         });
 
         /*showAxis(this.scene, {
@@ -103,7 +111,10 @@ export class SceneManager {
                                 });
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 if (!CatalogStore.isOpen) {
-                                    if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
+                                    TutoStore.reportAction("Attic", "appear");
+                                    if (TutoStore.currentMessage === 4 && !TutoStore.end) {
+                                        this.gameManager.pauseGame();
+                                    } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
                                         this.gameManager.clueEvent = objectKindType;
                                     }
                                 } else {
@@ -125,6 +136,7 @@ export class SceneManager {
 
                         try {
                             this.atticManager.prepareGravity();
+                            this.atticManager.prepareLadder();
                         } catch (e) {
                             console.error(e)
                         }

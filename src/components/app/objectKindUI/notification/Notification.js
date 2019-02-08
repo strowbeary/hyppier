@@ -19,7 +19,6 @@ const Notification = observer(class Notification extends Component {
         this.timer = createTimer(this.duration);
         this.timer.lock();
         this.delayTimer.onFinish(() => {
-            TutoStore.reportAction("Notification", "appear");
             this.timer.unlock();
             this.timer.start();
             this.setState({
@@ -40,6 +39,7 @@ const Notification = observer(class Notification extends Component {
             this.openPopup();
         });
         if (!GameStore.options.isPaused) {
+            this.delayTimer.setDuration(Math.round(this.duration / (Math.random() + 1)));
             this.delayTimer.start();
         }
     }
@@ -51,9 +51,9 @@ const Notification = observer(class Notification extends Component {
 
     changeDelayTimer(fromValidate) {
         if (fromValidate) {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout);
+            this.delayTimer.setDuration(this.duration);
         } else {
-            this.delayTimer.setDuration(this.props.objectKind.objectTimeout / 2);
+            this.delayTimer.setDuration(this.duration / 2);
         }
     }
 
@@ -85,10 +85,10 @@ const Notification = observer(class Notification extends Component {
         return (
             <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>
                 <svg height={32} width={32}>
-                    <circle cx={15} cy={15} r={14.25} stroke="black" strokeWidth="2" fill="transparent"
+                    <circle cx={16} cy={16} r={14.5} stroke="black" strokeWidth="2" fill="transparent"
                             strokeDashoffset={this.state.elapsedTime / this.duration * -dashSize}
                             strokeDasharray={dashSize}/>
-                    <circle cx={15} cy={15} r={9.25} fill="black"/>
+                    <circle cx={16} cy={16} r={9} fill="black"/>
                 </svg>
             </div>
         )

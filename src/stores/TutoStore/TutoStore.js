@@ -5,12 +5,15 @@ export default types.model("TutoStore",
     {
         messages: types.array(MessageStore),
         currentMessage: types.number,
-        showTip: types.boolean
+        showTip: types.boolean,
+        end: false
     })
     .actions(self =>
         ({
             hideTip() {
-                self.showTip = false;
+                if (self.showTip) {
+                    self.showTip = false;
+                }
             },
             reportAction(origin, type) {
                 if (type === "appear") {
@@ -23,6 +26,9 @@ export default types.model("TutoStore",
                 } else if (type === "actioned") {
                     if (typeof self.messages[self.currentMessage] !== "undefined") {
                         if (self.messages[self.currentMessage].originTarget === origin) {
+                            if (origin === "Attic") {
+                                self.end = true;
+                            }
                             self.showTip = false;
                         }
                     }
@@ -68,9 +74,10 @@ export default types.model("TutoStore",
                 action: "click",
                 originTarget: "Notification",
                 read: false
-            }, {
+            },
+            {
                 text: "Tes anciens objets sont stockés dans ton grenier (rien ne se perd, rien ne se crée, tout se transforme...en carton) Tu peux cliquer sur l'échelle pour y accéder",
-                expiration: 10000,
+                expiration: 5000,
                 action: "timer",
                 originTarget: "Attic",
                 read: false

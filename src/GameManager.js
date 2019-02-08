@@ -19,11 +19,18 @@ export class GameManager {
                     GameStore.attic.setAtticVisibility(true);
                 }
                 if(patch.value === "") {
-                    this.playGame();
                     GameStore.attic.setAtticVisibility(false);
                 }
             }
-        })
+        });
+    }
+
+    pauseCatalog() {
+        TimerManager.pauseAllExcept();
+        GameStore.options.setPause(true);
+        this.scene.animatables
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .forEach(animatable => animatable.pause())
     }
 
     pauseGame() {

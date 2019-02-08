@@ -38,12 +38,14 @@
     &.arrow {
       &:after {
         position: absolute;
-        content: url('../../../assets/img/message-arrow.svg');
         display: block;
-        bottom: 26px;
-        right: 24px;
-        width: 0;
-        height: 0;
+        bottom: 1rem;
+        right: 1rem;
+        width: 15px;
+        height: 13px;
+        background-image: url('../../../assets/img/message-arrow.svg');
+        background-size: cover;
+        background-color: transparent;
         animation: up-down 500ms infinite alternate;
       }
     }

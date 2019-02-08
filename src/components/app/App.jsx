@@ -6,51 +6,23 @@ import {CSSTransitionGroup} from "react-transition-group";
 import CatalogStore from "../../stores/CatalogStore/CatalogStore";
 import Catalog from "./catalog/Catalog"
 import HypeIndicator from "./hypeIndicator/HypeIndicator"
-import Toast from "./toast/Toast";
+import ToastWrapper from "./toastWrapper/ToastWrapper";
 import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
-import AboutModal from "./aboutModal/AboutModal";
-import FullScreenButton from "./options/fullscreenButton/FullScreenButton";
 import TutoStore from "../../stores/TutoStore/TutoStore";
-import Message from "./message/Message";
+
 
 const App = observer(class App extends Component {
 
     state = {
         message: null,
-        toast: false,
         loading: false,
         ready: false
     };
 
     constructor(props) {
         super(props);
-        /*this.timer = createTimer(3000);
-        this.timer.start();
-        this.timer.onFinish(() => {
-            if (this.state.toast) {
-                this.setState({toast: false});
-                let random = Math.round(Math.random() * 3000 + 500);
-                this.timer.setDuration(random);
-                this.timer.stop();
-                this.timer.start();
-            } else {
-                this.setState({toast: true});
-                this.timer.setDuration(3000);
-                this.timer.stop();
-                this.timer.start();
-            }
-        });*/
-    }
-
-    testChangeObject() {
-        const objectKindPath = CatalogStore.getObjectKind("Sound");
-        if (objectKindPath.activeObject === null) {
-            objectKindPath.setActiveObject(0, 0);
-        } else if (objectKindPath.activeObject + 1 < objectKindPath.objects.length) {
-            objectKindPath.setActiveObject(objectKindPath.activeObject + 1, 0);
-        }
     }
 
     resetPipo() {
@@ -66,7 +38,6 @@ const App = observer(class App extends Component {
     }
 
     updateReady(sceneManager) {
-        TutoStore.reportAction("Intro", "appear");
         this.setState({
             ready: true,
             sceneManager: sceneManager
@@ -90,27 +61,9 @@ const App = observer(class App extends Component {
                 {this.state.loading &&
                     <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>
                 }
-                {this.state.loading &&
+                {this.state.loading && !GameStore.attic.atticVisible &&
                     <HypeIndicator/>
                 }
-                {this.state.loading &&
-                    <div className={"game__footer"}>
-                        <AboutModal/>
-                        <FullScreenButton/>
-                    </div>
-                }
-                {TutoStore.displayTip() &&
-                    <Message message={TutoStore.getCurrentMessage()}/>
-                }
-                <CSSTransitionGroup
-                    transitionName="catalog"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}
-                >
-                    {this.state.toast && !GameStore.options.isPaused &&
-                    <Toast></Toast>
-                    }
-                </CSSTransitionGroup>
                 <CSSTransitionGroup
                     transitionName="catalog"
                     transitionEnterTimeout={500}
@@ -120,6 +73,10 @@ const App = observer(class App extends Component {
                     <Catalog index={CatalogStore.objectKindIndex}/>
                     }
                 </CSSTransitionGroup>
+                {
+                    TutoStore.end &&
+                    <ToastWrapper/>
+                }
                 <CSSTransitionGroup
                     transitionName="grow"
                     transitionEnterTimeout={500}

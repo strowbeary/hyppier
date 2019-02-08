@@ -15,18 +15,23 @@ export class LambdaMesh {
             this.time = objectTimeout * 0.03;
             this.cloneMaterial(this.mesh);
             this.freezeMaterials(this.mesh);
-            /*if (this.mesh._scene) {
-                this.setClickEvent();
-            }*/
         }
     }
 
-    addClone() {
+    addClone(direction) {
         let cloneIndex = this.clones.length;
         let clone = this.mesh.createInstance(this.mesh.name);
         this.clones.push(clone);
         this.clones[cloneIndex].setEnabled(false);
-        this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        if (direction === "up") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        } else if (direction === "left") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x - (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+        } else if (direction === "down") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y - (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+        } else if (direction === "right") {
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x + (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+        }
     }
 
     cloneMaterial(mesh) {// Need to clone material before animation
@@ -169,20 +174,6 @@ export class LambdaMesh {
             this.mesh.freezeWorldMatrix();
             typeof callback === 'function' && callback()
         });
-    }
-
-    setClickEvent() {
-        //Get Click Event on object
-        this.mesh.isPickable = true;
-        this.mesh.actionManager = new BABYLON.ActionManager(this.mesh._scene);
-        this.mesh.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(
-                BABYLON.ActionManager.OnPickTrigger,
-                () => { //DO SOMETHING ON CLICK
-                    this.launchDisappearAnimation();
-                }
-            )
-        );
     }
 
     freezeMaterials(mesh) {

@@ -4,13 +4,18 @@ import {observer} from "mobx-react";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import TutoStore from "../../../stores/TutoStore/TutoStore";
+import Message from "../message/Message";
+import AboutModal from "../aboutModal/AboutModal";
+import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
+import SoundButton from "../options/soundButton/SoundButton";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
     scene = null;
 
     state = {
-        ready: false
+        ready: false,
     };
 
     componentDidMount() {
@@ -20,6 +25,7 @@ export default observer(class GameCanvas extends React.Component {
             this.setState({
                 ready: true
             });
+            TutoStore.reportAction("Intro", "appear");
         });
         this.scene = this.sceneManager.scene;
         this.engine = this.sceneManager.engine;
@@ -30,6 +36,11 @@ export default observer(class GameCanvas extends React.Component {
         this.engine.resize();
         this.sceneManager.cameraManager.updateCamera();
         this.scene.activeCamera.getProjectionMatrix(true);
+    }
+
+    launchLadderFall() {
+        this.sceneManager.atticManager.launchLadderFall();
+        this.sceneManager.gameManager.playGame();
     }
 
     render() {
@@ -66,8 +77,20 @@ export default observer(class GameCanvas extends React.Component {
                             })
                     }
                 })()}
-
-                    </React.Fragment>
-                    );
+                {TutoStore.displayTip() &&
+                <Message message={TutoStore.getCurrentMessage()}
+                         launchLadderFall={() => {
+                             this.launchLadderFall()
+                         }}/>
                 }
-                });
+                {this.state.ready &&
+                    <div className={"game__footer"}>
+                        <AboutModal gameManager={this.sceneManager.gameManager}/>
+                        <SoundButton/>
+                        <FullScreenButton/>
+                    </div>
+                }
+            </React.Fragment>
+        );
+    }
+});

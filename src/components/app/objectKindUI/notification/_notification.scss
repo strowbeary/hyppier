@@ -1,11 +1,22 @@
+@import "../../../../variables";
+
 .notification {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   opacity: 1;
   transition: opacity 500ms linear;
+  position: relative;
+  cursor: url($pointer-url-levelDown), pointer;
 
   &.animated {
-    svg {
-        animation: wave 1s ease infinite;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      animation: tuto-pulse 1s ease infinite;
     }
   }
 
@@ -13,26 +24,4 @@
     opacity: 0;
     pointer-events: none;
   }
-}
-
-@keyframes wave {
-  0% {
-    -webkit-filter: drop-shadow( 0 0 0 rgba(0, 0, 0, 255));
-    filter: drop-shadow( 0 0 0 rgba(0, 0, 0, 255));
-  }
-  100% {
-    -webkit-filter: drop-shadow( 0 0 50px rgba(0, 0, 0, 0));
-    filter: drop-shadow( 0 0 50px rgba(0, 0, 0, 0));
-  }
-
-}
-@keyframes bounce {
-  0% {transform: translate(0, 10px);}
-  12.5% {transform: translate(0, 0);}
-  25% {transform: translate(0, 7px);}
-  37.5% {transform: translate(0, 0);}
-  50% {transform: translate(0, 5px);}
-  62.5% {transform: translate(0, 0);}
-  75% {transform: translate(0, 3px);}
-  100% {transform: translate(0, 0);}
 }

@@ -13,7 +13,8 @@ export default types.model("ObjectStore", {
     modelUrl: types.string,
     model: types.maybe(types.number),
     infos: types.array(InfoStore),
-    cloneNumber: types.number
+    cloneNumber: types.number,
+    cloneDirection: types.string
 })
     .actions(self =>
         ({
