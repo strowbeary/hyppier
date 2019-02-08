@@ -8,7 +8,6 @@ export class GameStarter {
             "room.babylon"
         );
         return container.meshes.forEach(loadedMesh => {
-            console.log(loadedMesh.name);
             try {
                 if (loadedMesh.name.includes("Location")) {
                     const locationOption = loadedMesh.name.split(".")[0].split(")")[0].split("(")[1];
@@ -21,7 +20,6 @@ export class GameStarter {
                     }
                 } else if(!loadedMesh.name.includes("Ladder-Position")) {
                     loadedMesh.receiveShadows = true;
-                    console.log(loadedMesh.name);
                     loadedMesh.convertToFlatShadedMesh();
                     loadedMesh.convertToUnIndexedMesh();
                     loadedMesh.freezeWorldMatrix();
