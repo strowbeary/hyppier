@@ -7,7 +7,7 @@
   opacity: 1;
   transition: opacity 500ms linear;
   position: relative;
-  cursor: url($pointer-url-levelDown), pointer;
+  cursor: url($pointer-url-levelDown) 16 0, pointer;
 
   &.animated {
     &:after {
