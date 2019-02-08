@@ -86,8 +86,8 @@ export default observer(class GameCanvas extends React.Component {
                 {this.state.ready &&
                     <div className={"game__footer"}>
                         <AboutModal gameManager={this.sceneManager.gameManager}/>
-                        <FullScreenButton/>
                         <SoundButton/>
+                        <FullScreenButton/>
                     </div>
                 }
             </React.Fragment>
