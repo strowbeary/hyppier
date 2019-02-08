@@ -9,8 +9,9 @@ import EmptySpace from "./emptySpace/EmptySpace";
 import Popup from "./popup/Popup";
 import {CSSTransitionGroup} from "react-transition-group";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {GameManager} from "../../../GameManager";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
+import {onPatch} from "mobx-state-tree";
+import {createTimer} from "../../../utils/TimerManager";
 
 const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
@@ -27,6 +28,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         this.scene = props.scene;
         this.objectKind = props.objectKind;
         this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
+        this.delayTimer = createTimer(this.objectKind.objectTimeout);
+        this.delayTimer.lock();
     }
 
     changePopup(object) {
@@ -35,10 +38,21 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     componentDidMount() {
         this.updatePosition();
-    }
 
-    isVisible() {
-        return this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && !GameStore.options.isPaused;
+        onPatch(this.objectKind, (patch) => {
+            if (patch.path.includes("replacementCounter")) {
+                if (patch.value === this.objectKind.objects.length - 1) {
+                    this.delayTimer.unlock();
+                    if (!GameStore.options.isPaused) {
+                        this.delayTimer.start();
+                    }
+                }
+            }
+        });
+
+        this.delayTimer.onFinish(() => {
+            this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation();
+        });
     }
 
     updatePosition() {
