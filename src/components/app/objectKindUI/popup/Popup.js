@@ -83,11 +83,9 @@ const Popup = observer(class Popup extends Component {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
         setTimeout(() => {
-            if (this.state.focus) {
-                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-                if (Popup.refs.length > 0) {
-                    Popup.refs[0].changeFocus(true);
-                }
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
             if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
                 this.objectKind.updateReplacementCounter();
@@ -103,12 +101,9 @@ const Popup = observer(class Popup extends Component {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
         setTimeout(() => {
-            if (this.state.focus) {
-                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-                if (Popup.refs.length > 0) {
-                    Popup.refs[0].changeFocus(true);
-                }
-                this.changeFocus(false);
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
             this.objectKind.updateReplacementCounter();
             for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
