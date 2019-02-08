@@ -17,16 +17,12 @@
   transition: transform 300ms ease-in-out;
   cursor: url($drag-and-drop-cursor), default;
 
-  &.hide {
-    display: none;
+  &.focus {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
 
-  &.disabled {
-    opacity: 0.5;
-
-    &:hover {
-      opacity: 1;
-    }
+  &.hide {
+    display: none;
   }
 
   &__image {

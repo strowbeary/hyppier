@@ -19,7 +19,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     state = {
         position: {x: 0, y: 0},
         popupVisibility: false,
-        popup: {focus: false, hovered: false}
+        popup: {focus: false}
     };
 
     constructor(props) {
@@ -115,9 +115,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             zIndex++;
         }
         if (this.state.popup.focus) {
-            zIndex++;
-        }
-        if (this.state.popup.hovered) {
             zIndex++;
         }
 

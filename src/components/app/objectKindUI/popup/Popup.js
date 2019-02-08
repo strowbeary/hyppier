@@ -35,17 +35,12 @@ const Popup = observer(class Popup extends Component {
             }
         });
         this.props.changeCurrentState({
-            focus: Popup.refs.length === 0,
-            hovered: false
+            focus: Popup.refs.length === 0
         });
     }
 
     changeFocus(value) {
         this.props.changeCurrentState({focus: value});
-    }
-
-    setHovered(value) {
-        this.props.changeCurrentState({hovered: value});
     }
 
     onDragStart(e) {
@@ -142,13 +137,11 @@ const Popup = observer(class Popup extends Component {
     }
 
     render() {
-        let disabled = this.props.currentState.focus ? '' : 'disabled';
-        let buttonsDisabled = !this.props.currentState.focus && !this.props.currentState.hovered;
+        let buttonsDisabled = !this.props.currentState.focus;
 
         return (
-            <div className={`popup ${disabled}`} style={this.state.draggablePosition}
-                 onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}
-                 onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
+            <div className={`popup ${buttonsDisabled? '':'focus'}`} style={this.state.draggablePosition}
+                 onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>
                 <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}
                         ref={this.buttonClose} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)</button>
