@@ -1,6 +1,6 @@
 @import "../../../variables";
 
-.goodEndScreen {
+.badEndScreen {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,13 +14,15 @@
   }
 
   &__section {
-    background-color: $green;
+    background-color: $red;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+  }
 
-    button {
+  &__button {
+    &__main {
       background-color: $yellow;
       padding: 1rem 2rem;
       border: none;
@@ -33,30 +35,16 @@
         transform: scale(1.5);
       }
     }
-  }
 
-  &__sectionSlider {
-    background-color: $light-grey;
-  }
-
-  &__arrowScroll {
-    position: absolute;
-    width: 1px;
-    height: 10vh;
-    background-color: white;
-    bottom: 2vh;
-    animation: up-down 500ms infinite alternate;
-
-    &:after {
-      content: "";
-      position: absolute;
-      border: solid white;
-      border-width: 0 1px 1px 0;
-      display: inline-block;
-      padding: 5px;
-      transform: rotate(45deg);
-      bottom: 0;
-      left: -5px;
+    &__light {
+      padding: 10px 5px;
+      border: none;
+      text-transform: uppercase;
+      text-decoration: underline;
+      font-size: 1rem;
+      letter-spacing: 0.1rem;
+      background: none;
+      margin-right: 5rem;
     }
   }
 
@@ -79,7 +67,7 @@
       font-size: 8rem;
       line-height: 6rem;
       margin-bottom: 2rem;
-      color: $green;
+      color: $red;
     }
 
     &__text {

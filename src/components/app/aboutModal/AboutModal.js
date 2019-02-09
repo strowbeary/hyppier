@@ -77,11 +77,9 @@ const AboutModal = observer(class AboutModal extends Component {
                                     <div>
                                         <p>
                                             Mais c'est aussi l'histoire mouvementée d'une équipe de quatre bras cassés :
-                                        </p>
-                                        <p>
+                                            <br/>
                                             - deux designers aux caprices esthétiques capillotractés,
-                                        </p>
-                                        <p>
+                                            <br/>
                                             - deux développeurs au réalisme technique affuté
                                         </p>
                                     </div>
