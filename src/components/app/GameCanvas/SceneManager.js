@@ -12,6 +12,8 @@ import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
+import ambiance from "../../../assets/sounds/ambiance.mp3";
+import {SoundManager} from "./SoundManager";
 
 export class SceneManager {
     static DEVICE_PIXEL_RATIO = window.devicePixelRatio;
@@ -61,7 +63,8 @@ export class SceneManager {
 
         this.scene.enablePhysics(null);
 
-        this.atticManager = new AtticManager(this.scene, particleSystem);
+        this.soundManager = new SoundManager(this.scene);
+        this.atticManager = new AtticManager(this.scene, particleSystem, this.soundManager);
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {

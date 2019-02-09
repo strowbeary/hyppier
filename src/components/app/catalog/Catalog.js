@@ -1,11 +1,12 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
-import icon_close from "../../../assets/img/icon_close.svg";
+import iconClose from "../../../assets/img/icon-close.svg";
 import "./_catalog.scss";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
+import iconCloseHover from "../../../assets/img/icon-close-hover.svg";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -29,6 +30,7 @@ const Catalog = observer(class Catalog extends Component {
         this.updateConfirmVisibilty(false);
         if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && this.objectKind.activeObject !== null) {
             this.objectKind.updateReplacementCounter();
+            GameStore.setPipo("angry");
         }
     }
 
@@ -82,12 +84,15 @@ const Catalog = observer(class Catalog extends Component {
                 <div className="catalog__header">
                     <span>Catalogue</span>
                     <button className="catalog__header__close" onClick={() => this.updateConfirmVisibilty(true)} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>
-                        <img src={icon_close} alt="close_icon"/>
+                        <img src={iconClose} alt="close_icon"/>
+                        <img src={iconCloseHover} alt="closeHover"/>
                     </button>
                 </div>
                 <div className="catalog__content">
-                    <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
-
+                    <div className="catalog__content__main__header">
+                        <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
+                        <a className="catalog__content__info" href={this.productNew.infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                    </div>
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">
                             <p>{this.productType}</p>

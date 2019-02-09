@@ -43,10 +43,6 @@
       font-size: 1rem;
       letter-spacing: 0.1rem;
       background: none;
-
-      &:disabled {
-        cursor: url($default-cursor-url-levelDown), default;
-      }
     }
 
     &__buttonCatalog {
@@ -63,15 +59,6 @@
 
       animation: shadow-pulse 1s infinite;
       transition: transform 300ms ease-in-out;
-
-      &:disabled {
-        animation-duration: 0s;
-        cursor: url($default-cursor-url-levelDown), default;
-
-        &:hover {
-          transform: scale(1);
-        }
-      }
 
       &:hover {
         transform: scale(1.1);

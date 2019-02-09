@@ -25,6 +25,22 @@ $catalog-width: 30vw;
       border: none;
       background: none;
       padding: 0;
+
+      width: 2.5rem;
+      height: 2.5rem;
+
+      >img:first-child, >img:last-child{
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      >img:first-child {
+        z-index: 1;
+      }
+
+      >img:last-child {
+        z-index: 0;
+      }
     }
   }
 
@@ -39,6 +55,17 @@ $catalog-width: 30vw;
 
     &__title {
       font-size: 1.6rem;
+    }
+
+    &__header {
+    }
+
+    &__info {
+      color: $yellow;
+      display: block;
+      text-transform: uppercase;
+      margin-top: 7px;
+      text-align: right;
     }
 
     &__main {

@@ -4,9 +4,14 @@ import "./_aboutModal.scss";
 import {CSSTransitionGroup} from "react-transition-group";
 import cciparis from "../../../assets/img/logo-cciparis.png";
 import gobelins from "../../../assets/img/logo-gobelins.png";
-import SvgButton from "../svgButton/SvgButton";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import instagram from "../../../assets/img/instagram.svg";
+import instagramHover from "../../../assets/img/instagram-hover.svg";
+import video from "../../../assets/img/video.svg";
+import videoHover from "../../../assets/img/video-hover.svg";
+import close from "../../../assets/img/close.svg";
+import closeHover from "../../../assets/img/close-hover.svg";
 
 const AboutModal = observer(class AboutModal extends Component {
 
@@ -48,7 +53,8 @@ const AboutModal = observer(class AboutModal extends Component {
                     {this.state.isOpen &&
                     <div className={"aboutModal__modal"}>
                         <button className={"aboutModal__closeButton"} onClick={() => this.closeModal()}>
-                            <SvgButton type={"close"}/>
+                            <img src={close} alt="close"/>
+                            <img src={closeHover} alt="closeHover"/>
                         </button>
                         <div className={"aboutModal__wrapper"}>
                             <h2 className={"aboutModal__title"}>About Hyppier!</h2>
@@ -71,11 +77,9 @@ const AboutModal = observer(class AboutModal extends Component {
                                     <div>
                                         <p>
                                             Mais c'est aussi l'histoire mouvementée d'une équipe de quatre bras cassés :
-                                        </p>
-                                        <p>
+                                            <br/>
                                             - deux designers aux caprices esthétiques capillotractés,
-                                        </p>
-                                        <p>
+                                            <br/>
                                             - deux développeurs au réalisme technique affuté
                                         </p>
                                     </div>
@@ -122,13 +126,13 @@ const AboutModal = observer(class AboutModal extends Component {
                                     <p>Merci à l'équipe pédagogique de Gobelins, l'école de l'image, pour ses conseils éclairés tout au long du projet</p>
                                     <div className={"aboutModal__logos"}>
                                         <div>
-                                            <img src={gobelins} alt={"gobelins"}></img>
+                                            <img src={gobelins} alt={"gobelins"}/>
                                         </div>
                                         <div>
                                             <span>une école de la</span>
                                         </div>
                                         <div>
-                                            <img src={cciparis} alt={"cciparis"}></img>
+                                            <img src={cciparis} alt={"cciparis"}/>
                                         </div>
                                     </div>
                                 </div>
@@ -136,10 +140,12 @@ const AboutModal = observer(class AboutModal extends Component {
                         </div>
                         <div className={"aboutModal__footer"}>
                             <button>
-                                <SvgButton type={"instagram"}/>
+                                <img src={instagram} alt="instagram"/>
+                                <img src={instagramHover} alt="instagramHover"/>
                             </button>
                             <button>
-                                <SvgButton type={"video"}/>
+                                <img src={video} alt="video"/>
+                                <img src={videoHover} alt="videoHover"/>
                             </button>
                         </div>
                     </div>
