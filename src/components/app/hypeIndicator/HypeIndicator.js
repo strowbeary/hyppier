@@ -6,11 +6,9 @@ import {spawn} from "../utils/spawn-worker";
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
 
-    frame = 0;
-
     state = {
         up: false,
-        bubbles: []
+        bubblePath: ""
     };
 
     componentDidMount() {
@@ -21,47 +19,48 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
     loop() {
         const worker = spawn(function () {
             let bubbles = [];
-            let wave_height = 2;
-            const point_number = 1;
-            const delta_point = 10 / point_number;
+            const delta_point = 10;
             const globalHeight = 45;
-            const bubbleNumber = 7 * wave_height;
-            for (let i = 0; i < bubbleNumber; i++) {
+            const bubbleNumber = 20;
+            for(let i = 0; i < bubbleNumber; i++) {
                 let speed = Math.random();
                 bubbles.push({
                     speed,
                     r: 3 * (Math.random() / 6 + 0.05),
                     globalHeight,
-                    x: (i + 0.5) * (point_number * delta_point) / (bubbleNumber)
+                    x: (i + 0.5) * (delta_point) / (bubbleNumber)
                 });
             }
 
-            function loop() {
+            function loop(frame) {
+
+                let bubblePath = "";
+                for(let bubble of bubbles) {
+                    let height = globalHeight * (frame / 300 + bubble.speed) % globalHeight;
+                    bubblePath +=  `M ${bubble.x - bubble.r},${globalHeight - height} `;
+                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${bubble.r * 2},0 `;
+                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${-bubble.r * 2},0 `;
+                    bubblePath +=  `z`;
+                }
+
                 postMessage({
-                    bubbles: bubbles.map((bubble) => {
-                        bubble.height = globalHeight * (frame / 1000 + bubble.speed) % globalHeight;
-                        return bubble;
-                    })
+                    bubblePath
                 });
             }
-
-            setInterval(() => loop(), 4);
+            onmessage = (e) => {
+                loop(e.data);
+            };
         });
         worker.onmessage = (event) => {
-            this.setState({
-                bubbles: event.data.bubbles
-            });
+            this.setState(event.data);
         };
-
-        onPatch(GameStore, (patch) => {
-            if(patch.path.includes("level")) {
-                console.log(this.hypeLevel, patch.value);
-                if (this.hypeLevel < patch.value) {
-                    this.setState({up: true});
-                }
-                this.hypeLevel = patch.value;
-            }
-        })*/
+        let frame = 0;
+        const loop = () => {
+            worker.postMessage(frame);
+            frame++;
+            requestAnimationFrame(loop);
+        };
+        loop();
     }
 
     onTransitionEnd() {
@@ -82,20 +81,11 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                         </div>
                         <svg viewBox="0 0 10 50" xmlns="http://www.w3.org/2000/svg">
                             <g transform="translate(0,5)">
-                                {(() => this.state.bubbles.map((bubble, id) => {
-                                    return (
-                                        <g key={id}
-                                           transform={`translate(${bubble.x} ${bubble.globalHeight - bubble.height})`}>
-                                            <circle
-                                                transform={`scale(${bubble.scale} ${bubble.scale})`}
-                                                cx="0"
-                                                cy="0"
-                                                r="3"
-                                                fill="rgba(255, 255, 255, 0.5)"
-                                                stroke="none"/>
-                                        </g>
-                                    )
-                                }))()}
+                                <path
+                                    d={this.state.bubblePath}
+                                    fill="rgba(255, 255, 255, 0.7)"
+                                    stroke="none">
+                                </path>
                             </g>
 
                         </svg>
