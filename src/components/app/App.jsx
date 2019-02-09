@@ -50,6 +50,9 @@ const App = observer(class App extends Component {
         if(GameStore.pipo === 'happy') {
             pipoMood = "happy";
             setTimeout(() => this.resetPipo(), 3000);
+        } else if (GameStore.pipo === 'angry') {
+            pipoMood = "angry";
+            setTimeout(() => this.resetPipo(), 3000);
         }
 
         return (
