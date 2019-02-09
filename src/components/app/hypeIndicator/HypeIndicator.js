@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import "./_hypeIndicator.scss";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {spawn} from "../utils/spawn-worker";
+import {onPatch} from "mobx-state-tree";
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
 
@@ -62,7 +63,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                 }
                 this.hypeLevel = patch.value;
             }
-        })
+        });
         let frame = 0;
         const loop = () => {
             worker.postMessage(frame);
