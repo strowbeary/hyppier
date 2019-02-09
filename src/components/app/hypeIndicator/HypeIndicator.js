@@ -59,7 +59,6 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
         onPatch(GameStore, (patch) => {
             if(patch.path.includes("level")) {
-                console.log(this.hypeLevel, patch.value);
                 if (this.hypeLevel < patch.value) {
                     this.setState({up: true});
                 }
