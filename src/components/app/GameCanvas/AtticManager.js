@@ -7,12 +7,13 @@ import CameraStore from "../../../stores/CameraStore/CameraStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 
 export class AtticManager {
-    constructor(scene, particleSystem) {
+    constructor(scene, particleSystem, soundManager) {
         this.scene = scene;
         this.mesh = BABYLON.MeshBuilder.CreateBox("box", {}, this.scene);
         this.mesh.material = this.scene.getMaterialByName("Clay");
         this.mesh.setEnabled(false);
         this.particleSystem = particleSystem;
+        this.soundManager = soundManager;
     }
 
     launchLadderFall() {
@@ -119,8 +120,10 @@ export class AtticManager {
                         TutoStore.reportAction("Attic", "actioned");
                         if (CameraStore.meshName !== "Attic") {
                             CameraStore.setTarget("Attic");
+                            this.soundManager.music.setVolume(0.1);
                         } else {
                             CameraStore.setTarget("");
+                            this.soundManager.music.setVolume(0.2);
                         }
                     }
                 }
