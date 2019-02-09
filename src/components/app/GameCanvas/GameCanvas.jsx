@@ -35,6 +35,7 @@ export default observer(class GameCanvas extends React.Component {
         this.scene.updateTransformMatrix(true);
         this.engine.resize();
         this.scene.activeCamera.getProjectionMatrix(true);
+        this.sceneManager.cameraManager.updateFrustum();
     }
 
     launchLadderFall() {

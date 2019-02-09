@@ -30,7 +30,7 @@ export class CameraManager {
         this.camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
         this.camera.setTarget(BABYLON.Vector3.Zero());
         this.camera.checkCollisions = true;
-        this.prepareFrustum();
+        this.updateFrustum();
 
 
         onPatch(CameraStore, (patch) => {
@@ -50,7 +50,7 @@ export class CameraManager {
         }*/
     }
 
-    prepareFrustum() {
+    updateFrustum() {
         const ratio = this.initialValues.height / this.initialValues.width;
         const distance = this.distance / (window.innerWidth / this.initialValues.width);
         this.camera.orthoTop = distance * ratio * (window.innerHeight / this.initialValues.height);
@@ -71,13 +71,14 @@ export class CameraManager {
         let toPosition = BABYLON.Vector3.Zero();
         let scale = 3;
         if(mesh === "Attic") {
-            toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
+            toPosition = this.scene.getMeshByName(mesh).position;
             scale = 1;
         }
         else if (typeof mesh === "string" && mesh.length > 0) {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
             scale = 1 / 3;
         }
+
         const Easing = new BABYLON.QuinticEase();
         Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
 
