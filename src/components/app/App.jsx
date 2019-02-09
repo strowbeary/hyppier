@@ -21,10 +21,6 @@ const App = observer(class App extends Component {
         ready: false
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     resetPipo() {
         if (GameStore.pipo === 'happy') {
             GameStore.setPipo("");

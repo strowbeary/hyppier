@@ -9,13 +9,6 @@ import sound_iPod from "../../../assets/img/sound_iPod.png"
 
 const StartScreen = observer(class StartScreen extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillUnmount() {
-    }
-
     render() {
         return (
             <div className="startScreen">

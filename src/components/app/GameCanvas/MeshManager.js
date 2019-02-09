@@ -1,5 +1,3 @@
-import * as BABYLON from "babylonjs";
-
 export class MeshManager {
     constructor(scene, lights, gameManager) {
         this.scene = scene;
