@@ -4,6 +4,7 @@ import ParcelTypeStore from "./ParcelTypeStore/ParcelTypeStore";
 export default types.model("AtticStore", {
     parcelsNumberLimit: 1000,
     electric: ParcelTypeStore,
+    furniture: ParcelTypeStore,
     atticVisible: false
 }).actions(self =>
     ({

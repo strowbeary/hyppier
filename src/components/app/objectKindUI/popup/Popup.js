@@ -79,22 +79,18 @@ const Popup = observer(class Popup extends Component {
     }
 
     onClose() {
-        TutoStore.reportAction("Notification", "actioned");
-        const timeout = TutoStore.currentMessage === 2? 500: 0;
         Popup.refs = Popup.refs.filter(popup => popup !== null && popup.popup.current !== null).filter(popup => popup.objectKind.name !== this.objectKind.name);
         if (Popup.refs.length > 0) {
             Popup.refs[0].changeFocus(true);
         }
-        setTimeout(() => {
-            if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
-                this.objectKind.updateReplacementCounter();
-            }
-            GameStore.hype.setLevelByDiff(-0.1);
-            CameraStore.setTarget();
-            GameStore.setPipo("angry");
-            this.isClosing = true;
-            this.props.closePopup(false);
-        }, timeout);
+        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
+            this.objectKind.updateReplacementCounter();
+        }
+        GameStore.hype.setLevelByDiff(-0.1);
+        CameraStore.setTarget();
+        GameStore.setPipo("angry");
+        this.isClosing = true;
+        this.props.closePopup(false);
     }
 
     onCatalog() {
@@ -132,15 +128,15 @@ const Popup = observer(class Popup extends Component {
     }
 
     render() {
-        let buttonsDisabled = !this.props.currentState.focus;
+        let focus = !this.props.currentState.focus;
 
         return (
-            <div className={`popup ${buttonsDisabled? '':'focus'}`} style={this.state.draggablePosition}
+            <div className={`popup ${focus? '':'focus'}`} style={this.state.draggablePosition}
                  onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>
-                <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}
+                <button className="popup__footer__buttonClose" onClick={() => this.onClose()}
                         ref={this.buttonClose} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)</button>
-                <button className="popup__footer__buttonCatalog" disabled={buttonsDisabled}
+                <button className="popup__footer__buttonCatalog"
                         onClick={() => this.onCatalog()} ref={this.buttonCatalog} onMouseOver={() => this.pipoYes()} onMouseLeave={() => this.pipoStop()}>Oh oui, je veux !</button>
             </div>
         )
