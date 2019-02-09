@@ -25,7 +25,7 @@ export const TimerManager = {
     },
     pauseAllExcept() {
         timers.forEach((timer, id) => {
-            if (id !== timerException && timer && timer.stop) timer.stop()
+            if (id !== timerException && timer && timer.pause) timer.pause()
         });
     }
 };

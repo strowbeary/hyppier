@@ -26,7 +26,7 @@ const Popup = observer(class Popup extends Component {
 
     componentDidMount() {
         let {height, width} = this.popup.current.getBoundingClientRect();
-        Popup.refs = Popup.refs.filter(popup => popup !== null);
+        Popup.refs = Popup.refs.filter(popup => popup !== null && popup.popup.current !== null);
         this.setState({
             draggablePosition: {
                 top: (this.firstPosition.y + 15 - height),
@@ -81,11 +81,11 @@ const Popup = observer(class Popup extends Component {
     onClose() {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
+        Popup.refs = Popup.refs.filter(popup => popup !== null && popup.popup.current !== null).filter(popup => popup.objectKind.name !== this.objectKind.name);
+        if (Popup.refs.length > 0) {
+            Popup.refs[0].changeFocus(true);
+        }
         setTimeout(() => {
-            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
-            if (Popup.refs.length > 0) {
-                Popup.refs[0].changeFocus(true);
-            }
             if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
                 this.objectKind.updateReplacementCounter();
             }
@@ -99,11 +99,11 @@ const Popup = observer(class Popup extends Component {
     onCatalog() {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
+        Popup.refs = Popup.refs.filter(popup => popup !== null && popup.popup.current !== null).filter(popup => popup.objectKind.name !== this.objectKind.name);
+        if (Popup.refs.length > 0) {
+            Popup.refs[0].changeFocus(true);
+        }
         setTimeout(() => {
-            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
-            if (Popup.refs.length > 0) {
-                Popup.refs[0].changeFocus(true);
-            }
             this.objectKind.updateReplacementCounter();
             for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
                 this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone(this.objectKind.objects[this.objectKind.replacementCounter].cloneDirection);
