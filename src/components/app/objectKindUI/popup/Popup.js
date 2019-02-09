@@ -91,7 +91,8 @@ const Popup = observer(class Popup extends Component {
             }
             GameStore.hype.setLevelByDiff(-0.1);
             CameraStore.setTarget();
-            this.pipoStop();
+            GameStore.setPipo("angry");
+            this.isClosing = true;
             this.props.closePopup(false);
         }, timeout);
     }
