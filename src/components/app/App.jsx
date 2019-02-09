@@ -60,15 +60,17 @@ const App = observer(class App extends Component {
                 {this.state.loading && !GameStore.attic.atticVisible &&
                     <HypeIndicator/>
                 }
-                <CSSTransitionGroup
-                    transitionName="catalog"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}
-                >
-                    {CatalogStore.isOpen &&
-                    <Catalog index={CatalogStore.objectKindIndex}/>
-                    }
-                </CSSTransitionGroup>
+                <div className={"catalogWrapper"}>
+                    <CSSTransitionGroup
+                        transitionName="catalog"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}
+                    >
+                        {CatalogStore.isOpen &&
+                        <Catalog index={CatalogStore.objectKindIndex}/>
+                        }
+                    </CSSTransitionGroup>
+                </div>
                 {
                     TutoStore.end &&
                     <ToastWrapper/>

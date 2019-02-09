@@ -54,6 +54,15 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         worker.onmessage = (event) => {
             this.setState(event.data);
         };
+
+        onPatch(GameStore, (patch) => {
+            if(patch.path.includes("level")) {
+                if (this.hypeLevel < patch.value) {
+                    this.setState({up: true});
+                }
+                this.hypeLevel = patch.value;
+            }
+        })
         let frame = 0;
         const loop = () => {
             worker.postMessage(frame);

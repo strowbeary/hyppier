@@ -86,6 +86,13 @@ button, a {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  .catalogWrapper {
+    display: block;
+    margin-left: 5vw;
+  }
 
   canvas {
     position: absolute;
@@ -98,7 +105,8 @@ button, a {
 
   &:before {
     content: "";
-    display: inline-block;
+    position: absolute;
+    display: block;
     opacity: 0;
     width: 100vw;
     height: 100vh;
