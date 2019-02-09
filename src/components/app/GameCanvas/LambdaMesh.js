@@ -11,6 +11,7 @@ export class LambdaMesh {
         this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
+        /*
         const pivotPosition =  this.mesh.getBoundingInfo().boundingBox.maximumWorld
             .subtract( this.mesh.getBoundingInfo().boundingBox.maximumWorld
                 .subtract( this.mesh.getBoundingInfo().boundingBox.minimumWorld)
@@ -20,7 +21,8 @@ export class LambdaMesh {
             pivotPosition.x - this.mesh.position.x,
             pivotPosition.y - this.mesh.position.y,
             pivotPosition.z - this.mesh.position.z
-        )); 
+        ));
+        */
 
         this.clones = [];
         if (this.mesh) {
@@ -93,7 +95,7 @@ export class LambdaMesh {
                 });
                 keys.push({
                     frame: frameNumber,
-                    value: new BABYLON.Color3.Black()
+                    value: new BABYLON.Color3.White()
                 });
                 animationBox.setKeys(keys);
 
@@ -111,7 +113,7 @@ export class LambdaMesh {
             });
             keys.push({
                 frame: frameNumber,
-                value: new BABYLON.Color3.Black()
+                value: new BABYLON.Color3.White()
             });
             animationBox.setKeys(keys);
 

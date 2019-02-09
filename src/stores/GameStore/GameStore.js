@@ -22,8 +22,7 @@ export default types.model({
     )
     .create({
     attic: AtticStore.create({
-        electric: {parcelsNumber: 0, clueEventLaunched: false},
-        furniture: {parcelsNumber: 0, clueEventLaunched: false}
+        electric: {parcelsNumber: 0, clueEventLaunched: false}
     }),
     hype: HypeStore.create({
         level: 0.5
