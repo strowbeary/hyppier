@@ -160,6 +160,39 @@ button, a {
   }
 }
 
+button {
+  position: relative;
+
+  img:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 500ms;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  img:first-child {
+    opacity: 1;
+    transition: opacity 500ms;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  &:hover {
+
+    img:last-child {
+      opacity: 1;
+    }
+
+    img:first-child {
+      opacity: 0;
+    }
+  }
+}
+
 .game__footer {
   position: fixed;
   bottom: 3rem;
@@ -175,14 +208,6 @@ button, a {
 
     &:first-child {
       margin-left: 0;
-    }
-
-    svg {
-      color: white;
-
-      &:hover {
-        color: black;
-      }
     }
   }
 }

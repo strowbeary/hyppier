@@ -36,7 +36,7 @@ export class AtticManager {
         this.ground = BABYLON.Mesh.CreateGround("ground", 32, 32, 2, this.scene);
 
 
-        this.wall1 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
+        /*this.wall1 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall1.position = new BABYLON.Vector3(
             this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.maximumWorld.x,
             this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
@@ -88,12 +88,12 @@ export class AtticManager {
         this.wall4.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall4, BABYLON.PhysicsImpostor.PlaneImpostor, {
             mass: 0,
             restitution: 0.5
-        }, this.scene);
+        }, this.scene);*/
 
 
         this.ground.position = this.groundPosition;
         this.ground.isVisible = false;
-        this.ground.physicsImpostor = new BABYLON.PhysicsImpostor(this.ground, BABYLON.PhysicsImpostor.PlaneImpostor, {
+        this.ground.physicsImpostor = new BABYLON.PhysicsImpostor(this.ground, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0.5
         }, this.scene);

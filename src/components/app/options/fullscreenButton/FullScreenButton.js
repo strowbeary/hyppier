@@ -2,7 +2,8 @@ import React from 'react';
 import {Component} from 'react';
 import {observer} from "mobx-react";
 import * as BABYLON from "babylonjs";
-import SvgButton from "../../svgButton/SvgButton";
+import fullscreen from "../../../../assets/img/fullscreen.svg";
+import fullscreenHover from "../../../../assets/img/fullscreen-hover.svg";
 
 const FullScreenButton = observer(class FullScreenButton extends Component {
 
@@ -36,8 +37,9 @@ const FullScreenButton = observer(class FullScreenButton extends Component {
 
     render() {
         return (
-            <button className={"fullscreenButton"} onClick={this.switchFullscreen}>
-                <SvgButton type={"fullscreen"}/>
+            <button className="fullscreenButton svgButton" onClick={this.switchFullscreen}>
+                <img className="svgButton__main" src={fullscreen} alt="fullscreen"/>
+                <img className="svgButton__hover" src={fullscreenHover} alt="fullscreen"/>
             </button>
         )
     }
