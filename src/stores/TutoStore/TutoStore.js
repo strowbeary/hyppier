@@ -68,7 +68,7 @@ export default types.model("TutoStore",
                 read: false
             },
             {
-                text: "Haha tu vois c'est facile! (si seulement avoir des nouveaux meubles étaient aussi simples). " +
+                text: "Haha tu vois c'est facile! (si seulement avoir des nouveaux meubles était aussi simple). " +
                     "Dès qu'une nouveauté sort tu pourras te la procurer, mais attention, l'offre est limitée et ce que tu ne prends pas sera perdu à jamais!",
                 expiration: 0,
                 action: "click",
