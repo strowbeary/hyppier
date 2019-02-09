@@ -116,13 +116,13 @@ button, a {
   }
 
   &.happy {
-    background: linear-gradient(45deg, $yellow 50%, lightgreen 50%);
+    background: linear-gradient(45deg, #FFE07D 50%, lightgreen 55%);
     background-size: 300%;
     background-position: 0;
     animation: animate 3s;
 
     &:after {
-      background: linear-gradient(45deg, transparent 50%, lightgreen 50%);
+      background: linear-gradient(45deg, transparent 50%, lightgreen 55%);
       background-size: 300%;
       background-position: 0;
       animation: animate 3s;
@@ -130,13 +130,13 @@ button, a {
   }
 
   &.angry {
-    background: linear-gradient(45deg, $yellow 50%, crimson 50%);
+    background: linear-gradient(45deg, $yellow 50%, crimson 55%);
     background-size: 300%;
     background-position: 0;
     animation: animate 3s;
 
     &:after {
-      background: linear-gradient(45deg, transparent 50%, crimson 50%);
+      background: linear-gradient(45deg, transparent 50%, crimson 55%);
       background-size: 300%;
       background-position: 0;
       animation: animate 3s;
