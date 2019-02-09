@@ -17,7 +17,7 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    cursor: url($pointer-url-levelDown), pointer;
+    cursor: url($pointer-url-levelDown) 16 0, pointer;
     transition: background-color 0.1s;
 
     &:hover {

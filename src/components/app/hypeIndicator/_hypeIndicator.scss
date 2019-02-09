@@ -23,12 +23,37 @@
     font-weight: bold;
     text-align: center;
     transform-origin: center;
-    animation: scale 4s infinite;
+  }
+
+  &__wave {
+    position: absolute;
+    display: block;
+    top: -10px;
+    background-image: url("../../../assets/img/wave.svg");
+    background-size: auto;
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 10px;
+    transition: transform 0.5s linear;
+    animation: moveBackground 2s linear infinite;
+
+    &.anim {
+      transform: scaleY(5);
+      animation: moveBackground 0.5s linear infinite;
+    }
+  }
+
+  &__level {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #ffe13d;
+    transition: height 1s linear;
   }
 
   .jauge {
     position: relative;
-    border: 7px solid white;
+    border: 6px solid white;
     background: white;
     width: 75px;
     height: 300px;
@@ -49,7 +74,7 @@
   z-index: 10;
   width: 128px;
   height: 128px;
-  transition: scale 1s ease-in;
+  //transition: transform 5ms linear;
   background: url('../../../assets/img/Pipo-Idle.png') left top no-repeat;
   background-size: (2560px/2) (3072px/2);
   animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
@@ -65,7 +90,6 @@
   &.yes {
     background: url('../../../assets/img/Pipo-Yes.png') left center;
     background-size: (2048px/2) (1792px/2);
-    transform: scale(1.15);
     animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
 
   }
@@ -73,7 +97,6 @@
   &.no {
     background: url('../../../assets/img/Pipo-No.png') left center;
     background-size: (2048px/2);
-    transform: scale(1.15);
     animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
   }
 }
@@ -132,17 +155,11 @@
   }
 }
 
-@keyframes animate {
-  0% {
+@keyframes moveBackground {
+  from {
     background-position-x: 0;
   }
-  40% {
-    background-position-x: 50%;
-  }
-  80% {
-    background-position-x: 0;
-  }
-  100% {
-    background-position-x: 50%;
+  to {
+    background-position-x: 100%;
   }
 }

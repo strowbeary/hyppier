@@ -19,7 +19,6 @@ const Popup = observer(class Popup extends Component {
 
     constructor(props) {
         super(props);
-
         this.objectKind = CatalogStore.objectKinds[props.index];
         this.firstPosition = this.props.position;
         this.adUrl = this.objectKind.objects[this.objectKind.replacementCounter + 1].adUrl;
@@ -35,17 +34,12 @@ const Popup = observer(class Popup extends Component {
             }
         });
         this.props.changeCurrentState({
-            focus: Popup.refs.length === 0,
-            hovered: false
+            focus: Popup.refs.length === 0 || Popup.refs[0].objectKind.name === this.objectKind.name
         });
     }
 
     changeFocus(value) {
         this.props.changeCurrentState({focus: value});
-    }
-
-    setHovered(value) {
-        this.props.changeCurrentState({hovered: value});
     }
 
     onDragStart(e) {
@@ -88,11 +82,9 @@ const Popup = observer(class Popup extends Component {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
         setTimeout(() => {
-            if (this.state.focus) {
-                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-                if (Popup.refs.length > 0) {
-                    Popup.refs[0].changeFocus(true);
-                }
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
             if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1) {
                 this.objectKind.updateReplacementCounter();
@@ -108,12 +100,9 @@ const Popup = observer(class Popup extends Component {
         TutoStore.reportAction("Notification", "actioned");
         const timeout = TutoStore.currentMessage === 2? 500: 0;
         setTimeout(() => {
-            if (this.state.focus) {
-                Popup.refs = Popup.refs.filter(popup => popup !== null).filter((popup) => !popup.state.focus);
-                if (Popup.refs.length > 0) {
-                    Popup.refs[0].changeFocus(true);
-                }
-                this.changeFocus(false);
+            Popup.refs = Popup.refs.filter(popup => popup !== null).filter(popup => popup !== this);
+            if (Popup.refs.length > 0) {
+                Popup.refs[0].changeFocus(true);
             }
             this.objectKind.updateReplacementCounter();
             for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
@@ -142,13 +131,11 @@ const Popup = observer(class Popup extends Component {
     }
 
     render() {
-        let disabled = this.props.currentState.focus ? '' : 'disabled';
-        let buttonsDisabled = !this.props.currentState.focus && !this.props.currentState.hovered;
+        let buttonsDisabled = !this.props.currentState.focus;
 
         return (
-            <div className={`popup ${disabled}`} style={this.state.draggablePosition}
-                 onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}
-                 onMouseOver={() => this.setHovered(true)} onMouseLeave={() => this.setHovered(false)}>
+            <div className={`popup ${buttonsDisabled? '':'focus'}`} style={this.state.draggablePosition}
+                 onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>
                 <button className="popup__footer__buttonClose" disabled={buttonsDisabled} onClick={() => this.onClose()}
                         ref={this.buttonClose} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)</button>
