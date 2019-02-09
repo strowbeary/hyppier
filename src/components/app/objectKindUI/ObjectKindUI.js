@@ -63,7 +63,6 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     get2dPosition() {
-        let y = 0;
         let position = this.objectKind.location.toVector3();
         if(this.objectKind.activeObject !== null) {
             const lambdaMesh = this.objectKind.objects[this.objectKind.activeObject].getModel();

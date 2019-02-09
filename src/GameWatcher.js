@@ -13,7 +13,6 @@ export class GameWatcher {
             CatalogStore.objectKinds.forEach(objectKind => {
                 let oldPreviewObjectId = null;
                 onPatch(objectKind, patch => {
-                    ObjectKindUI.refs.filter(ref => ref !== null).forEach(ref => ref.updatePosition());
                     try {
                         if (patch.path.includes("activeObject") && patch.op === "replace") {
                             if (objectKind.oldActiveObject !== null) {

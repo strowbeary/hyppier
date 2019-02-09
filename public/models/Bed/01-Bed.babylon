@@ -1,6 +1,6 @@
 {"producer":{"name":"Blender","version":"2.79 (sub 0)","exporter_version":"5.6.4","file":"Bed_01.babylon"},
 "autoClear":true,"clearColor":[0,0,0],"ambientColor":[0.2,0.2,0.3],"gravity":[0,-9.81,0],
-"materials":[{"name":"Bed_01.Blender white","id":"Bed_01.Blender white","ambient":[0.8,0.8,0.8],"diffuse":[0.64,0.64,0.64],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
+"materials":[{"name":"Bed_01.Blender white","id":"Bed_01.Blender white","ambient":[0.8,0.8,0.8],"diffuse":[0.8,0.8,0.8],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4}],
 "multiMaterials":[],
 "skeletons":[],
 "meshes":[{"name":"Bed-01.001","id":"Bed-01.001","materialId":"Bed_01.Blender white","billboardMode":0,"position":[0,0,0],"rotation":[0,3.1416,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""

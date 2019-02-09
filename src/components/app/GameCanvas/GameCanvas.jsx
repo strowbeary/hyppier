@@ -34,7 +34,6 @@ export default observer(class GameCanvas extends React.Component {
     onResize() {
         this.scene.updateTransformMatrix(true);
         this.engine.resize();
-        this.sceneManager.cameraManager.updateCamera();
         this.scene.activeCamera.getProjectionMatrix(true);
     }
 

@@ -181,7 +181,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 10000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -241,7 +241,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 15000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -300,7 +300,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -359,13 +359,13 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": 0
     },
     {
       "name": "Transport",
-      "type": "furniture",
+      "type": "mobility",
       "objects": [
         {
           "name": "Allumer le feu (RIP Johnny)",
@@ -450,7 +450,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 8000,
       "replacementCounter": 0,
       "activeObject": null
     }

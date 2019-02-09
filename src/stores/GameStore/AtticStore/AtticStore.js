@@ -8,7 +8,9 @@ export default types.model("AtticStore", {
 }).actions(self =>
     ({
         incrementParcelsNumberOf(objectKindType) {
-            self[objectKindType].incrementParcelsNumber();
+            if(self[objectKindType]) {
+                self[objectKindType].incrementParcelsNumber();
+            }
         },
         setAtticVisibility(value) {
             self.atticVisible = value;
@@ -17,11 +19,13 @@ export default types.model("AtticStore", {
 ).views(self =>
     ({
         shouldLaunchClueEvent(objectKindType) {
-            if(!self[objectKindType].clueEventLaunched && self[objectKindType].parcelsNumber >= self[objectKindType].parcelsNumberLimit) {
-                self[objectKindType].updateClueEventLaunched();
-                return true;
-            } else {
-                return false;
+            if(self[objectKindType]) {
+                if (!self[objectKindType].clueEventLaunched && self[objectKindType].parcelsNumber >= self[objectKindType].parcelsNumberLimit) {
+                    self[objectKindType].updateClueEventLaunched();
+                    return true;
+                } else {
+                    return false;
+                }
             }
         },
         isGameOver() {

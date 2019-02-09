@@ -48,21 +48,7 @@ export class SceneManager {
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
         defaultPipeline.samples = 4;
         defaultPipeline.fxaaEnabled = true;
-        defaultPipeline.grainEnabled = true;
-        defaultPipeline.grain.intensity = 15 * SceneManager.DEVICE_PIXEL_RATIO;
         defaultPipeline.imageProcessingEnabled = true;
-
-        const ssaoRatio = {
-            ssaoRatio: 0.5, // Ratio of the SSAO post-process, in a lower resolution
-            combineRatio: 1.0 // Ratio of the combine post-process (combines the SSAO and the scene)
-        };
-
-        const ssao = new BABYLON.SSAORenderingPipeline("ssao", this.scene, ssaoRatio, [this.camera]);
-        ssao.fallOff = 0.000001;
-        ssao.area = 1;
-        ssao.radius = 0.0001;
-        ssao.totalStrength = 2.0;
-        ssao.base = 0;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         const ambient = 0.85;
@@ -129,9 +115,7 @@ export class SceneManager {
                         if (typeof onReadyCB === 'function') {
                             onReadyCB();
                         }
-                        ObjectKindUI.refs.filter(ref => {
-                            return ref !== null
-                        }).forEach(ref => ref.updatePosition());
+                        ObjectKindUI.refs.forEach(ref => ref && ref.updatePosition());
 
                         try {
                             this.atticManager.prepareGravity();

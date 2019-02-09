@@ -22,6 +22,12 @@ export class GameStarter {
                     loadedMesh.receiveShadows = true;
                     loadedMesh.convertToFlatShadedMesh();
                     loadedMesh.convertToUnIndexedMesh();
+
+                    loadedMesh.material.diffuseColor = BABYLON.Color3.White();
+                    if(loadedMesh.subMaterials) {
+                        loadedMesh.subMaterials.forEach(material => material.diffuseColor = BABYLON.Color3.White());
+                        loadedMesh.subMaterials.forEach(material => material.ambientColor = BABYLON.Color3.White());
+                    }
                     loadedMesh.freezeWorldMatrix();
                     //loadedMesh.material.freeze();
                     scene.addMesh(loadedMesh);

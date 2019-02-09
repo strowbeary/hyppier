@@ -293,9 +293,334 @@
 ,34,33,29,38,36,31,10,38,30,36,39,32,39,10,40,46,41,35,49,43,11,39,44,10,47,46,34,38,46,12,37,47,39,36,35,11,45,48,49,52,50,51,53,42,48,52,49,45,50,52
 ,47,51,41,37,53,51,45,44,43,40,42,53,18,16,54,16,22,55,55,0,56,8,7,3,1,0,55,1,55,22,8,5,57,57,1,23,1,22,23,21,20,24,19,9,26,25,24,20]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":60,"indexStart":0,"indexCount":348}]
-,"instances":[]}
-,{"name":"Location(Shoes).001","id":"Location(Shoes).001","position":[-0.9447,-0.56,-1.5318],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Poster).001","id":"Location(Poster).001","position":[1.7384,0.7766,0.9392],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Plant).001","id":"Location(Plant).001","position":[-2.0154,-0.5619,-1.8091],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Mobile).001","id":"Location(Mobile).001","position":[0.2408,0.1267,1.1089],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Lampe).001","id":"Location(Lampe).001","position":[0.3699,0.1244,1.2254],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Console).001","id":"Location(Console).001","position":[0.262,0.127,0.8024],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Computer).001","id":"Location(Computer).001","position":[1.2848,0.1262,0.9828],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Clothing).001","id":"Location(Clothing).001","position":[1.6814,0.671,-1.5969],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Chair).001","id":"Location(Chair).001","position":[0.7692,-0.56,0.2174],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Bed).001","id":"Location(Bed).001","position":[0.534,-0.5574,-1.3972],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Location(Bag).001","id":"Location(Bag).001","position":[-1.9184,-0.56,0.2271],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Ladder-Position.001","id":"Ladder-Position.001","position":[-1.9708,-0.556,1.2762],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true,"checkCollisions":false,"billboardMode":0,"receiveShadows":false,"tags":""},{"name":"Attic","id":"Attic","materialId":"Room_Final.BlenderRender-White.001","billboardMode":0,"position":[-0.2644,8.8689,-0.3514],"rotation":[0,0,0],"scaling":[1,0.6042,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false,"pickable":true,"tags":""
-,"positions":[2,1.7463,-0.4339,2,2.5,-1.75,2,2.5,-0.2327,2,1.599,1.75,-1.4845,2.5,1.75,-1.4845,1.599,1.75,-1.9465,0,1.75,-2,0,1.6993,-1.9465,0,1.6993,-1.9465,0,-1.75,-2,0,-0.2327,-2,0,-1.75,-1.9465,0,-0.2327,-2,0,0.934,2,1.6979,1.0098,2,2.5,0.934,2,2.5,1.2024
+,"instances":[]},
+  {
+    "name": "Location(Shoes).001",
+    "id": "Location(Shoes).001",
+    "position": [
+      -0.9447,
+      -0.56,
+      -1.5318
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Poster).001",
+    "id": "Location(Poster).001",
+    "position": [
+      1.7384,
+      0.7766,
+      0.9392
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Plant).001",
+    "id": "Location(Plant).001",
+    "position": [
+      -2.0154,
+      -0.5619,
+      -1.8091
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Mobile).001",
+    "id": "Location(Mobile).001",
+    "position": [
+      0.2408,
+      0.1267,
+      1.1089
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Lampe).001",
+    "id": "Location(Lampe).001",
+    "position": [
+      0.3699,
+      0.1244,
+      1.2254
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Console).001",
+    "id": "Location(Console).001",
+    "position": [
+      0.262,
+      0.127,
+      0.8024
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Computer).001",
+    "id": "Location(Computer).001",
+    "position": [
+      1.2848,
+      0.1262,
+      0.9828
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Clothing).001",
+    "id": "Location(Clothing).001",
+    "position": [
+      1.6814,
+      0.671,
+      -1.5969
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Chair).001",
+    "id": "Location(Chair).001",
+    "position": [
+      0.7692,
+      -0.56,
+      0.2174
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Bed).001",
+    "id": "Location(Bed).001",
+    "position": [
+      0.534,
+      -0.5574,
+      -1.3972
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Location(Bag).001",
+    "id": "Location(Bag).001",
+    "position": [
+      -1.9184,
+      -0.56,
+      0.2271
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Ladder-Position.001",
+    "id": "Ladder-Position.001",
+    "position": [
+      -1.9708,
+      -0.556,
+      1.2762
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      1,
+      1
+    ],
+    "isVisible": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "billboardMode": 0,
+    "receiveShadows": false,
+    "tags": ""
+  },
+  {
+    "name": "Attic",
+    "id": "Attic",
+    "materialId": "Room_Final.BlenderRender-White.001",
+    "billboardMode": 0,
+    "position": [
+      -0.2644,
+      8.8689,
+      -0.3514
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scaling": [
+      1,
+      0.6042,
+      1
+    ],
+    "isVisible": true,
+    "freezeWorldMatrix": false,
+    "isEnabled": true,
+    "checkCollisions": false,
+    "receiveShadows": false,
+    "pickable": true,
+    "tags": "","positions":[2,1.7463,-0.4339,2,2.5,-1.75,2,2.5,-0.2327,2,1.599,1.75,-1.4845,2.5,1.75,-1.4845,1.599,1.75,-1.9465,0,1.75,-2,0,1.6993,-1.9465,0,1.6993,-1.9465,0,-1.75,-2,0,-0.2327,-2,0,-1.75,-1.9465,0,-0.2327,-2,0,0.934,2,1.6979,1.0098,2,2.5,0.934,2,2.5,1.2024
 ,2,1.7463,0.6469,2,0,-0.2327,2,0.6183,0.6469,2,0,0.934,2,0.6667,1.0098,2,0,1.2024,2,0,1.75,-1.4845,0.7656,1.75,-1.4845,0,1.75,2,0.7656,1.75,2,0,-1.75,2,0.6183,-0.4339,2,0.7656,-1.75,-1.9465,0.7656,1.75,-2,1.599,1.75,-2,0.7656,1.75,-1.9465,1.599,1.75
 ,-2,0,1.75,-1.4845,0,0.934,-1.4845,0,-0.2327,-1.9465,0,0.934,-1.4845,0,-1.75,2,0,1.6993,-1.4845,0,1.6993,-2,2.5,1.75,-1.9465,2.5,1.75,-1.4845,0,1.2024,2,0.7565,1.6815,2,1.6081,1.6815,2,2.5,1.75,-2,0,1.2024,-1.9465,0,1.2024,2,2.5,1.6993,2,1.599,-1.75
 ]

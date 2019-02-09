@@ -8,7 +8,7 @@ export class LambdaMesh {
         this.objectKindName = objectKindName;
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
-        this.mesh.convertToUnIndexedMesh();
+        //this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
         /*
@@ -66,10 +66,6 @@ export class LambdaMesh {
         keys.push({
             frame: 0,
             value: 0
-        });
-        keys.push({
-            frame: 15,
-            value: 1.15
         });
         keys.push({
             frame: 30,
