@@ -57,6 +57,17 @@ $catalog-width: 30vw;
       font-size: 1.6rem;
     }
 
+    &__header {
+    }
+
+    &__info {
+      color: $yellow;
+      display: block;
+      text-transform: uppercase;
+      margin-top: 7px;
+      text-align: right;
+    }
+
     &__main {
       margin: $vertical-space 0;
 

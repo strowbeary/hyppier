@@ -89,8 +89,10 @@ const Catalog = observer(class Catalog extends Component {
                     </button>
                 </div>
                 <div className="catalog__content">
-                    <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
-
+                    <div className="catalog__content__main__header">
+                        <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
+                        <a className="catalog__content__info" href={this.productNew.infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                    </div>
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">
                             <p>{this.productType}</p>
