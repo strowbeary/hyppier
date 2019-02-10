@@ -109,7 +109,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog() {
-        this.sceneManager.gameManager.pauseCatalog();
+        this.sceneManager.gameManager.pauseGame();
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");

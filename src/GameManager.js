@@ -15,21 +15,11 @@ class GameManager {
         GameManagerInstance = this;
     }
 
-    pauseCatalog() {
-        TimerManager.pauseAllExcept();
-        GameStore.options.setPause(true);
-        this.scene.animatables
-            .forEach(animatable => {
-                if (animatable.getAnimations()
-                    .map(animation => animation._animation.name.includes("materialDegradation"))
-                    .some((e) => e)) {
-                    animatable.pause();
-                }
-            })
-    }
-
     pauseGame() {
-        TimerManager.pauseAll();
+        if(GameStore.attic.atticVisible) {
+            TimerManager.pauseAll();
+        }
+        TimerManager.pauseAllExcept();
         GameStore.options.setPause(true);
         this.scene.animatables
             .forEach(animatable => {

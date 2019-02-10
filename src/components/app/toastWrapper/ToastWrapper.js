@@ -42,7 +42,7 @@ const ToastWrapper = observer(class ToastWrapper extends Component {
                     transitionLeaveTimeout={500}
                 >
                     {this.state.toast && (!GameStore.options.isPaused || (GameStore.options.isPaused && CatalogStore.isOpen)) &&
-                        <Toast></Toast>
+                        <Toast/>
                     }
                 </CSSTransitionGroup>
             </React.Fragment>

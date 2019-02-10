@@ -158,7 +158,7 @@ export class CameraManager {
         if (typeof mesh === "string" && mesh !== "" && mesh !== "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
             this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSizeWorld
-                .length() * this.initialValues.distance;
+                .length() * this.initialValues.distance / 2;
         } else if(mesh === "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
             this.distance = this.initialValues.distance;
@@ -168,6 +168,7 @@ export class CameraManager {
             this.distance = this.initialValues.distance;
         }
 
+        console.log("beforeCheck", this.distance);
         if(this.distance > this.initialValues.distance) {
             this.distance = this.initialValues.distance;
         } else if(this.distance < 1) {
