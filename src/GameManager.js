@@ -1,10 +1,10 @@
 import GameStore from "./stores/GameStore/GameStore";
 import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {TimerManager} from "./utils/TimerManager";
-import CameraStore from "./stores/CameraStore/CameraStore";
-import {onPatch} from "mobx-state-tree";
 
-export class GameManager {
+let GameManagerInstance;
+
+class GameManager {
 
     constructor(scene, atticManager) {
         this.scene = scene;
@@ -12,24 +12,14 @@ export class GameManager {
         this.objectKindName = null;
         this.objectKindType = null;
         this.atticManager = atticManager;
-        onPatch(CameraStore, (patch) => {
-            if(patch.path.includes("meshName")) {
-                if(patch.value === "Attic") {
-                    this.pauseGame();
-                    GameStore.attic.setAtticVisibility(true);
-                }
-                if(patch.value === "") {
-                    GameStore.attic.setAtticVisibility(false);
-                }
-            }
-        });
+        GameManagerInstance = this;
     }
 
     pauseCatalog() {
         TimerManager.pauseAllExcept();
         GameStore.options.setPause(true);
         this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null && animatable.getRuntimeAnimationByTargetProperty("target") === null)
             .forEach(animatable => animatable.pause())
     }
 
@@ -37,7 +27,7 @@ export class GameManager {
         TimerManager.pauseAll();
         GameStore.options.setPause(true);
         this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null)
+            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null && animatable.getRuntimeAnimationByTargetProperty("target") === null)
             .forEach(animatable => animatable.pause())
     }
 
@@ -99,3 +89,5 @@ export class GameManager {
         }
     }
 }
+
+export {GameManager, GameManagerInstance}
