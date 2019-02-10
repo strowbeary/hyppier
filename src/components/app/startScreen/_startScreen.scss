@@ -43,14 +43,15 @@
     position: absolute;
     top: 0;
     left: 0;
-    animation: moveUp 20s linear infinite;
+    animation: moveUp 40s linear infinite;
     width: 100%;
+    //transition: left 1s;
   }
 
   .decoObjectsBlurred {
     filter: blur(5px);
     width: 105%;
-    animation: moveUp 10s linear infinite;
+    animation: moveUp 20s linear infinite;
   }
 }
 
