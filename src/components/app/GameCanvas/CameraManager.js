@@ -143,7 +143,7 @@ export class CameraManager {
         animationGroup.normalize(0, 30);
         animationGroup.play();
         animationGroup.onAnimationGroupEndObservable.add(() => {
-            ObjectKindUI.refs.forEach(ref => ref &&ref.updatePosition());
+            this.scene.afterCameraRender = () => {};
             if(toPosition.equals(BABYLON.Vector3.Zero())) {
                 transitionFinishListener.forEach(listener => listener())
             }
@@ -156,16 +156,17 @@ export class CameraManager {
         if (this.camera.target.equals(this.scene.getMeshByName("Attic").position)) {
             scale = 1;
         }
-
-        if (typeof mesh === "string" && mesh.length > 0) {
+        if(mesh === "Attic") {
+            toPosition = this.scene.getMeshByName(mesh).position;
+            scale = 1;
+        } else if (typeof mesh === "string" && mesh.length > 0) {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
             scale = 1 / 3;
         }
 
-        if(mesh === "Attic") {
-            toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
-            scale = 1;
-        }
+        this.scene.afterCameraRender = () => {
+            ObjectKindUI.refs.forEach(ref => ref &&ref.updatePosition());
+        };
 
         this.createAnimations(toPosition, scale);
     }
