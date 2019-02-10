@@ -3,19 +3,16 @@ import React, {Component} from "react";
 import "./_startScreen.scss";
 import SpaceBar from "../spacebar/Spacebar";
 
-import sound_catEars from "../../../assets/img/sound_catEars.png"
-import sound_headset from "../../../assets/img/sound_headset.png"
-import sound_iPod from "../../../assets/img/sound_iPod.png"
+import objects from "../../../assets/img/objects.png";
+import objectsBlurred from "../../../assets/img/objects-blurred.png";
 
 const StartScreen = observer(class StartScreen extends Component {
 
     render() {
         return (
             <div className="startScreen">
-                <img src={sound_catEars} alt={"deco"} className={"catEars"}/>
-                <img src={sound_headset} alt={"deco"} className={"headset"}/>
-                <img src={sound_iPod} alt={"deco"} className={"iPod"}/>
-                <img src={sound_headset} alt={"deco"} className={"blur_headset"}/>
+                <img src={objects} alt="decoObjects" className="decoObjects"/>
+                <img src={objectsBlurred} alt="decoObjectsBlurred" className="decoObjectsBlurred"/>
                 <div className="startScreen__wrapper">
                     <div className={"startScreen__text"}>
                         <h1 className="startScreen__title">Hyppier</h1>
