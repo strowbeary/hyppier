@@ -18,7 +18,7 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
@@ -36,7 +36,7 @@
             }
           ],
           "cloneNumber": 1,
-          "cloneDirection": ""
+          "cloneDirection": "left"
         },
         {
           "name": "BIENÅSSÏ",
@@ -53,7 +53,7 @@
             }
           ],
           "cloneNumber": 1,
-          "cloneDirection": ""
+          "cloneDirection": "left"
         },
         {
           "name": "FESSØYEUSË",
@@ -70,7 +70,7 @@
             }
           ],
           "cloneNumber": 1,
-          "cloneDirection": ""
+          "cloneDirection": "left"
         },
         {
           "name": "KEBABÅTOR 3000",
@@ -86,7 +86,7 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 1,
+          "cloneNumber": 0,
           "cloneDirection": ""
         }
       ],
@@ -129,8 +129,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "WARMACHINE 720°",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -145,8 +145,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "Tryptique ludique polychrome",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -161,8 +161,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "Olinouane 42 - Dispositif d'écrans à mobilité réduite pour joueur invétéré",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -237,8 +237,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 2,
+          "cloneDirection": "up"
         }
       ],
       "objectTimeout": 5000,
@@ -339,8 +339,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "Matrice celeste des songes",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -355,8 +355,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         }
       ],
       "objectTimeout": 20000,
@@ -398,8 +398,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "Hyper Fly Glossy Glossy Neon Board",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -414,8 +414,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "left"
         },{
           "name": "Power Space Mountain To Infinity And Beyond",
           "adUrl": "img/catalog/popup_placeholder.png",
@@ -430,8 +430,8 @@
               "url": "http://localhost:8080"
             }
           ],
-          "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneNumber": 1,
+          "cloneDirection": "up"
         },{
           "name": "Burning Sky Holy Icarus Wings Shut Up And Take My Money",
           "adUrl": "img/catalog/popup_placeholder.png",
