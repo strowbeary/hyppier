@@ -20,19 +20,17 @@ function loadObject(objectKind) {
 
 function preloadNextObject(objectKind) {
     const objectIndex = objectKind.replacementCounter + 1;
-    if (objectIndex < objectKind.objects.length) {
-        return BABYLON.SceneLoader.LoadAssetContainerAsync(
-            "./models/",
-            objectKind.objects[objectIndex].modelUrl
-        ).then((container) => {
-            container.meshes.forEach(loadedMesh => {
-                if (!loadedMesh.name.includes("Location")) {
-                    loadedMesh.position = objectKind.location.toVector3();
-                    objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
-                }
-            });
-        }).catch(e => console.log(e));
-    }
+    return BABYLON.SceneLoader.LoadAssetContainerAsync(
+        "./models/",
+        objectKind.objects[objectIndex].modelUrl
+    ).then((container) => {
+        container.meshes.forEach(loadedMesh => {
+            if (!loadedMesh.name.includes("Location")) {
+                loadedMesh.position = objectKind.location.toVector3();
+                objectKind.objects[objectIndex].setModel(new LambdaMesh(loadedMesh, objectKind.objectTimeout, objectKind.name));
+            }
+        });
+    }).catch(e => console.log(e));
 }
 
 export default types
@@ -66,8 +64,12 @@ export default types
             preloadNextObject(self);
         },
         updateReplacementCounter() {
-            self.replacementCounter++;
-            preloadNextObject(self);
+            if (self.replacementCounter < self.objects.length - 1) {
+                self.replacementCounter++;
+                if (self.replacementCounter < self.objects.length - 1) {
+                    preloadNextObject(self);
+                }
+            }
         },
         setActiveObject(objectId) {
             if (self.activeObject !== objectId) {

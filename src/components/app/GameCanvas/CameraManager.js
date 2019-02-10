@@ -71,7 +71,6 @@ export class CameraManager {
             value: toPosition
         });
         animationTarget.setKeys(keysTarget);
-        console.log(toPosition);
 
         const Easing = new BABYLON.QuinticEase();
         Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);

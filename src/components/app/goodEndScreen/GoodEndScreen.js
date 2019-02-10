@@ -9,7 +9,6 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     }
 
     componentDidMount() {
-        console.log("hello");
     }
 
     render() {

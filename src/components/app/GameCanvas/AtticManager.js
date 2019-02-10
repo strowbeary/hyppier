@@ -121,11 +121,11 @@ export class AtticManager {
                             CameraStore.setTarget("Attic");
                             GameManagerInstance.pauseGame();
                             GameStore.attic.setAtticVisibility(true);
-                            this.soundManager.music.setVolume(0.05);
+                            this.soundManager.music.setVolume(0.001);
                         } else {
                             CameraStore.setTarget("");
                             GameStore.attic.setAtticVisibility(false);
-                            this.soundManager.music.setVolume(0.1);
+                            this.soundManager.music.setVolume(0.05);
                         }
                     }
                 }
