@@ -35,38 +35,38 @@ export class LambdaMesh {
         let clone = this.mesh.createInstance(this.mesh.name);
         this.clones.push(clone);
         this.clones[cloneIndex].setEnabled(false);
-        if (direction === "up") {
-            this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
+
+        switch (direction) {
+            case "right":
+                this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
+                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                    (cloneIndex + 1) + 0.1
+                ));
+                break;
+            case "down":
+                this.clones[cloneIndex].subtractInPlace(new BABYLON.Vector3(
                     0,
                     Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
                         this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
-                    (cloneIndex + 1),
-                    0
+                    (cloneIndex + 1)
                 ));
-        } else if (direction === "left") {
-            this.clones[cloneIndex].position.subtractInPlace(new BABYLON.Vector3(
-                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
-                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
-                (cloneIndex + 1) + 0.1,
-                0,
-                0
-            ));
-        } else if (direction === "down") {
-            this.clones[cloneIndex].subtractInPlace(new BABYLON.Vector3(
-                0,
-                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
-                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
-                (cloneIndex + 1),
-                0
-            ));
-        } else if (direction === "right") {
-            this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
-                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
-                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
-                (cloneIndex + 1) + 0.1,
-                0,
-                0
-            ));
+                break;
+            case "left":
+                this.clones[cloneIndex].position.subtractInPlace(new BABYLON.Vector3(
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
+                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                    (cloneIndex + 1) + 0.1
+                ));
+                break;
+            default:
+                this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
+                    0,
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
+                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
+                    (cloneIndex + 1)
+                ));
+                break;
         }
     }
 
@@ -100,47 +100,6 @@ export class LambdaMesh {
         mesh.animations.push(animationBox);
     }
 
-    materialDegradation(frameNumber, mesh) {
-        mesh.animations = [];
-        if (this.multimaterial) {
-            for (let i = 0; i < this.mesh.material.subMaterials.length; i++) {
-                let animationBox = new BABYLON.Animation(`materialDegradation-${mesh.id}-${i}`, "material.subMaterials." + i + ".diffuseColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                let keys = [];
-                keys.push({
-                    frame: 0,
-                    value: mesh.material.subMaterials[i].diffuseColor
-                });
-                keys.push({
-                    frame: frameNumber,
-                    value: new BABYLON.Color3.White()
-                });
-                animationBox.setKeys(keys);
-
-                let easingFunction = new BABYLON.ExponentialEase();
-                easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-                animationBox.setEasingFunction(easingFunction);
-                mesh.animations.push(animationBox);
-            }
-        } else {
-            let animationBox = new BABYLON.Animation(`materialDegradation-${mesh.id}`, "material.diffuseColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-            let keys = [];
-            keys.push({
-                frame: 0,
-                value: mesh.material.diffuseColor
-            });
-            keys.push({
-                frame: frameNumber,
-                value: new BABYLON.Color3.White()
-            });
-            animationBox.setKeys(keys);
-
-            let easingFunction = new BABYLON.ExponentialEase();
-            easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-            animationBox.setEasingFunction(easingFunction);
-            mesh.animations.push(animationBox);
-        }
-    }
-
     getTime() {
         return this.time / GameStore.hype.level;
     }
@@ -149,9 +108,37 @@ export class LambdaMesh {
 
         let time = this.getTime();
         this.unfreezeMaterials(this.mesh);
-        this.materialDegradation(time, this.mesh);
-        this.mesh._scene.beginAnimation(this.mesh, 0, time, false, 1, () => {
-            this.freezeMaterials(this.mesh)
+        this.mesh.animations = [];
+        let targets = [this.mesh];
+        if(this.multimaterial) {
+            targets = this.mesh.material.subMaterials;
+        }
+
+        let easingFunction = new BABYLON.ExponentialEase();
+        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+        targets.forEach((material, i) => {
+            BABYLON.Animation.CreateAndStartAnimation(
+                "materialDegradation",
+                this.mesh,
+                this.multimaterial ? "material.subMaterials." + i + ".diffuseColor" : "material.diffuseColor",
+                30,
+                time,
+                material.ambientColor,
+                BABYLON.Color3.White(),
+                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
+                easingFunction);
+            BABYLON.Animation.CreateAndStartAnimation(
+                "materialDegradation",
+                this.mesh,
+                this.multimaterial ? "material.subMaterials." + i + ".ambientColor" : "material.ambientColor",
+                30,
+                time,
+                material.ambientColor,
+                new BABYLON.Color3(0.8,0.8,0.8),
+                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
+                easingFunction, () => {
+                    this.freezeMaterials(this.mesh)
+                });
         });
     }
 
