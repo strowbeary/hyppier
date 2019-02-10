@@ -99,7 +99,7 @@
       "type": "electric",
       "objects": [
         {
-          "name": "Macintosh",
+          "name": "Macintosh 512k",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -116,7 +116,7 @@
           "cloneDirection": ""
         },
         {
-          "name": "Macintosh",
+          "name": "Station de travail perfectionnée",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -132,7 +132,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Macintosh",
+          "name": "WARMACHINE 720°",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -148,7 +148,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Macintosh",
+          "name": "Tryptique ludique polychrome",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -164,7 +164,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Macintosh",
+          "name": "Olinouane 42 - Dispositif d'écrans à mobilité réduite pour joueur invétéré",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -224,7 +224,7 @@
           "cloneDirection": ""
         },
         {
-          "name": "Lampe studieuse contrairement à vous ;)",
+          "name": "Super Nova Bling Bling",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -250,7 +250,7 @@
       "type": "furniture",
       "objects": [
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Rustik",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -267,7 +267,7 @@
           "cloneDirection": ""
         },
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "S.P.T. (Surface plane de travail)",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -281,9 +281,9 @@
             }
           ],
           "cloneNumber": 0,
-          "cloneDirection": ""
+          "cloneDirection": "Improved work pad"
         },{
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Bureau studieux pour personnes distraites",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -309,7 +309,7 @@
       "type": "furniture",
       "objects": [
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Lit de camp",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -326,7 +326,7 @@
           "cloneDirection": ""
         },
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Berceau mange-fatigue",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -342,7 +342,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Matrice celeste des songes",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -368,7 +368,7 @@
       "type": "mobility",
       "objects": [
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Retro rolling shoes",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -385,7 +385,7 @@
           "cloneDirection": ""
         },
         {
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "F*****g Cool Rider",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -401,7 +401,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Hyper Fly Glossy Glossy Neon Board",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -417,7 +417,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Power Space Mountain To Infinity And Beyond",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -433,7 +433,7 @@
           "cloneNumber": 0,
           "cloneDirection": ""
         },{
-          "name": "Allumer le feu (RIP Johnny)",
+          "name": "Burning Sky Holy Icarus Wings Shut Up And Take My Money",
           "adUrl": "img/catalog/popup_placeholder.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
@@ -451,6 +451,136 @@
         }
       ],
       "objectTimeout": 8000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Bag",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "System de stockage temporaire à fermeture pratique",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Bag/01-Bag.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Phone",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Cellulaire Casse-Noisette 2000",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Phone/01-Phone.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Gaming",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Système d'amusement pour individu non-binaire (existe en rose et bleu)",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Gaming/01-Gaming.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Plant",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Scène de crime végétale en pot",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Plant/01-Plant.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Poster",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Embellissement mural strié",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Poster/01-Poster.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": null
     }
