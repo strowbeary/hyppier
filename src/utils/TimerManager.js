@@ -5,6 +5,7 @@ let timerException;
 
 export const TimerManager = {
     setTimerException(timerId) {
+        console.log("TIMER EXCEPTION");
         timerException = timerId;
     },
     stopAll() {

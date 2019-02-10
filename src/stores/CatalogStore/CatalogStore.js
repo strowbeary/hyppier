@@ -9,9 +9,6 @@ const CatalogStore = types.model("CatalogStore", {
 })
     .actions(self =>
         ({
-            afterCreate() {
-              console.log(self.toJSON());
-            },
             openCatalog(objectKindIndex) {
                 self.objectKindIndex = objectKindIndex;
                 self.isOpen = true;

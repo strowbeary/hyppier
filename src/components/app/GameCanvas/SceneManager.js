@@ -59,7 +59,6 @@ export class SceneManager {
         this.scene.useMaterialMeshMap = true;
         this.scene.useClonedMeshMap = true;
 
-
         this.scene.enablePhysics(null);
 
         this.soundManager = new SoundManager(this.scene);
@@ -81,11 +80,6 @@ export class SceneManager {
                 this.gameManager.playAfterCatalog();
             }
         });
-
-        /*showAxis(this.scene, {
-            position: new BABYLON.Vector3(0, 0, 0),
-            label: "origin"
-        });*/
 
         GameStarter.init(this.scene)
             .then(() => {

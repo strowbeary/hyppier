@@ -19,16 +19,28 @@ class GameManager {
         TimerManager.pauseAllExcept();
         GameStore.options.setPause(true);
         this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null && animatable.getRuntimeAnimationByTargetProperty("target") === null)
-            .forEach(animatable => animatable.pause())
+            .forEach(animatable => {
+                console.log(animatable.getAnimations());
+                if (animatable.getAnimations()
+                    .map(animation => animation._animation.name.includes("materialDegradation"))
+                    .some((e) => e)) {
+                    animatable.pause();
+                }
+            })
     }
 
     pauseGame() {
         TimerManager.pauseAll();
         GameStore.options.setPause(true);
         this.scene.animatables
-            .filter(animatable => animatable.getRuntimeAnimationByTargetProperty("scalingDeterminant") === null && animatable.getRuntimeAnimationByTargetProperty("target") === null)
-            .forEach(animatable => animatable.pause())
+            .forEach(animatable => {
+                console.log(animatable.getAnimations());
+                if (animatable.getAnimations()
+                    .map(animation => animation._animation.name.includes("materialDegradation"))
+                    .some((e) => e)) {
+                    animatable.pause();
+                }
+            });
     }
 
     playGame() {

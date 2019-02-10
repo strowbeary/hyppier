@@ -7,10 +7,11 @@ const transitionFinishListener = [];
 
 export class CameraManager {
     static CATALOG_OFFSET = new BABYLON.Vector3(-0.30, 0.1, 0);
+
     initialValues = {
         width: window.innerWidth,
         height: window.innerHeight,
-        distance: 5,
+        distance: 6,
         ratio: window.innerHeight / window.innerWidth
     };
 
@@ -167,7 +168,10 @@ export class CameraManager {
             this.distance = this.initialValues.distance;
         }
 
-        console.log("mesh", mesh, "distance", this.distance);
+        if(this.distance > this.initialValues.distance) {
+            this.distance = this.initialValues.distance;
+        }
+
         this.createAnimations(toPosition);
     }
 
