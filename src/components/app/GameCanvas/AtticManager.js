@@ -9,9 +9,6 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 export class AtticManager {
     constructor(scene, particleSystem, soundManager) {
         this.scene = scene;
-        this.mesh = BABYLON.MeshBuilder.CreateBox("box", {}, this.scene);
-        this.mesh.material = this.scene.getMaterialByName("Clay");
-        this.mesh.setEnabled(false);
         this.particleSystem = particleSystem;
         this.soundManager = soundManager;
     }
@@ -31,21 +28,22 @@ export class AtticManager {
         this.attic = this.scene.getMeshByName("Attic");
         this.groundPosition = new BABYLON.Vector3(
             0,
-            this.attic.position.y - this.attic.getBoundingInfo().boundingBox.maximum.y * this.attic.scaling.y,
+            this.attic.getBoundingInfo().boundingBox.minimumWorld.y,
             0
         );
         this.ground = BABYLON.Mesh.CreateGround("ground", 32, 32, 2, this.scene);
 
+        const roomBoundingBox = this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox;
 
-        /*this.wall1 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
+        this.wall1 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall1.position = new BABYLON.Vector3(
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.maximumWorld.x,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.maximumWorld.z
+            roomBoundingBox.maximumWorld.x,
+            roomBoundingBox.minimumWorld.y,
+            roomBoundingBox.maximumWorld.z
         );
         this.wall1.rotate(BABYLON.Axis.Y, Math.PI / 2, BABYLON.Space.LOCAL);
         this.wall1.isVisible = false;
-        this.wall1.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall1, BABYLON.PhysicsImpostor.PlaneImpostor, {
+        this.wall1.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall1, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0.5
         }, this.scene);
@@ -53,13 +51,13 @@ export class AtticManager {
 
         this.wall2 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall2.position = new BABYLON.Vector3(
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.x,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.maximumWorld.z
+            roomBoundingBox.minimumWorld.x,
+            roomBoundingBox.minimumWorld.y,
+            roomBoundingBox.maximumWorld.z
         );
         this.wall2.rotate(BABYLON.Axis.Y, Math.PI / 2, BABYLON.Space.LOCAL);
         this.wall2.isVisible = false;
-        this.wall2.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall2, BABYLON.PhysicsImpostor.PlaneImpostor, {
+        this.wall2.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall2, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0.5
         }, this.scene);
@@ -67,29 +65,29 @@ export class AtticManager {
 
         this.wall3 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall3.position = new BABYLON.Vector3(
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.x,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.maximumWorld.z
+            roomBoundingBox.minimumWorld.x,
+            roomBoundingBox.minimumWorld.y,
+            roomBoundingBox.maximumWorld.z
         );
         this.wall3.rotate(BABYLON.Axis.Z, Math.PI / 2, BABYLON.Space.LOCAL);
         this.wall3.isVisible = false;
-        this.wall3.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall3, BABYLON.PhysicsImpostor.PlaneImpostor, {
+        this.wall3.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall3, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0.5
         }, this.scene);
 
         this.wall4 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall4.position = new BABYLON.Vector3(
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.x,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.z
+            this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox.minimumWorld.x,
+            roomBoundingBox.minimumWorld.y,
+            roomBoundingBox.minimumWorld.z
         );
         this.wall4.rotate(BABYLON.Axis.Z, Math.PI / 2, BABYLON.Space.LOCAL);
         this.wall4.isVisible = false;
-        this.wall4.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall4, BABYLON.PhysicsImpostor.PlaneImpostor, {
+        this.wall4.physicsImpostor = new BABYLON.PhysicsImpostor(this.wall4, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0.5
-        }, this.scene);*/
+        }, this.scene);
 
 
         this.ground.position = this.groundPosition;
@@ -132,19 +130,21 @@ export class AtticManager {
     }
 
     createParcel(mesh, objectKindType) {
-        let instance = this.mesh.createInstance(mesh.name);
-        instance.scaling = new BABYLON.Vector3(
-            Math.abs(mesh.getBoundingInfo().boundingBox.maximumWorld.x),
-            Math.abs(mesh.getBoundingInfo().boundingBox.maximumWorld.y),
-            Math.abs(mesh.getBoundingInfo().boundingBox.maximumWorld.z)
-        );
+        let instance = BABYLON.MeshBuilder.CreateBox("box", {
+            width: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.x),
+            height: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.y),
+            depth: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.z)
+        }, this.scene);
+
+        instance.material = this.scene.getMaterialByName("Clay");
+
         instance.position = new BABYLON.Vector3(
-            mesh.position.x,
-            this.groundPosition.y + ((mesh.getBoundingInfo().boundingBox.maximum.y * mesh.scaling.y) / 2),
-            mesh.position.z
+            0,
+            this.attic.getBoundingInfo().boundingBox.maximumWorld.y,
+            0
         );
         instance.physicsImpostor = new BABYLON.PhysicsImpostor(instance, BABYLON.PhysicsImpostor.BoxImpostor, {
-            mass: 1,
+            mass: 9.81,
             restitution: 0.5
         }, this.scene);
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
@@ -153,10 +153,6 @@ export class AtticManager {
     }
 
     fall() {
-        this.ground.position = new BABYLON.Vector3(
-            0,
-            this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y,
-            0
-        );
+        this.ground.position.y = this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox.minimumWorld.y;
     }
 }
