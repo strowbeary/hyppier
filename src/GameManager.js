@@ -20,7 +20,6 @@ class GameManager {
         GameStore.options.setPause(true);
         this.scene.animatables
             .forEach(animatable => {
-                console.log(animatable.getAnimations());
                 if (animatable.getAnimations()
                     .map(animation => animation._animation.name.includes("materialDegradation"))
                     .some((e) => e)) {
@@ -34,7 +33,6 @@ class GameManager {
         GameStore.options.setPause(true);
         this.scene.animatables
             .forEach(animatable => {
-                console.log(animatable.getAnimations());
                 if (animatable.getAnimations()
                     .map(animation => animation._animation.name.includes("materialDegradation"))
                     .some((e) => e)) {

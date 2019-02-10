@@ -7,7 +7,7 @@ export class LambdaMesh {
         this.objectKindName = objectKindName;
         this.mesh = mesh;
         this.mesh.convertToFlatShadedMesh();
-        //this.mesh.convertToUnIndexedMesh();
+        this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
 
@@ -130,6 +130,7 @@ export class LambdaMesh {
 
     launchAppearAnimation(callback) {
         this.mesh.unfreezeWorldMatrix();
+        this.mesh.scalingDeterminant = 0;
         this.mesh.setEnabled(true);
 
 
