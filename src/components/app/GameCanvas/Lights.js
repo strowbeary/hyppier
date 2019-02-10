@@ -20,17 +20,7 @@ export class Lights{
 
         light.position = new BABYLON.Vector3(-4, 4, -4);
         light2.position = new BABYLON.Vector3(0, 1, 0);
-        /*
-        let lightSphere = BABYLON.Mesh.CreateSphere("sphere", 10, 2, scene);
-        lightSphere.position = light.position;
-        lightSphere.material = new BABYLON.StandardMaterial("light", scene);
-        lightSphere.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
 
-        let lightSphere2 = BABYLON.Mesh.CreateSphere("sphere", 10, 2, scene);
-        lightSphere2.position = light.position;
-        lightSphere2.material = new BABYLON.StandardMaterial("light", scene);
-        lightSphere2.material.emissiveColor = new BABYLON.Color3(1, 0, 1);
-        */
         this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 13), light);
         this.shadowGenerator.setDarkness(0.3);
         this.shadowGenerator.usePoissonSampling = true;

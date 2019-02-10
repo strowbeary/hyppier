@@ -36,13 +36,37 @@ export class LambdaMesh {
         this.clones.push(clone);
         this.clones[cloneIndex].setEnabled(false);
         if (direction === "up") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + this.mesh.getBoundingInfo().boundingBox.extendSizeWorld.y * cloneIndex, this.mesh.position.z);
+            this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
+                    0,
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
+                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
+                    (cloneIndex + 1),
+                    0
+                ));
         } else if (direction === "left") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x - this.mesh.getBoundingInfo().boundingBox.maximumWorld.x * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+            this.clones[cloneIndex].position.subtractInPlace(new BABYLON.Vector3(
+                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
+                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                (cloneIndex + 1) + 0.1,
+                0,
+                0
+            ));
         } else if (direction === "down") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getPivotPoint().y - this.mesh.getBoundingInfo().boundingBox.maximumWorld.y * (cloneIndex + 1), this.mesh.position.z);
+            this.clones[cloneIndex].subtractInPlace(new BABYLON.Vector3(
+                0,
+                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
+                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
+                (cloneIndex + 1),
+                0
+            ));
         } else if (direction === "right") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getPivotPoint().y - this.mesh.getBoundingInfo().boundingBox.maximumWorld.y * (cloneIndex + 1), this.mesh.position.z);
+            this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
+                Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
+                    this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                (cloneIndex + 1) + 0.1,
+                0,
+                0
+            ));
         }
     }
 
