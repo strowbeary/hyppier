@@ -29,7 +29,7 @@ const Catalog = observer(class Catalog extends Component {
         this.pipoStop();
         this.closeCatalog(false);
         this.updateConfirmVisibilty(false);
-        if (this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && this.objectKind.activeObject !== null) {
+        if (this.objectKind.activeObject !== null) {
             this.objectKind.updateReplacementCounter();
             GameStore.setPipo("angry");
         }
