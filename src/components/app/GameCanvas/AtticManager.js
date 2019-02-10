@@ -1,7 +1,6 @@
 import * as BABYLON from "babylonjs";
 import * as cannon from "cannon";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {showAxis} from "../utils/Axis";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
@@ -35,7 +34,7 @@ export class AtticManager {
         );
         this.ground = BABYLON.Mesh.CreateGround("ground", 32, 32, 2, this.scene);
 
-        const roomBoundingBox = this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox;
+        const roomBoundingBox = this.scene.getMeshByName("Room").getBoundingInfo().boundingBox;
 
         this.wall1 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall1.position = new BABYLON.Vector3(
@@ -80,7 +79,7 @@ export class AtticManager {
 
         this.wall4 = BABYLON.Mesh.CreatePlane("ground", 32, this.scene);
         this.wall4.position = new BABYLON.Vector3(
-            this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox.minimumWorld.x,
+            roomBoundingBox.minimumWorld.x,
             roomBoundingBox.minimumWorld.y,
             roomBoundingBox.minimumWorld.z
         );
@@ -101,7 +100,7 @@ export class AtticManager {
     }
 
     prepareLadder() {
-        this.ladder = this.scene.getMeshByName("Ladder.001");
+        this.ladder = this.scene.getMeshByName("Ladder");
         this.ladder.unfreezeWorldMatrix();
         this.originalPosition = this.ladder.position.y;
         this.ladder.position.y = 10;
@@ -159,6 +158,6 @@ export class AtticManager {
     }
 
     fall() {
-        this.ground.position.y = this.scene.getMeshByName("_ROOM.002").getBoundingInfo().boundingBox.minimumWorld.y;
+        this.ground.position.y = this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y;
     }
 }
