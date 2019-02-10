@@ -35,7 +35,8 @@ const Spacebar = observer(class Spacebar extends Component {
     dispatchEvent(e) {
         e.preventDefault();
         e.stopPropagation();
-        if(e.keyCode === 32) {
+        console.log(e);
+        if(e.keyCode === 32 || e.type === "click") {
             this.props.onSpaceUp();
         }
     }
@@ -45,7 +46,7 @@ const Spacebar = observer(class Spacebar extends Component {
             <React.Fragment>
                 {
                     this.state.show &&
-                    <div className="spacebar">
+                    <div className="spacebar" onClick={(e) => this.dispatchEventForListener(e)}>
                         <span className="spacebar__spacebutton">Espace</span>
                     </div>
                 }
