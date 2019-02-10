@@ -23,8 +23,10 @@ export class GameStarter {
                     loadedMesh.convertToFlatShadedMesh();
                     loadedMesh.convertToUnIndexedMesh();
                     loadedMesh.freezeWorldMatrix();
-                    //loadedMesh.material.freeze();
                     scene.addMesh(loadedMesh);
+                }
+                if (loadedMesh.name === "Box") {
+                    loadedMesh.setEnabled(false);
                 }
             } catch (e) {
                 console.error(e);

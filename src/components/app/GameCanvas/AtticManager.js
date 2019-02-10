@@ -136,13 +136,10 @@ export class AtticManager {
     }
 
     createParcel(mesh, objectKindType) {
-        let instance = BABYLON.MeshBuilder.CreateBox("box", {
-            width: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.x),
-            height: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.y),
-            depth: Math.abs(mesh.getBoundingInfo().boundingBox.extendSizeWorld.z)
-        }, this.scene);
+        let instance = this.scene.getMeshByName("Box")
+            .clone("Parcel" + mesh.name, null);
+        instance.scalingDeterminant = 1 + mesh.getBoundingInfo().boundingBox.extendSizeWorld.length();
 
-        instance.material = this.scene.getMaterialByName("Clay");
 
         instance.position = new BABYLON.Vector3(
             0,
@@ -154,6 +151,8 @@ export class AtticManager {
             restitution: 0.5
         }, this.scene);
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
+        instance.setEnabled(true);
+        console.log(instance);
         this.scene.addMesh(instance);
         this.particleSystem.start();
         this.soundManager.dropParcel.play();
