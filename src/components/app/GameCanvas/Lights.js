@@ -7,7 +7,7 @@ export class Lights{
             "Light1",
             new BABYLON.Vector3(-20, 20, -20),
             new BABYLON.Vector3(1, -1, 1),
-            1,
+            70,
             0,
             scene);
         light.intensity = 0.3;
@@ -31,8 +31,8 @@ export class Lights{
         lightSphere2.material = new BABYLON.StandardMaterial("light", scene);
         lightSphere2.material.emissiveColor = new BABYLON.Color3(1, 0, 1);
         */
-        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 13), light);
-        this.shadowGenerator.setDarkness(0.6);
+        this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 14), light);
+        this.shadowGenerator.setDarkness(0.3);
         this.shadowGenerator.useExponentialShadowMap = true;
         this.shadowGenerator.setTransparencyShadow(false);
 

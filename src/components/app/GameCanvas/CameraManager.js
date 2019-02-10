@@ -170,8 +170,10 @@ export class CameraManager {
 
         if(this.distance > this.initialValues.distance) {
             this.distance = this.initialValues.distance;
+        } else if(this.distance < 1) {
+            this.distance = 1;
         }
-
+        console.log(mesh, this.distance);
         this.createAnimations(toPosition);
     }
 
