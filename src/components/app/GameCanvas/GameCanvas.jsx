@@ -77,7 +77,7 @@ export default observer(class GameCanvas extends React.Component {
                             })
                     }
                 })()}
-                {TutoStore.displayTip() &&
+                {TutoStore.displayTip() && !CatalogStore.isOpen &&
                 <Message message={TutoStore.getCurrentMessage()}
                          launchLadderFall={() => {
                              this.launchLadderFall()

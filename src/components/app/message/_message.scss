@@ -8,6 +8,7 @@
   top: 10vh;
   max-width: 25vw;
   border: solid 1px #E6E6E6;
+  animation: up-down 0.5s forwards;
 
   &__placeholder {
     visibility: hidden;
@@ -55,9 +56,11 @@
 
 @keyframes up-down {
   from {
+    opacity: 0;
     transform: translateY(2px);
   }
   to {
+    opacity: 1;
     transform: translateY(-2px);
   }
 }
