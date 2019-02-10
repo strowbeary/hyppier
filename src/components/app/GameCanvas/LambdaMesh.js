@@ -11,12 +11,15 @@ export class LambdaMesh {
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
 
-        const pivotPosition =  this.mesh.getBoundingInfo().boundingBox.centerWorld;
-        this.mesh.setPivotPoint(new BABYLON.Vector3(
-            pivotPosition.x - this.mesh.position.x,
-            pivotPosition.y - this.mesh.position.y,
-            pivotPosition.z - this.mesh.position.z
-        ));
+        const pivotPosition = this.mesh.getBoundingInfo().boundingBox.centerWorld;
+
+        if (this.objectKindName === "Transport") {
+            this.mesh.setPivotPoint(new BABYLON.Vector3(
+                pivotPosition.x - this.mesh.position.x,
+                pivotPosition.y - this.mesh.position.y,
+                pivotPosition.z - this.mesh.position.z
+            ));
+        }
 
         this.clones = [];
         if (this.mesh) {
@@ -33,13 +36,13 @@ export class LambdaMesh {
         this.clones.push(clone);
         this.clones[cloneIndex].setEnabled(false);
         if (direction === "up") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y + (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getBoundingInfo().boundingBox.maximumWorld.y + this.mesh.getBoundingInfo().boundingBox.extendSizeWorld.y * cloneIndex, this.mesh.position.z);
         } else if (direction === "left") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x - (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x - this.mesh.getBoundingInfo().boundingBox.maximumWorld.x * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
         } else if (direction === "down") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.position.y - (this.mesh.getBoundingInfo().maximum.y * this.mesh.scaling.y) * (cloneIndex + 1), this.mesh.position.z);
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getPivotPoint().y - this.mesh.getBoundingInfo().boundingBox.maximumWorld.y * (cloneIndex + 1), this.mesh.position.z);
         } else if (direction === "right") {
-            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x + (this.mesh.getBoundingInfo().maximum.x * this.mesh.scaling.x) * (cloneIndex + 1), this.mesh.position.y, this.mesh.position.z);
+            this.clones[cloneIndex].position = new BABYLON.Vector3(this.mesh.position.x, this.mesh.getPivotPoint().y - this.mesh.getBoundingInfo().boundingBox.maximumWorld.y * (cloneIndex + 1), this.mesh.position.z);
         }
     }
 
@@ -132,7 +135,6 @@ export class LambdaMesh {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.scalingDeterminant = 0;
         this.mesh.setEnabled(true);
-
 
 
         this.scaleAppearAnimation(this.mesh);
