@@ -9,6 +9,8 @@ import Message from "../message/Message";
 import AboutModal from "../aboutModal/AboutModal";
 import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import SoundButton from "../options/soundButton/SoundButton";
+import {CSSTransitionGroup} from "react-transition-group";
+import "../../../_variables.scss";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -77,18 +79,23 @@ export default observer(class GameCanvas extends React.Component {
                             })
                     }
                 })()}
-                {TutoStore.displayTip() &&
-                <Message message={TutoStore.getCurrentMessage()}
-                         launchLadderFall={() => {
-                             this.launchLadderFall()
-                         }}/>
-                }
+                <CSSTransitionGroup
+                    transitionName="catalog"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {TutoStore.displayTip() && !CatalogStore.isOpen &&
+                    <Message message={TutoStore.getCurrentMessage()}
+                             launchLadderFall={() => {
+                                 this.launchLadderFall()
+                             }}/>
+                    }
+                </CSSTransitionGroup>
                 {this.state.ready &&
-                    <div className={"game__footer"}>
-                        <AboutModal gameManager={this.sceneManager.gameManager}/>
-                        <SoundButton soundManager={this.sceneManager.soundManager}/>
-                        <FullScreenButton/>
-                    </div>
+                <div className={"game__footer"}>
+                    <AboutModal gameManager={this.sceneManager.gameManager}/>
+                    <SoundButton soundManager={this.sceneManager.soundManager}/>
+                    <FullScreenButton/>
+                </div>
                 }
             </React.Fragment>
         );
