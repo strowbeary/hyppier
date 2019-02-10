@@ -10,7 +10,8 @@ export class CameraManager {
     initialValues = {
         width: window.innerWidth,
         height: window.innerHeight,
-        distance: 5
+        distance: 5,
+        ratio: window.innerHeight / window.innerWidth
     };
 
     distance = this.initialValues.distance;
@@ -58,7 +59,7 @@ export class CameraManager {
         transitionFinishListener.push(listener);
     }
 
-    createAnimations(toPosition, scale) {
+    createAnimations(toPosition) {
         this.camera.animations = [];
         let animationTarget = new BABYLON.Animation("target", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keysTarget = [];
@@ -80,71 +81,70 @@ export class CameraManager {
         let animationGroup = new BABYLON.AnimationGroup("Camera");
         animationGroup.addTargetedAnimation(animationTarget, this.camera);
 
-        if (scale !== 1) {
-            let animationOrthoTop = new BABYLON.Animation("target", "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-            let keysOrthoTop = [];
-            keysOrthoTop.push({
-                frame: 0,
-                value: this.camera.orthoTop
-            });
-            keysOrthoTop.push({
-                frame: 30,
-                value: this.camera.orthoTop * scale
-            });
-            animationOrthoTop.setKeys(keysOrthoTop);
+        let animationOrthoTop = new BABYLON.Animation("target", "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let keysOrthoTop = [];
+        keysOrthoTop.push({
+            frame: 0,
+            value: this.camera.orthoTop
+        });
+        keysOrthoTop.push({
+            frame: 30,
+            value: this.distance * this.initialValues.ratio * (window.innerHeight / this.initialValues.height)
+        });
+        animationOrthoTop.setKeys(keysOrthoTop);
 
-            let animationOrthoLeft = new BABYLON.Animation("target", "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-            let keysOrthoLeft = [];
-            keysOrthoLeft.push({
-                frame: 0,
-                value: this.camera.orthoLeft
-            });
-            keysOrthoLeft.push({
-                frame: 30,
-                value: this.camera.orthoLeft * scale
-            });
-            animationOrthoLeft.setKeys(keysOrthoLeft);
+        let animationOrthoLeft = new BABYLON.Animation("target", "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let keysOrthoLeft = [];
+        keysOrthoLeft.push({
+            frame: 0,
+            value: this.camera.orthoLeft
+        });
+        keysOrthoLeft.push({
+            frame: 30,
+            value: -this.distance * this.initialValues.ratio * (window.innerWidth / this.initialValues.height)
+        });
+        animationOrthoLeft.setKeys(keysOrthoLeft);
 
-            let animationOrthoRight = new BABYLON.Animation("target", "orthoRight", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-            let keysOrthoRight = [];
-            keysOrthoRight.push({
-                frame: 0,
-                value: this.camera.orthoRight
-            });
-            keysOrthoRight.push({
-                frame: 30,
-                value: this.camera.orthoRight * scale
-            });
-            animationOrthoRight.setKeys(keysOrthoRight);
+        let animationOrthoRight = new BABYLON.Animation("target", "orthoRight", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let keysOrthoRight = [];
+        keysOrthoRight.push({
+            frame: 0,
+            value: this.camera.orthoRight
+        });
+        keysOrthoRight.push({
+            frame: 30,
+            value: this.distance * this.initialValues.ratio * (window.innerWidth / this.initialValues.height)
+        });
+        animationOrthoRight.setKeys(keysOrthoRight);
 
-            let animationOrthoBottom = new BABYLON.Animation("target", "orthoBottom", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-            let keysOrthoBottom = [];
-            keysOrthoBottom.push({
-                frame: 0,
-                value: this.camera.orthoBottom
-            });
-            keysOrthoBottom.push({
-                frame: 30,
-                value: this.camera.orthoBottom * scale
-            });
-            animationOrthoBottom.setKeys(keysOrthoBottom);
+        let animationOrthoBottom = new BABYLON.Animation("target", "orthoBottom", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let keysOrthoBottom = [];
+        keysOrthoBottom.push({
+            frame: 0,
+            value: this.camera.orthoBottom
+        });
+        keysOrthoBottom.push({
+            frame: 30,
+            value: -this.distance * this.initialValues.ratio * (window.innerHeight / this.initialValues.height)
+        });
+        animationOrthoBottom.setKeys(keysOrthoBottom);
 
-            animationOrthoTop.setEasingFunction(Easing);
-            animationOrthoLeft.setEasingFunction(Easing);
-            animationOrthoRight.setEasingFunction(Easing);
-            animationOrthoBottom.setEasingFunction(Easing);
+        animationOrthoTop.setEasingFunction(Easing);
+        animationOrthoLeft.setEasingFunction(Easing);
+        animationOrthoRight.setEasingFunction(Easing);
+        animationOrthoBottom.setEasingFunction(Easing);
 
-            animationGroup.addTargetedAnimation(animationOrthoTop, this.camera);
-            animationGroup.addTargetedAnimation(animationOrthoLeft, this.camera);
-            animationGroup.addTargetedAnimation(animationOrthoBottom, this.camera);
-            animationGroup.addTargetedAnimation(animationOrthoRight, this.camera);
-        }
+        animationGroup.addTargetedAnimation(animationOrthoTop, this.camera);
+        animationGroup.addTargetedAnimation(animationOrthoLeft, this.camera);
+        animationGroup.addTargetedAnimation(animationOrthoBottom, this.camera);
+        animationGroup.addTargetedAnimation(animationOrthoRight, this.camera);
+
 
         animationGroup.normalize(0, 30);
         animationGroup.play();
         animationGroup.onAnimationGroupEndObservable.add(() => {
-            ObjectKindUI.refs.forEach(ref => ref &&ref.updatePosition());
-            if(toPosition.equals(BABYLON.Vector3.Zero())) {
+            ObjectKindUI.refs.forEach(ref => ref && ref.updatePosition());
+            if (toPosition.equals(BABYLON.Vector3.Zero())) {
                 transitionFinishListener.forEach(listener => listener())
             }
         });
@@ -152,22 +152,23 @@ export class CameraManager {
 
     setTarget(mesh) {
         let toPosition = BABYLON.Vector3.Zero();
-        let scale = 3;
-        if (this.camera.target.equals(this.scene.getMeshByName("Attic").position)) {
-            scale = 1;
-        }
+        this.distance = this.initialValues.distance;
 
-        if (typeof mesh === "string" && mesh.length > 0) {
+        if (typeof mesh === "string" && mesh !== "" && mesh !== "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
-            scale = 1 / 3;
-        }
-
-        if(mesh === "Attic") {
+            this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSizeWorld
+                .length() * this.initialValues.distance;
+        } else if(mesh === "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
-            scale = 1;
+            this.distance = this.initialValues.distance;
+
+        } else {
+            toPosition = BABYLON.Vector3.Zero();
+            this.distance = this.initialValues.distance;
         }
 
-        this.createAnimations(toPosition, scale);
+        console.log("mesh", mesh, "distance", this.distance);
+        this.createAnimations(toPosition);
     }
 
 }
