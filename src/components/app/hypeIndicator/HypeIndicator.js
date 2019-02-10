@@ -9,12 +9,16 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
     state = {
         up: false,
-        bubblePath: ""
+        bubblePath: "",
+        mounted: false
     };
 
     componentDidMount() {
         this.loop();
         this.hypeLevel = GameStore.hype.level;
+        this.setState({
+            mounted: true
+        })
     }
 
     loop() {
@@ -52,8 +56,11 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                 loop(e.data);
             };
         });
+
         worker.onmessage = (event) => {
-            this.setState(event.data);
+            if(this.state.mounted) {
+                this.setState(event.data);
+            }
         };
 
         onPatch(GameStore, (patch) => {
@@ -66,11 +73,19 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         });
         let frame = 0;
         const loop = () => {
-            worker.postMessage(frame);
-            frame++;
+            if(this.state.mounted) {
+                worker.postMessage(frame);
+                frame++;
+            }
             requestAnimationFrame(loop);
         };
         loop();
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            mounted: false
+        })
     }
 
     onTransitionEnd() {

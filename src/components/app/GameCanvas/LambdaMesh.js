@@ -1,6 +1,5 @@
 import * as BABYLON from "babylonjs";
 import GameStore from "../../../stores/GameStore/GameStore";
-import {showAxis} from "../utils/Axis";
 
 export class LambdaMesh {
 
@@ -133,6 +132,8 @@ export class LambdaMesh {
         this.mesh.unfreezeWorldMatrix();
         this.mesh.setEnabled(true);
 
+
+
         this.scaleAppearAnimation(this.mesh);
         if (this.clones.length > 0) {
             this.clones.forEach(clone => {
@@ -147,6 +148,7 @@ export class LambdaMesh {
                 });
             });
         }
+
         this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {
             this.mesh.freezeWorldMatrix();
             typeof callback === 'function' && callback()

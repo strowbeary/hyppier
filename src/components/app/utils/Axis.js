@@ -24,7 +24,6 @@ export function showAxis(scene, options) {
             plane.material.backFaceCulling = false;
             plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
             plane.material.diffuseTexture = dynamicTexture;
-            plane.setPivotPoint(plane.getBoundingInfo().boundingBox.centerWorld);
             plane.position = options.position;
             plane.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
             //plane.showBoundingBox = true;
@@ -37,7 +36,7 @@ export function showAxis(scene, options) {
         makeTextPlane(options.label, "black", Math.max(options.size, 2) / 10);
     }
 
-    var axisX = BABYLON.Mesh.CreateLines("axisX", [
+    const axisX = BABYLON.Mesh.CreateLines("axisX", [
         BABYLON.Vector3.Zero().add(options.position),
         new BABYLON.Vector3(options.size, 0, 0).add(options.position),
         new BABYLON.Vector3(options.size * 0.95, 0.05 * options.size, 0).add(options.position),
@@ -53,7 +52,8 @@ export function showAxis(scene, options) {
     axisX.edgesColor = new BABYLON.Color4(1, 0, 0, 1);
     axisX.freezeWorldMatrix();
     axisX.freezeNormals();
-    var axisY = BABYLON.Mesh.CreateLines("axisY", [
+    axisX.renderingGroupId = 1;
+    const axisY = BABYLON.Mesh.CreateLines("axisY", [
         BABYLON.Vector3.Zero().add(options.position),
         new BABYLON.Vector3(0, options.size, 0).add(options.position),
         new BABYLON.Vector3(-0.05 * options.size, options.size * 0.95, 0).add(options.position),
@@ -69,7 +69,9 @@ export function showAxis(scene, options) {
     axisY.edgesColor = new BABYLON.Color4(0, 1, 0, 1);
     axisY.freezeWorldMatrix();
     axisY.freezeNormals();
-    var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
+    axisY.renderingGroupId = 1;
+
+    const axisZ = BABYLON.Mesh.CreateLines("axisZ", [
         BABYLON.Vector3.Zero().add(options.position),
         new BABYLON.Vector3(0, 0, options.size).add(options.position),
         new BABYLON.Vector3(0, -0.05 * options.size, options.size * 0.95).add(options.position),
@@ -85,4 +87,5 @@ export function showAxis(scene, options) {
     axisZ.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
     axisZ.freezeWorldMatrix();
     axisZ.freezeNormals();
+    axisZ.renderingGroupId = 1;
 };

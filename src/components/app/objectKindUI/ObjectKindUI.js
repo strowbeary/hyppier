@@ -100,6 +100,9 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
             popupVisibility: false
         });
     }
+    isVisible() {
+        return this.objectKind.replacementCounter < this.objectKind.objects.length - 1 && !GameStore.options.isPaused;
+    }
 
     playNotifSound() {
         this.sceneManager.soundManager.notifAppear.play();
