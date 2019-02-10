@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/boilerplate-webdoc.iml" filepath="$PROJECT_DIR$/.idea/boilerplate-webdoc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hyppier.iml" filepath="$PROJECT_DIR$/.idea/hyppier.iml" />
     </modules>
   </component>
 </project>

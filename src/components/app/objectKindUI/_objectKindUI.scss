@@ -1,0 +1,12 @@
+@import "../../../variables";
+
+.objectKindUI {
+  position: fixed;
+  opacity: 1;
+  transition: opacity 500ms linear;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

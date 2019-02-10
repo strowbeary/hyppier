@@ -1,0 +1,42 @@
+@import "../../../../variables";
+
+.glow {
+  animation: tuto-pulse 1s infinite;
+}
+
+.emptySpace {
+  opacity: 1;
+  transition: opacity 500ms linear;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $light-grey;
+    background-color: black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: url($pointer-url-levelDown) 16 0, pointer;
+    transition: background-color 0.1s;
+
+    &:hover {
+      background-color: orange;
+    }
+  }
+
+  span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

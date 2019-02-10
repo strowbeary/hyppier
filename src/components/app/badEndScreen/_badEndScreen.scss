@@ -1,0 +1,81 @@
+@import "../../../variables";
+
+.badEndScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+
+  section {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  &__section {
+    background-color: $red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__button {
+    &__main {
+      background-color: $yellow;
+      padding: 1rem 2rem;
+      border: none;
+      transition: transform 500ms;
+      text-transform: uppercase;
+      color: white;
+      font-size: 1.6rem;
+
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+
+    &__light {
+      padding: 10px 5px;
+      border: none;
+      text-transform: uppercase;
+      text-decoration: underline;
+      font-size: 1rem;
+      letter-spacing: 0.1rem;
+      background: none;
+      margin-right: 5rem;
+    }
+  }
+
+  &__bubble {
+    background-color: white;
+    box-shadow: 0 0 20px white;
+    border-radius: 50%;
+    width: 70vh;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    flex-shrink: 0;
+
+    &__title {
+      font-family: Selfie, sans-serif;
+      font-weight: 400;
+      font-size: 8rem;
+      line-height: 6rem;
+      margin-bottom: 2rem;
+      color: $red;
+    }
+
+    &__text {
+      display: block;
+      font-size: 1.5rem;
+      word-wrap: break-word;
+      max-width: 50vh;
+      margin-bottom: 2rem;
+    }
+  }
+}

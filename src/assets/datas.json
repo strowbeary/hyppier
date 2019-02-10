@@ -1,0 +1,588 @@
+{
+  "objectKinds": [
+    {
+      "name": "Chair",
+      "type": "furniture",
+      "objects": [
+        {
+          "name": "Tabouret",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Chair/01-Chair.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "MÅLOKÜ",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Chair/02-Chair.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "left"
+        },
+        {
+          "name": "BIENÅSSÏ",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Chair/03-Chair.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "left"
+        },
+        {
+          "name": "FESSØYEUSË",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Chair/04-Chair.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "left"
+        },
+        {
+          "name": "KEBABÅTOR 3000",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Chair/05-Chair.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": 0
+    },
+    {
+      "name": "Computer",
+      "type": "electric",
+      "objects": [
+        {
+          "name": "Macintosh 512k",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Computer/01-Computer.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "Station de travail perfectionnée",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Computer/02-Computer.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },{
+          "name": "WARMACHINE 720°",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Computer/03-Computer.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },{
+          "name": "Tryptique ludique polychrome",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Computer/04-Computer.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },{
+          "name": "Olinouane 42 - Dispositif d'écrans à mobilité réduite pour joueur invétéré",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Macintosh",
+          "modelUrl": "Computer/05-Computer.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": 0
+    },
+    {
+      "name": "Lampe",
+      "type": "electric",
+      "objects": [
+        {
+          "name": "Allumer le feu (RIP Johnny)",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Lamp/01-Lamp.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "Coin-coin de lumière",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Lamp/02-Lamp.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "Super Nova Bling Bling",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Lamp/03-Lamp.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 2,
+          "cloneDirection": "up"
+        }
+      ],
+      "objectTimeout": 5000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Table",
+      "type": "furniture",
+      "objects": [
+        {
+          "name": "Rustik",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Table/01-Table.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "S.P.T. (Surface plane de travail)",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Table/02-Table.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": "Improved work pad"
+        },{
+          "name": "Bureau studieux pour personnes distraites",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Table/03-Table.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": 0
+    },
+    {
+      "name": "Bed",
+      "type": "furniture",
+      "objects": [
+        {
+          "name": "Lit de camp",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Bed/01-Bed.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "Berceau mange-fatigue",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Bed/02-Bed.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },{
+          "name": "Matrice celeste des songes",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Bed/03-Bed.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": 0
+    },
+    {
+      "name": "Transport",
+      "type": "mobility",
+      "objects": [
+        {
+          "name": "Retro rolling shoes",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Transport/01-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        },
+        {
+          "name": "F*****g Cool Rider",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Transport/02-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "left"
+        },{
+          "name": "Hyper Fly Glossy Glossy Neon Board",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Transport/03-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },{
+          "name": "Power Space Mountain To Infinity And Beyond",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Transport/04-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": "right"
+        },{
+          "name": "Burning Sky Holy Icarus Wings Shut Up And Take My Money",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis une lampe standard",
+          "modelUrl": "Transport/05-Transport.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 0,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 8000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Bag",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "System de stockage temporaire à fermeture pratique",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Bag/01-Bag.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Phone",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Cellulaire Casse-Noisette 2000",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Phone/01-Phone.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Gaming",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Système d'amusement pour individu non-binaire (existe en rose et bleu)",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Gaming/01-Gaming.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Plant",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Scène de crime végétale en pot",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Plant/01-Plant.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    },
+    {
+      "name": "Poster",
+      "type": "Miscellaneous",
+      "objects": [
+        {
+          "name": "Embellissement mural strié",
+          "adUrl": "img/catalog/popup_placeholder.png",
+          "thumbnailUrl": "img/promo/promo.png",
+          "closeButtonLabel": "Tant pis",
+          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "catalogSlogan": "Je suis un super Tabouret",
+          "modelUrl": "Poster/01-Poster.babylon",
+          "infos": [
+            {
+              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
+              "url": "http://localhost:8080"
+            }
+          ],
+          "cloneNumber": 1,
+          "cloneDirection": ""
+        }
+      ],
+      "objectTimeout": 20000,
+      "replacementCounter": 0,
+      "activeObject": null
+    }
+  ]
+}

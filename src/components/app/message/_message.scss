@@ -1,0 +1,66 @@
+.message {
+  position: fixed;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px 15px;
+  font-size: 1.5rem;
+  left: 10vw;
+  top: 10vh;
+  max-width: 25vw;
+  border: solid 1px #E6E6E6;
+  animation: up-down 0.5s forwards;
+
+  &__placeholder {
+    visibility: hidden;
+    line-height: 2rem;
+  }
+
+  &__typing {
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 15px;
+    line-height: 2rem;
+
+    &:after {
+      content: " ";
+      display: inline-block;
+      width: 0.25rem;
+      height: 2rem;
+      background-color: orange;
+    }
+
+    &.end {
+      &:after {
+        display: none;
+      }
+    }
+
+    &.arrow {
+      &:after {
+        position: absolute;
+        display: block;
+        bottom: 1rem;
+        right: 1rem;
+        width: 15px;
+        height: 13px;
+        background-image: url('../../../assets/img/message-arrow.svg');
+        background-size: cover;
+        background-color: transparent;
+        animation: up-down 500ms infinite alternate;
+      }
+    }
+  }
+}
+
+@keyframes up-down {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}

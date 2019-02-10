@@ -1,0 +1,22 @@
+<svg
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        width="375px"
+        height="300px"
+        viewBox="0 0 375 300"
+        fill="#ffe13d"
+        xml:space="preserve">
+        <path class="waveShape" d="
+        M 0,0
+        c 37.5,0 37.5,10 75,10
+        c 37.5,0 37.5,-10 75,-10
+        c 37.5,0 37.5,10 75,10
+        c 37.5,0 37.5,-10 75,-10
+        c 37.5,0 37.5,10 75,10
+        L 375,300
+        L 0,300
+        z
+"/>
+</svg>

@@ -1,0 +1,40 @@
+@import "../../../../variables";
+
+.toast {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  background-color: white;
+  border-radius: $border-radius;
+  padding: 10px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    margin-right: 5px;
+  }
+
+  &.get {
+
+    &:before {
+      content: url("../../../../assets/img/shoppingbag.svg");
+    }
+  }
+
+  &.watch {
+
+    &:before {
+      content: url("../../../../assets/img/eye.svg");
+    }
+  }
+
+  span {
+    font-style: italic;
+  }
+
+  p {
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
+}

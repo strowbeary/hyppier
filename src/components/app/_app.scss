@@ -1,0 +1,213 @@
+@import "../../variables";
+
+@keyframes animate {
+  0%, 100% {
+    background-position: 0;
+  }
+  50% {
+    background-position: 100%;
+  }
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-regular.ttf");
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-boldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Brown;
+  src: url("../../assets/fonts/Brown/lineto-brown-light.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Regular.otf");
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Black.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Selfie;
+  src: url("../../assets/fonts/Selfie/Selfie_Light.otf");
+  font-weight: 100;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Brown, sans-serif;
+  user-select: none;
+}
+
+html {
+  font-size: 62.5%;
+  cursor: url(../../assets/img/cursor_default.svg) 10 0, default;
+}
+
+body {
+  background: $yellow;
+}
+
+button, a {
+  cursor: url(../../assets/img/cursor_pointer.svg) 16 0, pointer;
+}
+
+#app {
+  position: relative;
+  background-color: $yellow;
+  background-size: 300%;
+  background-position: 0;
+  transition: all 1s;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  .catalogWrapper {
+    display: block;
+    margin-left: 5vw;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: background-position 1s;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &.happy {
+    background: linear-gradient(45deg, #FFE07D 50%, $green 55%);
+    background-size: 300%;
+    background-position: 0;
+    animation: animate 3s;
+
+    &:after {
+      background: linear-gradient(45deg, transparent 50%, $green 55%);
+      background-size: 300%;
+      background-position: 0;
+      animation: animate 3s;
+    }
+  }
+
+  &.angry {
+    background: linear-gradient(45deg, $yellow 50%, $red 55%);
+    background-size: 300%;
+    background-position: 0;
+    animation: animate 3s;
+
+    &:after {
+      background: linear-gradient(45deg, transparent 50%, $red 55%);
+      background-size: 300%;
+      background-position: 0;
+      animation: animate 3s;
+    }
+  }
+
+  &.attic {
+    background: black;
+    background-size: 100%;
+
+    &:after {
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+      display: block;
+      content: url("../../assets/img/pause.svg");
+    }
+  }
+  &.attic:before {
+    opacity: 0;
+  }
+}
+
+button {
+  position: relative;
+
+  img:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 500ms;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  img:first-child {
+    opacity: 1;
+    transition: opacity 500ms;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  &:hover {
+
+    img:last-child {
+      opacity: 1;
+    }
+
+    img:first-child {
+      opacity: 0;
+    }
+  }
+}
+
+.game__footer {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+
+  button {
+    background: none;
+    border: none;
+    margin-left: 1.5rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

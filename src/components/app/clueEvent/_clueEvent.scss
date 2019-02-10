@@ -1,0 +1,12 @@
+@import "../../../variables";
+
+.clueEvent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: $false-black;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}

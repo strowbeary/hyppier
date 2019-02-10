@@ -1,0 +1,82 @@
+@import "../../../../variables";
+
+.confirmPopup {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
+  z-index: 1;
+  background-color: white;
+  padding: $vertical-space $horizontal-space;
+  border-radius: $border-radius;
+  border: solid 1px $light-grey;
+  display: grid;
+  height: auto;
+  grid-column-gap: $horizontal-space;
+  grid-row-gap: $vertical-space;
+  grid-template-columns: min-content min-content;
+  grid-template-areas:
+          "content content"
+          "buttonClose buttonCatalog";
+
+  &__content {
+    grid-area: content;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    img {
+      margin-right: $horizontal-space;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__buttonClose {
+    grid-area: buttonClose;
+    white-space: nowrap;
+    padding: 10px 5px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    background: none;
+
+    &:disabled {
+      cursor: url($default-cursor-url-levelDown), default;
+    }
+  }
+
+  &__buttonCatalog {
+    grid-area: buttonCatalog;
+    white-space: nowrap;
+    border: none;
+    border-radius: 10px;
+    background-color: $yellow;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    color: white;
+
+    animation: shadow-pulse 1s infinite;
+    transition: transform 300ms ease-in-out;
+
+    &:disabled {
+      animation-duration: 0s;
+      cursor: url($default-cursor-url-levelDown), default;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      animation-duration: 0s;
+    }
+  }
+}
