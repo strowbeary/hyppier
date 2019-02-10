@@ -11,11 +11,12 @@ const StartScreen = observer(class StartScreen extends Component {
         x: 0
     };
     componentDidMount() {
-        this.mousemove = document.addEventListener("mousemove", (e) => {
+        this.mousemove = (e) => {
             this.setState({
                 x: (e.clientX / window.innerWidth - 0.5)
             });
-        })
+        };
+        document.addEventListener("mousemove", this.mousemove);
     }
 
     componentWillUnmount() {
