@@ -10,10 +10,22 @@ const SoundButton = observer(class SoundButton extends Component {
 
     state = {on: true};
 
+    constructor(props) {
+        super(props);
+        this.soundManager = props.soundManager;
+    }
+
     toggleSound() {
+        if (this.state.on) {
+            this.soundManager.setGlobalVolume(0);
+        } else {
+            this.soundManager.setGlobalVolume(1);
+        }
         this.setState({
             on: !this.state.on
         });
+
+
     };
 
     render() {

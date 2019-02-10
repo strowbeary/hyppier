@@ -71,7 +71,7 @@ export default observer(class GameCanvas extends React.Component {
                                 return (
                                     <ObjectKindUI
                                         ref={(ref) => ObjectKindUI.refs.push(ref)} objectKind={objectKind}
-                                        scene={this.sceneManager}
+                                        sceneManager={this.sceneManager}
                                         key={objectKind.name}/>
                                 );
                             })
@@ -86,7 +86,7 @@ export default observer(class GameCanvas extends React.Component {
                 {this.state.ready &&
                     <div className={"game__footer"}>
                         <AboutModal gameManager={this.sceneManager.gameManager}/>
-                        <SoundButton/>
+                        <SoundButton soundManager={this.sceneManager.soundManager}/>
                         <FullScreenButton/>
                     </div>
                 }

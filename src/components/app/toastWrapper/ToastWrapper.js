@@ -5,6 +5,7 @@ import GameStore from "../../../stores/GameStore/GameStore";
 import Toast from "./toast/Toast";
 import {CSSTransitionGroup} from "react-transition-group";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {SoundManagerInstance} from "../GameCanvas/SoundManager";
 
 const ToastWrapper = observer(class ToastWrapper extends Component {
 
@@ -24,6 +25,7 @@ const ToastWrapper = observer(class ToastWrapper extends Component {
                 this.timer.start();
             } else {
                 this.setState({toast: true});
+                SoundManagerInstance.toastAppear.play();
                 this.timer.setDuration(3000);
                 this.timer.stop();
                 this.timer.start();

@@ -22,6 +22,7 @@ export class AtticManager {
         dust.disposeWhenFinishedAnimating = true;
         this.ladder.unfreezeWorldMatrix();
         BABYLON.Animation.CreateAndStartAnimation('ladderFall', this.ladder, 'position.y', 30, 30, 10, this.originalPosition, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        this.soundManager.ladderDrop.play();
     }
 
     prepareGravity() {
@@ -118,10 +119,10 @@ export class AtticManager {
                         TutoStore.reportAction("Attic", "actioned");
                         if (CameraStore.meshName !== "Attic") {
                             CameraStore.setTarget("Attic");
-                            this.soundManager.music.setVolume(0.1);
+                            this.soundManager.music.setVolume(0.05);
                         } else {
                             CameraStore.setTarget("");
-                            this.soundManager.music.setVolume(0.2);
+                            this.soundManager.music.setVolume(0.1);
                         }
                     }
                 }
@@ -150,6 +151,7 @@ export class AtticManager {
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
         this.scene.addMesh(instance);
         this.particleSystem.start();
+        this.soundManager.dropParcel.play();
     }
 
     fall() {

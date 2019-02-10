@@ -5,6 +5,7 @@ export default types.model("AtticStore", {
     parcelsNumberLimit: 1000,
     electric: ParcelTypeStore,
     furniture: ParcelTypeStore,
+    mobility: ParcelTypeStore,
     atticVisible: false
 }).actions(self =>
     ({
