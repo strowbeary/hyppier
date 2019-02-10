@@ -7,6 +7,7 @@ import GameStore from "../../../stores/GameStore/GameStore";
 import ConfirmPopup from "./confirmPopup/ConfirmPopup";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import iconCloseHover from "../../../assets/img/icon-close-hover.svg";
+import {SoundManagerInstance} from "../GameCanvas/SoundManager";
 
 const Catalog = observer(class Catalog extends Component {
 
@@ -41,6 +42,7 @@ const Catalog = observer(class Catalog extends Component {
             objectKindUI.notification.restartTimer();
         }
         this.isClosing = true;
+
         CatalogStore.closeCatalog();
         this.objectKind.location.removePreviewObject();
     }
@@ -48,7 +50,10 @@ const Catalog = observer(class Catalog extends Component {
     updateConfirmVisibilty(value) {
         this.setState({
             confirmVisibility: value
-        })
+        });
+        if (value) {
+            SoundManagerInstance.catalogError.play();
+        }
     }
 
     pipoYes() {

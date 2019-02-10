@@ -12,7 +12,6 @@ import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
-import ambiance from "../../../assets/sounds/ambiance.mp3";
 import {SoundManager} from "./SoundManager";
 
 export class SceneManager {

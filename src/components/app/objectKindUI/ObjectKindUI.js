@@ -25,7 +25,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
 
     constructor(props) {
         super(props);
-        this.scene = props.scene;
+        this.sceneManager = props.sceneManager;
         this.objectKind = props.objectKind;
         this.objectKindIndex = CatalogStore.findobjectKindIndex(this.objectKind.name);
         this.delayTimer = createTimer(this.objectKind.objectTimeout);
@@ -74,10 +74,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         return BABYLON.Vector3.Project(
             position,
             BABYLON.Matrix.Identity(),
-            this.scene.scene.getTransformMatrix(),
-            this.scene.camera.viewport.toGlobal(
-                this.scene.camera.getEngine().getRenderWidth(),
-                this.scene.camera.getEngine().getRenderHeight()
+            this.sceneManager.scene.getTransformMatrix(),
+            this.sceneManager.camera.viewport.toGlobal(
+                this.sceneManager.camera.getEngine().getRenderWidth(),
+                this.sceneManager.camera.getEngine().getRenderHeight()
             )
         );
     }
@@ -101,8 +101,12 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
     }
 
+    playNotifSound() {
+        this.sceneManager.soundManager.notifAppear.play();
+    }
+
     buildCatalog() {
-        this.scene.gameManager.pauseCatalog();
+        this.sceneManager.gameManager.pauseCatalog();
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
@@ -141,7 +145,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                 }
                 {
                     this.objectKind.activeObject !== null && TutoStore.currentMessage > 2 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
-                    <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()}/>
+                    <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()} playSound={() => this.playNotifSound()}/>
                 }
                 <CSSTransitionGroup
                     transitionName="grow"

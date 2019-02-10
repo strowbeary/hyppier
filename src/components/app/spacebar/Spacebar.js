@@ -1,6 +1,7 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_spacebar.scss";
+import {SoundManagerInstance} from "../GameCanvas/SoundManager";
 
 const Spacebar = observer(class Spacebar extends Component {
 
@@ -26,6 +27,7 @@ const Spacebar = observer(class Spacebar extends Component {
         e.preventDefault();
         e.stopPropagation();
         if(e.keyCode === 32) {
+            SoundManagerInstance && SoundManagerInstance.spacePress.play();
             this.setState({show: false})
         }
     }

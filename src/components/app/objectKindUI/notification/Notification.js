@@ -18,9 +18,11 @@ const Notification = observer(class Notification extends Component {
         this.delayTimer = createTimer(this.duration);
         this.timer = createTimer(this.duration);
         this.timer.lock();
+        this.playSound = props.playSound;
         this.delayTimer.onFinish(() => {
             this.timer.unlock();
             this.timer.start();
+            this.playSound();
             this.setState({
                 running: true
             });

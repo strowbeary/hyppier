@@ -90,7 +90,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -181,7 +181,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 10000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -241,7 +241,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 15000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
