@@ -40,15 +40,6 @@ export class CameraManager {
             }
         });
 
-        /*this.scene.beforeCameraRender = () => {
-            if (this.camera) {
-                ObjectKindUI.refs.forEach(ref => {
-                    if (ref) {
-                        ref.updatePosition()
-                    }
-                });
-            }
-        }*/
     }
 
     updateFrustum() {
@@ -152,7 +143,7 @@ export class CameraManager {
         animationGroup.normalize(0, 30);
         animationGroup.play();
         animationGroup.onAnimationGroupEndObservable.add(() => {
-            this.scene.afterCameraRender = () => {};
+            ObjectKindUI.refs.forEach(ref => ref &&ref.updatePosition());
             if(toPosition.equals(BABYLON.Vector3.Zero())) {
                 transitionFinishListener.forEach(listener => listener())
             }
@@ -166,16 +157,13 @@ export class CameraManager {
             scale = 1;
         }
         if(mesh === "Attic") {
-            toPosition = this.scene.getMeshByName(mesh).position;
+            toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
             scale = 1;
         } else if (typeof mesh === "string" && mesh.length > 0) {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
             scale = 1 / 3;
         }
 
-        this.scene.afterCameraRender = () => {
-            ObjectKindUI.refs.forEach(ref => ref &&ref.updatePosition());
-        };
 
         this.createAnimations(toPosition, scale);
     }
