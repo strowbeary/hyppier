@@ -81,7 +81,7 @@ button, a {
   background-color: $yellow;
   background-size: 300%;
   background-position: 0;
-  transition: background-position 1s;
+  transition: all 1s;
   width: 100vw;
   height: 100vh;
   overflow: hidden;

@@ -5,6 +5,7 @@ import {showAxis} from "../utils/Axis";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import CameraStore from "../../../stores/CameraStore/CameraStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
+import {GameManagerInstance} from "../../../GameManager";
 
 export class AtticManager {
     constructor(scene, particleSystem, soundManager) {
@@ -119,9 +120,12 @@ export class AtticManager {
                         TutoStore.reportAction("Attic", "actioned");
                         if (CameraStore.meshName !== "Attic") {
                             CameraStore.setTarget("Attic");
+                            GameManagerInstance.pauseGame();
+                            GameStore.attic.setAtticVisibility(true);
                             this.soundManager.music.setVolume(0.05);
                         } else {
                             CameraStore.setTarget("");
+                            GameStore.attic.setAtticVisibility(false);
                             this.soundManager.music.setVolume(0.1);
                         }
                     }
