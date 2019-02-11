@@ -46,7 +46,6 @@ $catalog-width: 30vw;
 
   &__content {
     padding: $vertical-space $horizontal-space 0;
-    overflow-y: scroll;
     flex-grow: 1;
 
     h6 {
@@ -122,13 +121,30 @@ $catalog-width: 30vw;
       font-size: 1.6rem;
       text-transform: uppercase;
       animation: shadow-pulse 1s infinite;
-      transition: transform 300ms ease-in-out;
+      transition: transform 300ms ease-in-out, background-color 300ms;
 
       &:hover {
-        transform: scale(1.1);
-        animation-duration: 0s;
+        background-color: $green;
+        animation: shadow-pulse-hover 1s infinite;
       }
     }
   }
 }
-
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0 transparentize($yellow, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+@keyframes shadow-pulse-hover
+{
+  0% {
+    box-shadow: 0 0 0 0 transparentize($green, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}

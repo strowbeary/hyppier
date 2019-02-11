@@ -8,8 +8,8 @@ import GameStore from "../../../../stores/GameStore/GameStore";
 const Notification = observer(class Notification extends Component {
 
     state = {
-      elapsedTime: 0,
-      running: false
+        elapsedTime: 0,
+        running: false
     };
 
     constructor(props) {
@@ -81,17 +81,21 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         const dashSize = Math.PI * 60;
-        let hide = this.state.running? '': 'hide';
-
+        let hide = this.state.running ? '' : 'hide';
+        let glow = (this.state.running && (this.state.elapsedTime / this.timer.getDuration() > 0.5)) ? "glow" : "";
 
         return (
-            <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.timer.getDuration() > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>
-                <svg height={32} width={32}>
-                    <circle cx={16} cy={16} r={14.5} stroke="black" strokeWidth="2" fill="transparent"
+            <div className={`notification ${hide}`} onClick={() => this.buildCatalog()}>
+                <div className={`wrapper ${glow}`}>
+                    <span>+</span>
+                </div>
+                <svg height={40} width={40}>
+                    <circle cx={20} cy={20} r={18} stroke="black" strokeWidth="2" fill="transparent"
                             strokeDashoffset={this.state.elapsedTime / this.timer.getDuration() * -dashSize}
                             strokeDasharray={dashSize}/>
-                    <circle cx={16} cy={16} r={9} fill="black"/>
                 </svg>
+
+
             </div>
         )
     }

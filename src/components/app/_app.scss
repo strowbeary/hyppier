@@ -106,29 +106,27 @@ button, a {
     content: "";
     position: absolute;
     z-index: -1;
-    top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    transform: scaleX(0);
-    transform-origin: 50%;
-    transition-property: transform;
-    transition: 300ms ease-out;
+    width: 100vw;
+    height: 100vw;
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform 1s, background 1s;
+    border-radius: 50%;
+    background: $yellow;
   }
 
   &.happy {
-
     &:before {
       background: $green;
-      transform: scaleX(1);
+      transform: scale(2);
     }
   }
 
   &.angry {
-
     &:before {
       background: $red;
-      transform: scaleX(1);
+      transform: scale(2);
     }
 
   }

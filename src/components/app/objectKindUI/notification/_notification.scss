@@ -9,14 +9,41 @@
   position: relative;
   cursor: url($pointer-url-levelDown) 16 0, pointer;
 
-  &.animated {
-    &:after {
-      content: "";
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      animation: tuto-pulse 1s ease infinite;
+  svg{
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    pointer-events: none;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $light-grey;
+    background-color: black;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: url($pointer-url-levelDown) 16 0, pointer;
+    transition: background-color 0.1s;
+
+    &.glow {
+      animation: tuto-pulse 1s infinite;
+    }
+
+    &:hover {
+      background-color: orange;
+    }
+
+    span {
+      display: block;
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+      font-weight: 100;
+      line-height: 24px;
+      text-align: center;
     }
   }
 

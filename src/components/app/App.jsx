@@ -22,9 +22,7 @@ const App = observer(class App extends Component {
     };
 
     resetPipo() {
-        if (GameStore.pipo === 'happy') {
-            GameStore.setPipo("");
-        }
+        GameStore.setPipo("");
     }
 
     launchLoading() {
@@ -45,10 +43,11 @@ const App = observer(class App extends Component {
         let pipoMood = "";
         if(GameStore.pipo === 'happy') {
             pipoMood = "happy";
-            setTimeout(() => this.resetPipo(), 3000);
-        } else if (GameStore.pipo === 'angry') {
+            setTimeout(() => this.resetPipo(), 1000);
+        }
+        if (GameStore.pipo === 'angry') {
             pipoMood = "angry";
-            setTimeout(() => this.resetPipo(), 3000);
+            setTimeout(() => this.resetPipo(), 1000);
         }
 
         return (
