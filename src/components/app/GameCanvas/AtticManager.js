@@ -29,8 +29,6 @@ export class AtticManager {
                 depth: this.ladder.getBoundingInfo().boundingBox.extendSize.z * 2
             }, this.scene);
             this.boxLadder.position = this.ladder.getBoundingInfo().boundingBox.centerWorld;
-            this.boxLadder.showBoundingBox = true;
-            this.ladder.showBoundingBox = true;
             this.boxLadder.visibility = 0;
             this.boxLadder.freezeWorldMatrix();
             this.soundManager.ladderDrop.play();
