@@ -26,13 +26,9 @@ const StartScreen = observer(class StartScreen extends Component {
 
     render() {
         return (
-            <div className="startScreen">
-                <img src={objects} alt="decoObjects" className="decoObjects" style={{
-                    left: `${this.state.x * 25}px`
-                }}/>
-                <img src={objectsBlurred} alt="decoObjectsBlurred" className="decoObjectsBlurred" style={{
-                    left: `${this.state.x * 50}px`
-                }}/>
+            <div className="startScreen" style={{
+                backgroundPositionX: `${this.state.x * 90}%, ${-this.state.x * 100}%`
+            }}>
                 <div className="startScreen__wrapper">
                     <div className={"startScreen__text"}>
                         <h1 className="startScreen__title">Hyppier</h1>

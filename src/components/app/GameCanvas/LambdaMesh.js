@@ -30,6 +30,14 @@ export class LambdaMesh {
             this.cloneMaterial(this.mesh);
             this.freezeMaterials(this.mesh);
         }
+
+    }
+
+    enableCollision() {
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.mesh, BABYLON.PhysicsImpostor.BoxImpostor, {
+            mass: 0,
+            restitution: 0
+        }, this.mesh._scene);
     }
 
     addClone(direction) {
@@ -41,31 +49,31 @@ export class LambdaMesh {
         switch (direction) {
             case "right":
                 this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
-                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
-                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximum.x -
+                        this.mesh.getBoundingInfo().boundingBox.minimum.x) *
                     (cloneIndex + 1) + 0.1
                 ));
                 break;
             case "down":
                 this.clones[cloneIndex].subtractInPlace(new BABYLON.Vector3(
                     0,
-                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
-                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximum.y -
+                        this.mesh.getBoundingInfo().boundingBox.minimum.y) *
                     (cloneIndex + 1)
                 ));
                 break;
             case "left":
                 this.clones[cloneIndex].position.subtractInPlace(new BABYLON.Vector3(
-                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.x -
-                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.x) *
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximum.x -
+                        this.mesh.getBoundingInfo().boundingBox.minimum.x) *
                     (cloneIndex + 1) + 0.1
                 ));
                 break;
             default:
                 this.clones[cloneIndex].position.addInPlace(new BABYLON.Vector3(
                     0,
-                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximumWorld.y -
-                        this.mesh.getBoundingInfo().boundingBox.minimumWorld.y) *
+                    Math.abs(this.mesh.getBoundingInfo().boundingBox.maximum.y -
+                        this.mesh.getBoundingInfo().boundingBox.minimum.y) *
                     (cloneIndex + 1)
                 ));
                 break;
