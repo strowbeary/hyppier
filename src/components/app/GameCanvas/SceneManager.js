@@ -66,9 +66,11 @@ export class SceneManager {
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {
+            if (TutoStore.currentMessage === 3 && !TutoStore.end) {
+                this.atticManager.launchLadderFall();
+            }
             if (typeof this.gameManager.objectKindType !== 'undefined' &&
                 this.gameManager.objectKindType !== null) {
-                TutoStore.reportAction("Attic", "appear");
                 if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
                     this.gameManager.clueEvent = this.gameManager.objectKindType;
                 }
@@ -86,19 +88,19 @@ export class SceneManager {
                 GameWatcher
                     .onUpdate((newMesh, oldMesh, objectKindType) => {
                         if (objectKindType) {
-                            if (oldMesh !== null) {
+                            if (oldMesh !== null) { //je remplace un objet
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 });
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                                if (!CatalogStore.isOpen) {
-                                    TutoStore.reportAction("Attic", "appear");
-                                    if (TutoStore.currentMessage === 4 && !TutoStore.end) {
+                                if (!CatalogStore.isOpen) { //si j'ai remplacé dans la popup
+                                    if (TutoStore.currentMessage === 3 && !TutoStore.end) {
                                         this.gameManager.pauseGame();
+                                        this.atticManager.launchLadderFall();
                                     } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
                                         this.gameManager.clueEvent = objectKindType;
                                     }
-                                } else {
+                                } else { //j'ajoute un objet
                                     this.gameManager.objectKindType = objectKindType;
                                     this.gameManager.objectKindName = oldMesh.objectKindName;
                                 }

@@ -33,6 +33,8 @@ export class AtticManager {
             this.boxLadder.freezeWorldMatrix();
             this.soundManager.ladderDrop.play();
             this.setClickEvent();
+            GameManagerInstance.playGame();
+            TutoStore.reportAction("Attic", "appear")
         });
     }
 

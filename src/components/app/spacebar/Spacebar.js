@@ -24,17 +24,13 @@ const Spacebar = observer(class Spacebar extends Component {
     }
 
     hideSpace(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if(e.keyCode === 32) {
+        if(e.keyCode === 32 || e.type === "click") {
             SoundManagerInstance && SoundManagerInstance.spacePress.play();
             this.setState({show: false})
         }
     }
 
     dispatchEvent(e) {
-        e.preventDefault();
-        e.stopPropagation();
         console.log(e);
         if(e.keyCode === 32 || e.type === "click") {
             this.props.onSpaceUp();

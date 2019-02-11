@@ -16,23 +16,31 @@ export default types.model("TutoStore",
                 }
             },
             reportAction(origin, type) {
-                if (type === "appear") {
-                    if (typeof self.messages[self.currentMessage + 1] !== "undefined") {
-                        if (self.messages[self.currentMessage + 1].originTarget === origin) {
-                            self.currentMessage++;
-                            self.showTip = true;
-                        }
-                    }
-                } else if (type === "actioned") {
-                    if (typeof self.messages[self.currentMessage] !== "undefined") {
-                        if (self.messages[self.currentMessage].originTarget === origin) {
-                            if (origin === "Attic") {
-                                self.end = true;
+                console.log(origin, type, self.currentMessage);
+                switch (type) {
+                    case "appear":
+                        if (typeof self.messages[self.currentMessage + 1] !== "undefined") {
+                            if (self.messages[self.currentMessage + 1].originTarget === origin) {
+                                self.currentMessage++;
+                                self.showTip = true;
                             }
-                            self.showTip = false;
                         }
-                    }
+                        break;
+                    case "actioned":
+                        if (typeof self.messages[self.currentMessage] !== "undefined") {
+                            if (self.messages[self.currentMessage].originTarget === origin) {
+                                if (origin === "Attic") {
+                                    self.end = true;
+                                }
+                                self.showTip = false;
+                            }
+                        }
+                        break;
+                    default:
+                        console.log("empty report action");
+                        break;
                 }
+
             }
         })
     )

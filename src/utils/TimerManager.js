@@ -44,11 +44,12 @@ export function createTimer(originalDuration) {
     let pauseTime = 0;
     let metaElapsedTime = 0;
     let locked = false;
-    let duration = (originalDuration * GameStore.hype.level + 0.5);
+    let duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
+
 
     onPatch(GameStore.hype, patch => {
         if(patch.path.includes("level")) {
-            duration = originalDuration * (patch.value + 0.5)
+            duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
         }
     });
 
@@ -108,7 +109,6 @@ export function createTimer(originalDuration) {
         if (metaElapsedTime >= duration) {
             ended = true;
             running = false;
-            console.log(metaElapsedTime, duration);
             finishListeners.forEach(listener => listener());
         }
         if (paused || ended) {
@@ -127,7 +127,8 @@ export function createTimer(originalDuration) {
     }
 
     function setDuration(newDuration) {
-        duration = (newDuration * GameStore.hype.level + 0.5);
+        originalDuration = newDuration;
+        duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
     }
 
     function getDuration() {
