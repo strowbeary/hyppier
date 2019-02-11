@@ -28,9 +28,11 @@ const FullScreenButton = observer(class FullScreenButton extends Component {
 
     switchFullscreen = () => {
         if (!this.isFullScreen) {
+            this.isFullScreen = true;
             BABYLON.Tools.RequestFullscreen(document.documentElement);
         }
         else {
+            this.isFullScreen = false;
             BABYLON.Tools.ExitFullscreen();
         }
     };
