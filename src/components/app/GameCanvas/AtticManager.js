@@ -23,7 +23,18 @@ export class AtticManager {
             dust.disposeWhenFinishedAnimating = true;
             dust.playAnimation(0, 100, false, 5);
             this.ladder.freezeWorldMatrix();
+            this.boxLadder = BABYLON.MeshBuilder.CreateBox("box", {
+                height: this.ladder.getBoundingInfo().boundingBox.extendSize.y * 2,
+                width: this.ladder.getBoundingInfo().boundingBox.extendSize.x * 2,
+                depth: this.ladder.getBoundingInfo().boundingBox.extendSize.z * 2
+            }, this.scene);
+            this.boxLadder.position = this.ladder.getBoundingInfo().boundingBox.centerWorld;
+            this.boxLadder.showBoundingBox = true;
+            this.ladder.showBoundingBox = true;
+            this.boxLadder.visibility = 0;
+            this.boxLadder.freezeWorldMatrix();
             this.soundManager.ladderDrop.play();
+            this.setClickEvent();
         });
     }
 
@@ -107,13 +118,12 @@ export class AtticManager {
         this.originalPosition = this.ladder.position.y;
         this.ladder.position.y = 10;
         this.ladder.freezeWorldMatrix();
-        this.setClickEvent();
     }
 
     setClickEvent() {
-        this.ladder.isPickable = true;
-        this.ladder.actionManager = new BABYLON.ActionManager(this.scene);
-        this.ladder.actionManager.registerAction(
+        this.boxLadder.isPickable = true;
+        this.boxLadder.actionManager = new BABYLON.ActionManager(this.scene);
+        this.boxLadder.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(
                 BABYLON.ActionManager.OnPickTrigger,
                 () => { //DO SOMETHING ON CLICK
