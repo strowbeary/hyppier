@@ -139,6 +139,9 @@ const AboutModal = observer(class AboutModal extends Component {
                             </div>
                         </div>
                         <div className={"aboutModal__footer"}>
+                            <a href="https://soundcloud.com/therewillbenosadness" rel="noopener noreferrer" target="_blank" className={"aboutModal__openButton"}>
+                                Credits musique : There will be no sadness
+                            </a>
                             <button>
                                 <img src={instagram} alt="instagram"/>
                                 <img src={instagramHover} alt="instagramHover"/>

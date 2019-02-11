@@ -157,7 +157,7 @@ export class CameraManager {
 
         if (typeof mesh === "string" && mesh !== "" && mesh !== "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
-            this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSizeWorld
+            this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSize
                 .length() * this.initialValues.distance / 2;
         } else if(mesh === "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
@@ -167,14 +167,11 @@ export class CameraManager {
             toPosition = BABYLON.Vector3.Zero();
             this.distance = this.initialValues.distance;
         }
-
-        console.log("beforeCheck", this.distance);
         if(this.distance > this.initialValues.distance) {
             this.distance = this.initialValues.distance;
         } else if(this.distance < 1) {
             this.distance = 1;
         }
-        console.log(mesh, this.distance);
         this.createAnimations(toPosition);
     }
 

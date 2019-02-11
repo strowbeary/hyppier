@@ -8,7 +8,7 @@
   top: 10vh;
   max-width: 25vw;
   border: solid 1px #E6E6E6;
-  animation: up-down 0.5s forwards;
+  animation: appear 0.5s forwards;
 
   &__placeholder {
     visibility: hidden;
@@ -48,19 +48,35 @@
         background-image: url('../../../assets/img/message-arrow.svg');
         background-size: cover;
         background-color: transparent;
-        animation: up-down 500ms infinite alternate;
+        animation: up-down 1000ms infinite forwards;
       }
     }
   }
 }
 
-@keyframes up-down {
+@keyframes appear {
   from {
     opacity: 0;
     transform: translateY(2px);
   }
   to {
     opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes up-down {
+  0% {
+    opacity: 0.1;
+    transform: translateY(-2px);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+  100% {
+
+    opacity: 0.1;
     transform: translateY(-2px);
   }
 }

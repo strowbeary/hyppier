@@ -1,11 +1,11 @@
 import GameStore from "../stores/GameStore/GameStore";
+import {onPatch} from "mobx-state-tree";
 
 const timers = [];
 let timerException;
 
 export const TimerManager = {
     setTimerException(timerId) {
-        console.log("TIMER EXCEPTION");
         timerException = timerId;
     },
     stopAll() {
@@ -31,7 +31,7 @@ export const TimerManager = {
     }
 };
 
-export function createTimer(duration) {
+export function createTimer(originalDuration) {
     let finishListeners = [];
     let startListeners = [];
     let loopHooks = [];
@@ -44,6 +44,13 @@ export function createTimer(duration) {
     let pauseTime = 0;
     let metaElapsedTime = 0;
     let locked = false;
+    let duration = (originalDuration * GameStore.hype.level + 0.5);
+
+    onPatch(GameStore.hype, patch => {
+        if(patch.path.includes("level")) {
+            duration = originalDuration * (patch.value + 0.5)
+        }
+    });
 
     function onFinish(listener) {
         finishListeners.push(listener);
@@ -91,8 +98,9 @@ export function createTimer(duration) {
     }
 
     function loop() {
-        metaElapsedTime = GameStore.hype.level * (performance.now() - startTime);
+        metaElapsedTime = (performance.now() - startTime);
         loopHooks.forEach(hook => hook({
+            duration,
             elapsedTime: Math.min(Math.max(metaElapsedTime, 0), duration),
             remainingTime: Math.max(duration - metaElapsedTime, 0),
             running: running
@@ -100,6 +108,7 @@ export function createTimer(duration) {
         if (metaElapsedTime >= duration) {
             ended = true;
             running = false;
+            console.log(metaElapsedTime, duration);
             finishListeners.forEach(listener => listener());
         }
         if (paused || ended) {
@@ -118,7 +127,7 @@ export function createTimer(duration) {
     }
 
     function setDuration(newDuration) {
-        duration = newDuration;
+        duration = (newDuration * GameStore.hype.level + 0.5);
     }
 
     function getDuration() {

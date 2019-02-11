@@ -11,7 +11,7 @@ import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
 import TutoStore from "../../stores/TutoStore/TutoStore";
-
+import pauseSvg from "../../assets/img/pause.svg";
 
 const App = observer(class App extends Component {
 
@@ -62,6 +62,10 @@ const App = observer(class App extends Component {
                 }
                 {this.state.loading && !GameStore.attic.atticVisible &&
                     <HypeIndicator/>
+                }
+                {
+                    this.state.loading && GameStore.attic.atticVisible &&
+                        <img src={pauseSvg} alt="pause" className={"pause"}/>
                 }
                 <div className={"catalogWrapper"}>
                     <CSSTransitionGroup
