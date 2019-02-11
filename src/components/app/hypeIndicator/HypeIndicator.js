@@ -91,15 +91,11 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
             <div className="gameIndicator">
                 <div className="gameIndicator__wrapper">
                     <div className="gameIndicator__word">Hype</div>
-                    <div className={`pyro ${GameStore.pipo === 'happy'? 'anim':''}`}>
-                        <div className="before"></div>
-                        <div className="after"></div>
-                    </div>
-                    <div className="jauge">
-                        <div className="gameIndicator__level" style={{
+                    <div className={`jauge ${this.state.up? 'anim':''}`}>
+                        <div className="level" style={{
                             "height": GameStore.hype.level * 100 + "%"
-                        }} onTransitionEnd={() => this.onTransitionEnd()}>
-                            <div className={`gameIndicator__wave ${this.state.up? 'anim':''}`}/>
+                        }} onTransitionEnd={(e) => this.onTransitionEnd(e)}>
+                            <div className="wave"/>
                         </div>
                         <svg viewBox="0 0 10 50" xmlns="http://www.w3.org/2000/svg">
                             <g transform="translate(0,5)">

@@ -12,6 +12,7 @@ import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
 import TutoStore from "../../stores/TutoStore/TutoStore";
 import pauseSvg from "../../assets/img/pause.svg";
+import GoodEndScreen from "./goodEndScreen/GoodEndScreen";
 
 const App = observer(class App extends Component {
 
@@ -41,7 +42,7 @@ const App = observer(class App extends Component {
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
         let pipoMood = "";
-        if(GameStore.pipo === 'happy') {
+        if (GameStore.pipo === 'happy') {
             pipoMood = "happy";
             setTimeout(() => this.resetPipo(), 1000);
         }
@@ -55,6 +56,7 @@ const App = observer(class App extends Component {
                  ref={(ref) => this.app = ref}>
                 {!this.state.ready &&
                     <StartScreen launchLoading={() => {this.launchLoading()}}/>
+                    //<GoodEndScreen/>
                 }
                 {this.state.loading &&
                     <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>
@@ -64,7 +66,7 @@ const App = observer(class App extends Component {
                 }
                 {
                     this.state.loading && GameStore.attic.atticVisible &&
-                        <img src={pauseSvg} alt="pause" className={"pause"}/>
+                    <img src={pauseSvg} alt="pause" className={"pause"}/>
                 }
                 <div className={"catalogWrapper"}>
                     <CSSTransitionGroup

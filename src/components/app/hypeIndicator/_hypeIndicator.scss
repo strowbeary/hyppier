@@ -1,3 +1,4 @@
+@import "../../../variables";
 $particles: 50;
 $width: 500;
 $height: 500;
@@ -79,41 +80,48 @@ $box-shadow2: ();
     transform-origin: center;
   }
 
-  &__wave {
-    position: absolute;
-    display: block;
-    top: -10px;
-    background-image: url("../../../assets/img/wave.svg");
-    background-size: auto;
-    background-repeat: repeat-x;
-    width: 100%;
-    height: 10px;
-    transition: transform 0.5s linear;
-    animation: moveBackground 2s linear infinite;
 
-    &.anim {
-      transform: scaleY(5);
-      animation: moveBackground 0.5s linear infinite;
-    }
-  }
 
-  &__level {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #ffe13d;
-    transition: height 1s linear;
-  }
+
 
   .jauge {
     position: relative;
     border: 6px solid white;
     background: white;
     width: 75px;
-    height: 300px;
+    height: 40vh;
     border-radius: 50px 50px 0 0;
     overflow: hidden;
     margin-bottom: -55px;
+    transition: filter 0.3s linear;
+
+    .level {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: red;
+      transition: height 1s linear, background 0.3s linear;
+    }
+    .wave {
+      position: absolute;
+      display: block;
+      top: -10px;
+      background-image: url("../../../assets/img/wave.svg");
+      background-size: auto;
+      background-repeat: repeat-x;
+      width: 100%;
+      height: 10px;
+      transition: transform 1s linear, animation 1s linear;
+      animation: moveBackground 2s linear infinite;
+      transform-origin: bottom center;
+    }
+    &.anim {
+      .wave {
+        transform: scaleY(5);
+        animation-duration: 0.5s;
+      }
+
+    }
 
     svg {
       position: absolute;
