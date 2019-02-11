@@ -66,13 +66,13 @@ export class SceneManager {
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {
-            if (TutoStore.currentMessage === 3 && !TutoStore.end) {
-                this.atticManager.launchLadderFall();
-            }
             if (typeof this.gameManager.objectKindType !== 'undefined' &&
                 this.gameManager.objectKindType !== null) {
                 if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
                     this.gameManager.clueEvent = this.gameManager.objectKindType;
+                }
+                if (TutoStore.currentMessage === 3 && !TutoStore.end) {
+                    this.atticManager.launchLadderFall();
                 }
             }
             if (TutoStore.currentMessage === 2 && GameStore.hype.level > 0.5) {
