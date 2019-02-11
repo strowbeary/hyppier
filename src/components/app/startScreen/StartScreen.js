@@ -10,6 +10,7 @@ const StartScreen = observer(class StartScreen extends Component {
     state = {
         x: 0
     };
+
     componentDidMount() {
         this.mousemove = document.addEventListener("mousemove", (e) => {
             this.setState({
