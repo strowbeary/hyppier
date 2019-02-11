@@ -171,7 +171,7 @@ export class AtticManager {
     fall() {
         CatalogStore.getAllObjectKind().forEach(objectKind => {
             if(objectKind.activeObject !== null){
-                //objectKind.objects[objectKind.activeObject].getModel().enableCollision();
+                objectKind.objects[objectKind.activeObject].getModel().enableCollision();
             }
         });
         this.ground.position.y = this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y;

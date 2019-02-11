@@ -34,6 +34,12 @@ export class LambdaMesh {
     }
 
     enableCollision() {
+        this.clones.forEach(clone => {
+        clone.physicsImpostor = new BABYLON.PhysicsImpostor(clone, BABYLON.PhysicsImpostor.BoxImpostor, {
+                mass: 0,
+                restitution: 0
+            }, this.mesh._scene);
+        });
         this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.mesh, BABYLON.PhysicsImpostor.BoxImpostor, {
             mass: 0,
             restitution: 0
