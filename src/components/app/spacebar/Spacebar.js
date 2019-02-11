@@ -31,7 +31,6 @@ const Spacebar = observer(class Spacebar extends Component {
     }
 
     dispatchEvent(e) {
-        console.log(e);
         if(e.keyCode === 32 || e.type === "click") {
             this.props.onSpaceUp();
         }

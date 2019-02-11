@@ -32,6 +32,7 @@ const Catalog = observer(class Catalog extends Component {
         if (this.objectKind.activeObject !== null) {
             this.objectKind.updateReplacementCounter();
             GameStore.setPipo("angry");
+            GameStore.hype.setLevelByDiff(-0.02);
         }
     }
 
@@ -73,7 +74,7 @@ const Catalog = observer(class Catalog extends Component {
     onValidate() {
         this.objectKind.updateReplacementCounter();
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-        GameStore.hype.setLevelByDiff(0.1);
+        GameStore.hype.setLevelByDiff(0.02);
         GameStore.setPipo("happy");
         this.closeCatalog(true);
     }

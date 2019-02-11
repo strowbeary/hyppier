@@ -241,7 +241,7 @@
           "cloneDirection": "up"
         }
       ],
-      "objectTimeout": 5000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -450,7 +450,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 8000,
+      "objectTimeout": 20000,
       "replacementCounter": 0,
       "activeObject": null
     },

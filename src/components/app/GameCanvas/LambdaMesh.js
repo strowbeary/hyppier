@@ -133,7 +133,7 @@ export class LambdaMesh {
         easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
         targets.forEach((material, i) => {
             BABYLON.Animation.CreateAndStartAnimation(
-                "materialDegradation",
+                "materialDegradation-diffuse-" + material.name,
                 this.mesh,
                 this.multimaterial ? "material.subMaterials." + i + ".diffuseColor" : "material.diffuseColor",
                 30,
@@ -142,8 +142,9 @@ export class LambdaMesh {
                 BABYLON.Color3.White(),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
                 easingFunction);
+
             BABYLON.Animation.CreateAndStartAnimation(
-                "materialDegradation",
+                "materialDegradation-ambient-" + material.name,
                 this.mesh,
                 this.multimaterial ? "material.subMaterials." + i + ".ambientColor" : "material.ambientColor",
                 30,

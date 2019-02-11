@@ -84,7 +84,7 @@ const Popup = observer(class Popup extends Component {
             Popup.refs[0].changeFocus(true);
         }
         this.objectKind.updateReplacementCounter();
-        GameStore.hype.setLevelByDiff(-0.1);
+        GameStore.hype.setLevelByDiff(-0.02);
         CameraStore.setTarget();
         GameStore.setPipo("angry");
         this.isClosing = true;
@@ -102,7 +102,7 @@ const Popup = observer(class Popup extends Component {
             this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone(this.objectKind.objects[this.objectKind.replacementCounter].cloneDirection);
         }
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-        GameStore.hype.setLevelByDiff(0.1);
+        GameStore.hype.setLevelByDiff(0.02);
         GameStore.setPipo("happy");
         this.isClosing = true;
         this.props.closePopup(true);

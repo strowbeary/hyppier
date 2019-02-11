@@ -1,8 +1,9 @@
+@import "../../../variables";
 .spacebar {
   position: absolute;
   bottom: 5vh;
   width: 100%;
-  color: white;
+  color: $false-black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +12,12 @@
     position: relative;
     display: block;
     padding: 10px 60px;
-    border: solid 2px white;
-    border-radius: 30px;
+    border: solid 2px $false-black;
+    border-radius: 25px;
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 0.3rem;
-    font-weight: 200;
+    font-weight: 400;
     animation: space-translate 1s linear infinite;
 
     &:before {
@@ -26,8 +27,8 @@
       right: -2px;
       top: -2px;
       bottom: -10px;
-      border: solid 2px white;
-      border-radius: 27px;
+      border: solid 2px $false-black;
+      border-radius: 25px;
       animation: space-bottom 1s linear infinite;
 
     }
