@@ -19,6 +19,10 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         this.loop();
     }
 
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     loop() {
         const worker = spawn(function () {
             let bubbles = [];
