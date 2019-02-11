@@ -81,10 +81,6 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         animationLoop();
     }
 
-    componentW() {
-       this.mounted = false;
-    }
-
     onTransitionEnd() {
         this.setState({up: false});
     }
@@ -95,6 +91,10 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
             <div className="gameIndicator">
                 <div className="gameIndicator__wrapper">
                     <div className="gameIndicator__word">Hype</div>
+                    <div className={`pyro ${GameStore.pipo === 'happy'? 'anim':''}`}>
+                        <div className="before"></div>
+                        <div className="after"></div>
+                    </div>
                     <div className="jauge">
                         <div className="gameIndicator__level" style={{
                             "height": GameStore.hype.level * 100 + "%"

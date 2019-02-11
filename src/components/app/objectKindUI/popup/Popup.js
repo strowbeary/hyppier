@@ -93,22 +93,19 @@ const Popup = observer(class Popup extends Component {
 
     onCatalog() {
         TutoStore.reportAction("Notification", "actioned");
-        const timeout = TutoStore.currentMessage === 2 ? 500 : 0;
         Popup.refs = Popup.refs.filter(popup => popup !== null && popup.popup.current !== null).filter(popup => popup.objectKind.name !== this.objectKind.name);
         if (Popup.refs.length > 0) {
             Popup.refs[0].changeFocus(true);
         }
-        setTimeout(() => {
-            this.objectKind.updateReplacementCounter();
-            for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
-                this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone(this.objectKind.objects[this.objectKind.replacementCounter].cloneDirection);
-            }
-            this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-            GameStore.hype.setLevelByDiff(0.1);
-            GameStore.setPipo("happy");
-            this.isClosing = true;
-            this.props.closePopup(true);
-        }, timeout);
+        this.objectKind.updateReplacementCounter();
+        for (let i = 0; i < this.objectKind.objects[this.objectKind.replacementCounter].cloneNumber; i++) {
+            this.objectKind.objects[this.objectKind.replacementCounter].getModel().addClone(this.objectKind.objects[this.objectKind.replacementCounter].cloneDirection);
+        }
+        this.objectKind.setActiveObject(this.objectKind.replacementCounter);
+        GameStore.hype.setLevelByDiff(0.1);
+        GameStore.setPipo("happy");
+        this.isClosing = true;
+        this.props.closePopup(true);
     }
 
     pipoYes() {
@@ -129,13 +126,17 @@ const Popup = observer(class Popup extends Component {
         let focus = !this.props.currentState.focus;
 
         return (
-            <div className={`popup ${focus? '':'focus'}`} style={this.state.draggablePosition}
+            <div className={`popup ${focus ? '' : 'focus'}`} style={this.state.draggablePosition}
                  onMouseDown={(e) => this.onDragStart(e)} ref={this.popup}>
                 <img className="popup__image" src={this.adUrl} alt="promotion" draggable={false}/>
                 <button className="popup__footer__buttonClose" onClick={() => this.onClose()}
-                        ref={this.buttonClose} onMouseOver={() => this.pipoNo()} onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)</button>
+                        ref={this.buttonClose} onMouseOver={() => this.pipoNo()}
+                        onMouseLeave={() => this.pipoStop()}>Bof, pas intéressé(e)
+                </button>
                 <button className="popup__footer__buttonCatalog"
-                        onClick={() => this.onCatalog()} ref={this.buttonCatalog} onMouseOver={() => this.pipoYes()} onMouseLeave={() => this.pipoStop()}>Oh oui, je veux !</button>
+                        onClick={() => this.onCatalog()} ref={this.buttonCatalog} onMouseOver={() => this.pipoYes()}
+                        onMouseLeave={() => this.pipoStop()}>Oh oui, je veux !
+                </button>
             </div>
         )
     }

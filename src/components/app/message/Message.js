@@ -18,9 +18,6 @@ const Message = observer(class Message extends Component {
                 TutoStore.reportAction("Attic", "actioned");
             }, this.message.expiration);
         }
-        if(this.message.originTarget === "Attic") {
-            this.props.launchLadderFall();
-        }
     }
 
     onSpaceUp() {

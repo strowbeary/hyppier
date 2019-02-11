@@ -40,7 +40,7 @@
         },
         {
           "name": "BIENÅSSÏ",
-          "adUrl": "img/catalog/popup_placeholder.png",
+          "adUrl": "img/pubs/Ads-Chair-03.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -117,7 +117,7 @@
         },
         {
           "name": "Station de travail perfectionnée",
-          "adUrl": "img/catalog/popup_placeholder.png",
+          "adUrl": "img/pubs/Ads-Computer-01.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -133,7 +133,7 @@
           "cloneDirection": "up"
         },{
           "name": "WARMACHINE 720°",
-          "adUrl": "img/catalog/popup_placeholder.png",
+          "adUrl": "img/pubs/Ads-Computer-02.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -225,7 +225,7 @@
         },
         {
           "name": "Super Nova Bling Bling",
-          "adUrl": "img/catalog/popup_placeholder.png",
+          "adUrl": "img/pubs/Ads-Lamp-03.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",
@@ -418,7 +418,7 @@
           "cloneDirection": "up"
         },{
           "name": "Power Space Mountain To Infinity And Beyond",
-          "adUrl": "img/catalog/popup_placeholder.png",
+          "adUrl": "img/pubs/Ads-Transport-04-03.png",
           "thumbnailUrl": "img/promo/promo.png",
           "closeButtonLabel": "Tant pis",
           "returnCatalogButtonLabel": "Retourner au catalogue",

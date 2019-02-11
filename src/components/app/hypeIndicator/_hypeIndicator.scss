@@ -1,3 +1,57 @@
+$particles: 50;
+$width: 500;
+$height: 500;
+
+// Create the explosion...
+$box-shadow: ();
+$box-shadow2: ();
+@for $i from 0 through $particles {
+  $box-shadow: $box-shadow,
+  random($width)-$width/2 + px
+  random($height)-$height/1.2 + px
+  #fff;
+  $box-shadow2: $box-shadow2, 0 0 #fff
+}
+
+.pyro {
+
+  > .before {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: $box-shadow2;
+  }
+
+  > .after {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: $box-shadow2;
+    animation-delay: 725ms, 725ms, 725ms;
+    animation-duration: 725ms, 725ms, 5.75s;
+  }
+
+  &.anim {
+    > .before, > .after {
+      animation: 500ms bang ease-out infinite backwards, 500ms gravity ease-in infinite backwards;
+    }
+  }
+}
+
+@keyframes bang {
+  to {
+    box-shadow:$box-shadow;
+  }
+}
+
+@keyframes gravity {
+  to {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+}
 
 .gameIndicator {
   position: fixed;

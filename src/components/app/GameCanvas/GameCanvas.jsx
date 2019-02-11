@@ -37,12 +37,6 @@ export default observer(class GameCanvas extends React.Component {
         this.scene.activeCamera.getProjectionMatrix(true);
         this.sceneManager.cameraManager.updateFrustum();
     }
-
-    launchLadderFall() {
-        this.sceneManager.atticManager.launchLadderFall();
-        this.sceneManager.gameManager.playGame();
-    }
-
     render() {
 
         return (
@@ -78,10 +72,7 @@ export default observer(class GameCanvas extends React.Component {
                     }
                 })()}
                 {TutoStore.displayTip() && !CatalogStore.isOpen &&
-                <Message message={TutoStore.getCurrentMessage()}
-                         launchLadderFall={() => {
-                             this.launchLadderFall()
-                         }}/>
+                    <Message message={TutoStore.getCurrentMessage()}/>
                 }
                 {this.state.ready &&
                     <div className={"game__footer"}>
