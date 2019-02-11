@@ -10,6 +10,8 @@ export class LambdaMesh {
         this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
+        this.mesh.scalingDeterminant = 0;
+        this.mesh.freezeWorldMatrix();
 
         const pivotPosition = this.mesh.getBoundingInfo().boundingBox.centerWorld;
 
@@ -68,6 +70,9 @@ export class LambdaMesh {
                 ));
                 break;
         }
+
+        this.clones[cloneIndex].scalingDeterminant = 0;
+        this.clones[cloneIndex].freezeWorldMatrix();
     }
 
     cloneMaterial(mesh) {// Need to clone material before animation
@@ -82,20 +87,20 @@ export class LambdaMesh {
 
     scaleAppearAnimation(mesh) {
         mesh.animations = [];
-        let animationBox = new BABYLON.Animation(`scaleAppear-${mesh.id}`, "scalingDeterminant", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let animationBox = new BABYLON.Animation(`scaleAppear-${mesh.id}`, "scalingDeterminant", 15, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keys = [];
         keys.push({
             frame: 0,
             value: 0
         });
         keys.push({
-            frame: 30,
+            frame: 15,
             value: 1
         });
         animationBox.setKeys(keys);
 
         let easingFunction = new BABYLON.ExponentialEase();
-        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN);
         animationBox.setEasingFunction(easingFunction);
         mesh.animations.push(animationBox);
     }
@@ -157,13 +162,13 @@ export class LambdaMesh {
                 clone.setEnabled(true);
                 clone.unfreezeWorldMatrix();
                 this.scaleAppearAnimation(clone);
-                clone._scene.beginAnimation(clone, 0, 30, false, 1, () => {
+                clone._scene.beginAnimation(clone, 0, 15, false, 1, () => {
                     clone.freezeWorldMatrix()
                 });
             });
         }
 
-        this.mesh._scene.beginAnimation(this.mesh, 0, 30, false, 1, () => {
+        this.mesh._scene.beginAnimation(this.mesh, 0, 15, false, 1, () => {
             this.mesh.freezeWorldMatrix();
             typeof callback === 'function' && callback()
         });
@@ -173,7 +178,7 @@ export class LambdaMesh {
         const lastClone = this.clones[this.clones.length - 1];
         lastClone.unfreezeWorldMatrix();
         this.scaleAppearAnimation(lastClone);
-        lastClone._scene.beginAnimation(lastClone, 30, 0, false, 1, () => {
+        lastClone._scene.beginAnimation(lastClone, 15, 0, false, 1, () => {
             lastClone.scalingDeterminant = 0;
             lastClone.freezeWorldMatrix();
             typeof callback === 'function' && callback()
@@ -187,13 +192,13 @@ export class LambdaMesh {
             this.clones.forEach(clone => {
                 clone.unfreezeWorldMatrix();
                 this.scaleAppearAnimation(clone);
-                clone._scene.beginAnimation(clone, 30, 0, false, 1, () => {
+                clone._scene.beginAnimation(clone, 15, 0, false, 1, () => {
                     clone.scalingDeterminant = 0;
                     clone.freezeWorldMatrix();
                 });
             });
         }
-        this.mesh._scene.beginAnimation(this.mesh, 30, 0, false, 1, () => {
+        this.mesh._scene.beginAnimation(this.mesh, 15, 0, false, 1, () => {
             this.mesh.scalingDeterminant = 0;
             this.mesh.freezeWorldMatrix();
             typeof callback === 'function' && callback()
