@@ -99,7 +99,7 @@ $box-shadow2: ();
       position: absolute;
       bottom: 0;
       width: 100%;
-      background: red;
+      background: #ffe13d;
       transition: height 1s linear, background 0.3s linear;
     }
     .wave {
@@ -110,14 +110,15 @@ $box-shadow2: ();
       background-size: auto;
       background-repeat: repeat-x;
       width: 100%;
-      height: 10px;
-      transition: transform 1s linear, animation 1s linear;
+      height: 13px;
+      transition: transform 0.5s linear, animation-duration 1s linear;
       animation: moveBackground 2s linear infinite;
       transform-origin: bottom center;
+      transform: scaleY(1);
     }
     &.anim {
       .wave {
-        transform: scaleY(5);
+        transform: scaleY(3);
         animation-duration: 0.5s;
       }
 
@@ -125,7 +126,6 @@ $box-shadow2: ();
 
     svg {
       position: absolute;
-      margin-top: -40px;
       width: 100%;
       transition: top 0.5s;
     }

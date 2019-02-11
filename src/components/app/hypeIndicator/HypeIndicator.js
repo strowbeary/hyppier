@@ -23,7 +23,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         const worker = spawn(function () {
             let bubbles = [];
             const delta_point = 10;
-            const globalHeight = 45;
+            const globalHeight = 55;
             const bubbleNumber = 20;
             for(let i = 0; i < bubbleNumber; i++) {
                 let speed = Math.random();
@@ -98,7 +98,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                             <div className="wave"/>
                         </div>
                         <svg viewBox="0 0 10 50" xmlns="http://www.w3.org/2000/svg">
-                            <g transform="translate(0,5)">
+                            <g>
                                 <path
                                     d={this.state.bubblePath}
                                     fill="rgba(255, 255, 255, 0.7)"
