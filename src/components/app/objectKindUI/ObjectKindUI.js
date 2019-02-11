@@ -136,8 +136,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         }
 
         let style = {
-            'top': y - 15,
-            'left': x - 15,
+            'top': Math.abs(y - 15),
+            'left': Math.abs(x - 15),
             'zIndex': zIndex
         };
 

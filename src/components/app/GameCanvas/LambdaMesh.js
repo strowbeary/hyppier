@@ -138,7 +138,7 @@ export class LambdaMesh {
                 this.multimaterial ? "material.subMaterials." + i + ".diffuseColor" : "material.diffuseColor",
                 30,
                 time,
-                material.ambientColor,
+                material.diffuseColor,
                 BABYLON.Color3.White(),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
                 easingFunction);

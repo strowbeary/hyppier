@@ -89,8 +89,8 @@ const Notification = observer(class Notification extends Component {
                 <div className={`wrapper ${glow}`}>
                     <span>+</span>
                 </div>
-                <svg height={40} width={40}>
-                    <circle cx={20} cy={20} r={18} stroke="black" strokeWidth="2" fill="transparent"
+                <svg height={44} width={44}>
+                    <circle cx={22} cy={22} r={20} stroke="black" strokeWidth="3" fill="transparent"
                             strokeDashoffset={this.state.elapsedTime / this.timer.getDuration() * -dashSize}
                             strokeDasharray={dashSize}/>
                 </svg>
