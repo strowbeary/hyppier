@@ -79,14 +79,14 @@ button, a {
 #app {
   position: relative;
   background-color: $yellow;
-  background-size: 300%;
-  background-position: 0;
   transition: all 1s;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 
   .catalogWrapper {
     display: block;
@@ -102,45 +102,35 @@ button, a {
     z-index: 0;
   }
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
-    display: block;
+    z-index: -1;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    transition: background-position 1s;
-    z-index: -1;
-    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: 50%;
+    transition-property: transform;
+    transition: 300ms ease-out;
   }
 
   &.happy {
-    background: linear-gradient(45deg, #FFE07D 50%, $green 55%);
-    background-size: 300%;
-    background-position: 0;
-    animation: animate 3s;
 
-    &:after {
-      background: linear-gradient(45deg, transparent 50%, $green 55%);
-      background-size: 300%;
-      background-position: 0;
-      animation: animate 3s;
+    &:before {
+      background: $green;
+      transform: scaleX(1);
     }
   }
 
   &.angry {
-    background: linear-gradient(45deg, $yellow 50%, $red 55%);
-    background-size: 300%;
-    background-position: 0;
-    animation: animate 3s;
 
-    &:after {
-      background: linear-gradient(45deg, transparent 50%, $red 55%);
-      background-size: 300%;
-      background-position: 0;
-      animation: animate 3s;
+    &:before {
+      background: $red;
+      transform: scaleX(1);
     }
+
   }
 
   &.attic {
