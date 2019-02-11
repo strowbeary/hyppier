@@ -27,10 +27,10 @@ const StartScreen = observer(class StartScreen extends Component {
         return (
             <div className="startScreen">
                 <img src={objects} alt="decoObjects" className="decoObjects" style={{
-                    left: `${this.state.x * 100}px`
+                    left: `${this.state.x * 25}px`
                 }}/>
                 <img src={objectsBlurred} alt="decoObjectsBlurred" className="decoObjectsBlurred" style={{
-                    left: `${this.state.x * 200}px`
+                    left: `${this.state.x * 50}px`
                 }}/>
                 <div className="startScreen__wrapper">
                     <div className={"startScreen__text"}>
