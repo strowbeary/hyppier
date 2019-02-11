@@ -13,15 +13,11 @@ export class LambdaMesh {
         this.mesh.scalingDeterminant = 0;
         this.mesh.freezeWorldMatrix();
 
-        const pivotPosition = this.mesh.getBoundingInfo().boundingBox.centerWorld;
 
-        if (this.objectKindName === "Transport") {
-            this.mesh.setPivotPoint(new BABYLON.Vector3(
-                pivotPosition.x - this.mesh.position.x,
-                pivotPosition.y - this.mesh.position.y,
-                pivotPosition.z - this.mesh.position.z
-            ));
-        }
+        this.mesh.setPivotPoint(
+            this.mesh.getBoundingInfo().boundingBox.centerWorld
+                .subtract(this.mesh.position)
+        );
 
         this.clones = [];
         if (this.mesh) {

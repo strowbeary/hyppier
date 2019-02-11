@@ -11,7 +11,7 @@ export class CameraManager {
     initialValues = {
         width: window.innerWidth,
         height: window.innerHeight,
-        distance: 6,
+        distance: 5.5,
         ratio: window.innerHeight / window.innerWidth
     };
 
