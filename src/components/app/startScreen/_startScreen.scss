@@ -7,7 +7,7 @@ $backgroundHeight: 300vh;
     background-position-y: 0, 0;
   }
   to {
-    background-position-y: -$backgroundHeight, -2 * $backgroundHeight;
+    background-position-y: -2 * $backgroundHeight, -$backgroundHeight;
   }
 }
 
@@ -18,7 +18,7 @@ $backgroundHeight: 300vh;
   z-index: 10;
   background-color: $yellow;
   background-image: url(../../../assets/img/objects.png), url(../../../assets/img/objects-blurred.png);
-  background-size: auto $backgroundHeight, auto $backgroundHeight;
+  background-size: auto $backgroundHeight, auto $backgroundHeight / 3;
   background-repeat: repeat;
   width: 100vw;
   height: 100vh;
@@ -30,7 +30,7 @@ $backgroundHeight: 300vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $false-black;
   }
 
   &__title {
