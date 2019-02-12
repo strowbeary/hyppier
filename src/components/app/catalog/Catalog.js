@@ -83,7 +83,7 @@ const Catalog = observer(class Catalog extends Component {
         return (
             <div className={`catalog`}>
                 {this.state.confirmVisibility &&
-                <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
+                <ConfirmPopup productName={this.productNew.name} onClose={() => this.onClose()}
                               closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
                               pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
                 }
@@ -97,7 +97,7 @@ const Catalog = observer(class Catalog extends Component {
                 <div className="catalog__content">
                     <div className="catalog__content__main__header">
                         <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
-                        <a className="catalog__content__info" href={this.productNew.infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                        <a className="catalog__content__info" href={this.productNew.url} target="_blank" rel="noopener noreferrer">En savoir +</a>
                     </div>
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">

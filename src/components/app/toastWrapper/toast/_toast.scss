@@ -5,14 +5,15 @@
   left: 30px;
   bottom: 30px;
   background-color: white;
-  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   padding: 10px;
   font-size: 1rem;
   display: flex;
   align-items: center;
 
   &:before {
-    margin-right: 5px;
+    margin-right: 7px;
   }
 
   &.get {
@@ -30,7 +31,7 @@
   }
 
   span {
-    font-style: italic;
+    text-decoration: underline;
   }
 
   p {

@@ -55,7 +55,7 @@ const Toast = observer(class Toast extends Component {
                 }
                 {
                     this.type === "watch" &&
-                    <p>{this.number} personnes sont en train de baver sur {this.objectName}</p>
+                    <p>{this.number} personnes sont en train de baver sur <span>{this.objectName}</span></p>
                 }
             </div>
         )
