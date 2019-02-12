@@ -19,7 +19,7 @@ const Catalog = observer(class Catalog extends Component {
         super(props);
         this.path = [props.index];
         this.objectKind = CatalogStore.objectKinds[this.path[0]];
-        this.productType = this.objectKind.name;
+        this.productType = this.objectKind.catalogName;
         this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
         this.path.push(this.objectKind.replacementCounter + 1);
         this.isClosing = false;
