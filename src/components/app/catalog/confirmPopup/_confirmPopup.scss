@@ -63,20 +63,11 @@
     color: white;
 
     animation: shadow-pulse 1s infinite;
-    transition: transform 300ms ease-in-out;
-
-    &:disabled {
-      animation-duration: 0s;
-      cursor: url($default-cursor-url-levelDown), default;
-
-      &:hover {
-        transform: scale(1);
-      }
-    }
+    transition: background-color 300ms;
 
     &:hover {
-      transform: scale(1.1);
-      animation-duration: 0s;
+      background-color: $green;
+      animation: shadow-pulse-hover 1s infinite;
     }
   }
 }

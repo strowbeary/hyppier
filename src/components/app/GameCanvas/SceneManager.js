@@ -71,14 +71,14 @@ export class SceneManager {
                 if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
                     this.gameManager.clueEvent = this.gameManager.objectKindType;
                 }
-                if (TutoStore.currentMessage === 3 && !TutoStore.end) {
+                if (TutoStore.currentMessage === 4 && !TutoStore.end) {
                     this.atticManager.launchLadderFall();
                 }
             }
             if (TutoStore.currentMessage === 2 && GameStore.hype.level > 0.5) {
-                TutoStore.reportAction("Notification", "appear");
+                TutoStore.reportAction("FirstObject", "appear");
             }
-            if (TutoStore.currentMessage !== 4 || TutoStore.end) {
+            if (TutoStore.currentMessage !== 5 || TutoStore.end) {
                 this.gameManager.playAfterCatalog();
             }
         });
@@ -94,7 +94,7 @@ export class SceneManager {
                                 });
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 if (!CatalogStore.isOpen) { //si j'ai remplacé dans la popup
-                                    if (TutoStore.currentMessage === 3 && !TutoStore.end) {
+                                    if (TutoStore.currentMessage === 4 && !TutoStore.end) {
                                         this.gameManager.pauseGame();
                                         this.atticManager.launchLadderFall();
                                     } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {

@@ -30,13 +30,12 @@ $box-shadow2: ();
     height: 5px;
     border-radius: 50%;
     box-shadow: $box-shadow2;
-    animation-delay: 725ms, 725ms, 725ms;
-    animation-duration: 725ms, 725ms, 5.75s;
   }
 
   &.anim {
     > .before, > .after {
-      animation: 500ms bang ease-out infinite backwards, 500ms gravity ease-in infinite backwards;
+      animation: 750ms bang ease-out infinite backwards;
+      animation-delay: 750ms, 750ms, 750ms, 750ms;
     }
   }
 }
@@ -44,13 +43,6 @@ $box-shadow2: ();
 @keyframes bang {
   to {
     box-shadow:$box-shadow;
-  }
-}
-
-@keyframes gravity {
-  to {
-    transform: translateY(200px);
-    opacity: 0;
   }
 }
 
@@ -78,11 +70,8 @@ $box-shadow2: ();
     font-weight: bold;
     text-align: center;
     transform-origin: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-
-
-
-
 
   .jauge {
     position: relative;
@@ -92,8 +81,9 @@ $box-shadow2: ();
     height: 40vh;
     border-radius: 50px 50px 0 0;
     overflow: hidden;
-    margin-bottom: -55px;
+    margin-bottom: -87px;
     transition: filter 0.3s linear;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
     .level {
       position: absolute;
@@ -132,79 +122,12 @@ $box-shadow2: ();
   }
 }
 
-.pipo {
-  z-index: 10;
-  width: 128px;
-  height: 128px;
-  //transition: transform 5ms linear;
-  background: url('../../../assets/img/Pipo-Idle.png') left top no-repeat;
-  background-size: (2560px/2) (3072px/2);
-  animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
-
-  &.happy {
-    //do not make this infinite
-  }
-
-  &.sad {
-    //do not make this infinite
-  }
-
-  &.yes {
-    background: url('../../../assets/img/Pipo-Yes.png') left center;
-    background-size: (2048px/2) (1792px/2);
-    animation: playXYes 0.28s steps(8) infinite, playYYes 1.96s steps(7) infinite;
-
-  }
-
-  &.no {
-    background: url('../../../assets/img/Pipo-No.png') left center;
-    background-size: (2048px/2);
-    animation: playXNo 0.33s steps(8) infinite, playYNo 1.98s steps(6) infinite;
-  }
-}
-
-@keyframes playXYes {
-  from {
-    background-position-x: 0;
-  }
-  to {
-    background-position-x: -(2048px/2);
-  }
-}
-
-@keyframes playYYEs {
-  from {
-    background-position-y: 0;
-  }
-  to {
-    background-position-y: -(1792px/2);
-  }
-}
-
-@keyframes playXNo {
-  from {
-    background-position-x: 0;
-  }
-  to {
-    background-position-x: -(2048px/2);
-  }
-}
-
-@keyframes playYNo {
-  from {
-    background-position-y: -(512px/2);
-  }
-  to {
-    background-position-y: -(2048px/2);
-  }
-}
-
 @keyframes playX {
   from {
     background-position-x: 0;
   }
   to {
-    background-position-x: -(2560px/2);
+    background-position-x: -(2560px/1.6);
   }
 }
 
@@ -213,7 +136,74 @@ $box-shadow2: ();
     background-position-y: 0;
   }
   to {
-    background-position-y: -(3072px/2);
+    background-position-y: -(3840px/1.6);
+  }
+}
+
+@keyframes playXNo {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(1792px/1.6);
+  }
+}
+
+@keyframes playYNo {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(2880px/1.6);
+  }
+}
+
+.pipo {
+  z-index: 10;
+  width: 160px;
+  height: 200px; //320
+  background: url('../../../assets/img/Pipo-Idle-4000.png') left top no-repeat;
+  background-size: (2560px/1.6) (3840px/1.6);
+  animation: playX 0.33s steps(10) infinite, playY 3.96s steps(12) infinite;
+
+  &.happy {
+    background: url('../../../assets/img/Pipo-Happy-0203.png') left top no-repeat;
+    background-size: (1792px/1.6) (2880px/1.6);
+    animation: playXNo 0.33s steps(7) 9, playYNo 2.97s steps(9) 1;
+  }
+
+  &.angry {
+    //do not make this infinite
+  }
+
+  &.yes {
+    background: url('../../../assets/img/Pipo-Idle_Yes-0156.png') top left no-repeat;
+    background-size: (1792px/1.6) (2560px/1.6);
+    animation: playXYes 0.195s steps(7) 8, playYYes 1.56s steps(8) 1;
+  }
+
+  &.no {
+    background: url('../../../assets/img/Pipo-Idle_No-0203.png') top left no-repeat;
+    background-size: (1792px/1.6) (2880px/1.6);
+    animation: playXNo 0.33s steps(7) 9, playYNo 2.97s steps(9) 1;
+  }
+}
+
+@keyframes playXYes {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(1792px/1.6);
+  }
+}
+
+@keyframes playYYes {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(2560px/1.6);
   }
 }
 

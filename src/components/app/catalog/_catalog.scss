@@ -8,7 +8,7 @@ $catalog-width: 30vw;
   background-color: white;
   display: flex;
   flex-direction: column;
-  border: solid 1px #E6E6E6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   &__header {
     display: flex;
@@ -121,7 +121,7 @@ $catalog-width: 30vw;
       font-size: 1.6rem;
       text-transform: uppercase;
       animation: shadow-pulse 1s infinite;
-      transition: transform 300ms ease-in-out, background-color 300ms;
+      transition: background-color 300ms;
 
       &:hover {
         background-color: $green;

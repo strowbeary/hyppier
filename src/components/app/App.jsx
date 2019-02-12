@@ -44,15 +44,15 @@ const App = observer(class App extends Component {
         let pipoMood = "";
         if (GameStore.pipo === 'happy') {
             pipoMood = "happy";
-            setTimeout(() => this.resetPipo(), 1000);
+            setTimeout(() => this.resetPipo(), 2970);
         }
         if (GameStore.pipo === 'angry') {
             pipoMood = "angry";
-            setTimeout(() => this.resetPipo(), 1000);
+            setTimeout(() => this.resetPipo(), 2970);
         }
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
+            <div id="app" className={`${pipoMood} ${isAtticVisible}`}
                  ref={(ref) => this.app = ref}>
                 {!this.state.ready &&
                     //<StartScreen launchLoading={() => {this.launchLoading()}}/>

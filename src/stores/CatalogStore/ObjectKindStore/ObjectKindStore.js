@@ -36,6 +36,7 @@ function preloadNextObject(objectKind) {
 export default types
     .model("ObjectKindStore", {
         name: types.string,
+        catalogName: types.string,
         objects: types.array(ObjectStore),
         objectTimeout: types.number,
         replacementCounter: types.number,

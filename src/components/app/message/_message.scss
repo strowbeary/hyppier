@@ -9,6 +9,7 @@
   max-width: 25vw;
   border: solid 1px #E6E6E6;
   animation: appear 0.5s forwards;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   &__placeholder {
     visibility: hidden;

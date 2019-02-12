@@ -26,16 +26,15 @@ const ConfirmPopup = observer(class ConfirmPopup extends Component {
     }
 
     render() {
-        let {infos, closeButtonLabel, returnCatalogButtonLabel} = this.props.product;
 
         return (
             <div className="confirmPopup">
                 <div className="confirmPopup__content">
                     <img src={errorSvg} alt="error"/>
-                    <p>{infos[0].slogan}</p>
+                    <p>Veux-tu vraiment passer à côté de {this.props.productName} ?</p>
                 </div>
-                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()} onMouseOver={() => this.onCloseOver()} onMouseLeave={() => this.onMouseLeave()}>{closeButtonLabel}</button>
-                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()} onMouseOver={() => this.onCatalogOver()} onMouseLeave={() => this.onMouseLeave()}>{returnCatalogButtonLabel}</button>
+                <button className="confirmPopup__buttonClose" onClick={() => this.onClose()} onMouseOver={() => this.onCloseOver()} onMouseLeave={() => this.onMouseLeave()}>Oui, tant pis</button>
+                <button className="confirmPopup__buttonCatalog" onClick={() => this.onCatalog()} onMouseOver={() => this.onCatalogOver()} onMouseLeave={() => this.onMouseLeave()}>Non, retourner au catalogue</button>
             </div>
         )
     }

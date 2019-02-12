@@ -34,7 +34,6 @@ export class LambdaMesh {
         this.mesh.convertToUnIndexedMesh();
         this.mesh.receiveShadows = false;
         this.mesh.setEnabled(false);
-        this.mesh.scalingDeterminant = 0;
         this.mesh.freezeWorldMatrix();
 
         if (this.objectKindName === "Transport") {
@@ -43,6 +42,7 @@ export class LambdaMesh {
                     .subtract(this.mesh.position)
             );
         }
+        this.mesh.scalingDeterminant = 0;
 
         this.clones = [];
 

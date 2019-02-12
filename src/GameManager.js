@@ -32,6 +32,7 @@ class GameManager {
     }
 
     playGame() {
+        console.log("playGame");
         TimerManager.startAll();
         GameStore.options.setPause(false);
         this.scene.animatables.forEach(animatable => animatable.restart())

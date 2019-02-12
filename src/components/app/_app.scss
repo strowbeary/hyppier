@@ -112,7 +112,7 @@ button, a {
     height: 1px;
     transform-origin: center;
     transform: scale(0);
-    transition: transform 1s, background 1s;
+    transition: transform 1s ease-in, background 1s ease-in;
     border-radius: 50%;
     background: $yellow;
   }

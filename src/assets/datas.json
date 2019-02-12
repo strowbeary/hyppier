@@ -2,90 +2,56 @@
   "objectKinds": [
     {
       "name": "Chair",
+      "catalogName": "Chaise",
       "type": "furniture",
       "objects": [
         {
           "name": "Tabouret",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "adUrl": "img/pubs/Ads-Chair-03.png",
+          "thumbnailUrl": "img/catalog/01-Chair.png",
           "catalogSlogan": "Je suis un super Tabouret",
           "modelUrl": "Chair/01-Chair.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://localhost:8080",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
           "name": "MÅLOKÜ",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Chair-02.png",
+          "thumbnailUrl": "img/catalog/02-Chair.png",
+          "catalogSlogan": "Il est temps de te débarrasser de ton assise des plus sommaires. Jette ton vieux tabouret et goûte à la joie d’un dos bien calé. ",
           "modelUrl": "Chair/02-Chair.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.lci.fr/shopping/ameublement-un-marche-en-pleine-croissance-2110564.html",
           "cloneNumber": 1,
           "cloneDirection": "left"
         },
         {
           "name": "BIENÅSSÏ",
           "adUrl": "img/pubs/Ads-Chair-03.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "thumbnailUrl": "img/catalog/03-Chair.png",
+          "catalogSlogan": "Moulé sur les fesses de Steve Jobs, ce fauteuil est la promesse d’une sensation de bien-être hors pair. Tu ne te souviendras plus avoir vécu sans et ça, ça n’a pas de prix !",
           "modelUrl": "Chair/03-Chair.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.focus-economics.com/blog/the-poorest-countries-in-the-world",
           "cloneNumber": 1,
           "cloneDirection": "left"
         },
         {
           "name": "FESSØYEUSË",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Chair-04.png",
+          "thumbnailUrl": "img/catalog/04-Chair.png",
+          "catalogSlogan": "Offre à ton arrière-train un confort inégalable avec ce fauteuil FESSØYEUSË. C’est simple comme bonjour: tu n’as qu’à cliquer, on s’occupe de te livrer !",
           "modelUrl": "Chair/04-Chair.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.latribune.fr/supplement/l-amenagement-interieur-un-marche-en-croissance-depuis-plusieurs-annees-791251.html",
           "cloneNumber": 1,
           "cloneDirection": "left"
         },
         {
           "name": "KEBABÅTOR 3000",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Chair-05.png",
+          "thumbnailUrl": "img/catalog/05-Chair.png",
+          "catalogSlogan": "Allure rétro-futuriste, broche à kebab pour les petites faims, ventilateur pour les coups de chaud: comment résister à autant de gadgets indispensables ?",
           "modelUrl": "Chair/05-Chair.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.criteo.com/wp-content/uploads/2018/01/Browsing-Buying-Behaviour-2016-UK.pdf",
           "cloneNumber": 0,
           "cloneDirection": ""
         }
@@ -96,87 +62,56 @@
     },
     {
       "name": "Computer",
+      "catalogName": "Ordinateur",
       "type": "electric",
       "objects": [
         {
           "name": "Macintosh 512k",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "adUrl": "img/pubs/Ads-Computer-01.png",
+          "thumbnailUrl": "img/catalog/01-Computer.png",
           "catalogSlogan": "Je suis un super Macintosh",
           "modelUrl": "Computer/01-Computer.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://localhost:8080",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
           "name": "Station de travail perfectionnée",
-          "adUrl": "img/pubs/Ads-Computer-01.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Macintosh",
-          "modelUrl": "Computer/02-Computer.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
-          "cloneNumber": 1,
-          "cloneDirection": "up"
-        },{
-          "name": "WARMACHINE 720°",
           "adUrl": "img/pubs/Ads-Computer-02.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Macintosh",
+          "thumbnailUrl": "img/catalog/02-Computer.png",
+          "catalogSlogan": "Et si tu remplaçais ton Macintosh 128K défraîchi et vieillissant par un modèle plus clinquant et récent ?",
+          "modelUrl": "Computer/02-Computer.babylon",
+          "url": "https://www.lemonde.fr/idees/article/2017/12/29/obsolescence-programmee-le-grand-gachis_5235676_3232.html",
+          "cloneNumber": 1,
+          "cloneDirection": "up"
+        },
+        {
+          "name": "Machine de guerre 720°",
+          "adUrl": "img/pubs/Ads-Computer-03.png",
+          "thumbnailUrl": "img/catalog/03-Computer.png",
+          "catalogSlogan": "Sous tes yeux ébahis, voici le cadeau de Noël parfait pour un tech addict comme toi. Mais pourquoi attendre le 25 décembre quand le coup de foudre est immédiat ? ",
           "modelUrl": "Computer/03-Computer.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.sciencesetavenir.fr/high-tech/2018-la-demande-en-ordinateurs-reste-stable_129885",
           "cloneNumber": 1,
           "cloneDirection": "up"
-        },{
+        },
+        {
           "name": "Tryptique ludique polychrome",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Macintosh",
+          "adUrl": "img/pubs/Ads-Computer-04.png",
+          "thumbnailUrl": "img/catalog/04-Computer.png",
+          "catalogSlogan": "78% des français ont un ordinateur mais seule la crème de la crème possède ce dernier modèle. Mieux vaut éviter de n’être que de la pâte brisée, pas vrai ? ",
           "modelUrl": "Computer/04-Computer.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://www.leparisien.fr/high-tech/75-des-francais-ont-un-smartphone-la-porte-d-entree-vers-internet-03-12-2018-7959822.php",
           "cloneNumber": 1,
           "cloneDirection": "up"
-        },{
+        },
+        {
           "name": "Olinouane 42 - Dispositif d'écrans à mobilité réduite pour joueur invétéré",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Macintosh",
+          "adUrl": "img/pubs/Ads-Computer-05.png",
+          "thumbnailUrl": "img/catalog/05-Computer.png",
+          "catalogSlogan": "Ordinateur, hologramme, station de jeu, radiateur, plateau de repas… Olinouane 42 a autant de fonctions que Kanye West d’amour-propre. N’attends plus pour te le procurer, les stocks fondent comme neige au soleil !",
           "modelUrl": "Computer/05-Computer.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://www.leparisien.fr/high-tech/pourquoi-un-ordinateur-dure-t-il-en-moyenne-quatre-ans-29-05-2012-2022388.php",
           "cloneNumber": 0,
           "cloneDirection": ""
         }
@@ -187,56 +122,36 @@
     },
     {
       "name": "Lampe",
+      "catalogName": "Lumière",
       "type": "electric",
       "objects": [
         {
           "name": "Allumer le feu (RIP Johnny)",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "adUrl": "img/pubs/Ads-Lamp-01.png",
+          "thumbnailUrl": "img/catalog/01-Lamp.png",
+          "catalogSlogan": "Une bougie romantique aka ton parfait allié pour déclarer ta flamme à ton futur rencard Tinder.",
           "modelUrl": "Lamp/01-Lamp.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://we-live.fr/bougie-respectueuse-environnement-ecolo?fbclid=IwAR1db0QZFgW-xeWo2sGuIeZG6dPLN9QL-j4gfR4_53fFGspZSHvqFZNELaMd",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
-          "name": "Coin-coin de lumière",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "name": "Coin-coin de Lumière",
+          "adUrl": "img/pubs/Ads-Lamp-02.png",
+          "thumbnailUrl": "img/catalog/02-Lamp.png",
+          "catalogSlogan": "Palette chromatique audacieuse, ambiance des plus lumineuses. C’est les watts qu’on préfère. (... C’est les watts ! ♫)  ",
           "modelUrl": "Lamp/02-Lamp.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.latribune.fr/supplement/l-amenagement-interieur-un-marche-en-croissance-depuis-plusieurs-annees-791251.html",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
-          "name": "Super Nova Bling Bling",
+          "name": "Supernova Bling Bling",
           "adUrl": "img/pubs/Ads-Lamp-03.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "thumbnailUrl": "img/catalog/03-Lamp.png",
+          "catalogSlogan": "Sobre, épurée, minimaliste et parfaite pour t’éclairer dans les soirées où tu trieras ta boîte mail surchargée. La rançon de la gloire !",
           "modelUrl": "Lamp/03-Lamp.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://fr.aleteia.org/2019/01/24/quatre-gestes-simples-pour-mettre-en-application-laudato-si-depuis-son-telephone/",
           "cloneNumber": 2,
           "cloneDirection": "up"
         }
@@ -247,55 +162,36 @@
     },
     {
       "name": "Table",
+      "catalogName": "Bureau",
       "type": "furniture",
       "objects": [
         {
           "name": "Rustik",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "adUrl": "img/pubs/Ads-Chaise-03.png",
+          "thumbnailUrl": "img/catalog/01-Table.png",
           "catalogSlogan": "Je suis une lampe standard",
           "modelUrl": "Table/01-Table.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://localhost:8080",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
-          "name": "S.P.T. (Surface plane de travail)",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "name": "Surface plane de travail",
+          "adUrl": "img/pubs/Ads-Table-02.png",
+          "thumbnailUrl": "img/catalog/02-Table.png",
+          "catalogSlogan": "Robuste comme un roc et tendance au point de figurer sur tous les tableaux Pinterest, ce bureau sera l’atout charme de ta chambre !",
           "modelUrl": "Table/02-Table.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.fnaem.fr/dl/communiques/FNAEM_COMMUNIQUE_178.pdf",
           "cloneNumber": 0,
           "cloneDirection": "Improved work pad"
-        },{
-          "name": "Bureau studieux pour personnes distraites",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+        },
+        {
+          "name": "Surface plane de travail, en mieux",
+          "adUrl": "img/pubs/Ads-Table-03.png",
+          "thumbnailUrl": "img/catalog/03-Table.png",
+          "catalogSlogan": "Pour être à la mode, une seule recette: on garde les mêmes ingrédients… en mieux.",
           "modelUrl": "Table/03-Table.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://www.ffi.msstate.edu/pdf/consumer_attitudes.pdf",
           "cloneNumber": 0,
           "cloneDirection": ""
         }
@@ -306,55 +202,36 @@
     },
     {
       "name": "Bed",
+      "catalogName": "Lit",
       "type": "furniture",
       "objects": [
         {
           "name": "Lit de camp",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
+          "adUrl": "img/pubs/Ads-Chair-03.png",
+          "thumbnailUrl": "img/catalog/01-Bed.png",
           "catalogSlogan": "Je suis une lampe standard",
           "modelUrl": "Bed/01-Bed.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://localhost:8080",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
-          "name": "Berceau mange-fatigue",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "name": "Berceau Mange-Fatigue",
+          "adUrl": "img/pubs/Ads-Bed-02.png",
+          "thumbnailUrl": "img/catalog/02-Bed.png",
+          "catalogSlogan": "Luxe, calme et volupté avec ce socle de sommeil qui fait (littéralement) rêver. Parce qu’une chose est sûre: c’est pas avec un lit de camp que tu vas conclure !",
           "modelUrl": "Bed/02-Bed.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.planetoscope.com/habitat/1158-ventes-de-meubles-en-france.html",
           "cloneNumber": 1,
           "cloneDirection": "up"
-        },{
-          "name": "Matrice celeste des songes",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+        },
+        {
+          "name": "Matrice Céleste des Songes",
+          "adUrl": "img/pubs/Ads-Bed-03.png",
+          "thumbnailUrl": "img/catalog/03-Bed.png",
+          "catalogSlogan": "Tour de lit en bois d’acacia, traitement anti-punaises-de-lit, anti-courbatures et anti-soirée-en-solitaire-de-célibataire. Succès garanti sur Tinder !",
           "modelUrl": "Bed/03-Bed.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.gentside.com/ikea/ikea-chaque-annee-la-firme-suedoise-utilise-1-de-la-reserve-mondiale-de-bois_art52446.html",
           "cloneNumber": 1,
           "cloneDirection": "up"
         }
@@ -365,87 +242,56 @@
     },
     {
       "name": "Transport",
+      "catalogName": "Micro-mobilité",
       "type": "mobility",
       "objects": [
         {
-          "name": "Retro rolling shoes",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "name": "Retro Rolling Shoes",
+          "adUrl": "img/pubs/Ads-Transport-01.png",
+          "thumbnailUrl": "img/catalog/01-Transport.png",
+          "catalogSlogan": "En attendant la sortie de patins à roulettes du futur, égaie tes trajets moroses du matin en enfilant cette paire délicieusement rétro !",
           "modelUrl": "Transport/01-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://sciencepost.fr/2018/12/voici-les-drift-w1-les-patins-a-roulettes-du-futur/",
           "cloneNumber": 0,
           "cloneDirection": ""
         },
         {
-          "name": "F*****g Cool Rider",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "name": "F*****g Cool Rider Board",
+          "adUrl": "img/pubs/Ads-Transport-02.png",
+          "thumbnailUrl": "img/catalog/02-Transport.png",
+          "catalogSlogan": "Bicolore, écologique, économique, réservée aux plus téméraires: cette planche de skate est forcément une plus-value dans ta panoplie de winner.",
           "modelUrl": "Transport/02-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.biopale.fr/jardin-et-exterieur/skateboard-electrique-ecologique/",
           "cloneNumber": 1,
           "cloneDirection": "left"
-        },{
+        },
+        {
           "name": "Hyper Fly Glossy Glossy Neon Board",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "adUrl": "img/pubs/Ads-Transport-03.png",
+          "thumbnailUrl": "img/catalog/03-Transport.png",
+          "catalogSlogan": "Ton meilleur ami vient de s’acheter une trottinette électrique, une vague de jalousie t’envahit. Montre-lui ta toute puissance avec ce hoverboard étincelant !",
           "modelUrl": "Transport/03-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.lesechos.fr/26/02/2017/lesechos.fr/0211831823498_e-trottinettes--hoverboard--gyroroues----les-citadins-se-dechainent-sur-les-trottoirs.htm ",
           "cloneNumber": 1,
           "cloneDirection": "up"
-        },{
+        },
+        {
           "name": "Power Space Mountain To Infinity And Beyond",
-          "adUrl": "img/pubs/Ads-Transport-04-03.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "adUrl": "img/pubs/Ads-Transport-04.png",
+          "thumbnailUrl": "img/catalog/04-Transport.png",
+          "catalogSlogan": "Les patins à roulettes, c’est so dangerous. Le skate, c’est so 90’s. Les hoverboards, c’est so overrated. En 2019, on se déplace en jetpack.",
           "modelUrl": "Transport/04-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://fr.express.live/lancement-jetpack/",
           "cloneNumber": 1,
           "cloneDirection": "right"
-        },{
+        },
+        {
           "name": "Burning Sky Holy Icarus Wings Shut Up And Take My Money",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis une lampe standard",
+          "adUrl": "img/pubs/Ads-Transport-05.png",
+          "thumbnailUrl": "img/catalog/05-Transport.png",
+          "catalogSlogan": "Étape ultime dans ta quête de hype: déploie tes ailes et va côtoyer les étoiles, Ô être de lumière rare et supérieur !",
           "modelUrl": "Transport/05-Transport.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper le prochain Ordinateur !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.latribune.fr/supplement/la-micro-mobilite-electrique-gagne-la-ville-789943.html",
           "cloneNumber": 0,
           "cloneDirection": ""
         }
@@ -456,22 +302,16 @@
     },
     {
       "name": "Bag",
+      "catalogName": "Sac",
       "type": "Miscellaneous",
       "objects": [
         {
-          "name": "System de stockage temporaire à fermeture pratique",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "name": "Système de stockage temporaire à ciel mi-clos",
+          "adUrl": "img/pubs/Ads-Bag-01.png",
+          "thumbnailUrl": "img/catalog/01-Bag.png",
+          "catalogSlogan": "Les sacs, c’est comme les followers sur Instagram: on n’en a jamais assez.",
           "modelUrl": "Bag/01-Bag.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.insee.fr/fr/statistiques/3591210#graphique-figure4",
           "cloneNumber": 1,
           "cloneDirection": ""
         }
@@ -482,22 +322,16 @@
     },
     {
       "name": "Phone",
+      "catalogName": "Téléphone",
       "type": "Miscellaneous",
       "objects": [
         {
           "name": "Cellulaire Casse-Noisette 2000",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Mobile-01.png",
+          "thumbnailUrl": "img/catalog/01-Mobile.png",
+          "catalogSlogan": "En 2019, le vintage est toujours au beau fixe. Procure-toi ce téléphone au charme d’antan assez robuste pour casser des oléagineux, tu feras des ravages !",
           "modelUrl": "Phone/01-Phone.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "http://madame.lefigaro.fr/style/comment-le-marche-du-vintage-specule-sur-les-collections-recentes-060917-133842",
           "cloneNumber": 1,
           "cloneDirection": ""
         }
@@ -508,22 +342,16 @@
     },
     {
       "name": "Gaming",
+      "catalogName": "Console",
       "type": "Miscellaneous",
       "objects": [
         {
           "name": "Système d'amusement pour individu non-binaire (existe en rose et bleu)",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Gaming-01.png",
+          "thumbnailUrl": "img/catalog/01-Gaming.png",
+          "catalogSlogan": "Après l’effort, le réconfort. Lâche un peu ton travail et détends-toi avec ce joyau du retrogaming !",
           "modelUrl": "Gaming/01-Gaming.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.jeuxvideo-live.com/news/la-nes-classic-a-battu-la-playstation-classic-en-deecembre-aux-us-92464",
           "cloneNumber": 1,
           "cloneDirection": ""
         }
@@ -534,22 +362,16 @@
     },
     {
       "name": "Plant",
+      "catalogName": "Plante",
       "type": "Miscellaneous",
       "objects": [
         {
           "name": "Scène de crime végétale en pot",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Plant-01.png",
+          "thumbnailUrl": "img/catalog/01-Plant.png",
+          "catalogSlogan": "*Insérer ici des arguments écologiques dithyrambiques sur les avantages irréfutables d’une vie plus saine, plus green, plus healthy*",
           "modelUrl": "Plant/01-Plant.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.grazia.fr/lifestyle/deco/plantporn-pourquoi-le-vegetal-prospere-sur-instagram-867715",
           "cloneNumber": 1,
           "cloneDirection": ""
         }
@@ -560,22 +382,16 @@
     },
     {
       "name": "Poster",
+      "catalogName": "Affiche",
       "type": "Miscellaneous",
       "objects": [
         {
           "name": "Embellissement mural strié",
-          "adUrl": "img/catalog/popup_placeholder.png",
-          "thumbnailUrl": "img/promo/promo.png",
-          "closeButtonLabel": "Tant pis",
-          "returnCatalogButtonLabel": "Retourner au catalogue",
-          "catalogSlogan": "Je suis un super Tabouret",
+          "adUrl": "img/pubs/Ads-Poster-01.png",
+          "thumbnailUrl": "img/catalog/01-Poster.png",
+          "catalogSlogan": "Comment veux-tu avoir un feed Instagram digne de ce nom si tu n’investis pas dans un peu de décoration ?",
           "modelUrl": "Poster/01-Poster.babylon",
-          "infos": [
-            {
-              "slogan": "N'attends plus tu risquerais de louper ce super Tabouret !",
-              "url": "http://localhost:8080"
-            }
-          ],
+          "url": "https://www.latribune.fr/supplement/l-amenagement-interieur-un-marche-en-croissance-depuis-plusieurs-annees-791251.html",
           "cloneNumber": 1,
           "cloneDirection": ""
         }
