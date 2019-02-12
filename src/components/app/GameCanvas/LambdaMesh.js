@@ -1,5 +1,4 @@
 import * as BABYLON from "babylonjs";
-import GameStore from "../../../stores/GameStore/GameStore";
 
 export class LambdaMesh {
 
@@ -13,16 +12,16 @@ export class LambdaMesh {
         this.mesh.scalingDeterminant = 0;
         this.mesh.freezeWorldMatrix();
 
-
-        this.mesh.setPivotPoint(
-            this.mesh.getBoundingInfo().boundingBox.centerWorld
-                .subtract(this.mesh.position)
-        );
+        if (this.objectKindName === "Transport") {
+            this.mesh.setPivotPoint(
+                this.mesh.getBoundingInfo().boundingBox.centerWorld
+                    .subtract(this.mesh.position)
+            );
+        }
 
         this.clones = [];
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
-            this.time = objectTimeout * 0.03;
             this.cloneMaterial(this.mesh);
             this.freezeMaterials(this.mesh);
         }
@@ -115,13 +114,8 @@ export class LambdaMesh {
         mesh.animations.push(animationBox);
     }
 
-    getTime() {
-        return this.time / GameStore.hype.level;
-    }
-
-    launchMaterialDegradation() {
-
-        let time = this.getTime();
+    launchMaterialDegradation(duration) {
+        let time = duration * 0.03; //get frames number
         this.unfreezeMaterials(this.mesh);
         this.mesh.animations = [];
         let targets = [this.mesh];
@@ -141,7 +135,7 @@ export class LambdaMesh {
                 material.diffuseColor,
                 BABYLON.Color3.White(),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-                easingFunction);
+                null);
 
             BABYLON.Animation.CreateAndStartAnimation(
                 "materialDegradation-ambient-" + material.name,
@@ -152,8 +146,8 @@ export class LambdaMesh {
                 material.ambientColor,
                 new BABYLON.Color3(0.8,0.8,0.8),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-                easingFunction, () => {
-                    this.freezeMaterials(this.mesh)
+                null, () => {
+                    this.freezeMaterials(this.mesh);
                 });
         });
     }

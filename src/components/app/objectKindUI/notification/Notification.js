@@ -20,13 +20,14 @@ const Notification = observer(class Notification extends Component {
         this.timer.lock();
         this.playSound = props.playSound;
         this.delayTimer.onFinish(() => {
+            let duration = this.timer.getDuration();
+            props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation(duration);
             this.timer.unlock();
             this.timer.start();
             this.playSound();
             this.setState({
                 running: true
             });
-            props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation();
         });
         this.timer.addLoopHook((data) => {
             this.setState({

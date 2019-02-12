@@ -162,7 +162,6 @@ export class AtticManager {
         }, this.scene);
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
         instance.setEnabled(true);
-        console.log(instance);
         this.scene.addMesh(instance);
         this.particleSystem.start();
         this.soundManager.dropParcel.play();
