@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import "./_message.scss";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import SpaceBar from "../spacebar/Spacebar";
+import {SoundManagerInstance} from "../GameCanvas/SoundManager";
 
 const Message = observer(class Message extends Component {
 
@@ -17,6 +18,32 @@ const Message = observer(class Message extends Component {
             setTimeout(() => {
                 TutoStore.reportAction("Attic", "actioned");
             }, this.message.expiration);
+        }
+        if(this.message.action === "keypress") {
+            this.hideSpaceForListener = (e) => {this.hideSpace(e)};
+            this.dispatchEventForListener = (e) => {this.dispatchEvent(e)};
+            window.addEventListener("keydown", this.hideSpaceForListener);
+            window.addEventListener("keyup", this.dispatchEventForListener);
+        }
+    }
+
+    componentWillUnmount() {
+        if(this.message.action === "keypress") {
+            window.removeEventListener("keydown", this.hideSpaceForListener);
+            window.removeEventListener("keyup", this.dispatchEventForListener);
+        }
+    }
+
+    hideSpace(e) {
+        if(e.keyCode === 32 || e.type === "click") {
+            SoundManagerInstance && SoundManagerInstance.spacePress.play();
+            this.setState({show: false})
+        }
+    }
+
+    dispatchEvent(e) {
+        if(e.keyCode === 32 || e.type === "click") {
+            this.onSpaceUp();
         }
     }
 
@@ -34,18 +61,19 @@ const Message = observer(class Message extends Component {
     }
 
     render() {
-        let arrow = this.message.action === "keypress"? 'arrow' : 'end';
+        let arrow = this.message.action === "keypress"? 'withSpacebar' : '';
 
         return (
             <React.Fragment>
                 <div className="message">
                     <p className={`message__typing ${arrow}`}>{this.message.text}</p>
-                    <p className={"message__placeholder"}>{this.message.text}</p>
+                    {
+                        this.message.action === "keypress" &&
+                        <div className={`spacebar`} onClick={(e) => this.dispatchEventForListener(e)}>
+                            <span className="spacebar__spacebutton">Espace</span>
+                        </div>
+                    }
                 </div>
-                {
-                    this.message.action === "keypress" &&
-                        <SpaceBar onSpaceUp={() => this.onSpaceUp()}/>
-                }
             </React.Fragment>
         )
     }

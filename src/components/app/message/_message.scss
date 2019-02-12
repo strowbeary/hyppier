@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .message {
   position: fixed;
   background-color: white;
@@ -11,45 +13,44 @@
   animation: appear 0.5s forwards;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-  &__placeholder {
-    visibility: hidden;
-    line-height: 2rem;
-  }
-
   &__typing {
     margin: 0 auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 20px 15px;
     line-height: 2rem;
 
-    &:after {
-      content: " ";
-      display: inline-block;
-      width: 0.25rem;
-      height: 2rem;
-      background-color: orange;
+    &.withSpacebar {
+      padding-bottom: calc(1.2rem + 7px);
     }
+  }
 
-    &.end {
-      &:after {
-        display: none;
-      }
-    }
+  .spacebar {
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+    color: $false-black;
+    width: auto;
 
-    &.arrow {
-      &:after {
+    &__spacebutton {
+      position: relative;
+      display: block;
+      padding: 2px 15px;
+      border: solid 2px $false-black;
+      border-radius: 15px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      font-weight: 400;
+      animation: space-translate 1s linear infinite;
+
+      &:before {
+        content: "";
         position: absolute;
-        display: block;
-        bottom: 1rem;
-        right: 1rem;
-        width: 15px;
-        height: 13px;
-        background-image: url('../../../assets/img/message-arrow.svg');
-        background-size: cover;
-        background-color: transparent;
-        animation: up-down 1000ms infinite forwards;
+        left: -2px;
+        right: -2px;
+        top: -2px;
+        bottom: -5px;
+        border: solid 2px $false-black;
+        border-radius: 15px;
+        animation: space-bottom 1s linear infinite;
       }
     }
   }
