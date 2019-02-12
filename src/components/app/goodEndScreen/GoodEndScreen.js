@@ -8,14 +8,12 @@ import SoundButton from "../options/soundButton/SoundButton";
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
     isScrolling = false;
+    objectTile = [];
     state = {
         pageIndex: 0,
         reticuleX: 0,
         reticuleY: 0
     };
-
-    componentDidMount() {
-    }
 
     wheelHandler(e) {
         let movement = -e.movementY;
@@ -84,10 +82,16 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
         }
     }
 
+    scrollTransitionHandler(e) {
+        if (e.propertyName === "top") {
+            this.isScrolling = false;
+        }
+    }
+
     render() {
         return (
             <article className="goodEndScreen"
-                     onTransitionEnd={() => this.isScrolling = false}
+                     onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
                      onTouchStart={e => this.touchHandler(e)}
                      onTouchMove={e => this.touchHandler(e)}
                      onWheel={e => this.wheelHandler(e)} style={{
@@ -120,9 +124,12 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                         </div>
                         {(() => {
                             let el = [];
-                            for(let i = 20; i > 0; i--) {
+                            for (let i = 32; i > 0; i--) {
                                 el.push(
-                                    <div key={i} className={"gridItem"} onMouseEnter={e => console.log(e)}>
+                                    <div
+                                        ref={ref => this.objectTile[i] = ref}
+                                        key={i}
+                                        className={"gridItem"}>
                                         <img src="img/catalog/01-Gaming.png"/>
                                     </div>
                                 )
