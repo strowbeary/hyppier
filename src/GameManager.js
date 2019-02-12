@@ -32,6 +32,10 @@ class GameManager {
             });
     }
 
+    pauseToastTimer() {
+        TimerManager.pauseExcept();
+    }
+
     playGame() {
         TimerManager.startAll();
         GameStore.options.setPause(false);
@@ -82,7 +86,7 @@ class GameManager {
             if (GameStore.clueEvent !== this.clueEvent) {
                 this.objectKindName = objectKindName;
                 GameStore.setClueEvent(this.clueEvent);
-                this.pauseGame();
+                this.pauseToastTimer();
             }
         } else if (!GameStore.options.isPaused) { //replacement in Popup
             if (GameStore.attic.isGameOver()) {

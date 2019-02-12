@@ -28,6 +28,11 @@ export const TimerManager = {
         timers.forEach((timer, id) => {
             if (id !== timerException && timer && timer.pause) timer.pause()
         });
+    },
+    pauseExcept() {
+        if (this.timers[timerException] && this.timers[timerException].pause) {
+            this.timers[timerException].pause();
+        }
     }
 };
 
