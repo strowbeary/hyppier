@@ -51,7 +51,9 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
 
         this.delayTimer.onFinish(() => {
-            this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation();
+            let duration = this.delayTimer.getDuration();
+            console.log(duration);
+            this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation(duration);
             this.delayTimer.destroy();
         });
     }

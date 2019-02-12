@@ -16,7 +16,6 @@ export default types.model("TutoStore",
                 }
             },
             reportAction(origin, type) {
-                console.log(origin, type, self.currentMessage);
                 switch (type) {
                     case "appear":
                         if (typeof self.messages[self.currentMessage + 1] !== "undefined") {
@@ -37,7 +36,6 @@ export default types.model("TutoStore",
                         }
                         break;
                     default:
-                        console.log("empty report action");
                         break;
                 }
 
