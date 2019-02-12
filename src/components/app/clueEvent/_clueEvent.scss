@@ -9,4 +9,19 @@
   width: 100vw;
   height: 100vh;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    font-size: 1.5rem;
+  }
+
+  &__title {
+    font-family: Selfie, sans-serif;
+    font-size: 8rem;
+    text-align: center;
+    font-weight: normal;
+    text-shadow: 0 0 20px white;
+  }
 }

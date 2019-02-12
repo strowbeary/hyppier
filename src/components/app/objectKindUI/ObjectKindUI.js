@@ -51,8 +51,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
 
         this.delayTimer.onFinish(() => {
-            this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation(this.objectKind.objectTimeout);
-            this.delayTimer.destroy();
+            if (this.objectKind.activeObject !== null) { //clueEventCase
+                this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation(this.objectKind.objectTimeout);
+                this.delayTimer.destroy();
+            }
         });
     }
 
@@ -109,7 +111,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog() {
-        this.sceneManager.gameManager.pauseGame();
+        this.sceneManager.gameManager.pauseGame("fromCatalog");
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");

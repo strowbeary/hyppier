@@ -22,7 +22,7 @@ export default types.model({
     )
     .create({
     attic: AtticStore.create({
-        electric: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 1000},
+        electric: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 5},
         furniture: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 1000},
         mobility: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 1000},
     }),

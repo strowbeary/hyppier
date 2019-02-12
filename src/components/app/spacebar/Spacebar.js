@@ -41,7 +41,7 @@ const Spacebar = observer(class Spacebar extends Component {
             <React.Fragment>
                 {
                     this.state.show &&
-                    <div className="spacebar" onClick={(e) => this.dispatchEventForListener(e)}>
+                    <div className={`spacebar ${this.props.color}`} onClick={(e) => this.dispatchEventForListener(e)}>
                         <span className="spacebar__spacebutton">Espace</span>
                     </div>
                 }

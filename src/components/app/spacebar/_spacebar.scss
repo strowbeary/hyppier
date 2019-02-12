@@ -33,6 +33,18 @@
 
     }
   }
+
+  &.white {
+    color: white;
+
+    .spacebar__spacebutton {
+      border-color: white;
+
+      &:before {
+        border-color: white;
+      }
+    }
+  }
 }
 
 @keyframes space-translate {
