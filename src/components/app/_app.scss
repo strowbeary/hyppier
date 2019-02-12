@@ -111,7 +111,7 @@ button, a {
     height: 100vw;
     transform-origin: center;
     transform: scale(0);
-    transition: transform 1s, background 1s;
+    transition: transform 1s ease-in, background 1s ease-in;
     border-radius: 50%;
     background: $yellow;
   }
@@ -119,14 +119,14 @@ button, a {
   &.happy {
     &:before {
       background: $green;
-      transform: scale(2);
+      transform: scale(3);
     }
   }
 
   &.angry {
     &:before {
       background: $red;
-      transform: scale(2);
+      transform: scale(3);
     }
 
   }

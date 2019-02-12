@@ -58,15 +58,19 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     pipoYes() {
-        GameStore.setPipo("yes");
+        if (GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
+            GameStore.setPipo("yes");
+        }
     }
 
     pipoNo() {
-        GameStore.setPipo("no");
+        if (GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
+            GameStore.setPipo("no");
+        }
     }
 
     pipoStop() {
-        if (!this.isClosing) {
+        if (!this.isClosing && GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
             GameStore.setPipo("");
         }
     }
