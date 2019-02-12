@@ -123,7 +123,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                             for(let i = 20; i > 0; i--) {
                                 el.push(
                                     <div key={i} className={"gridItem"} onMouseEnter={e => console.log(e)}>
-                                        <img src="img/catalog/01-Console.png"/>
+                                        <img src="img/catalog/01-Gaming.png"/>
                                     </div>
                                 )
                             }
