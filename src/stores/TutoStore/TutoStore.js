@@ -74,7 +74,14 @@ export default types.model("TutoStore",
                 read: false
             },
             {
-                text: "Tu vois, c’est extrêmement simple. Dès qu’une nouvelle version de ton objet est sortie, tu peux te la procurer. Mais attention, l’offre est limitée dans le temps, et ce que tu ne choisis pas est perdu à jamais !",
+                text: "Tu vois, c’est extrêmement simple. Au fait, tu remarqueras que tes objets perdent leur couleur, dénués de vie et de hype… Cela signifie qu’il est temps de les remplacer !",
+                expiration: 0,
+                action: "keypress",
+                originTarget: "FirstObject",
+                read: false
+            },
+            {
+                text: "Dès qu’une nouvelle version de ton objet est sortie, tu peux te la procurer. Mais attention, l’offre est limitée dans le temps, et ce que tu ne choisis pas est perdu à jamais !",
                 expiration: 0,
                 action: "click",
                 originTarget: "Notification",

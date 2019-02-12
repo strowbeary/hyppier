@@ -21,12 +21,14 @@ const Message = observer(class Message extends Component {
     }
 
     onSpaceUp() {
-        TutoStore.reportAction("Intro", "actioned");
+        TutoStore.reportAction(this.message.originTarget, "actioned");
         setTimeout(() => {
             if (TutoStore.currentMessage === 0) {
                 TutoStore.reportAction("Intro", "appear");
-            } else {
+            } else if (TutoStore.currentMessage === 1) {
                 TutoStore.reportAction("EmptySpace", "appear");
+            } else {
+                TutoStore.reportAction("Notification", "appear");
             }
         }, 500);
     }
