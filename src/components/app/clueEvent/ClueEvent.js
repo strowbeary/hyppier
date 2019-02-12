@@ -29,8 +29,14 @@ const ClueEvent = observer(class ClueEvent extends Component {
     render() {
         return (
             <div className="clueEvent">
-                <p> Oooh tu as déclenché un évènement ;) </p>
-                <SpaceBar onSpaceUp={() => this.closeClueEvent()}/>
+                {this.type === "electric" &&
+                    <div className="clueEvent__wrapper">
+                        <h3 className="clueEvent__title">Boom!</h3>
+                        <p>Tu t’es lâché.e sur le nombre d’appareils électroniques, les plombs ont sauté…</p>
+                        <p>Retire un objet gourmand en énergie en appuyant sur espace</p>
+                    </div>
+                }
+                <SpaceBar onSpaceUp={() => this.closeClueEvent()} color={"white"}/>
             </div>
         )
     }
