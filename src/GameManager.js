@@ -15,11 +15,12 @@ class GameManager {
         GameManagerInstance = this;
     }
 
-    pauseGame() {
-        if(GameStore.attic.atticVisible) {
+    pauseGame(fromCatalog) {
+        if (fromCatalog) {
+            TimerManager.pauseAllExcept();
+        } else {
             TimerManager.pauseAll();
         }
-        TimerManager.pauseAllExcept();
         GameStore.options.setPause(true);
         this.scene.animatables
             .forEach(animatable => {
@@ -32,7 +33,6 @@ class GameManager {
     }
 
     playGame() {
-        console.log("playGame");
         TimerManager.startAll();
         GameStore.options.setPause(false);
         this.scene.animatables.forEach(animatable => animatable.restart())
@@ -66,6 +66,7 @@ class GameManager {
         if (this.clueEvent !== null) {
             if (GameStore.clueEvent !== this.clueEvent) {
                 GameStore.setClueEvent(this.clueEvent);
+                this.pauseGame();
             }
         } else {
             this.playGame();
