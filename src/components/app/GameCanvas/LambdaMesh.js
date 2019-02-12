@@ -1,5 +1,30 @@
 import * as BABYLON from "babylonjs";
 
+function desaturate(color3 = BABYLON.Color3.White(), k) {
+    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
+    return new BABYLON.Color3(
+        intensity * k + color3.r * (1 - k),
+        intensity * k + color3.g * (1 - k),
+        intensity * k + color3.b * (1 - k)
+    );
+}
+function saturate(color3 = BABYLON.Color3.White(), k) {
+    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
+    return new BABYLON.Color3(
+        -intensity * k + color3.r * (1 + k),
+        -intensity * k + color3.g * (1 + k),
+        -intensity * k + color3.b * (1 + k)
+    );
+}
+function lighten(color3 = BABYLON.Color3.White(), k) {
+    let result = BABYLON.Color3.White().clone();
+    color3
+        .add(new BABYLON.Color3(k, k, k))
+        .clampToRef(0, 0.8, result);
+    return result;
+
+}
+
 export class LambdaMesh {
 
     constructor(mesh, objectTimeout, objectKindName) {
@@ -20,10 +45,22 @@ export class LambdaMesh {
         }
 
         this.clones = [];
+
         if (this.mesh) {
             this.multimaterial = this.mesh.material.subMaterials !== undefined;
             this.cloneMaterial(this.mesh);
             this.freezeMaterials(this.mesh);
+        }
+
+        if(this.multimaterial) {
+            mesh.material.subMaterials
+                .forEach(material => {
+                    material.ambientColor = lighten(material.ambientColor, 0.20);
+                   // material.diffuseColor = saturate(material.diffuseColor, 1);
+                });
+        } else {
+            mesh.material.ambientColor = lighten(mesh.material.ambientColor, 0.20);
+           // mesh.material.diffuseColor  = saturate(mesh.material.diffuseColor, 1);
         }
 
     }
@@ -133,7 +170,7 @@ export class LambdaMesh {
                 30,
                 time,
                 material.diffuseColor,
-                BABYLON.Color3.White(),
+                new BABYLON.Color3(0.8, 0.8, 0.8),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
                 null);
 

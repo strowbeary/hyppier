@@ -1,37 +1,140 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_goodEndScreen.scss";
+import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
+import AboutModal from "../GameCanvas/GameCanvas";
+import SoundButton from "../options/soundButton/SoundButton";
 
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    isScrolling = false;
+    state = {
+        pageIndex: 0,
+        reticuleX: 0,
+        reticuleY: 0
+    };
 
     componentDidMount() {
     }
 
+    wheelHandler(e) {
+        let movement = -e.movementY;
+        if (Math.abs(movement) > 5 && !this.isScrolling) {
+            //on peut declancher le scroll
+            if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
+                //NEXT
+                this.setState({
+                    pageIndex: this.state.pageIndex + 1
+                });
+                this.isScrolling = true;
+            } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0) {
+                //PREVIOUS
+                this.setState({
+                    pageIndex: this.state.pageIndex - 1
+                });
+                this.isScrolling = true;
+            }
+        }
+    }
+
+    prevX = null;
+    prevY = null;
+
+    touchHandler(e) {
+        switch (e.type) {
+            case "touchstart":
+                this.prevX = e.touches[0].clientX;
+                this.prevY = e.touches[0].clientY;
+                break;
+            case "touchmove":
+                if (!this.prevY || !this.prevX) {
+                    return;
+                }
+                const diffX = this.prevX - e.touches[0].clientX;
+                const diffY = this.prevY - e.touches[0].clientY;
+                if (Math.abs(diffX) < Math.abs(diffY)) {
+                    if (diffY > 0) {
+                        /* up swipe */
+                        if (this.state.pageIndex < 2) {
+                            this.setState({
+                                pageIndex: this.state.pageIndex + 1
+                            });
+                            this.isScrolling = true;
+                        }
+                    } else {
+                        /* down swipe */
+                        if (this.state.pageIndex > 0) {
+                            this.setState({
+                                pageIndex: this.state.pageIndex - 1
+                            });
+                            this.isScrolling = true;
+                        }
+                    }
+                }
+                /* reset values */
+                this.prevX = null;
+                this.prevY = null;
+
+                break;
+            case "touchend":
+
+                break;
+            default:
+                break;
+        }
+    }
+
     render() {
         return (
-            <div className="goodEndScreen">
-                <section className="goodEndScreen__section">
-                    <div className="goodEndScreen__bubble">
-                        <h3 className="goodEndScreen__bubble__title">Bravo, tu as gagné !</h3>
-                        <p className="goodEndScreen__bubble__text">
+            <article className="goodEndScreen"
+                     onTransitionEnd={() => this.isScrolling = false}
+                     onTouchStart={e => this.touchHandler(e)}
+                     onTouchMove={e => this.touchHandler(e)}
+                     onWheel={e => this.wheelHandler(e)} style={{
+                top: `${-100 * this.state.pageIndex}vh`
+            }}>
+                <nav className={this.state.pageIndex === 1 ? 'green' : ''}>
+                    <div onClick={() => this.setState({pageIndex: 0})}
+                         className={"navCircle " + (this.state.pageIndex === 0 ? 'active' : '')}/>
+                    <div onClick={() => this.setState({pageIndex: 1})}
+                         className={"navCircle " + (this.state.pageIndex === 1 ? 'active' : '')}/>
+                    <div onClick={() => this.setState({pageIndex: 2})}
+                         className={"navCircle " + (this.state.pageIndex === 2 ? 'active' : '')}/>
+                </nav>
+                <header>
+                    <div className="bubble">
+                        <h3>Bravo, tu as gagné !</h3>
+                        <p>
                             Bien joué, tu as su contrôlé ta fièvre acheteuse et n'as pas cédé à toutes les tentations
                             marketing !
                             Scroll pour (re)découvrir toutes les informations disséminées au cours de l'expérience.
                         </p>
                     </div>
-                    <div className="goodEndScreen__arrowScroll"/>
-                </section>
-                <section className="goodEndScreen__sectionSlider">
+                    <div className="arrowScroll"/>
+                </header>
+                <section>
 
+                    <div className={"grid"}>
+                        <div className={"tooltip"}>
+                            <p>En 2017, 600 milliards de casques se sont vendus dans le monde entier.</p>
+                        </div>
+                        {(() => {
+                            let el = [];
+                            for(let i = 20; i > 0; i--) {
+                                el.push(
+                                    <div key={i} className={"gridItem"} onMouseEnter={e => console.log(e)}>
+                                        <img src="img/catalog/01-Console.png"/>
+                                    </div>
+                                )
+                            }
+                            return el;
+                        })()}
+                    </div>
                 </section>
-                <section className="goodEndScreen__section">
-                    <div className="goodEndScreen__bubble">
-                        <h3 className="goodEndScreen__bubble__title">Minimalisme <br/> vs <br/> Consumérisme</h3>
-                        <p className="goodEndScreen__bubble__text">
+                <footer>
+                    <div className="bubble">
+                        <h3>Minimalisme <span>vs</span> Consumérisme</h3>
+                        <p>
                             Qui peut se targuer de résister à tout achat compulsif ? Le coeur a ses raisons que la
                             raison ignore... Mais le risque quand on écoute davantage ses pulsions que sa conscience
                             écologique, c'est de tomber dans une véritable escalade de la démesure.
@@ -42,8 +145,8 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                         </p>
                         <button>Rejouer</button>
                     </div>
-                </section>
-            </div>
+                </footer>
+            </article>
         )
     }
 });

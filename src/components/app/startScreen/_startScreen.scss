@@ -1,6 +1,6 @@
 @import "../../../variables";
 
-$backgroundHeight: 300vh;
+$backgroundHeight: 1342px;
 
 @keyframes moveUp {
   from {
@@ -17,8 +17,8 @@ $backgroundHeight: 300vh;
   left: 0;
   z-index: 10;
   background-color: $yellow;
-  background-image: url(../../../assets/img/objects.png), url(../../../assets/img/objects-blurred.png);
-  background-size: auto $backgroundHeight, auto $backgroundHeight / 2;
+  background-image: url(../../../assets/img/objects-blurred.png), url(../../../assets/img/objects.png);
+  background-size: auto $backgroundHeight, auto $backgroundHeight;
   background-repeat: repeat;
   width: 100vw;
   height: 100vh;

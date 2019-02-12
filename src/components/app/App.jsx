@@ -55,8 +55,8 @@ const App = observer(class App extends Component {
             <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
                  ref={(ref) => this.app = ref}>
                 {!this.state.ready &&
-                    <StartScreen launchLoading={() => {this.launchLoading()}}/>
-                    //<GoodEndScreen/>
+                    //<StartScreen launchLoading={() => {this.launchLoading()}}/>
+                    <GoodEndScreen/>
                 }
                 {this.state.loading &&
                     <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>

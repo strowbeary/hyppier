@@ -53,8 +53,6 @@ export default observer(class GameCanvas extends React.Component {
                     top: 10,
                     left: 10
                 }}>
-                    <button onClick={() => CameraStore.setTarget("Attic")}>Go to attic</button>
-                    <button onClick={() => CameraStore.setTarget()}>reset target</button>
                     <button onClick={() => this.sceneManager.atticManager.fall()}>Attic down</button>
                 </div>
                 {(() => {

@@ -27,7 +27,7 @@ const StartScreen = observer(class StartScreen extends Component {
     render() {
         return (
             <div className="startScreen" style={{
-                backgroundPositionX: `${this.state.x * 30}vw, ${this.state.x * 10}vw`
+                backgroundPositionX: `${this.state.x * 20}vw, ${this.state.x * 10}vw`
             }}>
                 <div className="startScreen__wrapper">
                     <div className={"startScreen__text"}>
