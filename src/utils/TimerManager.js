@@ -30,8 +30,10 @@ export const TimerManager = {
         });
     },
     pauseExcept() {
-        if (this.timers[timerException] && this.timers[timerException].pause) {
-            this.timers[timerException].pause();
+        if (typeof timerException !== "undefined") {
+            if(typeof timers[timerException] !== "undefined") {
+                timers[timerException].pause();
+            }
         }
     }
 };
