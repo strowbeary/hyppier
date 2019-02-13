@@ -28,87 +28,54 @@ function shuffle(array) {
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
     isScrolling = false;
-    lockScroll = false;
+    lockSlide = false;
+    lockTimeout = null;
     scrollRatio = 0;
     objectTile = [];
+
     state = {
-        pageIndex: 1,
-        reticuleX: 0,
-        reticuleY: 0,
+        pageIndex: 0,
         tooltipText: "Survole l'un des objets de la grille pour tout savoir sur eux"
     };
+
     shuffledInfos = shuffle(infos);
 
     wheelHandler(e) {
-        if (!this.lockScroll) {
-            let movement = e.deltaY;
-            if (Math.abs(movement) > 3 && !this.isScrolling && (!this.lockScroll || this.scrollRatio === 1)) {
-                //on peut declancher le scroll
-                if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
-                    //NEXT
-                    this.setState({
-                        pageIndex: this.state.pageIndex + 1
-                    });
-                    this.isScrolling = true;
-                } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (!this.lockScroll || this.scrollRatio === 0)) {
-                    //PREVIOUS
-                    this.setState({
-                        pageIndex: this.state.pageIndex - 1
-                    });
-                    this.isScrolling = true;
-                }
+        let movement = e.deltaY;
+        if (!this.lockSlide && Math.abs(movement) > 5 && !this.isScrolling) {
+            //on peut declancher le scroll
+            if (Math.sign(movement) > 0 && this.state.pageIndex < 2 && (this.state.pageIndex === 1 ? (this.scrollRatio === 1) : true)) {
+                //NEXT
+                this.setState({
+                    pageIndex: this.state.pageIndex + 1
+                });
+                this.isScrolling = true;
+            }
+            else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (this.state.pageIndex === 1 ? (this.scrollRatio === 0) : true)) {
+                //PREVIOUS
+                this.setState({
+                    pageIndex: this.state.pageIndex - 1
+                });
+                this.isScrolling = true;
             }
         }
 
     }
 
-    prevX = null;
-    prevY = null;
-
-    touchHandler(e) {
-        if (!this.lockScroll) {
-            switch (e.type) {
-                case "touchstart":
-                    this.prevX = e.touches[0].clientX;
-                    this.prevY = e.touches[0].clientY;
-                    break;
-                case "touchmove":
-                    if (!this.prevY || !this.prevX) {
-                        return;
-                    }
-                    const diffX = this.prevX - e.touches[0].clientX;
-                    const diffY = this.prevY - e.touches[0].clientY;
-                    if (Math.abs(diffX) < Math.abs(diffY)) {
-                        if (diffY > 0) {
-                            /* up swipe */
-                            if (this.state.pageIndex < 2) {
-                                this.setState({
-                                    pageIndex: this.state.pageIndex + 1
-                                });
-                                this.isScrolling = true;
-                            }
-                        } else {
-                            /* down swipe */
-                            if (this.state.pageIndex > 0) {
-                                this.setState({
-                                    pageIndex: this.state.pageIndex - 1
-                                });
-                                this.isScrolling = true;
-                            }
-                        }
-                    }
-                    /* reset values */
-                    this.prevX = null;
-                    this.prevY = null;
-
-                    break;
-                case "touchend":
-
-                    break;
-                default:
-                    break;
-            }
+    scrollHandler(e) {
+        this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
+        if(this.state.pageIndex === 1) {
+            this.lockSlide = true;
+            console.log("locked", this.scrollRatio);
+            this.lockTimeout && clearTimeout(this.lockTimeout);
+            this.lockTimeout = setTimeout(() => {
+                if(this.scrollRatio === 0 || this.scrollRatio === 1) {
+                    this.lockSlide = false;
+                    console.log("unlocked", this.scrollRatio);
+                }
+            }, 500);
         }
+
     }
 
     scrollTransitionHandler(e) {
@@ -121,11 +88,10 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
         if (this.state.pageIndex === 1) {
             this.lockScroll = true;
         }
+        console.log(this.state);
         return (
             <article className="goodEndScreen"
                      onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
-                     onTouchStart={e => this.touchHandler(e)}
-                     onTouchMove={e => this.touchHandler(e)}
                      onWheel={e => this.wheelHandler(e)}
                      style={{
                          top: `${-100 * this.state.pageIndex}vh`
@@ -149,12 +115,8 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                     </div>
                     <div className="arrowScroll"/>
                 </header>
-                <section onScroll={e => {
-                    this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
-                    if (this.scrollRatio === 1 || this.scrollRatio === 0) {
-                        this.lockScroll = false;
-                    }
-                }}>
+                <section
+                    onScroll={e => this.scrollHandler(e)}>
 
                     <div className={"grid"}>
                         <div className={"tooltip"}>
@@ -166,7 +128,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                                     ref={ref => this.objectTile[i] = ref}
                                     key={i}
                                     className={"gridItem"}
-                                    onMouseEnter={() => {
+                                    onMouseEnter={(e) => {
                                         this.setState({
                                             tooltipText: info.infoText
                                         })
