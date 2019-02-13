@@ -1,4 +1,5 @@
 @import "../../variables";
+$backgroundHeight: 1342px;
 
 @keyframes animate {
   0%, 100% {
@@ -6,6 +7,15 @@
   }
   50% {
     background-position: 100%;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    background-position-y: -$backgroundHeight, -$backgroundHeight;
+  }
+  to {
+    background-position-y: 2 * $backgroundHeight, $backgroundHeight;
   }
 }
 
@@ -144,8 +154,27 @@ button, a {
       content: url("../../assets/img/pause.svg");
     }
   }
+
   &.attic:before {
     opacity: 0;
+  }
+
+  &.badEnding {
+    &:after {
+      content: " ";
+      position: fixed;
+      background-image: url(../../assets/img/cartons_blurred.png), url(../../assets/img/cartons.png);
+      background-size: auto $backgroundHeight, auto $backgroundHeight;
+      background-repeat: no-repeat;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      animation: moveDown 5s ease-out 1 forwards;
+    }
   }
 }
 
