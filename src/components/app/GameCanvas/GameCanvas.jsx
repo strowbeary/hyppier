@@ -10,6 +10,7 @@ import AboutModal from "../aboutModal/AboutModal";
 import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import SoundButton from "../options/soundButton/SoundButton";
 import GoodEndScreen from "../goodEndScreen/GoodEndScreen";
+import GameStore from "../../../stores/GameStore/GameStore";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -43,7 +44,7 @@ export default observer(class GameCanvas extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.ready &&
+                {this.state.ready && GameStore.gameEnded &&
                     <GoodEndScreen soundManager={this.sceneManager.soundManager}/>
                 }
                 <canvas
