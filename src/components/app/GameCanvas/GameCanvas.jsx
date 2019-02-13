@@ -9,6 +9,7 @@ import Message from "../message/Message";
 import AboutModal from "../aboutModal/AboutModal";
 import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import SoundButton from "../options/soundButton/SoundButton";
+import GoodEndScreen from "../goodEndScreen/GoodEndScreen";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -37,10 +38,14 @@ export default observer(class GameCanvas extends React.Component {
         this.scene.activeCamera.getProjectionMatrix(true);
         this.sceneManager.cameraManager.updateFrustum();
     }
+
     render() {
 
         return (
             <React.Fragment>
+                {this.state.ready &&
+                    <GoodEndScreen soundManager={this.sceneManager.soundManager}/>
+                }
                 <canvas
                     style={{
                         width: "100vw",
@@ -70,14 +75,14 @@ export default observer(class GameCanvas extends React.Component {
                     }
                 })()}
                 {TutoStore.displayTip() && !CatalogStore.isOpen &&
-                    <Message message={TutoStore.getCurrentMessage()}/>
+                <Message message={TutoStore.getCurrentMessage()}/>
                 }
                 {this.state.ready &&
-                    <div className={"game__footer"}>
-                        <AboutModal gameManager={this.sceneManager.gameManager}/>
-                        <SoundButton soundManager={this.sceneManager.soundManager}/>
-                        <FullScreenButton/>
-                    </div>
+                <div className={"game__footer"}>
+                    <AboutModal gameManager={this.sceneManager.gameManager}/>
+                    <SoundButton soundManager={this.sceneManager.soundManager}/>
+                    <FullScreenButton/>
+                </div>
                 }
             </React.Fragment>
         );

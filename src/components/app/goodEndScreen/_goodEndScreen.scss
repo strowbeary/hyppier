@@ -16,6 +16,17 @@
   }
 }
 
+@keyframes tileAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 article.goodEndScreen {
   position: fixed;
   left: 0;
@@ -23,6 +34,7 @@ article.goodEndScreen {
   bottom: 0;
   overflow: hidden;
   transition: top 0.5s;
+  z-index: 1000;
 
 
   nav {
@@ -68,10 +80,10 @@ article.goodEndScreen {
 
     .bubble {
       background-color: white;
-      box-shadow: 0 0 20px white;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
       border-radius: 50%;
-      width: 70vh;
-      height: 70vh;
+      width: 80vh;
+      height: 80vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -110,19 +122,34 @@ article.goodEndScreen {
     align-items: center;
     justify-content: center;
 
+    .bubble {
+      opacity: 0;
+      animation: tileAppear 0.3s ease-in-out 100ms 1 normal forwards;
+
+      h3 {
+        opacity: 0;
+        animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
+      }
+
+      p {
+        opacity: 0;
+        animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
+      }
+    }
+
     .arrowScroll {
       position: absolute;
-      width: 1px;
-      height: 10vh;
+      width: 2px;
+      height: 50px;
       background-color: white;
-      bottom: 2vh;
+      bottom: 25px;
       animation: up-down 1000ms infinite forwards;
 
       &:after {
         content: "";
         position: absolute;
         border: solid white;
-        border-width: 0 1px 1px 0;
+        border-width: 0 2px 2px 0;
         display: inline-block;
         padding: 5px;
         transform: rotate(45deg);
@@ -134,7 +161,7 @@ article.goodEndScreen {
 
   section {
     background-color: $light-grey;
-    $itemSize: 20rem;
+    $itemSize: 18rem;
     overflow: auto;
 
     .grid {
@@ -144,8 +171,8 @@ article.goodEndScreen {
       justify-content: space-evenly;
       align-items: center;
       grid-gap: 16px;
-      padding: 79px;
-
+      padding: 80px 130px;
+      margin-left: 32px;
 
       .tooltip {
         grid-column-end: span 2;
@@ -157,20 +184,29 @@ article.goodEndScreen {
         align-self: flex-start;
         box-sizing: border-box;
         position: sticky;
-        top: 79px;
+        top: 80px;
+        z-index: 10;
+
         p {
-          font-size: 2rem;
-          line-height: 2.5rem;
+          font-size: 1.4rem;
+          line-height: 2.2rem;
         }
       }
 
       .gridItem {
         width: $itemSize;
         height: $itemSize;
+        padding: 20px;
         border: 3px solid transparent;
         box-sizing: border-box;
         border-radius: 16px;
+        opacity: 0;
+        transform: translateY(3px);
         transition: border 2s;
+
+        &.appear {
+          animation: tileAppear 0.3s ease-in-out 1 normal forwards;
+        }
 
         &:hover {
           border: 3px solid $green;
@@ -182,6 +218,26 @@ article.goodEndScreen {
         }
       }
     }
+    .arrowScroll {
+      width: 2px;
+      height: 50px;
+      background-color: $green;
+      animation: up-down 1000ms infinite forwards;
+      margin-left: 50vw;
+      margin-bottom: 25px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        border: solid $green;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(45deg);
+        bottom: 0;
+        left: -5px;
+      }
+    }
   }
 
   footer {
@@ -190,13 +246,43 @@ article.goodEndScreen {
     align-items: center;
     justify-content: center;
 
-    h3 {
-      width: 329px;
+    .bubble {
+      opacity: 0;
+
+      h3 {
+        width: 329px;
+        opacity: 0;
+      }
+
+      p {
+        margin-bottom: 5rem;
+        opacity: 0;
+      }
+
+      button {
+        opacity: 0;
+      }
     }
 
-    p {
-      margin-bottom: 2rem;
+    &.appear > .bubble {
+      animation: tileAppear 0.3s ease-in-out 100ms 1 normal forwards;
+
+      h3 {
+        animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
+      }
+
+      p {
+        animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
+      }
+
+      button {
+        animation: tileAppear 0.3s ease-in-out 480ms 1 normal forwards, shadow-pulse 1s infinite;
+        &:hover {
+          animation-name: tileAppear, shadow-pulse-hover;
+        }
+      }
     }
+
 
     button {
       border: none;
@@ -208,12 +294,10 @@ article.goodEndScreen {
       text-transform: uppercase;
       font-weight: 400;
       letter-spacing: 1px;
-      animation: shadow-pulse 1s infinite;
       transition: background-color 300ms;
 
       &:hover {
         background-color: $green;
-        animation: shadow-pulse-hover 1s infinite;
       }
     }
   }

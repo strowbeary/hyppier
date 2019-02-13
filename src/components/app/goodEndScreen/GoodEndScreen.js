@@ -1,12 +1,9 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_goodEndScreen.scss";
-import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
-import AboutModal from "../GameCanvas/GameCanvas";
-import SoundButton from "../options/soundButton/SoundButton";
 import infos from "./infos";
 
-function shuffle(array) {
+export function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
@@ -31,9 +28,10 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     lockSlide = false;
     lockTimeout = null;
     scrollRatio = 0;
-    objectTile = [];
 
     state = {
+        pageOneVisited: false,
+        pageTwoVisited: false,
         pageIndex: 0,
         tooltipText: "Survole l'un des objets de la grille pour tout savoir sur eux"
     };
@@ -50,8 +48,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                     pageIndex: this.state.pageIndex + 1
                 });
                 this.isScrolling = true;
-            }
-            else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (this.state.pageIndex === 1 ? (this.scrollRatio === 0) : true)) {
+            } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (this.state.pageIndex === 1 ? (this.scrollRatio === 0) : true)) {
                 //PREVIOUS
                 this.setState({
                     pageIndex: this.state.pageIndex - 1
@@ -59,19 +56,27 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                 this.isScrolling = true;
             }
         }
+        if(!this.state.pageOneVisited) {
+            this.setState({
+                pageOneVisited: this.state.pageIndex === 1
+            })
+        }
+        if(!this.state.pageTwoVisited) {
+            this.setState({
+                pageTwoVisited: this.state.pageIndex === 2
+            })
+        }
 
     }
 
     scrollHandler(e) {
         this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
-        if(this.state.pageIndex === 1) {
+        if (this.state.pageIndex === 1) {
             this.lockSlide = true;
-            console.log("locked", this.scrollRatio);
             this.lockTimeout && clearTimeout(this.lockTimeout);
             this.lockTimeout = setTimeout(() => {
-                if(this.scrollRatio === 0 || this.scrollRatio === 1) {
+                if (this.scrollRatio === 0 || this.scrollRatio === 1) {
                     this.lockSlide = false;
-                    console.log("unlocked", this.scrollRatio);
                 }
             }, 500);
         }
@@ -85,10 +90,6 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     }
 
     render() {
-        if (this.state.pageIndex === 1) {
-            this.lockScroll = true;
-        }
-        console.log(this.state);
         return (
             <article className="goodEndScreen"
                      onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
@@ -124,25 +125,31 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                         </div>
                         {(() => {
                             return this.shuffledInfos.map((info, i) => (
-                                <div
-                                    ref={ref => this.objectTile[i] = ref}
-                                    key={i}
-                                    className={"gridItem"}
-                                    onMouseEnter={(e) => {
-                                        this.setState({
-                                            tooltipText: info.infoText
-                                        })
-                                    }}
-                                >
-                                    <a href={info.link} target="_blank" rel="noopener noreferrer">
-                                        <img alt="photo de l'objet" src={info.imgUrl}/>
-                                    </a>
-                                </div>
+                                    <div
+                                        key={i}
+                                        className={"gridItem " + (this.state.pageOneVisited ? 'appear' : '')}
+                                        onAnimationEnd={() => {
+                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1 + Math.random() / 2);
+                                            this.props.soundManager.objectTileAppear.play();
+                                        }}
+                                        style={{
+                                            animationDelay: 300 + 90 * i + "ms"
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            this.setState({
+                                                tooltipText: info.infoText
+                                            })
+                                        }}>
+                                        <a href={info.link} target="_blank" rel="noopener noreferrer">
+                                            <img alt="photo de l'objet" src={info.imgUrl}/>
+                                        </a>
+                                    </div>
                             ));
                         })()}
                     </div>
+                    <div className="arrowScroll"/>
                 </section>
-                <footer>
+                <footer className={this.state.pageTwoVisited ? 'appear' : ''}>
                     <div className="bubble">
                         <h3>Minimalisme <span>vs</span> Consumérisme</h3>
                         <p>
