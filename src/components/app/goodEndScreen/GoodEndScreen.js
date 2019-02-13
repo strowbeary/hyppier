@@ -8,6 +8,8 @@ import SoundButton from "../options/soundButton/SoundButton";
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
     isScrolling = false;
+    lockScroll = false;
+    scrollRatio = 0;
     objectTile = [];
     state = {
         pageIndex: 0,
@@ -16,69 +18,74 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     };
 
     wheelHandler(e) {
-        let movement = -e.movementY;
-        if (Math.abs(movement) > 5 && !this.isScrolling) {
-            //on peut declancher le scroll
-            if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
-                //NEXT
-                this.setState({
-                    pageIndex: this.state.pageIndex + 1
-                });
-                this.isScrolling = true;
-            } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0) {
-                //PREVIOUS
-                this.setState({
-                    pageIndex: this.state.pageIndex - 1
-                });
-                this.isScrolling = true;
+        if(!this.lockScroll) {
+            let movement = -e.movementY;
+            if (Math.abs(movement) > 5 && !this.isScrolling && (!this.lockScroll || this.scrollRatio === 1)) {
+                //on peut declancher le scroll
+                if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
+                    //NEXT
+                    this.setState({
+                        pageIndex: this.state.pageIndex + 1
+                    });
+                    this.isScrolling = true;
+                } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (!this.lockScroll || this.scrollRatio === 0)) {
+                    //PREVIOUS
+                    this.setState({
+                        pageIndex: this.state.pageIndex - 1
+                    });
+                    this.isScrolling = true;
+                }
             }
         }
+
     }
 
     prevX = null;
     prevY = null;
 
     touchHandler(e) {
-        switch (e.type) {
-            case "touchstart":
-                this.prevX = e.touches[0].clientX;
-                this.prevY = e.touches[0].clientY;
-                break;
-            case "touchmove":
-                if (!this.prevY || !this.prevX) {
-                    return;
-                }
-                const diffX = this.prevX - e.touches[0].clientX;
-                const diffY = this.prevY - e.touches[0].clientY;
-                if (Math.abs(diffX) < Math.abs(diffY)) {
-                    if (diffY > 0) {
-                        /* up swipe */
-                        if (this.state.pageIndex < 2) {
-                            this.setState({
-                                pageIndex: this.state.pageIndex + 1
-                            });
-                            this.isScrolling = true;
-                        }
-                    } else {
-                        /* down swipe */
-                        if (this.state.pageIndex > 0) {
-                            this.setState({
-                                pageIndex: this.state.pageIndex - 1
-                            });
-                            this.isScrolling = true;
+        if(!this.lockScroll) {
+            switch (e.type) {
+                case "touchstart":
+                    this.prevX = e.touches[0].clientX;
+                    this.prevY = e.touches[0].clientY;
+                    break;
+                case "touchmove":
+                    if (!this.prevY || !this.prevX) {
+                        return;
+                    }
+                    const diffX = this.prevX - e.touches[0].clientX;
+                    const diffY = this.prevY - e.touches[0].clientY;
+                    if (Math.abs(diffX) < Math.abs(diffY)) {
+                        if (diffY > 0) {
+                            /* up swipe */
+                            if (this.state.pageIndex < 2) {
+                                this.setState({
+                                    pageIndex: this.state.pageIndex + 1
+                                });
+                                this.isScrolling = true;
+                            }
+                        } else {
+                            /* down swipe */
+                            if (this.state.pageIndex > 0) {
+                                this.setState({
+                                    pageIndex: this.state.pageIndex - 1
+                                });
+                                this.isScrolling = true;
+                            }
                         }
                     }
-                }
-                /* reset values */
-                this.prevX = null;
-                this.prevY = null;
+                    /* reset values */
+                    this.prevX = null;
+                    this.prevY = null;
 
-                break;
-            case "touchend":
+                    break;
+                case "touchend":
 
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -89,6 +96,9 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     }
 
     render() {
+        if(this.state.pageIndex === 1) {
+            this.lockScroll = true;
+        }
         return (
             <article className="goodEndScreen"
                      onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
@@ -116,7 +126,12 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                     </div>
                     <div className="arrowScroll"/>
                 </header>
-                <section>
+                <section onScroll={e => {
+                    this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
+                    if (this.scrollRatio === 1 || this.scrollRatio === 0) {
+                        this.lockScroll = false;
+                    }
+                }}>
 
                     <div className={"grid"}>
                         <div className={"tooltip"}>
