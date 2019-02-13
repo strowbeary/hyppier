@@ -4,6 +4,26 @@ import "./_goodEndScreen.scss";
 import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import AboutModal from "../GameCanvas/GameCanvas";
 import SoundButton from "../options/soundButton/SoundButton";
+import infos from "./infos";
+
+function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
 
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
@@ -12,15 +32,17 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     scrollRatio = 0;
     objectTile = [];
     state = {
-        pageIndex: 0,
+        pageIndex: 1,
         reticuleX: 0,
-        reticuleY: 0
+        reticuleY: 0,
+        tooltipText: "Survole l'un des objets de la grille pour tout savoir sur eux"
     };
+    shuffledInfos = shuffle(infos);
 
     wheelHandler(e) {
-        if(!this.lockScroll) {
-            let movement = -e.movementY;
-            if (Math.abs(movement) > 5 && !this.isScrolling && (!this.lockScroll || this.scrollRatio === 1)) {
+        if (!this.lockScroll) {
+            let movement = e.deltaY;
+            if (Math.abs(movement) > 3 && !this.isScrolling && (!this.lockScroll || this.scrollRatio === 1)) {
                 //on peut declancher le scroll
                 if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
                     //NEXT
@@ -44,7 +66,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     prevY = null;
 
     touchHandler(e) {
-        if(!this.lockScroll) {
+        if (!this.lockScroll) {
             switch (e.type) {
                 case "touchstart":
                     this.prevX = e.touches[0].clientX;
@@ -96,7 +118,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
     }
 
     render() {
-        if(this.state.pageIndex === 1) {
+        if (this.state.pageIndex === 1) {
             this.lockScroll = true;
         }
         return (
@@ -104,9 +126,10 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                      onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
                      onTouchStart={e => this.touchHandler(e)}
                      onTouchMove={e => this.touchHandler(e)}
-                     onWheel={e => this.wheelHandler(e)} style={{
-                top: `${-100 * this.state.pageIndex}vh`
-            }}>
+                     onWheel={e => this.wheelHandler(e)}
+                     style={{
+                         top: `${-100 * this.state.pageIndex}vh`
+                     }}>
                 <nav className={this.state.pageIndex === 1 ? 'green' : ''}>
                     <div onClick={() => this.setState({pageIndex: 0})}
                          className={"navCircle " + (this.state.pageIndex === 0 ? 'active' : '')}/>
@@ -119,37 +142,41 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                     <div className="bubble">
                         <h3>Bravo, tu as gagné !</h3>
                         <p>
-                            Bien joué, tu as su contrôlé ta fièvre acheteuse et n'as pas cédé à toutes les tentations
-                            marketing !
-                            Scroll pour (re)découvrir toutes les informations disséminées au cours de l'expérience.
+                            Bien joué, tu as su contrôler ta fièvre acheteuse et n’as pas cédé à toutes les tentations
+                            marketing ! Scroll pour (re)découvrir toutes les informations disséminées au cours de
+                            l’expérience.
                         </p>
                     </div>
                     <div className="arrowScroll"/>
                 </header>
                 <section onScroll={e => {
                     this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
-                    if (this.scrollRatio === 1 || this.scrollRatio === 0) {
+                    if (this.scrollRatio === 1 || this.scrollRatio === 0) {
                         this.lockScroll = false;
                     }
                 }}>
 
                     <div className={"grid"}>
                         <div className={"tooltip"}>
-                            <p>En 2017, 600 milliards de casques se sont vendus dans le monde entier.</p>
+                            <p>{this.state.tooltipText}</p>
                         </div>
                         {(() => {
-                            let el = [];
-                            for (let i = 32; i > 0; i--) {
-                                el.push(
-                                    <div
-                                        ref={ref => this.objectTile[i] = ref}
-                                        key={i}
-                                        className={"gridItem"}>
-                                        <img src="img/catalog/01-Gaming.png"/>
-                                    </div>
-                                )
-                            }
-                            return el;
+                            return this.shuffledInfos.map((info, i) => (
+                                <div
+                                    ref={ref => this.objectTile[i] = ref}
+                                    key={i}
+                                    className={"gridItem"}
+                                    onMouseEnter={() => {
+                                        this.setState({
+                                            tooltipText: info.infoText
+                                        })
+                                    }}
+                                >
+                                    <a href={info.link} target="_blank" rel="noopener noreferrer">
+                                        <img alt="photo de l'objet" src={info.imgUrl}/>
+                                    </a>
+                                </div>
+                            ));
                         })()}
                     </div>
                 </section>
