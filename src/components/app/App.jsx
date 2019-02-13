@@ -57,7 +57,6 @@ const App = observer(class App extends Component {
                  ref={(ref) => this.app = ref}>
                 {!this.state.ready &&
                     <StartScreen launchLoading={() => {this.launchLoading()}}/>
-                    //<GoodEndScreen/>
                 }
                 {this.state.loading &&
                     <GameCanvas onReady={(sceneManager) => this.updateReady(sceneManager)}/>

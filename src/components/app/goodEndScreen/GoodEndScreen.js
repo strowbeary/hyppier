@@ -1,31 +1,54 @@
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_goodEndScreen.scss";
-import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
-import AboutModal from "../GameCanvas/GameCanvas";
-import SoundButton from "../options/soundButton/SoundButton";
+import infos from "./infos";
+
+export function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
 
 const GoodEndScreen = observer(class GoodEndScreen extends Component {
 
     isScrolling = false;
-    objectTile = [];
+    lockSlide = false;
+    lockTimeout = null;
+    scrollRatio = 0;
+
     state = {
+        pageOneVisited: false,
+        pageTwoVisited: false,
         pageIndex: 0,
-        reticuleX: 0,
-        reticuleY: 0
+        tooltipText: "Survole l'un des objets de la grille pour tout savoir sur eux"
     };
 
+    shuffledInfos = shuffle(infos);
+
     wheelHandler(e) {
-        let movement = -e.movementY;
-        if (Math.abs(movement) > 5 && !this.isScrolling) {
+        let movement = e.deltaY;
+        if (!this.lockSlide && Math.abs(movement) > 5 && !this.isScrolling) {
             //on peut declancher le scroll
-            if (Math.sign(movement) > 0 && this.state.pageIndex < 2) {
+            if (Math.sign(movement) > 0 && this.state.pageIndex < 2 && (this.state.pageIndex === 1 ? (this.scrollRatio === 1) : true)) {
                 //NEXT
                 this.setState({
                     pageIndex: this.state.pageIndex + 1
                 });
                 this.isScrolling = true;
-            } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0) {
+            } else if (Math.sign(movement) < 0 && this.state.pageIndex > 0 && (this.state.pageIndex === 1 ? (this.scrollRatio === 0) : true)) {
                 //PREVIOUS
                 this.setState({
                     pageIndex: this.state.pageIndex - 1
@@ -33,53 +56,31 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                 this.isScrolling = true;
             }
         }
+        if(!this.state.pageOneVisited) {
+            this.setState({
+                pageOneVisited: this.state.pageIndex === 1
+            })
+        }
+        if(!this.state.pageTwoVisited) {
+            this.setState({
+                pageTwoVisited: this.state.pageIndex === 2
+            })
+        }
+
     }
 
-    prevX = null;
-    prevY = null;
-
-    touchHandler(e) {
-        switch (e.type) {
-            case "touchstart":
-                this.prevX = e.touches[0].clientX;
-                this.prevY = e.touches[0].clientY;
-                break;
-            case "touchmove":
-                if (!this.prevY || !this.prevX) {
-                    return;
+    scrollHandler(e) {
+        this.scrollRatio = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight);
+        if (this.state.pageIndex === 1) {
+            this.lockSlide = true;
+            this.lockTimeout && clearTimeout(this.lockTimeout);
+            this.lockTimeout = setTimeout(() => {
+                if (this.scrollRatio === 0 || this.scrollRatio === 1) {
+                    this.lockSlide = false;
                 }
-                const diffX = this.prevX - e.touches[0].clientX;
-                const diffY = this.prevY - e.touches[0].clientY;
-                if (Math.abs(diffX) < Math.abs(diffY)) {
-                    if (diffY > 0) {
-                        /* up swipe */
-                        if (this.state.pageIndex < 2) {
-                            this.setState({
-                                pageIndex: this.state.pageIndex + 1
-                            });
-                            this.isScrolling = true;
-                        }
-                    } else {
-                        /* down swipe */
-                        if (this.state.pageIndex > 0) {
-                            this.setState({
-                                pageIndex: this.state.pageIndex - 1
-                            });
-                            this.isScrolling = true;
-                        }
-                    }
-                }
-                /* reset values */
-                this.prevX = null;
-                this.prevY = null;
-
-                break;
-            case "touchend":
-
-                break;
-            default:
-                break;
+            }, 500);
         }
+
     }
 
     scrollTransitionHandler(e) {
@@ -92,11 +93,10 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
         return (
             <article className="goodEndScreen"
                      onTransitionEnd={(e) => this.scrollTransitionHandler(e)}
-                     onTouchStart={e => this.touchHandler(e)}
-                     onTouchMove={e => this.touchHandler(e)}
-                     onWheel={e => this.wheelHandler(e)} style={{
-                top: `${-100 * this.state.pageIndex}vh`
-            }}>
+                     onWheel={e => this.wheelHandler(e)}
+                     style={{
+                         top: `${-100 * this.state.pageIndex}vh`
+                     }}>
                 <nav className={this.state.pageIndex === 1 ? 'green' : ''}>
                     <div onClick={() => this.setState({pageIndex: 0})}
                          className={"navCircle " + (this.state.pageIndex === 0 ? 'active' : '')}/>
@@ -109,36 +109,45 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                     <div className="bubble">
                         <h3>Bravo, tu as gagné !</h3>
                         <p>
-                            Bien joué, tu as su contrôlé ta fièvre acheteuse et n'as pas cédé à toutes les tentations
-                            marketing !
-                            Scroll pour (re)découvrir toutes les informations disséminées au cours de l'expérience.
+                            Bien joué, tu as su contrôler ta fièvre acheteuse et n’as pas cédé à toutes les tentations
+                            marketing ! Scroll pour (re)découvrir toutes les informations disséminées au cours de
+                            l’expérience.
                         </p>
                     </div>
                     <div className="arrowScroll"/>
                 </header>
-                <section>
+                <section
+                    onScroll={e => this.scrollHandler(e)}>
 
                     <div className={"grid"}>
                         <div className={"tooltip"}>
-                            <p>En 2017, 600 milliards de casques se sont vendus dans le monde entier.</p>
+                            <p>{this.state.tooltipText}</p>
                         </div>
                         {(() => {
-                            let el = [];
-                            for (let i = 32; i > 0; i--) {
-                                el.push(
+                            return this.shuffledInfos.map((info, i) => (
                                     <div
-                                        ref={ref => this.objectTile[i] = ref}
                                         key={i}
-                                        className={"gridItem"}>
-                                        <img src="img/catalog/01-Gaming.png"/>
+                                        className={"gridItem " + (this.state.pageOneVisited ? 'appear' : '')}
+                                        style={{
+                                            animationDelay: 300 + 90 * i + "ms"
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1.3 + Math.random() / 2);
+                                            this.props.soundManager.objectTileAppear.play();
+                                            this.setState({
+                                                tooltipText: info.infoText
+                                            })
+                                        }}>
+                                        <a href={info.link} target="_blank" rel="noopener noreferrer">
+                                            <img alt="photo de l'objet" src={info.imgUrl}/>
+                                        </a>
                                     </div>
-                                )
-                            }
-                            return el;
+                            ));
                         })()}
                     </div>
+                    <div className="arrowScroll"/>
                 </section>
-                <footer>
+                <footer className={this.state.pageTwoVisited ? 'appear' : ''}>
                     <div className="bubble">
                         <h3>Minimalisme <span>vs</span> Consumérisme</h3>
                         <p>
@@ -150,7 +159,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                             pencher la balance du bon côté.
                             Alors pour vivre heureux, vivons léger ?
                         </p>
-                        <button>Rejouer</button>
+                        <button onClick={() => window.location.reload()}>Rejouer</button>
                     </div>
                 </footer>
             </article>

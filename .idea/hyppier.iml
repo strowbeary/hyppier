@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/babylon" level="application" />
     <orderEntry type="library" name="@types/react" level="application" />
+    <orderEntry type="library" name="@types/react-transition-group" level="application" />
   </component>
 </module>

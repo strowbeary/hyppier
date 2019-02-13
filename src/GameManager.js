@@ -58,6 +58,10 @@ class GameManager {
 
         if (GameStore.attic.isGameOver()) {
             this.atticManager.fall();
+            setTimeout(() => {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
+            }, 3500);
         }
     }
 
@@ -78,6 +82,10 @@ class GameManager {
             this.objectKindType = null;
             if (GameStore.attic.isGameOver()) {
                 this.atticManager.fall();
+                setTimeout(() => {
+                    this.pauseGame();
+                    GameStore.setGameEnded(true);
+                }, 3500);
             }
         }
     }
