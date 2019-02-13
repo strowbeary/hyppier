@@ -86,37 +86,37 @@ const AboutModal = observer(class AboutModal extends Component {
                                 </div>
                                 <ul className={"aboutModal__team"}>
                                     <li>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank" rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank" rel="noopener noreferrer">
                                             <p>Xindi</p>
                                             <p>YANG</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="http://camillerostoucher.com" target="_blank" rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="http://camillerostoucher.com" target="_blank" rel="noopener noreferrer">
                                             <p>Camille</p>
                                             <p>ROSTOUCHER</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank" rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank" rel="noopener noreferrer">
                                             <p>Mélanie</p>
                                             <p>NGO</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href={""} target={"_blank"}>
+                                        <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer">
                                             <p>Rémi</p>
                                             <p>CAILLOT</p>
                                         </a>
