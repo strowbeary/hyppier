@@ -129,7 +129,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                                         key={i}
                                         className={"gridItem " + (this.state.pageOneVisited ? 'appear' : '')}
                                         onAnimationEnd={() => {
-                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1 + Math.random() / 2);
+                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1.3 + Math.random() / 2);
                                             this.props.soundManager.objectTileAppear.play();
                                         }}
                                         style={{
@@ -161,7 +161,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                             pencher la balance du bon côté.
                             Alors pour vivre heureux, vivons léger ?
                         </p>
-                        <button>Rejouer</button>
+                        <button onClick={() => window.location.reload()}>Rejouer</button>
                     </div>
                 </footer>
             </article>
