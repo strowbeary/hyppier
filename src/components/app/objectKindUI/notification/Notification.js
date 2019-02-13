@@ -21,7 +21,9 @@ const Notification = observer(class Notification extends Component {
         this.playSound = props.playSound;
         this.delayTimer.onFinish(() => {
             let duration = this.timer.getDuration();
-            props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation(duration);
+            if (props.objectKind.activeObject !== null) {
+                props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation(duration);
+            }
             this.timer.unlock();
             this.timer.start();
             this.playSound();
@@ -42,7 +44,6 @@ const Notification = observer(class Notification extends Component {
             this.openPopup();
         });
         if (!GameStore.options.isPaused) {
-            this.delayTimer.setDuration(Math.round(this.duration / (Math.random() + 1)));
             this.delayTimer.start();
         }
     }
@@ -56,7 +57,7 @@ const Notification = observer(class Notification extends Component {
         if (fromValidate) {
             this.delayTimer.setDuration(this.duration);
         } else {
-            this.delayTimer.setDuration(this.duration / 2);
+            this.delayTimer.setDuration(this.duration * 0.75);
         }
     }
 

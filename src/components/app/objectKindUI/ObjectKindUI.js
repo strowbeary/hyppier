@@ -149,7 +149,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                     this.objectKind.activeObject === null && TutoStore.currentMessage > 1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 2 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 3 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()} playSound={() => this.playNotifSound()}/>
                 }
                 <CSSTransitionGroup

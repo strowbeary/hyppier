@@ -48,6 +48,7 @@ class GameManager {
         if (clones.length > 0) {
             const lastClone = clones[clones.length - 1];
             lambdaMesh.launchCloneDisappearAnimation(() => this.scene.removeMesh(lastClone));
+            lambdaMesh.clones.pop();
         } else {
             CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         }
@@ -70,7 +71,7 @@ class GameManager {
         if (this.clueEvent !== null) {
             if (GameStore.clueEvent !== this.clueEvent) {
                 GameStore.setClueEvent(this.clueEvent);
-                this.pauseGame();
+                this.pauseToastTimer();
             }
         } else {
             this.playGame();
@@ -86,7 +87,7 @@ class GameManager {
             if (GameStore.clueEvent !== this.clueEvent) {
                 this.objectKindName = objectKindName;
                 GameStore.setClueEvent(this.clueEvent);
-                this.pauseToastTimer();
+                this.pauseGame();
             }
         } else if (!GameStore.options.isPaused) { //replacement in Popup
             if (GameStore.attic.isGameOver()) {

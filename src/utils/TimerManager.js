@@ -14,9 +14,7 @@ export const TimerManager = {
     startAll() {
         timers.forEach(timer => {
             if (timer && timer.start) {
-                if (!timer.hasStarted()) {
-                    timer.setDuration(Math.round(timer.getDuration() / (Math.random() + 1)));
-                }
+                timer.setDuration(timer.getDuration());
                 timer.start()
             }
         });

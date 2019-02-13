@@ -56,7 +56,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 35000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -116,7 +116,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 40000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -196,7 +196,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 55000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -236,7 +236,7 @@
           "cloneDirection": "up"
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 50000,
       "replacementCounter": 0,
       "activeObject": 0
     },
@@ -296,7 +296,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 30000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -316,7 +316,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -336,7 +336,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -356,7 +356,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -376,7 +376,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     },
@@ -396,7 +396,7 @@
           "cloneDirection": ""
         }
       ],
-      "objectTimeout": 20000,
+      "objectTimeout": 5000,
       "replacementCounter": 0,
       "activeObject": null
     }
