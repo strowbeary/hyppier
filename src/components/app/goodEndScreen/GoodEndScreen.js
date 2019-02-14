@@ -97,6 +97,11 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                      style={{
                          top: `${-100 * this.state.pageIndex}vh`
                      }}>
+                <div className="pipo right big"/>
+                <div className="pipo right big"/>
+                <div className="pipo right little"/>
+                <div className="pipo big"/>
+                <div className="pipo little"/>
                 <nav className={this.state.pageIndex === 1 ? 'green' : ''}>
                     <div onClick={() => this.setState({pageIndex: 0})}
                          className={"navCircle " + (this.state.pageIndex === 0 ? 'active' : '')}/>

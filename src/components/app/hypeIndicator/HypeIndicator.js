@@ -87,7 +87,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
                         </svg>
                     </div>
-                    <div className={`pipo ${GameStore.pipo}`}></div>
+                    <div className={`pipo ${GameStore.pipo}`}/>
                 </div>
             </div>
         )

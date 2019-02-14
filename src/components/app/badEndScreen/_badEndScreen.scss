@@ -11,6 +11,42 @@
   }
 }
 
+@keyframes playMeanLittleX {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(1792px/1.6);
+  }
+}
+
+@keyframes playMeanLittleY {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(2304px/1.6);
+  }
+}
+
+@keyframes playMeanX {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -1792px;
+  }
+}
+
+@keyframes playMeanY {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -2304px;
+  }
+}
+
 
 .badEndScreen {
   position: fixed;
@@ -21,6 +57,62 @@
   overflow: hidden;
   z-index: 1000;
   transition: top 0.5s;
+
+  .pipo {
+    position: absolute;
+    z-index: 10;
+    background: url('../../../assets/img/Pipo-Evil-0203.png') left top no-repeat;
+
+    &.little {
+      width: 160px;
+      height: 160px;
+      background-size: (1792px/1.6) (2304px/1.6);
+      animation: playMeanLittleX 0.33s steps(7) infinite, playMeanLittleY 2.97s steps(9) infinite;
+    }
+
+    &.big {
+      width: 256px;
+      height: 256px;
+      background-size: 1792px 2304px;
+      animation: playMeanX 0.33s steps(7) infinite, playMeanY 2.97s steps(9) infinite;
+    }
+
+    &:nth-child(1) {
+      position: absolute;
+      top: 50vh;
+      left: 20vw;
+    }
+
+    &:nth-child(2) {
+      position: absolute;
+      top: 5vh;
+      left: 5vw;
+      filter: blur(2px);
+    }
+
+    &:nth-child(3) {
+      position: absolute;
+      top: 25vh;
+      left: 30vw;
+    }
+
+    &:nth-child(4) {
+      position: absolute;
+      bottom: 5vh;
+      right: 10vw;
+    }
+
+    &:nth-child(5) {
+      position: absolute;
+      right: 5vw;
+      top: 5vh;
+      filter: blur(2px);
+    }
+
+    &.right {
+      transform: scaleX(-1);
+    }
+  }
 
   section {
     width: 100%;
@@ -83,9 +175,9 @@
   &__title {
     font-family: Selfie, sans-serif;
     font-weight: 400;
-    font-size: 8rem;
+    font-size: 10rem;
     line-height: 6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     color: $red;
     animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
   }
@@ -95,7 +187,7 @@
     font-size: 1.5rem;
     word-wrap: break-word;
     max-width: 50vh;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
   }
 }
