@@ -12,7 +12,6 @@ import SFXCrack from "../../../assets/sounds/SFX-Crack.wav";
 import SFXCrash from "../../../assets/sounds/SFX-Crash.wav";
 import SFXPositive from "../../../assets/sounds/SFX-Positive.mp3";
 
-let SoundManagerInstance;
 
 class SoundManager {
 
@@ -30,9 +29,6 @@ class SoundManager {
         this.atticCrack = new BABYLON.Sound("AtticCrack", SFXCrack, this.scene, null, {volume: 0.2});
         this.atticCrash = new BABYLON.Sound("AtticCrash", SFXCrash, this.scene, null, {volume: 0.1});
         this.positiveFeedback = new BABYLON.Sound("SFXPositive", SFXPositive, this.scene, null, {volume: 0.1});
-        SoundManagerInstance = this;
-
-
     }
 
     setGlobalVolume(value) {
@@ -40,4 +36,4 @@ class SoundManager {
     }
 }
 
-export {SoundManager, SoundManagerInstance};
+export {SoundManager};
