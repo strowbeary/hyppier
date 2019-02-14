@@ -84,9 +84,7 @@ export class CameraManager {
 
 
         animationTarget.setEasingFunction(Easing);
-
-        let animationGroup = new BABYLON.AnimationGroup("Camera");
-        animationGroup.addTargetedAnimation(animationTarget, this.camera);
+        this.camera.animations.push(animationTarget);
 
         let animationOrthoTop = new BABYLON.Animation(
             "target",
@@ -147,15 +145,12 @@ export class CameraManager {
         animationOrthoRight.setEasingFunction(Easing);
         animationOrthoBottom.setEasingFunction(Easing);
 
-        animationGroup.addTargetedAnimation(animationOrthoTop, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoLeft, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoBottom, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoRight, this.camera);
+        this.camera.animations.push(animationOrthoTop);
+        this.camera.animations.push(animationOrthoLeft);
+        this.camera.animations.push(animationOrthoBottom);
+        this.camera.animations.push(animationOrthoRight);
 
-
-        animationGroup.normalize(0, 30);
-        animationGroup.play();
-        animationGroup.onAnimationGroupEndObservable.add(() => {
+        this.scene.beginAnimation(this.camera, 0, 30, false, 1, () => {
             ObjectKindUI.refs.forEach(ref => ref && ref.updatePosition());
             if (toPosition.equals(BABYLON.Vector3.Zero())) {
                 transitionFinishListener.forEach(listener => listener())
