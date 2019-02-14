@@ -5,6 +5,7 @@ import GameStore from "../../../stores/GameStore/GameStore";
 import {spawn} from "../utils/spawn-worker";
 import {onPatch} from "mobx-state-tree";
 import {bubbleWorker} from "./bubbleWorker";
+import hype from "../../../assets/img/hype.png";
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
 
@@ -62,7 +63,9 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         return (
             <div className="gameIndicator">
                 <div className="gameIndicator__wrapper">
-                    <div className="gameIndicator__word">Hype</div>
+                    <div className="gameIndicator__word">
+                        <img src={hype} alt="hype"/>
+                    </div>
                     <div className={`pyro ${GameStore.pipo === 'happy'? 'anim': ''}`}>
                         <div className="before"/>
                         <div className="after"/>

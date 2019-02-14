@@ -64,13 +64,13 @@ $box-shadow2: ();
   }
 
   &__word {
-    font-family: Selfie, sans-serif;
-    font-size: 4rem;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    transform-origin: center;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-bottom: -10px;
+
+    >img {
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+      width: 140px;
+    }
   }
 
   .jauge {
