@@ -17,7 +17,7 @@ class SoundManager {
 
     constructor(scene) {
         this.scene = scene;
-        this.music = new BABYLON.Sound("Music", ambiance, this.scene, null, {loop: true, autoplay: true, volume: 0.05});
+        this.music = new BABYLON.Sound("Music", ambiance, this.scene, null, {loop: true, autoplay: false, volume: 0.05});
         this.dropParcel = new BABYLON.Sound("Parcel", SFXBoxDrop, this.scene, null, {volume: 0.1});
         this.spacePress = new BABYLON.Sound("Spacepress", SFXClick, this.scene, null, {volume: 0.2});
         this.clueEventElectric = new BABYLON.Sound("ElectricityOut", SFXElectricityOut, this.scene, null, {volume: 0.2});
