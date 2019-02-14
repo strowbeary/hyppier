@@ -8,6 +8,22 @@ function lighten(color3 = BABYLON.Color3.White(), k) {
     return result;
 
 }
+function desaturate(color3 = BABYLON.Color3.White(), k) {
+    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
+    return new BABYLON.Color3(
+        intensity * k + color3.r * (1 - k),
+        intensity * k + color3.g * (1 - k),
+        intensity * k + color3.b * (1 - k)
+    );
+}
+function saturate(color3 = BABYLON.Color3.White(), k) {
+    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
+    return new BABYLON.Color3(
+        -intensity * k + color3.r * (1 + k),
+        -intensity * k + color3.g * (1 + k),
+        -intensity * k + color3.b * (1 + k)
+    );
+}
 
 export class LambdaMesh {
 
@@ -39,12 +55,14 @@ export class LambdaMesh {
         if(this.multimaterial) {
             mesh.material.subMaterials
                 .forEach(material => {
-                    material.ambientColor = lighten(material.ambientColor, 0.20);
-                   // material.diffuseColor = saturate(material.diffuseColor, 1);
+                    material.ambientColor = lighten(material.ambientColor, 0.3);
+                    material.diffuseColor  = lighten(material.diffuseColor, 0.1);
+                    material.diffuseColor  = saturate(material.diffuseColor, 0.15);
                 });
         } else {
-            mesh.material.ambientColor = lighten(mesh.material.ambientColor, 0.20);
-           // mesh.material.diffuseColor  = saturate(mesh.material.diffuseColor, 1);
+            mesh.material.ambientColor = lighten(mesh.material.ambientColor, 0.3);
+            mesh.material.diffuseColor  = lighten(mesh.material.diffuseColor, 0.1);
+            mesh.material.diffuseColor  = saturate(mesh.material.diffuseColor, 0.15);
         }
 
     }

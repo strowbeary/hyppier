@@ -37,12 +37,13 @@ export class SceneManager {
         defaultPipeline.imageProcessingEnabled = true;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-        const ambient = 0.8;
+        const ambient = 0.7;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
         this.scene.blockMaterialDirtyMechanism = true;
         this.scene.useGeometryIdsMap = true;
         this.scene.useMaterialMeshMap = true;
         this.scene.useClonedMeshMap = true;
+
 
         this.scene.enablePhysics(null);
 

@@ -132,7 +132,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                                             animationDelay: 300 + 90 * i + "ms"
                                         }}
                                         onMouseEnter={(e) => {
-                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1.3 + Math.random() / 2);
+                                            this.props.soundManager.objectTileAppear.setPlaybackRate(1.5 + Math.random() / 2);
                                             this.props.soundManager.objectTileAppear.play();
                                             this.setState({
                                                 tooltipText: info.infoText
