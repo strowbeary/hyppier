@@ -156,7 +156,6 @@ export class CameraManager {
                 transitionFinishListener.forEach(listener => listener())
             }
         });
-        animationGroup.play();
     }
 
     setTarget(mesh) {

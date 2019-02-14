@@ -24,36 +24,32 @@
 
   .spacebar {
     position: absolute;
-    right: 5px;
-    bottom: 15px;
-    color: $false-black;
+    right: 8px;
+    bottom: 8px;
+    display: block;
     width: auto;
+    border: solid 1px $false-black;
+    border-radius: 11px;
+    padding-bottom: 5px;
+    animation: mini-spacebar 984ms linear infinite;
 
-    &__spacebutton {
-      position: relative;
+    &:before {
+      content: "Espace";
       display: block;
-      padding: 2px 15px;
-      border: solid 2px $false-black;
-      border-radius: 15px;
-      font-size: 1.2rem;
+      margin: -1px;
+      height: 100%;
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.1rem;
       font-weight: 400;
-      animation: space-translate 1s linear infinite;
+      padding: 2px 15px;
+      color: $false-black;
 
-      &:before {
-        content: "";
-        position: absolute;
-        left: -2px;
-        right: -2px;
-        top: -2px;
-        bottom: -5px;
-        border: solid 2px $false-black;
-        border-radius: 13px;
-        animation: space-bottom 1s linear infinite;
-      }
+      border: solid 1px $false-black;
+      border-radius: 10px;
     }
   }
+
 }
 
 @keyframes appear {
@@ -67,18 +63,14 @@
   }
 }
 
-@keyframes up-down {
+@keyframes mini-spacebar {
   0% {
-    opacity: 0.1;
-    transform: translateY(-2px);
+    padding-bottom: 5px;
   }
-  90% {
-    opacity: 1;
-    transform: translateY(2px);
+  20% {
+    padding-bottom: 0;
   }
   100% {
-
-    opacity: 0.1;
-    transform: translateY(-2px);
+    padding-bottom: 5px;
   }
 }

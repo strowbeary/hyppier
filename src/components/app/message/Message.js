@@ -69,7 +69,6 @@ const Message = observer(class Message extends Component {
                     {
                         this.message.action === "keypress" &&
                         <div className={`spacebar`} onClick={(e) => this.dispatchEventForListener(e)}>
-                            <span className="spacebar__spacebutton">Espace</span>
                         </div>
                     }
                 </div>
