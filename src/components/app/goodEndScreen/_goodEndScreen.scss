@@ -175,9 +175,8 @@ article.goodEndScreen {
       margin-left: 32px;
 
       .tooltip {
-        grid-column-end: span 3;
+        grid-column-end: span 4;
         background: white;
-        border: 1px solid #E6E6E6;
         padding: 32px;
         border-radius: 16px;
         display: flex;
@@ -186,10 +185,11 @@ article.goodEndScreen {
         position: sticky;
         top: 80px;
         z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
         p {
-          font-size: 1.4rem;
-          line-height: 2.2rem;
+          font-size: 2rem;
+          line-height: 2.5rem;
         }
       }
 

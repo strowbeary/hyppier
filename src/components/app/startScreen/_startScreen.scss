@@ -18,7 +18,7 @@ $backgroundHeight: 1342px;
   z-index: 10;
   background-color: $yellow;
   background-image: url(../../../assets/img/objects-blurred.png), url(../../../assets/img/objects.png);
-  background-size: auto $backgroundHeight, auto $backgroundHeight;
+  background-size: auto $backgroundHeight * 2, auto $backgroundHeight * 1.5;
   background-repeat: repeat;
   width: 100vw;
   height: 100vh;

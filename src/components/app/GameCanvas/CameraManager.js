@@ -61,8 +61,16 @@ export class CameraManager {
     }
 
     createAnimations(toPosition) {
+        const Easing = new BABYLON.CubicEase();
+        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN);
         this.camera.animations = [];
-        let animationTarget = new BABYLON.Animation("target", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let animationTarget = new BABYLON.Animation(
+            "target",
+            "target",
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+        );
         let keysTarget = [];
         keysTarget.push({
             frame: 0,
@@ -74,15 +82,18 @@ export class CameraManager {
         });
         animationTarget.setKeys(keysTarget);
 
-        const Easing = new BABYLON.QuinticEase();
-        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
 
         animationTarget.setEasingFunction(Easing);
 
         let animationGroup = new BABYLON.AnimationGroup("Camera");
         animationGroup.addTargetedAnimation(animationTarget, this.camera);
 
-        let animationOrthoTop = new BABYLON.Animation("target", "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let animationOrthoTop = new BABYLON.Animation(
+            "target",
+            "orthoTop",
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keysOrthoTop = [];
         keysOrthoTop.push({
             frame: 0,
@@ -96,6 +107,7 @@ export class CameraManager {
 
         let animationOrthoLeft = new BABYLON.Animation("target", "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keysOrthoLeft = [];
+
         keysOrthoLeft.push({
             frame: 0,
             value: this.camera.orthoLeft

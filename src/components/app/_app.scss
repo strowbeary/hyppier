@@ -118,8 +118,8 @@ button, a {
     z-index: -1;
     right: 8vw;
     top: 50vh;
-    width: 1px;
-    height: 1px;
+    width: 4px;
+    height: 4px;
     transform-origin: center;
     transform: scale(0);
     transition: transform 0.5s ease-in, background 0.5s ease-in;
@@ -219,7 +219,7 @@ button {
   right: 3rem;
   display: flex;
   align-items: center;
-  z-index: 2;
+  z-index: 100000;
 
   button {
     background: none;

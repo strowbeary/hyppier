@@ -40,7 +40,7 @@ const App = observer(class App extends Component {
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
-        let badEnding = GameStore.attic.isGameLost()? 'badEnding': '';
+        let badEnding = GameStore.attic.isGameLost() ? 'badEnding': '';
         let pipoMood = "";
         if (GameStore.pipo === 'happy') {
             pipoMood = "happy";

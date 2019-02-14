@@ -85,7 +85,7 @@ class GameManager {
                 setTimeout(() => {
                     this.pauseGame();
                     GameStore.setGameEnded(true);
-                }, 3500);
+                }, 5500);
             }
             const finishedObjectKind = CatalogStore.getAllObjectKind()
                 .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
@@ -110,7 +110,7 @@ class GameManager {
                 setTimeout(() => {
                     this.pauseGame();
                     GameStore.setGameEnded(true);
-                }, 3500);
+                }, 5500);
             }
             const finishedObjectKind = CatalogStore.getAllObjectKind()
                 .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
