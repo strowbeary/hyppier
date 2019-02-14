@@ -1,21 +1,5 @@
 import * as BABYLON from "babylonjs";
 
-function desaturate(color3 = BABYLON.Color3.White(), k) {
-    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
-    return new BABYLON.Color3(
-        intensity * k + color3.r * (1 - k),
-        intensity * k + color3.g * (1 - k),
-        intensity * k + color3.b * (1 - k)
-    );
-}
-function saturate(color3 = BABYLON.Color3.White(), k) {
-    let intensity = 0.3 * color3.r + 0.59 * color3.g + 0.11 * color3.b;
-    return new BABYLON.Color3(
-        -intensity * k + color3.r * (1 + k),
-        -intensity * k + color3.g * (1 + k),
-        -intensity * k + color3.b * (1 + k)
-    );
-}
 function lighten(color3 = BABYLON.Color3.White(), k) {
     let result = BABYLON.Color3.White().clone();
     color3

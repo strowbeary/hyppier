@@ -2,7 +2,6 @@ import {observer} from "mobx-react";
 import React, {Component} from "react";
 import "./_message.scss";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
-import SpaceBar from "../spacebar/Spacebar";
 import {SoundManagerInstance} from "../GameCanvas/SoundManager";
 
 const Message = observer(class Message extends Component {

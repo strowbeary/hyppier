@@ -2,7 +2,6 @@ import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import Message from "../message/Message";
@@ -50,10 +49,11 @@ export default observer(class GameCanvas extends React.Component {
                 {GameStore.attic.isGameLost() && GameStore.gameEnded &&
                     <BadEndScreen/>
                 }
-                {this.state.ready &&
+                {(this.state.ready &&
                 GameStore.hype.isGameWon() &&
-                GameStore.gameEnded &&
-                    <GoodEndScreen soundManager={this.sceneManager.soundManager}/>
+                GameStore.gameEnded) ||
+                (GameStore.gameEnded && !GameStore.attic.isGameLost()&&
+                    <GoodEndScreen soundManager={this.sceneManager.soundManager}/>)
                 }
                 <canvas
                     style={{

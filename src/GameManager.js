@@ -89,6 +89,7 @@ class GameManager {
             }
             const finishedObjectKind = CatalogStore.getAllObjectKind()
                 .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
             if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
                 this.pauseGame();
                 GameStore.setGameEnded(true);
@@ -113,6 +114,7 @@ class GameManager {
             }
             const finishedObjectKind = CatalogStore.getAllObjectKind()
                 .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
             if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
                 this.pauseGame();
                 GameStore.setGameEnded(true);

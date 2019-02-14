@@ -139,7 +139,7 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                                             })
                                         }}>
                                         <a href={info.link} target="_blank" rel="noopener noreferrer">
-                                            <img alt="photo de l'objet" src={info.imgUrl}/>
+                                            <img alt={"photo de l'objet " + i} src={info.imgUrl}/>
                                         </a>
                                     </div>
                             ));
