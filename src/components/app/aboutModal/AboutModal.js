@@ -23,7 +23,7 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     openModal() {
-        if(!GameStore.options.isPaused) {
+        if (!GameStore.options.isPaused) {
             this.gameManager.pauseGame();
         }
         this.setState({
@@ -32,7 +32,7 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     closeModal() {
-        if(!CatalogStore.isOpen && !GameStore.attic.atticVisible) {
+        if (!CatalogStore.isOpen && !GameStore.attic.atticVisible) {
             this.gameManager.playGame();
         }
         this.setState({
@@ -62,13 +62,16 @@ const AboutModal = observer(class AboutModal extends Component {
                                 <div className={"aboutModal__textBlock"}>
                                     <div>
                                         <p>
-                                            Hyppier! (fusion de hype et happier), c'est la fabuleuse histoire du consumérisme à
+                                            Hyppier! (fusion de hype et happier), c'est la fabuleuse histoire du
+                                            consumérisme à
                                             l’ère 2.0, où la fast-fashion fait déborder nos armoires, où l’obsolescence
-                                            programmée dézingue nos appareils électroménagers et où les pop-ups par milliers nous poussent
+                                            programmée dézingue nos appareils électroménagers et où les pop-ups par
+                                            milliers nous poussent
                                             à une frénésie d’achat incontrôlée.
                                         </p>
                                         <p>
-                                            Bref, l’histoire d’une époque caricaturée à l’extrême où l’épanouissement personnel
+                                            Bref, l’histoire d’une époque caricaturée à l’extrême où l’épanouissement
+                                            personnel
                                             est à portée de clics sur un panier.
                                         </p>
                                     </div>
@@ -86,28 +89,34 @@ const AboutModal = observer(class AboutModal extends Component {
                                 </div>
                                 <ul className={"aboutModal__team"}>
                                     <li>
-                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                           rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                           rel="noopener noreferrer">
                                             <p>Xindi</p>
                                             <p>YANG</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://camillerostoucher.com" target="_blank" rel="noopener noreferrer">
+                                        <a href="http://camillerostoucher.com" target="_blank"
+                                           rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href="http://camillerostoucher.com" target="_blank" rel="noopener noreferrer">
+                                        <a href="http://camillerostoucher.com" target="_blank"
+                                           rel="noopener noreferrer">
                                             <p>Camille</p>
                                             <p>ROSTOUCHER</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                           rel="noopener noreferrer">
                                             PIPO
                                         </a>
-                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                           rel="noopener noreferrer">
                                             <p>Mélanie</p>
                                             <p>NGO</p>
                                         </a>
@@ -122,8 +131,37 @@ const AboutModal = observer(class AboutModal extends Component {
                                         </a>
                                     </li>
                                 </ul>
+                                <div className={"aboutModal__sounds"}>
+                                    <p>Credits sons</p>
+                                    <span>Musique - </span>
+                                    <a href="https://soundcloud.com/therewillbenosadness" rel="noopener noreferrer"
+                                       target="_blank" className={"aboutModal__openButton"}>
+                                        There will be no sadness
+                                    </a>
+                                    <br/>
+                                    <span>Bruitage - </span>
+                                    <a href="https://freesound.org/people/sandyrb/sounds/95078/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        sandyrb
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/FunWithSound/sounds/456965/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        FunWithSound
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/bennstir/sounds/81071/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        benstir
+                                    </a>
+
+                                </div>
                                 <div className={"aboutModal__thanks"}>
-                                    <p>Merci à l'équipe pédagogique de Gobelins, l'école de l'image, pour ses conseils éclairés tout au long du projet</p>
+                                    <p>Merci à l'équipe pédagogique de Gobelins, l'école de l'image, pour ses conseils
+                                        éclairés tout au long du projet</p>
                                     <div className={"aboutModal__logos"}>
                                         <div>
                                             <img src={gobelins} alt={"gobelins"}/>
@@ -139,13 +177,12 @@ const AboutModal = observer(class AboutModal extends Component {
                             </div>
                         </div>
                         <div className={"aboutModal__footer"}>
-                            <a href="https://soundcloud.com/therewillbenosadness" rel="noopener noreferrer" target="_blank" className={"aboutModal__openButton"}>
-                                Credits musique : There will be no sadness
+                            <a href="https://www.instagram.com/hyppier/" rel="noopener noreferrer" target="_blank">
+                                <button>
+                                    <img src={instagram} alt="instagram"/>
+                                    <img src={instagramHover} alt="instagramHover"/>
+                                </button>
                             </a>
-                            <button>
-                                <img src={instagram} alt="instagram"/>
-                                <img src={instagramHover} alt="instagramHover"/>
-                            </button>
                             <button>
                                 <img src={video} alt="video"/>
                                 <img src={videoHover} alt="videoHover"/>

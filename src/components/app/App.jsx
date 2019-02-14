@@ -12,7 +12,6 @@ import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
 import TutoStore from "../../stores/TutoStore/TutoStore";
 import pauseSvg from "../../assets/img/pause.svg";
-import GoodEndScreen from "./goodEndScreen/GoodEndScreen";
 
 const App = observer(class App extends Component {
 

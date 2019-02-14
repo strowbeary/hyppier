@@ -3,9 +3,6 @@ import React, {Component} from "react";
 import "./_startScreen.scss";
 import SpaceBar from "../spacebar/Spacebar";
 
-import objects from "../../../assets/img/objects.png";
-import objectsBlurred from "../../../assets/img/objects-blurred.png";
-
 const StartScreen = observer(class StartScreen extends Component {
     state = {
         x: 0

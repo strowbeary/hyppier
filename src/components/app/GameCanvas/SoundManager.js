@@ -11,7 +11,6 @@ import nock from "../../../assets/sounds/nock.wav";
 import SFXCrack from "../../../assets/sounds/SFX-Crack.wav";
 import SFXCrash from "../../../assets/sounds/SFX-Crash.wav";
 import SFXPositive from "../../../assets/sounds/SFX-Positive.mp3";
-import SFXPositive2 from "../../../assets/sounds/SFX-Positive-2.wav";
 
 let SoundManagerInstance;
 

@@ -8,7 +8,6 @@ import {AtticManager} from "./AtticManager";
 import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
