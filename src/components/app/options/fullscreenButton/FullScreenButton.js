@@ -6,10 +6,6 @@ import fullscreen from "../../../../assets/img/fullscreen.svg";
 import fullscreenHover from "../../../../assets/img/fullscreen-hover.svg";
 import fullscreenClose from "../../../../assets/img/fullscreen-close.svg";
 import fullscreenCloseHover from "../../../../assets/img/fullscreen-close-hover.svg";
-import soundON from "../../../../assets/img/soundON.svg";
-import soundONHover from "../../../../assets/img/soundON-hover.svg";
-import soundOFF from "../../../../assets/img/soundOFF.svg";
-import soundOFFHover from "../../../../assets/img/soundOFF-hover.svg";
 
 const FullScreenButton = observer(class FullScreenButton extends Component {
 
