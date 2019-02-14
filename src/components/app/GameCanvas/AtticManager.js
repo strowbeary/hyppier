@@ -7,21 +7,14 @@ import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
 import {GameManagerInstance} from "../../../GameManager";
 
 export class AtticManager {
-    constructor(scene, particleSystem, soundManager) {
+    constructor(scene, soundManager) {
         this.scene = scene;
-        this.particleSystem = particleSystem;
         this.soundManager = soundManager;
     }
 
     launchLadderFall() {
         this.ladder.unfreezeWorldMatrix();
         BABYLON.Animation.CreateAndStartAnimation('ladderFall', this.ladder, 'position.y', 30, 30, 10, this.originalPosition, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT, null, () => {
-            let spriteManagerDust = new BABYLON.SpriteManager("treesManager", "/img/Pipo-Idle.png", 1, 256, this.scene);
-            spriteManagerDust.renderingGroupId = 1;
-            let dust = new BABYLON.Sprite("dust", spriteManagerDust);
-            dust.position = new BABYLON.Vector3(this.ladder.position.x, this.originalPosition, this.ladder.position.z);
-            dust.disposeWhenFinishedAnimating = true;
-            dust.playAnimation(0, 100, false, 5);
             this.ladder.freezeWorldMatrix();
             this.boxLadder = BABYLON.MeshBuilder.CreateBox("box", {
                 height: this.ladder.getBoundingInfo().boundingBox.extendSize.y * 2,
@@ -163,8 +156,8 @@ export class AtticManager {
         GameStore.attic.incrementParcelsNumberOf(objectKindType);
         instance.setEnabled(true);
         this.scene.addMesh(instance);
-        this.particleSystem.start();
         this.soundManager.dropParcel.play();
+        this.soundManager.atticCrack.play();
     }
 
     fall() {
@@ -174,5 +167,6 @@ export class AtticManager {
             }
         });
         this.ground.position.y = this.scene.getMeshByName("Room").getBoundingInfo().boundingBox.minimumWorld.y;
+        this.soundManager.atticCrash.play();
     }
 }
