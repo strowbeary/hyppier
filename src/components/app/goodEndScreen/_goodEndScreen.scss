@@ -45,6 +45,24 @@
   }
 }
 
+@keyframes playXNo {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(1792px/1.6);
+  }
+}
+
+@keyframes playYNo {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(2880px/1.6);
+  }
+}
+
 article.goodEndScreen {
   position: fixed;
   left: 0;
