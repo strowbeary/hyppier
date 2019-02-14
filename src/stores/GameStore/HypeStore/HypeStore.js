@@ -7,6 +7,15 @@ export default types.model("HypeStore", {
         setLevelByDiff(diff) {
             if (self.level + diff <= 1 && self.level + diff >= 0) {
                 self.level += diff;
+            } else if (self.level + diff < 0) {
+                self.level = 0;
+            } else if (self.level + diff > 1) {
+                self.level = 1;
             }
         }
     }))
+    .views(self => ({
+        isGameWon() {
+            return self.level === 0;
+        }
+    }));

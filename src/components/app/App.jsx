@@ -41,7 +41,7 @@ const App = observer(class App extends Component {
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
-        let badEnding = GameStore.attic.isGameOver()? 'badEnding': '';
+        let badEnding = GameStore.attic.isGameLost()? 'badEnding': '';
         let pipoMood = "";
         if (GameStore.pipo === 'happy') {
             pipoMood = "happy";
@@ -80,7 +80,7 @@ const App = observer(class App extends Component {
                     </CSSTransitionGroup>
                 </div>
                 {
-                    TutoStore.end &&
+                    TutoStore.end && !GameStore.gameEnded &&
                     <ToastWrapper/>
                 }
                 <CSSTransitionGroup

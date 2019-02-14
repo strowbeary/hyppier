@@ -56,7 +56,7 @@ class GameManager {
 
         this.playGame();
 
-        if (GameStore.attic.isGameOver()) {
+        if (GameStore.attic.isGameLost()) {
             this.atticManager.fall();
             setTimeout(() => {
                 this.pauseGame();
@@ -80,12 +80,16 @@ class GameManager {
         } else {
             this.playGame();
             this.objectKindType = null;
-            if (GameStore.attic.isGameOver()) {
+            if (GameStore.attic.isGameLost()) {
                 this.atticManager.fall();
                 setTimeout(() => {
                     this.pauseGame();
                     GameStore.setGameEnded(true);
                 }, 3500);
+            }
+            if(GameStore.hype.isGameWon()) {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
             }
         }
     }
@@ -98,8 +102,16 @@ class GameManager {
                 this.pauseGame();
             }
         } else if (!GameStore.options.isPaused) { //replacement in Popup
-            if (GameStore.attic.isGameOver()) {
+            if (GameStore.attic.isGameLost()) {
                 this.atticManager.fall();
+                setTimeout(() => {
+                    this.pauseGame();
+                    GameStore.setGameEnded(true);
+                }, 3500);
+            }
+            if(GameStore.hype.isGameWon()) {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
             }
         }
     }

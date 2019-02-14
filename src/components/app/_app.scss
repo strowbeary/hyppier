@@ -89,7 +89,7 @@ button, a {
 #app {
   position: relative;
   background-color: $yellow;
-  //transition: all 1s;
+  transition: background 1s;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -122,7 +122,7 @@ button, a {
     height: 1px;
     transform-origin: center;
     transform: scale(0);
-    transition: transform 1s ease-in, background 1s ease-in;
+    transition: transform 0.5s ease-in, background 0.5s ease-in;
     border-radius: 50%;
     background: $yellow;
   }
@@ -130,6 +130,7 @@ button, a {
   &.happy {
     &:before {
       background: $green;
+      border-radius: 50%;
       transform: scale(5000);
     }
   }
@@ -138,6 +139,7 @@ button, a {
     &:before {
       background: $red;
       transform: scale(5000);
+      border-radius: 50%;
     }
 
   }

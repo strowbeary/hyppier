@@ -30,7 +30,7 @@ export default types.model("AtticStore", {
                 }
             }
         },
-        isGameOver() {
+        isGameLost() {
             return (self.electric.parcelsNumber + self.furniture.parcelsNumber + self.mobility.parcelsNumber) >= self.parcelsNumberLimit;
         }
     })

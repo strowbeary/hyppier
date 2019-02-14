@@ -11,6 +11,7 @@ import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import SoundButton from "../options/soundButton/SoundButton";
 import GoodEndScreen from "../goodEndScreen/GoodEndScreen";
 import GameStore from "../../../stores/GameStore/GameStore";
+import BadEndScreen from "../badEndScreen/BadEndScreen";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -41,10 +42,15 @@ export default observer(class GameCanvas extends React.Component {
     }
 
     render() {
-
+        if(GameStore.attic.isGameLost() || GameStore.hype.isGameWon()) {
+            this.sceneManager.soundManager.music.pause();
+        }
         return (
             <React.Fragment>
-                {this.state.ready && GameStore.gameEnded &&
+                {GameStore.attic.isGameLost() &&
+                    <BadEndScreen/>
+                }
+                {this.state.ready && GameStore.hype.isGameWon() &&
                     <GoodEndScreen soundManager={this.sceneManager.soundManager}/>
                 }
                 <canvas
@@ -54,13 +60,6 @@ export default observer(class GameCanvas extends React.Component {
                     }}
                     ref={(canvas) => this.canvas = canvas}
                 />
-                <div style={{
-                    position: "fixed",
-                    top: 10,
-                    left: 10
-                }}>
-                    <button onClick={() => this.sceneManager.atticManager.fall()}>Attic down</button>
-                </div>
                 {(() => {
                     if (this.state.ready) {
                         return CatalogStore
@@ -76,14 +75,14 @@ export default observer(class GameCanvas extends React.Component {
                     }
                 })()}
                 {TutoStore.displayTip() && !CatalogStore.isOpen &&
-                <Message message={TutoStore.getCurrentMessage()}/>
+                    <Message message={TutoStore.getCurrentMessage()}/>
                 }
                 {this.state.ready &&
-                <div className={"game__footer"}>
-                    <AboutModal gameManager={this.sceneManager.gameManager}/>
-                    <SoundButton soundManager={this.sceneManager.soundManager}/>
-                    <FullScreenButton/>
-                </div>
+                    <div className={"game__footer"}>
+                        <AboutModal gameManager={this.sceneManager.gameManager}/>
+                        <SoundButton soundManager={this.sceneManager.soundManager}/>
+                        <FullScreenButton/>
+                    </div>
                 }
             </React.Fragment>
         );
