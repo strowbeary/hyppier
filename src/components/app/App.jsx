@@ -45,6 +45,7 @@ const App = observer(class App extends Component {
         let pipoMood = "";
         if (GameStore.pipo === 'happy') {
             pipoMood = "happy";
+            this.state.sceneManager && this.state.sceneManager.soundManager.positiveFeedback.play();
             setTimeout(() => this.resetPipo(), 2970);
         }
         if (GameStore.pipo === 'angry') {
