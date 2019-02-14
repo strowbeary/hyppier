@@ -27,8 +27,8 @@ class SoundManager {
         this.ladderDrop = new BABYLON.Sound("LadderDrop", SFXLadderdrop, this.scene, null, {volume: 0.2});
         this.notifAppear = new BABYLON.Sound("NotifAppear", SFXNotif, this.scene, null, {volume: 0.5});
         this.toastAppear = new BABYLON.Sound("ToastAppear", SFXToast, this.scene, null, {volume: 0.5});
-        this.objectTileAppear = new BABYLON.Sound("nock1", nock, this.scene, null, {volume: 0.6});
-        this.atticCrack = new BABYLON.Sound("AtticCrack", SFXCrack, this.scene, null, {volume: 1});
+        this.objectTileAppear = new BABYLON.Sound("nock1", nock, this.scene, null, {volume: 0.5});
+        this.atticCrack = new BABYLON.Sound("AtticCrack", SFXCrack, this.scene, null, {volume: 0.4});
         this.atticCrash = new BABYLON.Sound("AtticCrash", SFXCrash, this.scene, null, {volume: 0.1});
         this.positiveFeedback = new BABYLON.Sound("SFXPositive", SFXPositive, this.scene, null, {volume: 0.1});
         SoundManagerInstance = this;

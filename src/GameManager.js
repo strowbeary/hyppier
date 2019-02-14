@@ -87,7 +87,9 @@ class GameManager {
                     GameStore.setGameEnded(true);
                 }, 3500);
             }
-            if(GameStore.hype.isGameWon()) {
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
                 this.pauseGame();
                 GameStore.setGameEnded(true);
             }
@@ -109,7 +111,9 @@ class GameManager {
                     GameStore.setGameEnded(true);
                 }, 3500);
             }
-            if(GameStore.hype.isGameWon()) {
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
                 this.pauseGame();
                 GameStore.setGameEnded(true);
             }

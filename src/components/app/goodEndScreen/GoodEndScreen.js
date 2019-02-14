@@ -128,9 +128,6 @@ const GoodEndScreen = observer(class GoodEndScreen extends Component {
                                     <div
                                         key={i}
                                         className={"gridItem " + (this.state.pageOneVisited ? 'appear' : '')}
-                                        onTransitionEnd={() => {
-                                            this.props.soundManager.objectTileAppear.play();
-                                        }}
                                         style={{
                                             animationDelay: 300 + 90 * i + "ms"
                                         }}
