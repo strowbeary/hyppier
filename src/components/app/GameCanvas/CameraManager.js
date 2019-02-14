@@ -62,7 +62,7 @@ export class CameraManager {
 
     createAnimations(toPosition) {
         const Easing = new BABYLON.CubicEase();
-        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN);
+        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
         this.camera.animations = [];
         let animationTarget = new BABYLON.Animation(
             "target",
