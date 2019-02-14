@@ -12,6 +12,10 @@ import video from "../../../assets/img/video.svg";
 import videoHover from "../../../assets/img/video-hover.svg";
 import close from "../../../assets/img/close.svg";
 import closeHover from "../../../assets/img/close-hover.svg";
+import Camille from "../../../assets/img/Pipo-Mean.png";
+import Melanie from "../../../assets/img/Pipo-Jaded.png";
+import Remi from "../../../assets/img/Pipo-Smiling.png";
+import Xindi from "../../../assets/img/Pipo-Happy.png";
 
 const AboutModal = observer(class AboutModal extends Component {
 
@@ -58,6 +62,48 @@ const AboutModal = observer(class AboutModal extends Component {
                         </button>
                         <div className={"aboutModal__wrapper"}>
                             <h2 className={"aboutModal__title"}>About Hyppier!</h2>
+                            <ul className={"aboutModal__team"}>
+                                <li>
+                                    <a href="http://camillerostoucher.com" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Camille} alt="mean Pipo"/>
+                                    </a>
+                                    <a href="http://camillerostoucher.com" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Camille ROSTOUCHER</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Xindi} alt="happy Pipo"/>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Xindi YANG</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://remicaillot.fr/" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Remi} alt="smiling Pipo"/>
+                                    </a>
+                                    <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer"
+                                       className={"aboutModal__openButton"}>
+                                        <p>Rémi CAILLOT</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Melanie} alt="jaded Pipo"/>
+                                    </a>
+                                    <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Mélanie NGO</p>
+                                    </a>
+                                </li>
+                            </ul>
                             <div className={"aboutModal__textWrapper"}>
                                 <div className={"aboutModal__textBlock"}>
                                     <div>
@@ -87,52 +133,7 @@ const AboutModal = observer(class AboutModal extends Component {
                                         </p>
                                     </div>
                                 </div>
-                                <ul className={"aboutModal__team"}>
-                                    <li>
-                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
-                                           rel="noopener noreferrer">
-                                            PIPO
-                                        </a>
-                                        <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
-                                           rel="noopener noreferrer">
-                                            <p>Xindi</p>
-                                            <p>YANG</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://camillerostoucher.com" target="_blank"
-                                           rel="noopener noreferrer">
-                                            PIPO
-                                        </a>
-                                        <a href="http://camillerostoucher.com" target="_blank"
-                                           rel="noopener noreferrer">
-                                            <p>Camille</p>
-                                            <p>ROSTOUCHER</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
-                                           rel="noopener noreferrer">
-                                            PIPO
-                                        </a>
-                                        <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
-                                           rel="noopener noreferrer">
-                                            <p>Mélanie</p>
-                                            <p>NGO</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer">
-                                            PIPO
-                                        </a>
-                                        <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer">
-                                            <p>Rémi</p>
-                                            <p>CAILLOT</p>
-                                        </a>
-                                    </li>
-                                </ul>
                                 <div className={"aboutModal__sounds"}>
-                                    <p>Credits sons</p>
                                     <span>Musique - </span>
                                     <a href="https://soundcloud.com/therewillbenosadness" rel="noopener noreferrer"
                                        target="_blank" className={"aboutModal__openButton"}>
@@ -157,10 +158,40 @@ const AboutModal = observer(class AboutModal extends Component {
                                        className={"aboutModal__openButton"}>
                                         benstir
                                     </a>
-
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/gusgus26/sounds/415089/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        gusgus26
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/zzwerty/sounds/315878/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        zzwerty
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/newagesoup/sounds/339360/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        newagesoup
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/plasterbrain/sounds/423166/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        plasterbrain
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/kila_vat/sounds/434379/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        kila_vat
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/Stereo%20Surgeon/sounds/261205/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        Stereo Surgeon
+                                    </a>
                                 </div>
                                 <div className={"aboutModal__thanks"}>
-                                    <p>Merci à l'équipe pédagogique de Gobelins, l'école de l'image, pour ses conseils
+                                    <p>Merci à l'équipe pédagogique de <a href="https://www.gobelins.fr/" className={"aboutModal__openButton"} rel="noopener noreferrer" target="_blank">Gobelins, l'école de l'image</a>, pour ses conseils
                                         éclairés tout au long du projet</p>
                                     <div className={"aboutModal__logos"}>
                                         <div>

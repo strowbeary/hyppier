@@ -1,6 +1,7 @@
 @import "../../../variables";
 
 .aboutModal {
+  cursor: url($default-cursor-url) default;
 
   &__openButton {
     font-size: 1.2rem;
@@ -53,8 +54,11 @@
   }
 
   &__team {
+    position: absolute;
+    left: 3rem;
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, auto);
     grid-gap: 1rem;
     list-style-type: none;
     margin: 1rem 0 0;
@@ -68,6 +72,11 @@
       a {
         color: white;
         text-decoration: none;
+        font-size: 1rem;
+
+        >img {
+          width: 100px;
+        }
       }
     }
   }
@@ -110,6 +119,12 @@
 
   &__thanks {
     margin-top: 3rem;
+
+    .aboutModal__openButton {
+      text-transform: none;
+      font-size: 1.5rem;
+      letter-spacing: 0;
+    }
   }
 
   &__logos {
