@@ -1,7 +1,7 @@
 export function bubbleWorker() {
     let bubbles = [];
     const delta_point = 10;
-    const globalHeight = 55;
+    const globalHeight = 75;
     const bubbleNumber = 20;
     for(let i = 0; i < bubbleNumber; i++) {
         let speed = Math.random();

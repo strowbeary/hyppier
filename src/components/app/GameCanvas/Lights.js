@@ -10,7 +10,7 @@ export class Lights{
             70,
             0,
             scene);
-        light.intensity = 0.3;
+        light.intensity = 0.4;
 
         const light2 = new BABYLON.DirectionalLight(
             "Light2",

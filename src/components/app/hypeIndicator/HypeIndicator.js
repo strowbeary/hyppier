@@ -73,7 +73,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
                         }} onTransitionEnd={(e) => this.onTransitionEnd(e)}>
                             <div className="wave"/>
                         </div>
-                        <svg viewBox="0 0 10 50" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 10 75" xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <path
                                     d={this.state.bubblePath}
