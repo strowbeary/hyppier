@@ -8,7 +8,6 @@ import {AtticManager} from "./AtticManager";
 import {GameManager} from "../../../GameManager";
 import GameStore from "../../../stores/GameStore/GameStore";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import flare from "../../../assets/img/flare.png";
 import * as cannon from "cannon";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
@@ -27,24 +26,10 @@ export class SceneManager {
         this.scene = new BABYLON.Scene(this.engine);
         this.cameraManager = new CameraManager(this.scene);
         this.camera = this.cameraManager.camera;
-        this.camera.attachControl(canvas);
+        // this.camera.attachControl(canvas);
         const lights = new Lights();
         lights.init(this.scene);
         this.scene.shadowsEnabled = true;
-
-        const particleSystem = new BABYLON.ParticleSystem("particles", 1000, this.scene);
-        particleSystem.particleTexture = new BABYLON.Texture(flare, this.scene);
-        particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0);
-        particleSystem.emitter = new BABYLON.Vector3(0, 3, 0);
-        particleSystem.minSize = 0.05;
-        particleSystem.maxSize = 0.1;
-        particleSystem.minEmitBox = new BABYLON.Vector3(-0.1, 0, 0);
-        particleSystem.maxEmitBox = new BABYLON.Vector3(0.1, 0, 0);
-        particleSystem.emitRate = 100;
-        particleSystem.minLifeTime = 0.1;
-        particleSystem.maxLifeTime = 0.75;
-        particleSystem.disposeOnStop = false;
-        particleSystem.targetStopDuration = 2;
 
         const defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene, [this.camera]);
         defaultPipeline.samples = 4;
@@ -52,31 +37,34 @@ export class SceneManager {
         defaultPipeline.imageProcessingEnabled = true;
 
         this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-        const ambient = 1;
+        const ambient = 0.7;
         this.scene.ambientColor = new BABYLON.Color3(ambient, ambient, ambient);
         this.scene.blockMaterialDirtyMechanism = true;
         this.scene.useGeometryIdsMap = true;
         this.scene.useMaterialMeshMap = true;
         this.scene.useClonedMeshMap = true;
 
+
         this.scene.enablePhysics(null);
 
         this.soundManager = new SoundManager(this.scene);
-        this.atticManager = new AtticManager(this.scene, particleSystem, this.soundManager);
+        this.atticManager = new AtticManager(this.scene, this.soundManager);
         this.gameManager = new GameManager(this.scene, this.atticManager);
         this.meshManager = new MeshManager(this.scene, lights, this.gameManager);
         this.cameraManager.onOriginTargeted(() => {
             if (typeof this.gameManager.objectKindType !== 'undefined' &&
                 this.gameManager.objectKindType !== null) {
-                TutoStore.reportAction("Attic", "appear");
                 if (GameStore.attic.shouldLaunchClueEvent(this.gameManager.objectKindType)) {
                     this.gameManager.clueEvent = this.gameManager.objectKindType;
                 }
+                if (TutoStore.currentMessage === 4 && !TutoStore.end) {
+                    this.atticManager.launchLadderFall();
+                }
             }
             if (TutoStore.currentMessage === 2 && GameStore.hype.level > 0.5) {
-                TutoStore.reportAction("Notification", "appear");
+                TutoStore.reportAction("FirstObject", "appear");
             }
-            if (TutoStore.currentMessage !== 4 || TutoStore.end) {
+            if (TutoStore.currentMessage !== 5 || TutoStore.end) {
                 this.gameManager.playAfterCatalog();
             }
         });
@@ -86,19 +74,19 @@ export class SceneManager {
                 GameWatcher
                     .onUpdate((newMesh, oldMesh, objectKindType) => {
                         if (objectKindType) {
-                            if (oldMesh !== null) {
+                            if (oldMesh !== null) { //je remplace un objet
                                 oldMesh.clones.forEach(clone => {
                                     this.atticManager.createParcel(oldMesh.mesh, objectKindType);
                                 });
                                 this.atticManager.createParcel(oldMesh.mesh, objectKindType);
-                                if (!CatalogStore.isOpen) {
-                                    TutoStore.reportAction("Attic", "appear");
+                                if (!CatalogStore.isOpen) { //si j'ai remplacé dans la popup
                                     if (TutoStore.currentMessage === 4 && !TutoStore.end) {
                                         this.gameManager.pauseGame();
+                                        this.atticManager.launchLadderFall();
                                     } else if (GameStore.attic.shouldLaunchClueEvent(objectKindType)) {
                                         this.gameManager.clueEvent = objectKindType;
                                     }
-                                } else {
+                                } else { //j'ajoute un objet
                                     this.gameManager.objectKindType = objectKindType;
                                     this.gameManager.objectKindName = oldMesh.objectKindName;
                                 }

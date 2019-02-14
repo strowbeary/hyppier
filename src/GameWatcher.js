@@ -2,7 +2,6 @@ import CatalogStore from "./stores/CatalogStore/CatalogStore";
 import {onPatch} from "mobx-state-tree";
 import CameraStore from "./stores/CameraStore/CameraStore";
 import {CameraManager} from "./components/app/GameCanvas/CameraManager";
-import ObjectKindUI from "./components/app/objectKindUI/ObjectKindUI";
 
 export class GameWatcher {
 
@@ -47,10 +46,7 @@ export class GameWatcher {
                                 const lambdaMesh = objectKind.objects[objectKind.location.previewObjectId].getModel();
                                 lambdaMesh.mesh.position = objectKind.location.toVector3();
                                 GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh, null));
-                                CameraStore.setTarget(
-                                    lambdaMesh.mesh.name,
-                                    CameraManager.CATALOG_OFFSET
-                                );
+                                CameraStore.setTarget(lambdaMesh.mesh.name);
 
                             } else {
                                 const lambdaMesh = objectKind.objects[oldPreviewObjectId].getModel();

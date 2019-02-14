@@ -7,7 +7,6 @@
   padding: $vertical-space $horizontal-space;
   text-align: left;
   display: grid;
-  border: solid 1px $light-grey;
   grid-column-gap: $horizontal-space;
   grid-row-gap: $vertical-space;
   grid-template-columns: min-content min-content;
@@ -16,9 +15,10 @@
           "buttonClose buttonCatalog";
   transition: transform 300ms ease-in-out;
   cursor: url($drag-and-drop-cursor), default;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   &.focus {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   }
 
   &.hide {
@@ -28,7 +28,6 @@
   &__image {
     width: 100%;
     grid-area: image;
-    cursor: url($default-cursor-url-levelDown), default;
   }
 
   &__footer {
@@ -58,11 +57,11 @@
       color: white;
 
       animation: shadow-pulse 1s infinite;
-      transition: transform 300ms ease-in-out;
+      transition: background-color 300ms;
 
       &:hover {
-        transform: scale(1.1);
-        animation-duration: 0s;
+        background-color: $green;
+        animation: shadow-pulse-hover 1s infinite;
       }
     }
   }

@@ -12,6 +12,10 @@ import video from "../../../assets/img/video.svg";
 import videoHover from "../../../assets/img/video-hover.svg";
 import close from "../../../assets/img/close.svg";
 import closeHover from "../../../assets/img/close-hover.svg";
+import Camille from "../../../assets/img/Pipo-Mean.png";
+import Melanie from "../../../assets/img/Pipo-Jaded.png";
+import Remi from "../../../assets/img/Pipo-Smiling.png";
+import Xindi from "../../../assets/img/Pipo-Happy.png";
 
 const AboutModal = observer(class AboutModal extends Component {
 
@@ -23,7 +27,7 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     openModal() {
-        if(!GameStore.options.isPaused) {
+        if (!GameStore.options.isPaused) {
             this.gameManager.pauseGame();
         }
         this.setState({
@@ -32,7 +36,7 @@ const AboutModal = observer(class AboutModal extends Component {
     }
 
     closeModal() {
-        if(!CatalogStore.isOpen && !GameStore.attic.atticVisible) {
+        if (!CatalogStore.isOpen && !GameStore.attic.atticVisible) {
             this.gameManager.playGame();
         }
         this.setState({
@@ -58,17 +62,62 @@ const AboutModal = observer(class AboutModal extends Component {
                         </button>
                         <div className={"aboutModal__wrapper"}>
                             <h2 className={"aboutModal__title"}>About Hyppier!</h2>
+                            <ul className={"aboutModal__team"}>
+                                <li>
+                                    <a href="http://camillerostoucher.com" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Camille} alt="mean Pipo"/>
+                                    </a>
+                                    <a href="http://camillerostoucher.com" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Camille ROSTOUCHER</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Xindi} alt="happy Pipo"/>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/xindi-yang-55a316a1" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Xindi YANG</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://remicaillot.fr/" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Remi} alt="smiling Pipo"/>
+                                    </a>
+                                    <a href="https://remicaillot.fr/" target="_blank" rel="noopener noreferrer"
+                                       className={"aboutModal__openButton"}>
+                                        <p>Rémi CAILLOT</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                       rel="noopener noreferrer">
+                                        <img src={Melanie} alt="jaded Pipo"/>
+                                    </a>
+                                    <a href="https://fr.linkedin.com/in/m%C3%A9lanie-ngo-661520118" target="_blank"
+                                       rel="noopener noreferrer" className={"aboutModal__openButton"}>
+                                        <p>Mélanie NGO</p>
+                                    </a>
+                                </li>
+                            </ul>
                             <div className={"aboutModal__textWrapper"}>
                                 <div className={"aboutModal__textBlock"}>
                                     <div>
                                         <p>
-                                            Hyppier! (fusion de hype et happier), c'est la fabuleuse histoire du consumérisme à
+                                            Hyppier! (fusion de hype et happier), c'est la fabuleuse histoire du
+                                            consumérisme à
                                             l’ère 2.0, où la fast-fashion fait déborder nos armoires, où l’obsolescence
-                                            programmée dézingue nos appareils électroménagers et où les pop-ups par milliers nous poussent
+                                            programmée dézingue nos appareils électroménagers et où les pop-ups par
+                                            milliers nous poussent
                                             à une frénésie d’achat incontrôlée.
                                         </p>
                                         <p>
-                                            Bref, l’histoire d’une époque caricaturée à l’extrême où l’épanouissement personnel
+                                            Bref, l’histoire d’une époque caricaturée à l’extrême où l’épanouissement
+                                            personnel
                                             est à portée de clics sur un panier.
                                         </p>
                                     </div>
@@ -84,46 +133,66 @@ const AboutModal = observer(class AboutModal extends Component {
                                         </p>
                                     </div>
                                 </div>
-                                <ul className={"aboutModal__team"}>
-                                    <li>
-                                        <a href={""} target={"_blank"}>
-                                            PIPO
-                                        </a>
-                                        <a href={""} target={"_blank"}>
-                                            <p>Xindi</p>
-                                            <p>YANG</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href={""} target={"_blank"}>
-                                            PIPO
-                                        </a>
-                                        <a href={""} target={"_blank"}>
-                                            <p>Camille</p>
-                                            <p>ROSTOUCHER</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href={""} target={"_blank"}>
-                                            PIPO
-                                        </a>
-                                        <a href={""} target={"_blank"}>
-                                            <p>Mélanie</p>
-                                            <p>NGO</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href={""} target={"_blank"}>
-                                            PIPO
-                                        </a>
-                                        <a href={""} target={"_blank"}>
-                                            <p>Rémi</p>
-                                            <p>CAILLOT</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div className={"aboutModal__sounds"}>
+                                    <span>Musique - </span>
+                                    <a href="https://soundcloud.com/therewillbenosadness" rel="noopener noreferrer"
+                                       target="_blank" className={"aboutModal__openButton"}>
+                                        There will be no sadness
+                                    </a>
+                                    <br/>
+                                    <span>Bruitage - </span>
+                                    <a href="https://freesound.org/people/sandyrb/sounds/95078/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        sandyrb
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/FunWithSound/sounds/456965/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        FunWithSound
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/bennstir/sounds/81071/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        benstir
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/gusgus26/sounds/415089/"
+                                       rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        gusgus26
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/zzwerty/sounds/315878/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        zzwerty
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/newagesoup/sounds/339360/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        newagesoup
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/plasterbrain/sounds/423166/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        plasterbrain
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/kila_vat/sounds/434379/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        kila_vat
+                                    </a>
+                                    <span> - </span>
+                                    <a href="https://freesound.org/people/Stereo%20Surgeon/sounds/261205/" rel="noopener noreferrer" target="_blank"
+                                       className={"aboutModal__openButton"}>
+                                        Stereo Surgeon
+                                    </a>
+                                </div>
                                 <div className={"aboutModal__thanks"}>
-                                    <p>Merci à l'équipe pédagogique de Gobelins, l'école de l'image, pour ses conseils éclairés tout au long du projet</p>
+                                    <p>Merci à l'équipe pédagogique de <a href="https://www.gobelins.fr/" className={"aboutModal__openButton"} rel="noopener noreferrer" target="_blank">Gobelins, l'école de l'image</a>, pour ses conseils
+                                        éclairés tout au long du projet</p>
                                     <div className={"aboutModal__logos"}>
                                         <div>
                                             <img src={gobelins} alt={"gobelins"}/>
@@ -139,10 +208,12 @@ const AboutModal = observer(class AboutModal extends Component {
                             </div>
                         </div>
                         <div className={"aboutModal__footer"}>
-                            <button>
-                                <img src={instagram} alt="instagram"/>
-                                <img src={instagramHover} alt="instagramHover"/>
-                            </button>
+                            <a href="https://www.instagram.com/hyppier/" rel="noopener noreferrer" target="_blank">
+                                <button>
+                                    <img src={instagram} alt="instagram"/>
+                                    <img src={instagramHover} alt="instagramHover"/>
+                                </button>
+                            </a>
                             <button>
                                 <img src={video} alt="video"/>
                                 <img src={videoHover} alt="videoHover"/>

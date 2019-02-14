@@ -2,13 +2,15 @@ import * as React from "react";
 import {SceneManager} from "./SceneManager";
 import {observer} from "mobx-react";
 import CatalogStore from "../../../stores/CatalogStore/CatalogStore";
-import CameraStore from "../../../stores/CameraStore/CameraStore";
 import ObjectKindUI from "../objectKindUI/ObjectKindUI";
 import TutoStore from "../../../stores/TutoStore/TutoStore";
 import Message from "../message/Message";
 import AboutModal from "../aboutModal/AboutModal";
 import FullScreenButton from "../options/fullscreenButton/FullScreenButton";
 import SoundButton from "../options/soundButton/SoundButton";
+import GoodEndScreen from "../goodEndScreen/GoodEndScreen";
+import GameStore from "../../../stores/GameStore/GameStore";
+import BadEndScreen from "../badEndScreen/BadEndScreen";
 
 export default observer(class GameCanvas extends React.Component {
     sceneManager = null;
@@ -38,15 +40,21 @@ export default observer(class GameCanvas extends React.Component {
         this.sceneManager.cameraManager.updateFrustum();
     }
 
-    launchLadderFall() {
-        this.sceneManager.atticManager.launchLadderFall();
-        this.sceneManager.gameManager.playGame();
-    }
-
     render() {
-
+        if(GameStore.attic.isGameLost() || GameStore.hype.isGameWon()) {
+            this.sceneManager.soundManager.music.pause();
+        }
         return (
             <React.Fragment>
+                {GameStore.attic.isGameLost() && GameStore.gameEnded &&
+                    <BadEndScreen/>
+                }
+                {(this.state.ready &&
+                GameStore.hype.isGameWon() &&
+                GameStore.gameEnded) ||
+                (GameStore.gameEnded && !GameStore.attic.isGameLost()&&
+                    <GoodEndScreen soundManager={this.sceneManager.soundManager}/>)
+                }
                 <canvas
                     style={{
                         width: "100vw",
@@ -54,15 +62,6 @@ export default observer(class GameCanvas extends React.Component {
                     }}
                     ref={(canvas) => this.canvas = canvas}
                 />
-                <div style={{
-                    position: "fixed",
-                    top: 10,
-                    left: 10
-                }}>
-                    <button onClick={() => CameraStore.setTarget("Attic")}>Go to attic</button>
-                    <button onClick={() => CameraStore.setTarget()}>reset target</button>
-                    <button onClick={() => this.sceneManager.atticManager.fall()}>Attic down</button>
-                </div>
                 {(() => {
                     if (this.state.ready) {
                         return CatalogStore
@@ -78,16 +77,13 @@ export default observer(class GameCanvas extends React.Component {
                     }
                 })()}
                 {TutoStore.displayTip() && !CatalogStore.isOpen &&
-                <Message message={TutoStore.getCurrentMessage()}
-                         launchLadderFall={() => {
-                             this.launchLadderFall()
-                         }}/>
+                    <Message message={TutoStore.getCurrentMessage()}/>
                 }
                 {this.state.ready &&
                     <div className={"game__footer"}>
                         <AboutModal gameManager={this.sceneManager.gameManager}/>
                         <SoundButton soundManager={this.sceneManager.soundManager}/>
-                        <FullScreenButton/>
+                        <FullScreenButton onResize={() => this.onResize()}/>
                     </div>
                 }
             </React.Fragment>

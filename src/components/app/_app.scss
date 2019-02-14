@@ -1,4 +1,5 @@
 @import "../../variables";
+$backgroundHeight: 1342px;
 
 @keyframes animate {
   0%, 100% {
@@ -6,6 +7,15 @@
   }
   50% {
     background-position: 100%;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    background-position-y: -$backgroundHeight, -$backgroundHeight;
+  }
+  to {
+    background-position-y: 2 * $backgroundHeight, $backgroundHeight;
   }
 }
 
@@ -59,12 +69,12 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Brown, sans-serif;
+  font-family: "Brown", sans-serif;
   user-select: none;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 75%;
   cursor: url(../../assets/img/cursor_default.svg) 10 0, default;
 }
 
@@ -79,14 +89,14 @@ button, a {
 #app {
   position: relative;
   background-color: $yellow;
-  background-size: 300%;
-  background-position: 0;
-  transition: all 1s;
+  transition: background 1s;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 
   .catalogWrapper {
     display: block;
@@ -102,45 +112,36 @@ button, a {
     z-index: 0;
   }
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: background-position 1s;
     z-index: -1;
-    pointer-events: none;
+    right: 8vw;
+    top: 50vh;
+    width: 4px;
+    height: 4px;
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform 0.5s ease-in, background 0.5s ease-in;
+    border-radius: 50%;
+    background: $yellow;
   }
 
   &.happy {
-    background: linear-gradient(45deg, #FFE07D 50%, $green 55%);
-    background-size: 300%;
-    background-position: 0;
-    animation: animate 3s;
-
-    &:after {
-      background: linear-gradient(45deg, transparent 50%, $green 55%);
-      background-size: 300%;
-      background-position: 0;
-      animation: animate 3s;
+    &:before {
+      background: $green;
+      border-radius: 50%;
+      transform: scale(5000);
     }
   }
 
   &.angry {
-    background: linear-gradient(45deg, $yellow 50%, $red 55%);
-    background-size: 300%;
-    background-position: 0;
-    animation: animate 3s;
-
-    &:after {
-      background: linear-gradient(45deg, transparent 50%, $red 55%);
-      background-size: 300%;
-      background-position: 0;
-      animation: animate 3s;
+    &:before {
+      background: $red;
+      transform: scale(5000);
+      border-radius: 50%;
     }
+
   }
 
   &.attic {
@@ -155,8 +156,27 @@ button, a {
       content: url("../../assets/img/pause.svg");
     }
   }
+
   &.attic:before {
     opacity: 0;
+  }
+
+  &.badEnding {
+    &:after {
+      content: " ";
+      position: fixed;
+      background-image: url(../../assets/img/cartons_blurred.png), url(../../assets/img/cartons.png);
+      background-size: auto $backgroundHeight, auto $backgroundHeight;
+      background-repeat: no-repeat;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      animation: moveDown 5s ease-out 1 forwards;
+    }
   }
 }
 
@@ -199,7 +219,7 @@ button {
   right: 3rem;
   display: flex;
   align-items: center;
-  z-index: 2;
+  z-index: 100000;
 
   button {
     background: none;
@@ -210,4 +230,10 @@ button {
       margin-left: 0;
     }
   }
+}
+
+.pause {
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
 }

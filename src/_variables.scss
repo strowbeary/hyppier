@@ -1,8 +1,8 @@
 $false-black: #272727;
 $light-grey: #FAFAFA;
-$yellow: #FFE07D; //$yellow: #FFD832; //$yellow: #ffd764;
+$yellow: #FFDA3E; //$yellow: #FFD832; //$yellow: #ffd764;
 $green: #54eebc;
-$red: crimson;
+$red: #ff5e5e;
 
 $border-radius: 15px;
 $vertical-space: 1.5rem;
@@ -32,15 +32,7 @@ $drag-and-drop-cursor: "../../../../assets/img/cursor_drag_drop.svg";
   }
 }
 
-@keyframes shadow-pulse
-{
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 216, 50, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 10px rgba(255, 216, 50, 0);
-  }
-}
+
 
 @keyframes tuto-pulse
 {

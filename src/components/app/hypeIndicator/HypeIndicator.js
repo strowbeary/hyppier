@@ -4,6 +4,8 @@ import "./_hypeIndicator.scss";
 import GameStore from "../../../stores/GameStore/GameStore";
 import {spawn} from "../utils/spawn-worker";
 import {onPatch} from "mobx-state-tree";
+import {bubbleWorker} from "./bubbleWorker";
+import hype from "../../../assets/img/hype.png";
 
 const HypeIndicator = observer(class HypeIndicator extends Component {
 
@@ -19,41 +21,12 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         this.loop();
     }
 
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     loop() {
-        const worker = spawn(function () {
-            let bubbles = [];
-            const delta_point = 10;
-            const globalHeight = 45;
-            const bubbleNumber = 20;
-            for(let i = 0; i < bubbleNumber; i++) {
-                let speed = Math.random();
-                bubbles.push({
-                    speed,
-                    r: 3 * (Math.random() / 6 + 0.05),
-                    globalHeight,
-                    x: (i + 0.5) * (delta_point) / (bubbleNumber)
-                });
-            }
-
-            function loop(frame) {
-
-                let bubblePath = "";
-                for(let bubble of bubbles) {
-                    let height = globalHeight * (frame / 300 + bubble.speed) % globalHeight;
-                    bubblePath +=  `M ${bubble.x - bubble.r},${globalHeight - height} `;
-                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${bubble.r * 2},0 `;
-                    bubblePath +=  `a ${bubble.r},${bubble.r} 0 1,0 ${-bubble.r * 2},0 `;
-                    bubblePath +=  `z`;
-                }
-
-                postMessage({
-                    bubblePath
-                });
-            }
-            onmessage = (e) => {
-                loop(e.data);
-            };
-        });
+        const worker = spawn(bubbleWorker);
 
         worker.onmessage = (event) => {
             if(this.mounted) {
@@ -81,10 +54,6 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         animationLoop();
     }
 
-    componentW() {
-       this.mounted = false;
-    }
-
     onTransitionEnd() {
         this.setState({up: false});
     }
@@ -94,15 +63,21 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
         return (
             <div className="gameIndicator">
                 <div className="gameIndicator__wrapper">
-                    <div className="gameIndicator__word">Hype</div>
-                    <div className="jauge">
-                        <div className="gameIndicator__level" style={{
+                    <div className="gameIndicator__word">
+                        <img src={hype} alt="hype"/>
+                    </div>
+                    <div className={`pyro ${GameStore.pipo === 'happy'? 'anim': ''}`}>
+                        <div className="before"/>
+                        <div className="after"/>
+                    </div>
+                    <div className={`jauge ${this.state.up? 'anim':''}`}>
+                        <div className="level" style={{
                             "height": GameStore.hype.level * 100 + "%"
-                        }} onTransitionEnd={() => this.onTransitionEnd()}>
-                            <div className={`gameIndicator__wave ${this.state.up? 'anim':''}`}/>
+                        }} onTransitionEnd={(e) => this.onTransitionEnd(e)}>
+                            <div className="wave"/>
                         </div>
-                        <svg viewBox="0 0 10 50" xmlns="http://www.w3.org/2000/svg">
-                            <g transform="translate(0,5)">
+                        <svg viewBox="0 0 10 75" xmlns="http://www.w3.org/2000/svg">
+                            <g>
                                 <path
                                     d={this.state.bubblePath}
                                     fill="rgba(255, 255, 255, 0.7)"
@@ -112,7 +87,7 @@ const HypeIndicator = observer(class HypeIndicator extends Component {
 
                         </svg>
                     </div>
-                    <div className={`pipo ${GameStore.pipo}`}></div>
+                    <div className={`pipo ${GameStore.pipo}`}/>
                 </div>
             </div>
         )

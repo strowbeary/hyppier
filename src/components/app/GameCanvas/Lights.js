@@ -10,7 +10,7 @@ export class Lights{
             70,
             0,
             scene);
-        light.intensity = 0.3;
+        light.intensity = 0.7;
 
         const light2 = new BABYLON.DirectionalLight(
             "Light2",
@@ -22,7 +22,7 @@ export class Lights{
         light2.position = new BABYLON.Vector3(0, 1, 0);
 
         this.shadowGenerator = new BABYLON.ShadowGenerator(Math.pow(2, 13), light);
-        this.shadowGenerator.setDarkness(0.3);
+        this.shadowGenerator.setDarkness(0.7);
         this.shadowGenerator.usePoissonSampling = true;
         this.shadowGenerator.setTransparencyShadow(false);
 

@@ -1,93 +1,380 @@
 @import "../../../variables";
 
-.goodEndScreen {
+@keyframes up-down {
+  0% {
+    opacity: 0.1;
+    transform: translateY(-2px);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+  100% {
+
+    opacity: 0.1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes tileAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes playXHappy {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -1792px;
+  }
+}
+
+@keyframes playYHappy {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -2880px;
+  }
+}
+
+article.goodEndScreen {
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow: hidden;
+  transition: top 0.5s;
+  z-index: 1000;
 
-  section {
-    width: 100vw;
+
+  nav {
+    position: fixed;
+    z-index: 1;
+    top: 0;
     height: 100vh;
-  }
-
-  &__section {
-    background-color: $green;
+    left: 32px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    position: relative;
+    flex-direction: column;
 
-    button {
-      background-color: $yellow;
-      padding: 1rem 2rem;
-      border: none;
-      transition: transform 500ms;
-      text-transform: uppercase;
-      color: white;
-      font-size: 1.6rem;
+    .navCircle {
+      width: 13px;
+      height: 13px;
+      border: 1px solid white;
+      border-radius: 50%;
+      transition: background 0.5s, border 0.5s;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
 
-      &:hover {
-        transform: scale(1.5);
+      &.active {
+        background: white;
+      }
+    }
+
+    &.green {
+      .navCircle {
+        border-color: $green;
+
+        &.active {
+          background: $green;
+        }
       }
     }
   }
 
-  &__sectionSlider {
-    background-color: $light-grey;
-  }
-
-  &__arrowScroll {
+  .pipo {
     position: absolute;
-    width: 1px;
-    height: 10vh;
-    background-color: white;
-    bottom: 2vh;
-    animation: up-down 500ms infinite alternate;
+    z-index: 10;
+    background: url('../../../assets/img/Pipo-Happy-0203.png') left top no-repeat;
 
-    &:after {
-      content: "";
+    &.little {
+      width: 160px;
+      height: 200px;
+      background-size: (1792px/1.6) (2880px/1.6);
+      animation: playXNo 0.33s steps(7) infinite, playYNo 2.97s steps(9) infinite;
+    }
+
+    &.big {
+      width: 256px;
+      height: 320px;
+      background-size: 1792px 2880px;
+      animation: playXHappy 0.33s steps(7) infinite, playYHappy 2.97s steps(9) infinite;
+    }
+
+    &:nth-child(1) {
       position: absolute;
-      border: solid white;
-      border-width: 0 1px 1px 0;
-      display: inline-block;
-      padding: 5px;
-      transform: rotate(45deg);
-      bottom: 0;
-      left: -5px;
+      top: 50vh;
+      left: 20vw;
+    }
+
+    &:nth-child(2) {
+      position: absolute;
+      top: 5vh;
+      left: 5vw;
+      filter: blur(2px);
+    }
+
+    &:nth-child(3) {
+      position: absolute;
+      top: 25vh;
+      left: 30vw;
+    }
+
+    &:nth-child(4) {
+      position: absolute;
+      top: 60vh;
+      right: 10vw;
+    }
+
+    &:nth-child(5) {
+      position: absolute;
+      right: 5vw;
+      top: 5vh;
+      filter: blur(2px);
+    }
+
+    &.right {
+      transform: scaleX(-1);
     }
   }
 
-  &__bubble {
-    background-color: white;
-    box-shadow: 0 0 20px white;
-    border-radius: 50%;
-    width: 70vh;
-    height: 70vh;
+  section, header, footer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    .bubble {
+      background-color: white;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      width: 80vh;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      flex-shrink: 0;
+      text-wrap: normal;
+
+      h3 {
+        text-align: center;
+        font-family: Selfie, sans-serif;
+        font-weight: 400;
+        font-size: 7rem;
+        line-height: 3rem;
+        margin-bottom: 4rem;
+        color: $green;
+
+        span {
+          font-family: Selfie, sans-serif;
+          font-size: 4rem;
+        }
+      }
+
+      p {
+        display: block;
+        font-size: 1.4rem;
+        word-wrap: break-word;
+        max-width: 50vh;
+      }
+    }
+  }
+
+  header {
+    background-color: $green;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    flex-shrink: 0;
 
-    &__title {
-      font-family: Selfie, sans-serif;
-      font-weight: 400;
-      font-size: 8rem;
-      line-height: 6rem;
-      margin-bottom: 2rem;
-      color: $green;
+    .bubble {
+      opacity: 0;
+      animation: tileAppear 0.3s ease-in-out 100ms 1 normal forwards;
+
+      h3 {
+        opacity: 0;
+        animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
+      }
+
+      p {
+        opacity: 0;
+        animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
+      }
     }
 
-    &__text {
-      display: block;
-      font-size: 1.5rem;
-      word-wrap: break-word;
-      max-width: 50vh;
-      margin-bottom: 2rem;
+    .arrowScroll {
+      position: absolute;
+      width: 2px;
+      height: 50px;
+      background-color: white;
+      bottom: 25px;
+      animation: up-down 1000ms infinite forwards;
+
+      &:after {
+        content: "";
+        position: absolute;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(45deg);
+        bottom: 0;
+        left: -5px;
+      }
     }
   }
+
+  section {
+    background-color: $light-grey;
+    $itemSize: 18rem;
+    overflow: auto;
+
+    .grid {
+      display: grid;
+      grid: auto / repeat(auto-fill, minmax($itemSize, 1fr));
+      grid-auto-flow: dense;
+      justify-content: space-evenly;
+      align-items: center;
+      grid-gap: 16px;
+      padding: 80px 130px;
+      margin-left: 32px;
+
+      .tooltip {
+        grid-column-end: span 4;
+        background: white;
+        padding: 32px;
+        border-radius: 16px;
+        display: flex;
+        align-self: flex-start;
+        box-sizing: border-box;
+        position: sticky;
+        top: 80px;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        p {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+      }
+
+      .gridItem {
+        width: $itemSize;
+        height: $itemSize;
+        padding: 20px;
+        border: 3px solid transparent;
+        box-sizing: border-box;
+        border-radius: 16px;
+        opacity: 0;
+        transform: translateY(3px);
+        transition: border 2s;
+
+        &.appear {
+          animation: tileAppear 0.3s ease-in-out 1 normal forwards;
+        }
+
+        &:hover {
+          border: 3px solid $green;
+          transition: border 0ms;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .arrowScroll {
+      width: 2px;
+      height: 50px;
+      background-color: $green;
+      animation: up-down 1000ms infinite forwards;
+      margin-left: 50vw;
+      margin-bottom: 25px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        border: solid $green;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(45deg);
+        bottom: 0;
+        left: -5px;
+      }
+    }
+  }
+
+  footer {
+    background-color: $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .bubble {
+      opacity: 0;
+
+      h3 {
+        width: 329px;
+        opacity: 0;
+      }
+
+      p {
+        margin-bottom: 5rem;
+        opacity: 0;
+      }
+
+      button {
+        opacity: 0;
+      }
+    }
+
+    &.appear > .bubble {
+      animation: tileAppear 0.3s ease-in-out 100ms 1 normal forwards;
+
+      h3 {
+        animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
+      }
+
+      p {
+        animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
+      }
+
+      button {
+        animation: tileAppear 0.3s ease-in-out 480ms 1 normal forwards, shadow-pulse 1s infinite;
+        &:hover {
+          animation-name: tileAppear, shadow-pulse-hover;
+        }
+      }
+    }
+
+
+    button {
+      border: none;
+      background-color: $yellow;
+      color: white;
+      border-radius: 10px;
+      padding: 10px 25px;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: 1px;
+      transition: background-color 300ms;
+
+      &:hover {
+        background-color: $green;
+      }
+    }
+  }
+
+
 }

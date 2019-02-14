@@ -15,6 +15,7 @@ const ClueEvent = observer(class ClueEvent extends Component {
     componentDidMount() {
         if (this.type === "electric") {
             SoundManagerInstance.clueEventElectric.play();
+            SoundManagerInstance.music.pause();
         }
     }
 
@@ -23,14 +24,21 @@ const ClueEvent = observer(class ClueEvent extends Component {
     }
 
     componentWillUnmount() {
-        this.sceneManager.gameManager.playAfterClueEventClosed()
+        SoundManagerInstance.music.play();
+        this.sceneManager.gameManager.playAfterClueEventClosed();
     }
 
     render() {
         return (
             <div className="clueEvent">
-                <p> Oooh tu as déclenché un évènement ;) </p>
-                <SpaceBar onSpaceUp={() => this.closeClueEvent()}/>
+                {this.type === "electric" &&
+                    <div className="clueEvent__wrapper">
+                        <h3 className="clueEvent__title">Boom!</h3>
+                        <p>Tu t’es lâché.e sur le nombre d’appareils électroniques, les plombs ont sauté…</p>
+                        <p>Retire un objet gourmand en énergie en appuyant sur espace.</p>
+                    </div>
+                }
+                <SpaceBar onSpaceUp={() => this.closeClueEvent()} color={"white"}/>
             </div>
         )
     }

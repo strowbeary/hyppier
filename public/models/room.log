@@ -1,0 +1,66 @@
+Exporter version: 5.6.4, Blender version: 2.79 (sub 0)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		export scope        :  ALL
+		inline textures     :  false
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		texture directory   :  /Users/remicaillot/Projets/hyppier/public/models/
+	Python World class constructor completed
+	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
+	processing begun of mesh:  Box
+		processing begun of Standard material:  Blender white
+		num positions      :  28
+		num normals        :  28
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  144
+	processing begun of mesh:  Ladder
+		registered as also a user of material:  Blender white
+		num positions      :  448
+		num normals        :  448
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  2016
+	processing begun of node:  Location(Table).001
+	processing begun of node:  Location(Transport).001
+	processing begun of node:  Location(Poster).001
+	processing begun of node:  Location(Plant).001
+	processing begun of node:  Location(Phone).001
+	processing begun of node:  Location(Lampe).001
+	processing begun of node:  Location(Gaming).001
+	processing begun of node:  Location(Computer).001
+	processing begun of node:  Location(Chair).001
+	processing begun of node:  Location(Bed).001
+	processing begun of node:  Location(Bag).001
+	processing begun of node:  Ladder-Position.001
+	processing begun of mesh:  Attic
+		registered as also a user of material:  Blender white
+		num positions      :  13
+		num normals        :  13
+		num uvs            :  0
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  45
+	processing begun of mesh:  Room
+		processing begun of Standard material:  Blender white-old
+		processing begun of Standard material:  Blender grey-light.001
+		registered as also a user of material:  Blender white
+		processing begun of Standard material:  Blender grey-dark
+		processing begun of Standard material:  Blender grey-light
+		processing begun of multimaterial:  room.Multimaterial#0
+		num positions      :  783
+		num normals        :  783
+		num uvs            :  1566
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  3204
+========= Writing of scene file started =========
+========= Writing of scene file completed =========
+========= end of processing =========
+elapsed time:  0 min, 0.0987 secs

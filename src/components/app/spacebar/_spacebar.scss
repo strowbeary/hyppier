@@ -1,59 +1,60 @@
+@import "../../../variables";
 .spacebar {
   position: absolute;
   bottom: 5vh;
   width: 100%;
-  color: white;
+  color: $false-black;
   display: flex;
   justify-content: center;
   align-items: center;
 
+
   &__spacebutton {
     position: relative;
     display: block;
-    padding: 10px 60px;
-    border: solid 2px white;
-    border-radius: 30px;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3rem;
-    font-weight: 200;
-    animation: space-translate 1s linear infinite;
+    border: solid 2px $false-black;
+    border-radius: 25px;
+    animation: big-spacebar 984ms linear infinite;
+    padding-bottom: 10px;
 
     &:before {
-      content: "";
-      position: absolute;
-      left: -2px;
-      right: -2px;
-      top: -2px;
-      bottom: -10px;
-      border: solid 2px white;
-      border-radius: 27px;
-      animation: space-bottom 1s linear infinite;
+      content: "Espace";
+      display: block;
+      margin: -2px;
+      border: solid 2px $false-black;
+      border-radius: 25px;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+      font-weight: 400;
+      padding: 1rem 60px;
+      height: 100%;
 
+    }
+  }
+
+  &.white {
+    color: white;
+
+    .spacebar__spacebutton {
+      border-color: white;
+
+      &:before {
+        border-color: white;
+      }
     }
   }
 }
 
-@keyframes space-translate {
-  0% {
-    transform: translateY(0);
-  }
-  80% {
-    transform: translateY(8px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
-@keyframes space-bottom {
+@keyframes big-spacebar {
   0% {
-    bottom: -10px;
+    padding-bottom: 10px;
   }
   80% {
-    bottom: -2px;
+    padding-bottom: 0;
   }
   100% {
-    bottom: -10px;
+    padding-bottom: 10px;
   }
 }

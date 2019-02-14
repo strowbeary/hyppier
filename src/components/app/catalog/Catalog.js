@@ -19,7 +19,7 @@ const Catalog = observer(class Catalog extends Component {
         super(props);
         this.path = [props.index];
         this.objectKind = CatalogStore.objectKinds[this.path[0]];
-        this.productType = this.objectKind.name;
+        this.productType = this.objectKind.catalogName;
         this.productNew = this.objectKind.objects[this.objectKind.replacementCounter + 1];
         this.path.push(this.objectKind.replacementCounter + 1);
         this.isClosing = false;
@@ -32,6 +32,7 @@ const Catalog = observer(class Catalog extends Component {
         if (this.objectKind.activeObject !== null) {
             this.objectKind.updateReplacementCounter();
             GameStore.setPipo("angry");
+            GameStore.hype.setLevelByDiff(-0.07);
         }
     }
 
@@ -57,15 +58,19 @@ const Catalog = observer(class Catalog extends Component {
     }
 
     pipoYes() {
-        GameStore.setPipo("yes");
+        if (GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
+            GameStore.setPipo("yes");
+        }
     }
 
     pipoNo() {
-        GameStore.setPipo("no");
+        if (GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
+            GameStore.setPipo("no");
+        }
     }
 
     pipoStop() {
-        if (!this.isClosing) {
+        if (!this.isClosing && GameStore.pipo !== "happy" && GameStore.pipo !== "angry") {
             GameStore.setPipo("");
         }
     }
@@ -73,7 +78,7 @@ const Catalog = observer(class Catalog extends Component {
     onValidate() {
         this.objectKind.updateReplacementCounter();
         this.objectKind.setActiveObject(this.objectKind.replacementCounter);
-        GameStore.hype.setLevelByDiff(0.1);
+        GameStore.hype.setLevelByDiff(0.02);
         GameStore.setPipo("happy");
         this.closeCatalog(true);
     }
@@ -82,7 +87,7 @@ const Catalog = observer(class Catalog extends Component {
         return (
             <div className={`catalog`}>
                 {this.state.confirmVisibility &&
-                <ConfirmPopup product={this.productNew} onClose={() => this.onClose()}
+                <ConfirmPopup productName={this.productNew.name} onClose={() => this.onClose()}
                               closeConfirmPopup={() => this.updateConfirmVisibilty(false)}
                               pipoYes={() => this.pipoYes()} pipoNo={() => this.pipoNo()} pipoStop={() => this.pipoStop()}/>
                 }
@@ -96,7 +101,7 @@ const Catalog = observer(class Catalog extends Component {
                 <div className="catalog__content">
                     <div className="catalog__content__main__header">
                         <p className="catalog__content__title">{this.productNew.catalogSlogan}</p>
-                        <a className="catalog__content__info" href={this.productNew.infos[0].url} target="_blank" rel="noopener noreferrer">En savoir +</a>
+                        <a className="catalog__content__info" href={this.productNew.url} target="_blank" rel="noopener noreferrer">En savoir +</a>
                     </div>
                     <div className="catalog__content__main">
                         <div className="catalog__content__main__productType">

@@ -11,7 +11,7 @@ import GameStore from "../../stores/GameStore/GameStore";
 import ClueEvent from "./clueEvent/ClueEvent";
 import StartScreen from "./startScreen/StartScreen";
 import TutoStore from "../../stores/TutoStore/TutoStore";
-
+import pauseSvg from "../../assets/img/pause.svg";
 
 const App = observer(class App extends Component {
 
@@ -22,9 +22,7 @@ const App = observer(class App extends Component {
     };
 
     resetPipo() {
-        if (GameStore.pipo === 'happy') {
-            GameStore.setPipo("");
-        }
+        GameStore.setPipo("");
     }
 
     launchLoading() {
@@ -42,17 +40,20 @@ const App = observer(class App extends Component {
 
     render() {
         let isAtticVisible = GameStore.attic.atticVisible ? 'attic' : '';
+        let badEnding = GameStore.attic.isGameLost() ? 'badEnding': '';
         let pipoMood = "";
-        if(GameStore.pipo === 'happy') {
+        if (GameStore.pipo === 'happy') {
             pipoMood = "happy";
-            setTimeout(() => this.resetPipo(), 3000);
-        } else if (GameStore.pipo === 'angry') {
+            this.state.sceneManager && this.state.sceneManager.soundManager.positiveFeedback.play();
+            setTimeout(() => this.resetPipo(), 2970);
+        }
+        if (GameStore.pipo === 'angry') {
             pipoMood = "angry";
-            setTimeout(() => this.resetPipo(), 3000);
+            setTimeout(() => this.resetPipo(), 3300);
         }
 
         return (
-            <div id="app" className={`${pipoMood} ${isAtticVisible}`} onAnimationEnd={(e) => this.resetPipo(e)}
+            <div id="app" className={`${pipoMood} ${isAtticVisible} ${badEnding}`}
                  ref={(ref) => this.app = ref}>
                 {!this.state.ready &&
                     <StartScreen launchLoading={() => {this.launchLoading()}}/>
@@ -62,6 +63,10 @@ const App = observer(class App extends Component {
                 }
                 {this.state.loading && !GameStore.attic.atticVisible &&
                     <HypeIndicator/>
+                }
+                {
+                    this.state.loading && GameStore.attic.atticVisible &&
+                    <img src={pauseSvg} alt="pause" className={"pause"}/>
                 }
                 <div className={"catalogWrapper"}>
                     <CSSTransitionGroup
@@ -75,7 +80,7 @@ const App = observer(class App extends Component {
                     </CSSTransitionGroup>
                 </div>
                 {
-                    TutoStore.end &&
+                    TutoStore.end && !GameStore.gameEnded &&
                     <ToastWrapper/>
                 }
                 <CSSTransitionGroup

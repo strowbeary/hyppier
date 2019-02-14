@@ -1,13 +1,28 @@
 @import "../../../variables";
 
+$backgroundHeight: 1342px;
+
+@keyframes moveUp {
+  from {
+    background-position-y: 0, 0;
+  }
+  to {
+    background-position-y: -2 * $backgroundHeight, -$backgroundHeight;
+  }
+}
+
 .startScreen {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
   background-color: $yellow;
+  background-image: url(../../../assets/img/objects-blurred.png), url(../../../assets/img/objects.png);
+  background-size: auto $backgroundHeight * 2, auto $backgroundHeight * 1.5;
+  background-repeat: repeat;
   width: 100vw;
   height: 100vh;
+  animation: moveUp 100s linear infinite running;
 
   &__wrapper {
     width: 100vw;
@@ -15,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $false-black;
   }
 
   &__title {
@@ -30,47 +45,12 @@
     text-align: center;
   }
 
-  img {
-    position: absolute;
-    transform: scale(0.4);
-  }
 
-  .catEars {
-    left: 0;
-    bottom: 0;
-    transform-origin: left bottom;
-    animation: move 5s infinite;
-  }
 
-  .iPod {
-    left: 20%;
-    top: 0;
-    transform-origin: left top;
-    animation: move 5s infinite 1s;
-  }
-
-  .headset {
-    right: 0;
-    top: -20%;
-    transform-origin: right top;
-    animation: move 5s infinite;
-  }
-
-  .blur_headset {
-    top: 20%;
-    left: -10%;
-    transform-origin: left top;
+  .decoObjectsBlurred {
     filter: blur(5px);
-    animation: move 2.5s infinite 2s;
-  }
-}
-
-@keyframes move {
-  from {
-    transform: scale(0.4) rotate(0deg) translate3d(50px, 0, 0) rotate(0deg);
-  }
-  to {
-    transform: scale(0.4) rotate(360deg) translate3d(50px, 0, 0) rotate(-360deg);
+    width: 105%;
+    animation: moveUp 20s linear infinite;
   }
 }
 

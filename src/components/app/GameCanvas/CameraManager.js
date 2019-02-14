@@ -11,7 +11,7 @@ export class CameraManager {
     initialValues = {
         width: window.innerWidth,
         height: window.innerHeight,
-        distance: 6,
+        distance: 5.5,
         ratio: window.innerHeight / window.innerWidth
     };
 
@@ -61,8 +61,16 @@ export class CameraManager {
     }
 
     createAnimations(toPosition) {
+        const Easing = new BABYLON.CubicEase();
+        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
         this.camera.animations = [];
-        let animationTarget = new BABYLON.Animation("target", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let animationTarget = new BABYLON.Animation(
+            "target",
+            "target",
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+        );
         let keysTarget = [];
         keysTarget.push({
             frame: 0,
@@ -74,15 +82,16 @@ export class CameraManager {
         });
         animationTarget.setKeys(keysTarget);
 
-        const Easing = new BABYLON.QuinticEase();
-        Easing.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
 
         animationTarget.setEasingFunction(Easing);
+        this.camera.animations.push(animationTarget);
 
-        let animationGroup = new BABYLON.AnimationGroup("Camera");
-        animationGroup.addTargetedAnimation(animationTarget, this.camera);
-
-        let animationOrthoTop = new BABYLON.Animation("target", "orthoTop", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        let animationOrthoTop = new BABYLON.Animation(
+            "target",
+            "orthoTop",
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keysOrthoTop = [];
         keysOrthoTop.push({
             frame: 0,
@@ -96,6 +105,7 @@ export class CameraManager {
 
         let animationOrthoLeft = new BABYLON.Animation("target", "orthoLeft", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
         let keysOrthoLeft = [];
+
         keysOrthoLeft.push({
             frame: 0,
             value: this.camera.orthoLeft
@@ -135,15 +145,12 @@ export class CameraManager {
         animationOrthoRight.setEasingFunction(Easing);
         animationOrthoBottom.setEasingFunction(Easing);
 
-        animationGroup.addTargetedAnimation(animationOrthoTop, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoLeft, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoBottom, this.camera);
-        animationGroup.addTargetedAnimation(animationOrthoRight, this.camera);
+        this.camera.animations.push(animationOrthoTop);
+        this.camera.animations.push(animationOrthoLeft);
+        this.camera.animations.push(animationOrthoBottom);
+        this.camera.animations.push(animationOrthoRight);
 
-
-        animationGroup.normalize(0, 30);
-        animationGroup.play();
-        animationGroup.onAnimationGroupEndObservable.add(() => {
+        this.scene.beginAnimation(this.camera, 0, 30, false, 1, () => {
             ObjectKindUI.refs.forEach(ref => ref && ref.updatePosition());
             if (toPosition.equals(BABYLON.Vector3.Zero())) {
                 transitionFinishListener.forEach(listener => listener())
@@ -157,24 +164,18 @@ export class CameraManager {
 
         if (typeof mesh === "string" && mesh !== "" && mesh !== "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld.add(CameraManager.CATALOG_OFFSET);
-            this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSizeWorld
+            this.distance = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.extendSize
                 .length() * this.initialValues.distance / 2;
         } else if(mesh === "Attic") {
             toPosition = this.scene.getMeshByName(mesh).getBoundingInfo().boundingBox.centerWorld;
             this.distance = this.initialValues.distance;
-
-        } else {
-            toPosition = BABYLON.Vector3.Zero();
-            this.distance = this.initialValues.distance;
         }
 
-        console.log("beforeCheck", this.distance);
         if(this.distance > this.initialValues.distance) {
             this.distance = this.initialValues.distance;
         } else if(this.distance < 1) {
             this.distance = 1;
         }
-        console.log(mesh, this.distance);
         this.createAnimations(toPosition);
     }
 

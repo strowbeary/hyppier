@@ -24,18 +24,14 @@ const Spacebar = observer(class Spacebar extends Component {
     }
 
     hideSpace(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if(e.keyCode === 32) {
+        if(e.keyCode === 32 || e.type === "click") {
             SoundManagerInstance && SoundManagerInstance.spacePress.play();
             this.setState({show: false})
         }
     }
 
     dispatchEvent(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if(e.keyCode === 32) {
+        if(e.keyCode === 32 || e.type === "click") {
             this.props.onSpaceUp();
         }
     }
@@ -45,8 +41,8 @@ const Spacebar = observer(class Spacebar extends Component {
             <React.Fragment>
                 {
                     this.state.show &&
-                    <div className="spacebar">
-                        <span className="spacebar__spacebutton">Espace</span>
+                    <div className={`spacebar ${this.props.color}`} onClick={(e) => this.dispatchEventForListener(e)}>
+                        <div className="spacebar__spacebutton"></div>
                     </div>
                 }
             </React.Fragment>

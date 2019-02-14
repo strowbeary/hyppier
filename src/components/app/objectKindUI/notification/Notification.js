@@ -8,8 +8,8 @@ import GameStore from "../../../../stores/GameStore/GameStore";
 const Notification = observer(class Notification extends Component {
 
     state = {
-      elapsedTime: 0,
-      running: false
+        elapsedTime: 0,
+        running: false
     };
 
     constructor(props) {
@@ -20,13 +20,16 @@ const Notification = observer(class Notification extends Component {
         this.timer.lock();
         this.playSound = props.playSound;
         this.delayTimer.onFinish(() => {
+            let duration = this.timer.getDuration();
+            if (props.objectKind.activeObject !== null) {
+                props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation(duration);
+            }
             this.timer.unlock();
             this.timer.start();
             this.playSound();
             this.setState({
                 running: true
             });
-            props.objectKind.objects[props.objectKind.activeObject].getModel().launchMaterialDegradation();
         });
         this.timer.addLoopHook((data) => {
             this.setState({
@@ -41,7 +44,6 @@ const Notification = observer(class Notification extends Component {
             this.openPopup();
         });
         if (!GameStore.options.isPaused) {
-            this.delayTimer.setDuration(Math.round(this.duration / (Math.random() + 1)));
             this.delayTimer.start();
         }
     }
@@ -55,7 +57,7 @@ const Notification = observer(class Notification extends Component {
         if (fromValidate) {
             this.delayTimer.setDuration(this.duration);
         } else {
-            this.delayTimer.setDuration(this.duration / 2);
+            this.delayTimer.setDuration(this.duration * 0.75);
         }
     }
 
@@ -81,17 +83,21 @@ const Notification = observer(class Notification extends Component {
 
     render() {
         const dashSize = Math.PI * 60;
-        let hide = this.state.running? '': 'hide';
-
+        let hide = this.state.running ? '' : 'hide';
+        let glow = (this.state.running && (this.state.elapsedTime / this.timer.getDuration() > 0.5)) ? "glow" : "";
 
         return (
-            <div className={`notification ${hide} ${(this.state.running && (this.state.elapsedTime / this.duration > 0.5)) ? "animated" : ""}`} onClick={() => this.buildCatalog()}>
-                <svg height={32} width={32}>
-                    <circle cx={16} cy={16} r={14.5} stroke="black" strokeWidth="2" fill="transparent"
-                            strokeDashoffset={this.state.elapsedTime / this.duration * -dashSize}
+            <div className={`notification ${hide}`} onClick={() => this.buildCatalog()}>
+                <div className={`wrapper ${glow}`}>
+                    <span>+</span>
+                </div>
+                <svg height={44} width={44}>
+                    <circle cx={22} cy={22} r={20} stroke="black" strokeWidth="3" fill="transparent"
+                            strokeDashoffset={this.state.elapsedTime / this.timer.getDuration() * -dashSize}
                             strokeDasharray={dashSize}/>
-                    <circle cx={16} cy={16} r={9} fill="black"/>
                 </svg>
+
+
             </div>
         )
     }

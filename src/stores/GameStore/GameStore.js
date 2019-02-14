@@ -8,7 +8,8 @@ export default types.model({
     hype: HypeStore,
     options: OptionsStore,
     pipo: types.maybe(types.string),
-    clueEvent: types.maybe(types.string)
+    clueEvent: types.maybe(types.string),
+    gameEnded: false
 })
     .actions(self =>
         ({
@@ -17,12 +18,15 @@ export default types.model({
             },
             setClueEvent(objectKindType) {
                 self.clueEvent = objectKindType
+            },
+            setGameEnded(val) {
+                self.gameEnded = !!val;
             }
         })
     )
     .create({
     attic: AtticStore.create({
-        electric: {parcelsNumber: 0, clueEventLaunched: false},
+        electric: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 5},
         furniture: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 1000},
         mobility: {parcelsNumber: 0, clueEventLaunched: false, parcelsNumberLimit: 1000},
     }),

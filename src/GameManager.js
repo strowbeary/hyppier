@@ -15,11 +15,12 @@ class GameManager {
         GameManagerInstance = this;
     }
 
-    pauseGame() {
-        if(GameStore.attic.atticVisible) {
+    pauseGame(fromCatalog) {
+        if (fromCatalog) {
+            TimerManager.pauseAllExcept();
+        } else {
             TimerManager.pauseAll();
         }
-        TimerManager.pauseAllExcept();
         GameStore.options.setPause(true);
         this.scene.animatables
             .forEach(animatable => {
@@ -29,6 +30,10 @@ class GameManager {
                     animatable.pause();
                 }
             });
+    }
+
+    pauseToastTimer() {
+        TimerManager.pauseExcept();
     }
 
     playGame() {
@@ -43,6 +48,7 @@ class GameManager {
         if (clones.length > 0) {
             const lastClone = clones[clones.length - 1];
             lambdaMesh.launchCloneDisappearAnimation(() => this.scene.removeMesh(lastClone));
+            lambdaMesh.clones.pop();
         } else {
             CatalogStore.getObjectKind(this.objectKindName).setActiveObject(null);
         }
@@ -50,8 +56,12 @@ class GameManager {
 
         this.playGame();
 
-        if (GameStore.attic.isGameOver()) {
+        if (GameStore.attic.isGameLost()) {
             this.atticManager.fall();
+            setTimeout(() => {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
+            }, 3500);
         }
     }
 
@@ -65,12 +75,24 @@ class GameManager {
         if (this.clueEvent !== null) {
             if (GameStore.clueEvent !== this.clueEvent) {
                 GameStore.setClueEvent(this.clueEvent);
+                this.pauseToastTimer();
             }
         } else {
             this.playGame();
             this.objectKindType = null;
-            if (GameStore.attic.isGameOver()) {
+            if (GameStore.attic.isGameLost()) {
                 this.atticManager.fall();
+                setTimeout(() => {
+                    this.pauseGame();
+                    GameStore.setGameEnded(true);
+                }, 5500);
+            }
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
+            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
             }
         }
     }
@@ -83,8 +105,19 @@ class GameManager {
                 this.pauseGame();
             }
         } else if (!GameStore.options.isPaused) { //replacement in Popup
-            if (GameStore.attic.isGameOver()) {
+            if (GameStore.attic.isGameLost()) {
                 this.atticManager.fall();
+                setTimeout(() => {
+                    this.pauseGame();
+                    GameStore.setGameEnded(true);
+                }, 5500);
+            }
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
+            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
+            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+                this.pauseGame();
+                GameStore.setGameEnded(true);
             }
         }
     }

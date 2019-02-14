@@ -51,8 +51,10 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         });
 
         this.delayTimer.onFinish(() => {
-            this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation();
-            this.delayTimer.destroy();
+            if (this.objectKind.activeObject !== null) { //clueEventCase
+                this.objectKind.objects[this.objectKind.activeObject].getModel().launchMaterialDegradation(this.objectKind.objectTimeout);
+                this.delayTimer.destroy();
+            }
         });
     }
 
@@ -109,7 +111,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
     }
 
     buildCatalog() {
-        this.sceneManager.gameManager.pauseGame();
+        this.sceneManager.gameManager.pauseGame("fromCatalog");
         this.objectKind.location.setPreviewObject(this.objectKind.replacementCounter + 1);
         CatalogStore.openCatalog(this.objectKindIndex);
         GameStore.setPipo("");
@@ -136,8 +138,8 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
         }
 
         let style = {
-            'top': y - 15,
-            'left': x - 15,
+            'top': Math.abs(y - 15),
+            'left': Math.abs(x - 15),
             'zIndex': zIndex
         };
 
@@ -147,7 +149,7 @@ const ObjectKindUI = observer(class ObjectKindUI extends Component {
                     this.objectKind.activeObject === null && TutoStore.currentMessage > 1 && <EmptySpace buildCatalog={() => {this.buildCatalog()}}/>
                 }
                 {
-                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 2 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
+                    this.objectKind.activeObject !== null && TutoStore.currentMessage > 3 && this.objectKind.replacementCounter < this.objectKind.objects.length - 1 &&
                     <Notification ref={(ref) => this.notification = ref} objectKind={this.objectKind} buildCatalog={(timer) => {this.buildCatalog(timer)}} openPopup={() => this.openPopup()} playSound={() => this.playNotifSound()}/>
                 }
                 <CSSTransitionGroup

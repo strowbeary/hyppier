@@ -1,11 +1,11 @@
 import GameStore from "../stores/GameStore/GameStore";
+import {onPatch} from "mobx-state-tree";
 
 const timers = [];
 let timerException;
 
 export const TimerManager = {
     setTimerException(timerId) {
-        console.log("TIMER EXCEPTION");
         timerException = timerId;
     },
     stopAll() {
@@ -14,9 +14,7 @@ export const TimerManager = {
     startAll() {
         timers.forEach(timer => {
             if (timer && timer.start) {
-                if (!timer.hasStarted()) {
-                    timer.setDuration(Math.round(timer.getDuration() / (Math.random() + 1)));
-                }
+                timer.setDuration(timer.getDuration());
                 timer.start()
             }
         });
@@ -28,10 +26,17 @@ export const TimerManager = {
         timers.forEach((timer, id) => {
             if (id !== timerException && timer && timer.pause) timer.pause()
         });
+    },
+    pauseExcept() {
+        if (typeof timerException !== "undefined") {
+            if(typeof timers[timerException] !== "undefined") {
+                timers[timerException].pause();
+            }
+        }
     }
 };
 
-export function createTimer(duration) {
+export function createTimer(originalDuration) {
     let finishListeners = [];
     let startListeners = [];
     let loopHooks = [];
@@ -44,6 +49,14 @@ export function createTimer(duration) {
     let pauseTime = 0;
     let metaElapsedTime = 0;
     let locked = false;
+    let duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
+
+
+    onPatch(GameStore.hype, patch => {
+        if(patch.path.includes("level")) {
+            duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
+        }
+    });
 
     function onFinish(listener) {
         finishListeners.push(listener);
@@ -91,8 +104,9 @@ export function createTimer(duration) {
     }
 
     function loop() {
-        metaElapsedTime = GameStore.hype.level * (performance.now() - startTime);
+        metaElapsedTime = (performance.now() - startTime);
         loopHooks.forEach(hook => hook({
+            duration,
             elapsedTime: Math.min(Math.max(metaElapsedTime, 0), duration),
             remainingTime: Math.max(duration - metaElapsedTime, 0),
             running: running
@@ -118,7 +132,8 @@ export function createTimer(duration) {
     }
 
     function setDuration(newDuration) {
-        duration = newDuration;
+        originalDuration = newDuration;
+        duration = originalDuration - (originalDuration / 2) * Math.abs(0.5 - Math.max(0.5, GameStore.hype.level));
     }
 
     function getDuration() {

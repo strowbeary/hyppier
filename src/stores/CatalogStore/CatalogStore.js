@@ -28,7 +28,7 @@ const CatalogStore = types.model("CatalogStore", {
                 return self.objectKinds.find(objectKind => objectKind.name === objectKindName);
             },
             getAllObjectKind() {
-                return self.objectKinds.map(objectKind => {return objectKind});
+                return self.objectKinds;
             }
         })
     )
