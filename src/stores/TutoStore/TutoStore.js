@@ -88,7 +88,7 @@ export default types.model("TutoStore",
                 read: false
             },
             {
-                text: "Tes anciens objets sont stockés dans ton grenier! Tu peux cliquer sur l'échelle pour y accéder",
+                text: "Tes anciens objets sont stockés dans ton grenier ! Tu peux cliquer sur l'échelle pour y accéder.",
                 expiration: 5000,
                 action: "timer",
                 originTarget: "Attic",

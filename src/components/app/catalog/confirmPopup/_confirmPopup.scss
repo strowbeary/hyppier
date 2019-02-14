@@ -9,7 +9,7 @@
   background-color: white;
   padding: $vertical-space $horizontal-space;
   border-radius: $border-radius;
-  border: solid 1px $light-grey;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: grid;
   height: auto;
   grid-column-gap: $horizontal-space;

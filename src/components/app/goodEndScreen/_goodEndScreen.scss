@@ -27,6 +27,24 @@
   }
 }
 
+@keyframes playXHappy {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -1792px;
+  }
+}
+
+@keyframes playYHappy {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -2880px;
+  }
+}
+
 article.goodEndScreen {
   position: fixed;
   left: 0;
@@ -70,6 +88,62 @@ article.goodEndScreen {
           background: $green;
         }
       }
+    }
+  }
+
+  .pipo {
+    position: absolute;
+    z-index: 10;
+    background: url('../../../assets/img/Pipo-Happy-0203.png') left top no-repeat;
+
+    &.little {
+      width: 160px;
+      height: 200px;
+      background-size: (1792px/1.6) (2880px/1.6);
+      animation: playXNo 0.33s steps(7) infinite, playYNo 2.97s steps(9) infinite;
+    }
+
+    &.big {
+      width: 256px;
+      height: 320px;
+      background-size: 1792px 2880px;
+      animation: playXHappy 0.33s steps(7) infinite, playYHappy 2.97s steps(9) infinite;
+    }
+
+    &:nth-child(1) {
+      position: absolute;
+      top: 50vh;
+      left: 20vw;
+    }
+
+    &:nth-child(2) {
+      position: absolute;
+      top: 5vh;
+      left: 5vw;
+      filter: blur(2px);
+    }
+
+    &:nth-child(3) {
+      position: absolute;
+      top: 25vh;
+      left: 30vw;
+    }
+
+    &:nth-child(4) {
+      position: absolute;
+      top: 60vh;
+      right: 10vw;
+    }
+
+    &:nth-child(5) {
+      position: absolute;
+      right: 5vw;
+      top: 5vh;
+      filter: blur(2px);
+    }
+
+    &.right {
+      transform: scaleX(-1);
     }
   }
 
