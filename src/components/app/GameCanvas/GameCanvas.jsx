@@ -47,10 +47,10 @@ export default observer(class GameCanvas extends React.Component {
         }
         return (
             <React.Fragment>
-                {GameStore.attic.isGameLost() &&
+                {GameStore.attic.isGameLost() && GameStore.gameEnded &&
                     <BadEndScreen/>
                 }
-                {this.state.ready && GameStore.hype.isGameWon() &&
+                {this.state.ready && GameStore.hype.isGameWon() && GameStore.gameEnded &&
                     <GoodEndScreen soundManager={this.sceneManager.soundManager}/>
                 }
                 <canvas
