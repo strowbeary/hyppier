@@ -83,7 +83,7 @@ export default observer(class GameCanvas extends React.Component {
                     <div className={"game__footer"}>
                         <AboutModal gameManager={this.sceneManager.gameManager}/>
                         <SoundButton soundManager={this.sceneManager.soundManager}/>
-                        <FullScreenButton/>
+                        <FullScreenButton onResize={() => this.onResize()}/>
                     </div>
                 }
             </React.Fragment>

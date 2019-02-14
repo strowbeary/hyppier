@@ -11,32 +11,38 @@ const FullScreenButton = observer(class FullScreenButton extends Component {
 
     state = {isFullScreen: false};
 
+    constructor(props) {
+        super(props);
+        this.onResize = props.onResize;
+    }
+
     componentDidMount() {
-        document.addEventListener("fullscreenchange", this.onFullScreenChange, false);
-        document.addEventListener("mozfullscreenchange", this.onFullScreenChange, false);
-        document.addEventListener("webkitfullscreenchange", this.onFullScreenChange, false);
-        document.addEventListener("msfullscreenchange", this.onFullScreenChange, false);
+        document.addEventListener("fullscreenchange", () => this.onFullScreenChange(), false);
+        document.addEventListener("mozfullscreenchange", () => this.onFullScreenChange(), false);
+        document.addEventListener("webkitfullscreenchange", () => this.onFullScreenChange(), false);
+        document.addEventListener("msfullscreenchange", () => this.onFullScreenChange(), false);
     }
 
     onFullScreenChange() {
         if (document.fullscreen !== undefined) {
-            this.isFullScreen = document.fullscreen;
+            this.setState({isFullScreen: document.fullscreen});
         } else if (document.mozFullScreen !== undefined) {
-            this.isFullScreen = document.mozFullScreen;
+            this.setState({isFullScree: document.mozFullScreen});
         } else if (document.webkitIsFullScreen !== undefined) {
-            this.isFullScreen = document.webkitIsFullScreen;
+            this.setState({isFullScree: document.webkitIsFullScreen});
         } else if (document.msIsFullScreen !== undefined) {
-            this.isFullScreen = document.msIsFullScreen;
+            this.setState({isFullScree: document.msIsFullScreen});
+        } else {
+            this.setState({isFullScreen: false});
         }
+        this.onResize();
     }
 
     switchFullscreen = () => {
         if (!this.state.isFullScreen) {
-            this.setState({isFullScreen: true});
             BABYLON.Tools.RequestFullscreen(document.documentElement);
         }
         else {
-            this.setState({isFullScreen: false});
             BABYLON.Tools.ExitFullscreen();
         }
     };
