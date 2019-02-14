@@ -49,7 +49,7 @@ const App = observer(class App extends Component {
         }
         if (GameStore.pipo === 'angry') {
             pipoMood = "angry";
-            setTimeout(() => this.resetPipo(), 2970);
+            setTimeout(() => this.resetPipo(), 3300);
         }
 
         return (

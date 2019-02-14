@@ -169,11 +169,13 @@ $box-shadow2: ();
   &.happy {
     background: url('../../../assets/img/Pipo-Happy-0203.png') left top no-repeat;
     background-size: (1792px/1.6) (2880px/1.6);
-    animation: playXNo 0.33s steps(7) 9, playYNo 2.97s steps(9) 1;
+    animation: playXNo 0.33s steps(7) 9 forwards, playYNo 2.97s steps(9) 1 forwards;
   }
 
   &.angry {
-    //do not make this infinite
+    background: url('../../../assets/img/Pipo-Upset-0220.png') left top no-repeat;
+    background-size: (2048px/1.6) (3200px/1.6);
+    animation: playXAngry 0.33s steps(8) 10 forwards, playYAngry 3.30s steps(10) 1 forwards;
   }
 
   &.yes {
@@ -186,6 +188,24 @@ $box-shadow2: ();
     background: url('../../../assets/img/Pipo-Idle_No-0203.png') top left no-repeat;
     background-size: (1792px/1.6) (2880px/1.6);
     animation: playXNo 0.33s steps(7) 9, playYNo 2.97s steps(9) 1;
+  }
+}
+
+@keyframes playXAngry {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -(2048px/1.6);
+  }
+}
+
+@keyframes playYAngry {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: -(3200px/1.6);
   }
 }
 

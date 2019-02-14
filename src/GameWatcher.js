@@ -46,10 +46,7 @@ export class GameWatcher {
                                 const lambdaMesh = objectKind.objects[objectKind.location.previewObjectId].getModel();
                                 lambdaMesh.mesh.position = objectKind.location.toVector3();
                                 GameWatcher.updateWatchers.forEach(watcher => watcher(lambdaMesh, oldLambdaMesh, null));
-                                CameraStore.setTarget(
-                                    lambdaMesh.mesh.name,
-                                    CameraManager.CATALOG_OFFSET
-                                );
+                                CameraStore.setTarget(lambdaMesh.mesh.name);
 
                             } else {
                                 const lambdaMesh = objectKind.objects[oldPreviewObjectId].getModel();
