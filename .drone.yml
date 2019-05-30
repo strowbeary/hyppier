@@ -1,0 +1,35 @@
+kind: pipeline
+name: default
+
+steps:
+    - name: Build website
+      image: node
+      commands:
+          - npm install
+          - npm run build
+    - name: Build & push to local docker registery
+      image: plugins/docker
+      settings:
+          registry: registery.remicaillot.fr
+          auto_tag: true
+          repo: registery.remicaillot.fr/hyppier
+          dockerfile: ./Dockerfile
+    - name: Deploy to server
+      image: docker:dind
+      volumes:
+        - name: dockersock
+          path: /var/run/docker.sock
+      commands:
+        - docker pull registery.remicaillot.fr/hyppier:latest
+        - docker stop hyppier
+        - docker rm hyppier
+        - docker run --name hyppier --hostname hyppier.com -d registery.remicaillot.fr/hyppier
+volumes:
+    - name: dockersock
+      host:
+          path: /var/run/docker.sock
+trigger:
+    branch:
+        - master
+    event:
+        - push

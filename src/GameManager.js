@@ -80,17 +80,20 @@ class GameManager {
         } else {
             this.playGame();
             this.objectKindType = null;
+
+
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
             if (GameStore.attic.isGameLost()) {
+                console.log("game lost");
                 this.atticManager.fall();
                 setTimeout(() => {
                     this.pauseGame();
                     GameStore.setGameEnded(true);
                 }, 5500);
             }
-            const finishedObjectKind = CatalogStore.getAllObjectKind()
-                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
-            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
-            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+            else if (GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+                console.log("game won");
                 this.pauseGame();
                 GameStore.setGameEnded(true);
             }
@@ -105,17 +108,18 @@ class GameManager {
                 this.pauseGame();
             }
         } else if (!GameStore.options.isPaused) { //replacement in Popup
+
+            const finishedObjectKind = CatalogStore.getAllObjectKind()
+                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
             if (GameStore.attic.isGameLost()) {
+                console.log("game lost");
                 this.atticManager.fall();
                 setTimeout(() => {
                     this.pauseGame();
                     GameStore.setGameEnded(true);
                 }, 5500);
-            }
-            const finishedObjectKind = CatalogStore.getAllObjectKind()
-                .filter(objectKind => objectKind.replacementCounter === objectKind.objects.length - 1).length;
-            console.log(finishedObjectKind, CatalogStore.getAllObjectKind().length);
-            if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+            } else if(GameStore.hype.isGameWon() || finishedObjectKind === CatalogStore.getAllObjectKind().length) {
+                console.log("game won");
                 this.pauseGame();
                 GameStore.setGameEnded(true);
             }

@@ -128,6 +128,8 @@
   }
 
   button {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
     animation: tileAppear 0.3s ease-in-out 480ms 1 normal forwards;
   &.main {
     border: none;
@@ -170,6 +172,8 @@
   flex-direction: column;
   text-align: center;
   flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
   animation: tileAppear 0.3s ease-in-out 100ms 1 normal forwards;
 
   &__title {
@@ -179,6 +183,8 @@
     line-height: 6rem;
     margin-bottom: 4rem;
     color: $red;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
     animation: tileAppear 0.3s ease-in-out 300ms 1 normal forwards;
   }
 
@@ -188,6 +194,8 @@
     word-wrap: break-word;
     max-width: 50vh;
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
     animation: tileAppear 0.3s ease-in-out 390ms 1 normal forwards;
   }
 }
