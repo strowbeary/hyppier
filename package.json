@@ -2,7 +2,7 @@
   "name": "hyppier",
   "version": "1.0.0",
   "private": true,
-  "homepage": "http://remicaillot.fr/hyppier/build",
+  "homepage": "http://hyppier.com",
   "dependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",
